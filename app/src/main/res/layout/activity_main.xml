@@ -67,4 +67,16 @@
             android:textSize="@dimen/deimen_16x"
             app:layout_constraintTop_toBottomOf="@+id/tv_test4"/>
 
+    <TextView
+            android:id="@+id/tv_test6"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/deimen_30x"
+            android:text="测试SP文件数据"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/deimen_10x"
+            android:layout_marginLeft="@dimen/deimen_20x"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textSize="@dimen/deimen_16x"
+            app:layout_constraintTop_toBottomOf="@+id/tv_test5"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

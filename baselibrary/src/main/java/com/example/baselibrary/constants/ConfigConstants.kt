@@ -28,5 +28,8 @@ object ConfigConstants {
     //okhttp 读取超时
     const val OKHTTP_READ_TIME_OUT = 5L
 
+    //sp文件名
+    const val SP_TEST_USER = "sp_test_user"
+
 
 }

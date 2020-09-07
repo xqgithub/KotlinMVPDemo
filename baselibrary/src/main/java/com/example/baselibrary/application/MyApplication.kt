@@ -6,6 +6,7 @@ import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.di.modules.MyAppModule
 import com.example.baselibrary.utils.CrashHandler
 import com.example.baselibrary.utils.LogUtils
+import com.facebook.stetho.Stetho
 
 /**
  * 自定义Application
@@ -59,6 +60,8 @@ class MyApplication : MultiDexApplication() {
         //2.加载全部异常捕获
         val crashhandler = CrashHandler.getInstance()
         crashhandler.init(this)
+        //3.初始化Stetho出正式包的时候，建议屏蔽掉
+        Stetho.initializeWithDefaults(this)
     }
 
 }

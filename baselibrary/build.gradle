@@ -65,6 +65,8 @@ dependencies {
     api _dependencies.adapter_rxjava2
     api _dependencies.okhttp3
     api _dependencies.logging_interceptor
+    api _dependencies.stetho
+    api _dependencies.stethookhttp3
 
 }
 
