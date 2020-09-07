@@ -23,6 +23,8 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        //1.greendao
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
     }
 }
 
@@ -33,6 +35,7 @@ allprojects {
     repositories {
 //        国内gradle慢，打开下面下载地址，屏蔽jcenter()
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://jitpack.io' }
         google()
 //        jcenter()
     }

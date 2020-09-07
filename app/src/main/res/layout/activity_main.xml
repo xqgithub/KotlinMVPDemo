@@ -78,5 +78,16 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:textSize="@dimen/deimen_16x"
             app:layout_constraintTop_toBottomOf="@+id/tv_test5"/>
+    <TextView
+            android:id="@+id/tv_test7"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/deimen_30x"
+            android:text="User表插入数据"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/deimen_10x"
+            android:layout_marginLeft="@dimen/deimen_20x"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textSize="@dimen/deimen_16x"
+            app:layout_constraintTop_toBottomOf="@+id/tv_test6"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

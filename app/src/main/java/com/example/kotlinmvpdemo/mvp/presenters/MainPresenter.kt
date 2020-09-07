@@ -4,9 +4,12 @@ import android.content.Context
 import com.example.baselibrary.data.api.ApiResponse2
 import com.example.baselibrary.data.api.ApiService
 import com.example.baselibrary.data.api.BaseSubscriber
+import com.example.baselibrary.data.database.datasource.User
+import com.example.baselibrary.di.modules.DBHelperModule
 import com.example.baselibrary.mvp.entity.Translation
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.runRx
+import com.example.kotlinmvpdemo.DaoSession
 import com.example.kotlinmvpdemo.mvp.views.MainView
 import io.reactivex.Observable
 import io.reactivex.Observer
@@ -23,7 +26,9 @@ import javax.inject.Inject
  */
 class MainPresenter @Inject constructor(
     val mainview: MainView,
-    val apiService: ApiService
+    val apiService: ApiService,
+    val dbHelperModule: DBHelperModule,
+    val daoSession: DaoSession
 ) {
     /**
      * 初始化
@@ -261,6 +266,48 @@ class MainPresenter @Inject constructor(
                 }
             })
     }
+
+
+    /**
+     * 插入单条数据
+     */
+    fun insertData() {
+        val user = User()
+        user.id = 1
+        user.name = "路飞"
+        user.sex = "男"
+        dbHelperModule.insert(user, daoSession)
+    }
+
+    /**
+     * 插入多条数据
+     */
+    fun insertData2() {
+        val user = User()
+        user.id = 2
+        user.name = "索隆"
+        user.sex = "男"
+
+        val user2 = User()
+        user2.primaryid = 9
+        user2.id = 3
+        user2.name = "娜美"
+        user2.sex = "女"
+
+        val userList = mutableListOf<User>()
+        userList.add(user)
+        userList.add(user2)
+        dbHelperModule.insert(userList, daoSession)
+    }
+
+    /**
+     * 删除User表中的数据
+     */
+    fun deleteDatas() {
+        dbHelperModule.deleteAll(User::class.java, daoSession)
+    }
+
+
 }
 
 

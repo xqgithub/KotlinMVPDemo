@@ -1,6 +1,8 @@
 package com.example.kotlinmvpdemo.di.modules
 
 import com.example.baselibrary.data.api.ApiService
+import com.example.baselibrary.di.modules.DBHelperModule
+import com.example.kotlinmvpdemo.DaoSession
 import com.example.kotlinmvpdemo.di.scopes.MainActivityScope
 import com.example.kotlinmvpdemo.mvp.presenters.MainPresenter
 import com.example.kotlinmvpdemo.mvp.views.MainView
@@ -22,7 +24,12 @@ class MainModule @Inject constructor(private val mainview: MainView) {
 
     @MainActivityScope
     @Provides
-    fun providegetPresenter(mainview: MainView, apiService: ApiService): MainPresenter {
-        return MainPresenter(mainview, apiService)
+    fun providegetPresenter(
+        mainview: MainView,
+        apiService: ApiService,
+        dbHelperModule: DBHelperModule,
+        daoSession: DaoSession
+    ): MainPresenter {
+        return MainPresenter(mainview, apiService, dbHelperModule, daoSession)
     }
 }

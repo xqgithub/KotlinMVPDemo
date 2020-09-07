@@ -31,5 +31,8 @@ object ConfigConstants {
     //sp文件名
     const val SP_TEST_USER = "sp_test_user"
 
+    //全局数据库名称
+    const val DB_SQL_NAME = "kotlinmvpdemo"
+
 
 }

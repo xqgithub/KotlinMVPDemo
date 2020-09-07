@@ -68,5 +68,11 @@ class MainActivity : BaseActivity(), MainView {
 //            test_sp = "其实我是索隆"
             LogUtils.i("SP_TEST_USER文件中haha字段 =-= $test_sp")
         }
+
+        tv_test7.setOnClickListener {
+            presenter.deleteDatas()
+            presenter.insertData()
+            presenter.insertData2()
+        }
     }
 }
