@@ -1,0 +1,2 @@
+1.appcompat 升级到1.3.0-alpha02 可以解决 android x 中 java.lang.Class<androidx.core.view.ViewCompat因为找不到，而导致 java.lang.ClassNotFoundException: Didn't find class "android.view.View$OnUnhandledKeyEventListener" on path: DexPathList
+解决参考网址：https://stackoverflow.com/questions/51782548/androidxappcompat-iart-error-android-view-viewonunhandledkeyeventlistener/52954286

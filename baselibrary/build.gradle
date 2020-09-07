@@ -1,0 +1,70 @@
+/**
+ * 基础module，放置所有基础工具类
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+def cfg = rootProject.ext.android
+def _dependencies = rootProject.ext.dependencies
+
+android {
+    compileSdkVersion cfg.compileSdkVersion
+    buildToolsVersion cfg.buildToolsVersion
+    defaultConfig {
+//        applicationId "com.example.kotlinmvpdemo"
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionCode cfg.versionCode
+        versionName cfg.versionName
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/activities',
+                            'src/main/res/layouts/dialogs',
+                            'src/main/res/layouts',
+                            'src/main/res'
+                    ]
+        }
+    }
+
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api _dependencies.appcompat
+    api _dependencies.core_ktx
+    api _dependencies.constraintlayout
+    implementation _dependencies.dagger2
+    kapt _dependencies.dagger_compiler2
+    implementation _dependencies.multidex_version
+    api _dependencies.rxandroid2
+    api _dependencies.rxjava2
+    api _dependencies.retrofit
+    api _dependencies.converter_gson
+    api _dependencies.adapter_rxjava2
+    api _dependencies.okhttp3
+    api _dependencies.logging_interceptor
+
+}
+
