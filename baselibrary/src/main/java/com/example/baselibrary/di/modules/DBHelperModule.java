@@ -15,6 +15,9 @@ import org.greenrobot.greendao.query.QueryBuilder;
 import javax.inject.Singleton;
 import java.util.List;
 
+/**
+ * 数据库辅助类,简单的写法
+ */
 @Module
 public class DBHelperModule {
 
