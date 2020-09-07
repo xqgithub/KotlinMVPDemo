@@ -16,7 +16,7 @@ import javax.inject.Singleton;
 import java.util.List;
 
 /**
- * 数据库辅助类,简单的写法
+ * 数据库辅助类,简单的写法 2
  */
 @Module
 public class DBHelperModule {
