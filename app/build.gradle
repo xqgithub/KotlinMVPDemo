@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply from: 'and_res_guard.gradle'
 
 def cfg = rootProject.ext.android
 def _dependencies = rootProject.ext.dependencies
@@ -17,10 +18,26 @@ android {
         versionName cfg.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        jks_config {
+            keyAlias rootProject.ext.signingConfig.keyAlias
+            keyPassword rootProject.ext.signingConfig.keyPassword
+            storeFile file(rootProject.ext.signingConfig.storeFile)
+            storePassword rootProject.ext.signingConfig.storePassword
+        }
+    }
+
     buildTypes {
-        release {
+        debug {
+            // 是否进行混淆
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            // 是否进行混淆
+            minifyEnabled false
+            // 混淆文件的位置，其中'proguard-android.txt'为sdk默认的混淆配置，'proguard-rules-haha2.pro' 是该模块下的混淆配置
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.jks_config
         }
     }
 }

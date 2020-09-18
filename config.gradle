@@ -76,5 +76,15 @@ ext {
 
     ]
 
+    /**
+     * 秘钥
+     */
+    signingConfig = [
+            keyAlias     : 'kotlinmvp',
+            keyPassword  : '12345678',
+            storeFile    : '../signing/kotlinmvp.jks',
+            storePassword: '12345678'
+    ]
+
 
 }
