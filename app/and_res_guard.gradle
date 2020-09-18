@@ -1,5 +1,7 @@
 apply plugin: 'AndResGuard'
-
+/**
+ * 打包工具添加
+ */
 andResGuard {
     mappingFile = null
     use7zip = true
