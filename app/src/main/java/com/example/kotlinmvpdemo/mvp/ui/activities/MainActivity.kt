@@ -6,6 +6,8 @@ import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.SPreferenceUtils
+import com.example.baselibrary.utils.ScreenUtils
+import com.example.baselibrary.utils.glideutils.GlideUtils
 import com.example.kotlinmvpdemo.R
 import com.example.kotlinmvpdemo.di.componets.DaggerMainComponet
 import com.example.kotlinmvpdemo.di.modules.MainModule
@@ -73,6 +75,19 @@ class MainActivity : BaseActivity(), MainView {
             presenter.deleteDatas()
             presenter.insertData()
             presenter.insertData2()
+        }
+
+        tv_test8.setOnClickListener {
+            var picPath = "https://n.sinaimg.cn/sinacn20200204ac/551/w816h535/20200204/cc25-inzcrxs3080005.png"
+            GlideUtils.getInstance().loadUrlToImagaViewActivity(
+                this@MainActivity,
+                picPath,
+                iv_test8,
+                ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.deimen_60x)),
+                ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.deimen_60x)),
+                R.mipmap.ic_launcher,
+                R.mipmap.ic_launcher
+            )
         }
     }
 }

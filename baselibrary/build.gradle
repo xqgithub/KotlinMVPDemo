@@ -93,6 +93,8 @@ dependencies {
     api _dependencies.greendao
     api _dependencies.greendao_generator
     api _dependencies.greendaoupgradehelper
-
+    /** glide **/
+    api _dependencies.glide
+    kapt _dependencies.glide_compiler
 }
 

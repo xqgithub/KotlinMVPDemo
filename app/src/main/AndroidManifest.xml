@@ -12,6 +12,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+
         <activity android:name=".mvp.ui.activities.CheckPermissionsActivity"
                   android:launchMode="singleTask"
                   android:theme="@style/myTransparent"

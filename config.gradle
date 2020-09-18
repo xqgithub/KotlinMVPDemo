@@ -37,7 +37,9 @@ ext {
             stethookhttp3        : "1.4.1",
             greendao             : "3.2.2",
             greendao_generator   : "3.2.2",
-            greendaoupgradehelper: "v2.2.1"
+            greendaoupgradehelper: "v2.2.1",
+            glide                : "4.11.0",
+            glide_compiler       : "4.11.0",
     ]
 
     /**
@@ -62,7 +64,9 @@ ext {
             stethookhttp3        : "com.facebook.stetho:stetho-okhttp3:${dependenciesversion.stethookhttp3}",
             greendao             : "org.greenrobot:greendao:${dependenciesversion.greendao}",
             greendao_generator   : "org.greenrobot:greendao-generator:${dependenciesversion.greendao_generator}",
-            greendaoupgradehelper: "io.github.yuweiguocn:GreenDaoUpgradeHelper:${dependenciesversion.greendaoupgradehelper}"
+            greendaoupgradehelper: "io.github.yuweiguocn:GreenDaoUpgradeHelper:${dependenciesversion.greendaoupgradehelper}",
+            glide                : "com.github.bumptech.glide:glide:${dependenciesversion.glide}",
+            glide_compiler       : "com.github.bumptech.glide:compiler:${dependenciesversion.glide_compiler}",
     ]
 
     /**

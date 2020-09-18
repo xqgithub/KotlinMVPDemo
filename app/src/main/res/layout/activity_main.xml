@@ -90,4 +90,24 @@
             android:textSize="@dimen/deimen_16x"
             app:layout_constraintTop_toBottomOf="@+id/tv_test6"/>
 
+    <TextView
+            android:id="@+id/tv_test8"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/deimen_30x"
+            android:text="加载网络图片"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/deimen_10x"
+            android:layout_marginLeft="@dimen/deimen_20x"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textSize="@dimen/deimen_16x"
+            app:layout_constraintTop_toBottomOf="@+id/tv_test7"/>
+
+    <ImageView
+            app:layout_constraintLeft_toRightOf="@+id/tv_test8"
+            android:id="@+id/iv_test8"
+            app:layout_constraintTop_toTopOf="@+id/tv_test8"
+            android:layout_width="@dimen/deimen_60x"
+            android:layout_height="@dimen/deimen_60x"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
