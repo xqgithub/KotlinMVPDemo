@@ -7,7 +7,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
 /**
- * 公共实用类(java方法)
+ * 公共实用类(java方法1)
  */
 public class PublicPracticalMethodFromJAVA {
 
