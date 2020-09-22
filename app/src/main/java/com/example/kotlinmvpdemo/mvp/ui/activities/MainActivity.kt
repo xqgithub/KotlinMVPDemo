@@ -1,5 +1,6 @@
 package com.example.kotlinmvpdemo.mvp.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
@@ -8,6 +9,7 @@ import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.SPreferenceUtils
 import com.example.baselibrary.utils.ScreenUtils
 import com.example.baselibrary.utils.glideutils.GlideUtils
+import com.example.baselibrary.utils.intentToJump
 import com.example.kotlinmvpdemo.R
 import com.example.kotlinmvpdemo.di.componets.DaggerMainComponet
 import com.example.kotlinmvpdemo.di.modules.MainModule
@@ -87,6 +89,14 @@ class MainActivity : BaseActivity(), MainView {
                 ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.deimen_60x)),
                 R.mipmap.ic_launcher,
                 R.mipmap.ic_launcher
+            )
+        }
+
+        tv_test9.setOnClickListener {
+            intentToJump(
+                this@MainActivity,
+                TestProductFlavorsActivity::class.java,
+                Intent.FLAG_ACTIVITY_CLEAR_TOP
             )
         }
     }

@@ -70,4 +70,15 @@ object ConfigConstants {
             null
         ).absolutePath + File.separator + "AGlideImage"
 
+    /** 版本差异配置 **/
+    //1.AndroidManifest中meta-data的package_id的key
+    const val PACKAGE_ID = "package_id"
+    //2.AndroidManifest中meta-data的app_version的key
+    const val APP_VERSION = "app_version"
+    //1.测试版本
+    const val ceshi = "package_10001"
+    //2.生产版本
+    const val shengchan = "package_10002"
+
+
 }

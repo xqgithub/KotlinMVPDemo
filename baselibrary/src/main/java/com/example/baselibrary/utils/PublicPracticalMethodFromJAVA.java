@@ -1,7 +1,10 @@
 package com.example.baselibrary.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 
 /**
  * 公共实用类(java方法)
@@ -49,4 +52,35 @@ public class PublicPracticalMethodFromJAVA {
     }
 
 
+    /**
+     * 00002
+     * 根据metaDataKey获取metaDataValue
+     *
+     * @param ctx
+     * @param metaDataKey
+     * @return
+     */
+    public String getMetaDataValue(Context ctx, String metaDataKey) {
+        if (ctx == null) {
+            return null;
+        }
+        String channelName = null;
+        try {
+            PackageManager packageManager = ctx.getPackageManager();
+            if (packageManager != null) {
+                //注意此处为ApplicationInfo 而不是 ActivityInfo,设置的meta-data是在application标签中，而不是某activity标签中，所以用ApplicationInfo
+                ApplicationInfo applicationInfo = packageManager.getApplicationInfo(ctx.getPackageName(),
+                        PackageManager.GET_META_DATA);
+                if (applicationInfo != null) {
+                    if (applicationInfo.metaData != null) {
+                        channelName = applicationInfo.metaData.getString(metaDataKey);
+                    }
+                }
+
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return channelName;
+    }
 }

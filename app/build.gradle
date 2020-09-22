@@ -16,6 +16,8 @@ android {
         targetSdkVersion cfg.targetSdkVersion
         versionCode cfg.versionCode
         versionName cfg.versionName
+        //版本名后面添加一句话，意思就是flavor dimension 它的维度就是该版本号，这样维度就是都是统一的了
+        flavorDimensions "versionCode"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -38,6 +40,26 @@ android {
             // 混淆文件的位置，其中'proguard-android.txt'为sdk默认的混淆配置，'proguard-rules-haha2.pro' 是该模块下的混淆配置
 //            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.jks_config
+        }
+    }
+
+    /*******创建productFlavors 实现版本差异化*******/
+    productFlavors {
+        ceshi {
+            applicationId "com.example.kotlinmvpdemo.ceshi"
+            manifestPlaceholders = [package_id : "package_10001",
+                                    app_name   : "@string/productflavors_ceshi",
+                                    app_logo   : "@mipmap/app_logo_jingyong",
+                                    app_version: "ceshi"
+            ]
+        }
+        shengchan {
+            applicationId "com.example.kotlinmvpdemo.shengchan"
+            manifestPlaceholders = [package_id : "package_10002",
+                                    app_name   : "@string/productflavors_shengchan",
+                                    app_logo   : "@mipmap/app_logo_shandian",
+                                    app_version: "shengchan"
+            ]
         }
     }
 }

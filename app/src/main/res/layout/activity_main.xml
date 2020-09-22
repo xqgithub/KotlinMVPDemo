@@ -109,5 +109,17 @@
             android:layout_width="@dimen/deimen_60x"
             android:layout_height="@dimen/deimen_60x"/>
 
+    <TextView
+            android:id="@+id/tv_test9"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/deimen_30x"
+            android:text="跳转到TestProductFlavorsActivity页面"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/deimen_10x"
+            android:layout_marginLeft="@dimen/deimen_20x"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textSize="@dimen/deimen_16x"
+            app:layout_constraintTop_toBottomOf="@+id/iv_test8"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

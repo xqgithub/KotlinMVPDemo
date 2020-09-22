@@ -21,7 +21,6 @@ android {
         versionCode cfg.versionCode
         versionName cfg.versionName
         multiDexEnabled true
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     sourceSets {
@@ -51,7 +50,6 @@ android {
         //设置目录,kotlin才能找到相关文件
         targetGenDir 'src/main/java'
     }
-
 }
 
 dependencies {

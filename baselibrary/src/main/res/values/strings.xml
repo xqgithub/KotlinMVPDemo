@@ -1,6 +1,8 @@
 <resources>
     <!--<string name="app_name">BaseLibrary</string>-->
     <string name="app_name">KotlinMVPDemo</string>
+    <string name="productflavors_ceshi">测试版kotlinMVP</string>
+    <string name="productflavors_shengchan">生产版kotlinMVP</string>
     <string name="quit">退出</string>
     <string name="settings">设置</string>
     <string name="help">帮助</string>
