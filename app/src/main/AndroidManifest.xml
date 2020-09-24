@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="com.example.kotlinmvpdemo">
-
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.example.kotlinmvpdemo">
 
     <application
             android:name="com.example.baselibrary.application.MyApplication"
@@ -12,11 +12,11 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name=".mvp.ui.activities.CheckPermissionsActivity"
-                  android:launchMode="singleTask"
-                  android:theme="@style/myTransparent"
-                  android:screenOrientation="portrait">
+        <activity
+                android:name=".mvp.ui.activities.CheckPermissionsActivity"
+                android:launchMode="singleTask"
+                android:screenOrientation="portrait"
+                android:theme="@style/myTransparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -25,22 +25,17 @@
         </activity>
         <activity
                 android:name=".mvp.ui.activities.PermissionsActivity"
-                android:theme="@style/myTransparent2"
-                android:screenOrientation="portrait"/>
+                android:screenOrientation="portrait"
+                android:theme="@style/myTransparent2"/>
         <activity
                 android:name=".mvp.ui.activities.MainActivity"
                 android:screenOrientation="portrait"/>
         <activity
                 android:name=".mvp.ui.activities.TestProductFlavorsActivity"
-                android:screenOrientation="portrait"/>
-
-
-        <!--package的ID配置-->
+                android:screenOrientation="portrait"/> <!-- package的ID配置 -->
         <meta-data
                 android:name="package_id"
-                android:value="${package_id}"/>
-
-        <!--app_version配置-->
+                android:value="${package_id}"/> <!-- app_version配置 -->
         <meta-data
                 android:name="app_version"
                 android:value="${app_version}"/>

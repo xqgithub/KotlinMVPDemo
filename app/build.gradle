@@ -54,7 +54,7 @@ android {
             ]
         }
         shengchan {
-            applicationId "com.example.kotlinmvpdemo.shengchan"
+            applicationId "com.example.kotlinmvpdemo"
             manifestPlaceholders = [package_id : "package_10002",
                                     app_name   : "@string/productflavors_shengchan",
                                     app_logo   : "@mipmap/app_logo_shandian",
@@ -65,6 +65,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -77,4 +79,3 @@ dependencies {
      */
     implementation project(':baselibrary')
 }
-
