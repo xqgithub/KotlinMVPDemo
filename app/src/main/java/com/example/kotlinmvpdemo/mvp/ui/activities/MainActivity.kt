@@ -120,7 +120,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     /**
-     * EventBus 测试消息1
+     * EventBus 测试消息2
      * @param ThreadMode.POSTING:默认的线程模式，在哪个线程发送事件就在对应线程处理事件，避免了线程切换，效率高
      * @param ThreadMode.MAIN:如在主线程（UI线程）发送事件，则直接在主线程处理事件；如果在子线程发送事件，则先将事件入队列，然后通过 Handler 切换到主线程，依次处理事件
      * @param ThreadMode.MAIN_ORDERED:无论在哪个线程发送事件，都将事件加入到队列中，然后通过Handler切换到主线程，依次处理事件
