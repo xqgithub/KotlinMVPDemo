@@ -86,5 +86,7 @@ dependencies {
     /** glide **/
     api _dependencies.glide
     kapt _dependencies.glide_compiler
+    /** eventbus3 **/
+    api _dependencies.eventbus3
 }
 

@@ -10,5 +10,11 @@ class ProductFlavorsPresenter @Inject constructor(
     val productFlavorsView: ProductFlavorsView
 ) {
 
+    /**
+     * 发送测试消息
+     */
+    fun sendEventBusTestMessage() {
+
+    }
 
 }

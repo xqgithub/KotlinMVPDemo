@@ -40,6 +40,7 @@ ext {
             greendaoupgradehelper: "v2.2.1",
             glide                : "4.11.0",
             glide_compiler       : "4.11.0",
+            eventbus3            : "3.1.1",
     ]
 
     /**
@@ -67,6 +68,7 @@ ext {
             greendaoupgradehelper: "io.github.yuweiguocn:GreenDaoUpgradeHelper:${dependenciesversion.greendaoupgradehelper}",
             glide                : "com.github.bumptech.glide:glide:${dependenciesversion.glide}",
             glide_compiler       : "com.github.bumptech.glide:compiler:${dependenciesversion.glide_compiler}",
+            eventbus3            : "org.greenrobot:eventbus:${dependenciesversion.eventbus3}",
     ]
 
     /**

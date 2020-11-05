@@ -34,3 +34,6 @@ fun intentToJump(context: Context, cls: Class<*>, flag: Int) {
     context.startActivity(intent)
 }
 
+
+
+

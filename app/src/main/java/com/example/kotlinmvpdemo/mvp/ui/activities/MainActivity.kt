@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
+import com.example.baselibrary.constants.EventTag
 import com.example.baselibrary.di.componets.MyAppComponet
+import com.example.baselibrary.mvp.entity.MessageEvent
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.SPreferenceUtils
 import com.example.baselibrary.utils.ScreenUtils
@@ -17,6 +19,9 @@ import com.example.kotlinmvpdemo.mvp.presenters.MainPresenter
 import com.example.kotlinmvpdemo.mvp.views.MainView
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView {
@@ -98,6 +103,42 @@ class MainActivity : BaseActivity(), MainView {
                 TestProductFlavorsActivity::class.java,
                 Intent.FLAG_ACTIVITY_CLEAR_TOP
             )
+        }
+
+        tv_test10.setOnClickListener {
+            //1.注册EventBus
+            if (!EventBus.getDefault().isRegistered(this)) {
+                EventBus.getDefault().register(this)
+            }
+            //2.跳转到 TestProductFlavorsActivity 页面
+            intentToJump(
+                this@MainActivity,
+                TestProductFlavorsActivity::class.java,
+                Intent.FLAG_ACTIVITY_CLEAR_TOP
+            )
+        }
+    }
+
+    /**
+     * EventBus 测试消息
+     * @param ThreadMode.POSTING:默认的线程模式，在哪个线程发送事件就在对应线程处理事件，避免了线程切换，效率高
+     * @param ThreadMode.MAIN:如在主线程（UI线程）发送事件，则直接在主线程处理事件；如果在子线程发送事件，则先将事件入队列，然后通过 Handler 切换到主线程，依次处理事件
+     * @param ThreadMode.MAIN_ORDERED:无论在哪个线程发送事件，都将事件加入到队列中，然后通过Handler切换到主线程，依次处理事件
+     * @param ThreadMode.BACKGROUND:与ThreadMode.MAIN相反，如果在子线程发送事件，则直接在子线程处理事件；如果在主线程上发送事件，则先将事件入队列，然后通过线程池处理事件
+     * @param ThreadMode.ASYNC:与ThreadMode.MAIN_ORDERED相反，无论在哪个线程发送事件，都将事件加入到队列中，然后通过线程池执行事件
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 100)
+    fun EventBusTestMessage(messageevent: MessageEvent) {
+        if (EventTag.event_test == messageevent.message_type) {
+            LogUtils.i("收到测试消息 =-= ${messageevent.message}")
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //注销EventBus
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this)
         }
     }
 }
