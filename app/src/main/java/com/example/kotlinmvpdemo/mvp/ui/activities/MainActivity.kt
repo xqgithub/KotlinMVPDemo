@@ -110,7 +110,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     /**
-     * 先注册EventBus，再跳转到TestProductFlavorsActivity
+     * 先注册EventBus，再跳转到TestProductFlavorsActivity1
      */
     fun testEventBus() {
         //1.注册EventBus
