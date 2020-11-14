@@ -306,8 +306,6 @@ class MainPresenter @Inject constructor(
     fun deleteDatas() {
         dbHelperModule.deleteAll(User::class.java, daoSession)
     }
-
-
 }
 
 

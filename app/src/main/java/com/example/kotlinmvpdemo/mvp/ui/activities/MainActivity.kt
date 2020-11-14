@@ -2,6 +2,10 @@ package com.example.kotlinmvpdemo.mvp.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.EventTag
@@ -16,8 +20,8 @@ import com.example.kotlinmvpdemo.R
 import com.example.kotlinmvpdemo.di.componets.DaggerMainComponet
 import com.example.kotlinmvpdemo.di.modules.MainModule
 import com.example.kotlinmvpdemo.mvp.presenters.MainPresenter
+import com.example.kotlinmvpdemo.mvp.ui.adapter.MainListAdapter
 import com.example.kotlinmvpdemo.mvp.views.MainView
-import example.com.testkotlin.haha.utils.showShortToastSafe
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -56,68 +60,71 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun init() {
         LogUtils.i("=-= 我要开始初始化了")
-        tv_test.setOnClickListener {
-            showShortToastSafe("你好我叫hello world")
-            presenter.getTestData(this@MainActivity)
-        }
-        tv_test2.setOnClickListener {
-            presenter.getTestData2(this@MainActivity)
-        }
-        tv_test3.setOnClickListener {
-            presenter.getTestData3(this@MainActivity)
-        }
-        tv_test4.setOnClickListener {
-            presenter.getTestData4(this@MainActivity)
-        }
-        tv_test5.setOnClickListener {
-            presenter.getTestData5(this@MainActivity)
-        }
-        tv_test6.setOnClickListener {
-            //1.创建文件sp_test_user.xml文件，保存数值
-//            test_sp = "其实我是索隆"
-            LogUtils.i("SP_TEST_USER文件中haha字段 =-= $test_sp")
-        }
-
-        tv_test7.setOnClickListener {
-            presenter.deleteDatas()
-            presenter.insertData()
-            presenter.insertData2()
-        }
-
-        tv_test8.setOnClickListener {
-            var picPath = "https://n.sinaimg.cn/sinacn20200204ac/551/w816h535/20200204/cc25-inzcrxs3080005.png"
-            GlideUtils.getInstance().loadUrlToImagaViewActivity(
-                this@MainActivity,
-                picPath,
-                iv_test8,
-                ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.deimen_60x)),
-                ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.deimen_60x)),
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher
-            )
-        }
-
-        tv_test9.setOnClickListener {
-            intentToJump(
-                this@MainActivity,
-                TestProductFlavorsActivity::class.java,
-                Intent.FLAG_ACTIVITY_CLEAR_TOP
-            )
-        }
-
-        tv_test10.setOnClickListener {
-            //1.注册EventBus
-            if (!EventBus.getDefault().isRegistered(this)) {
-                EventBus.getDefault().register(this)
+        //1.初始化recyerview
+        val linearlayoutmanager = LinearLayoutManager(this@MainActivity)
+        linearlayoutmanager.orientation = RecyclerView.VERTICAL
+        val mainlistadapter = MainListAdapter(this@MainActivity, items)
+        rv_main.layoutManager = linearlayoutmanager
+        rv_main.adapter = mainlistadapter
+        //2.Item的点击事件
+        mainlistadapter.setOnItemClickListener(object : MainListAdapter.OnItemClickListener {
+            override fun setItemOnClick(position: Int, imageView: ImageView) {
+                when (position) {
+                    0 -> presenter.getTestData(this@MainActivity)
+                    1 -> presenter.getTestData2(this@MainActivity)
+                    2 -> presenter.getTestData3(this@MainActivity)
+                    3 -> presenter.getTestData4(this@MainActivity)
+                    4 -> presenter.getTestData5(this@MainActivity)
+                    5 -> {
+                        test_sp = "其实我是索隆"
+                        LogUtils.i("SP_TEST_USER文件中haha字段 =-= $test_sp")
+                    }
+                    6 -> {
+                        presenter.deleteDatas()
+                        presenter.insertData()
+                        presenter.insertData2()
+                    }
+                    7 -> {
+                        var picPath =
+                            "https://n.sinaimg.cn/sinacn20200204ac/551/w816h535/20200204/cc25-inzcrxs3080005.png"
+                        imageView.visibility = View.VISIBLE
+                        GlideUtils.getInstance().loadUrlToImagaViewActivity(
+                            this@MainActivity,
+                            picPath,
+                            imageView,
+                            ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.deimen_70x)),
+                            ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.deimen_70x)),
+                            R.mipmap.ic_launcher,
+                            R.mipmap.ic_launcher
+                        )
+                    }
+                    8 -> intentToJump(
+                        this@MainActivity,
+                        TestProductFlavorsActivity::class.java,
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    )
+                    9 -> testEventBus()
+                }
             }
-            //2.跳转到 TestProductFlavorsActivity 页面
-            intentToJump(
-                this@MainActivity,
-                TestProductFlavorsActivity::class.java,
-                Intent.FLAG_ACTIVITY_CLEAR_TOP
-            )
-        }
+        })
     }
+
+    /**
+     * 先注册EventBus，再跳转到TestProductFlavorsActivity
+     */
+    fun testEventBus() {
+        //1.注册EventBus
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this)
+        }
+        //2.跳转到 TestProductFlavorsActivity 页面
+        intentToJump(
+            this@MainActivity,
+            TestProductFlavorsActivity::class.java,
+            Intent.FLAG_ACTIVITY_CLEAR_TOP
+        )
+    }
+
 
     /**
      * EventBus 测试消息2
@@ -134,6 +141,23 @@ class MainActivity : BaseActivity(), MainView {
         }
     }
 
+    /**
+     *测试数据
+     */
+    val items = listOf<String>(
+        "接口请求测试",
+        "接口请求,无条件轮询，间隔一段时间就请求一次",
+        "接口请求,有条件轮询",
+        "网络请求嵌套回调",
+        "网络请求出错重连",
+        "测试SP文件数据",
+        "User表插入数据",
+        "加载网络图片",
+        "跳转到TestProductFlavorsActivity页面",
+        "EventBus"
+    )
+
+
     override fun onDestroy() {
         super.onDestroy()
         //注销EventBus
@@ -141,4 +165,6 @@ class MainActivity : BaseActivity(), MainView {
             EventBus.getDefault().unregister(this)
         }
     }
+
+
 }

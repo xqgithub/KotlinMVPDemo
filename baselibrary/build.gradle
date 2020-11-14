@@ -88,5 +88,7 @@ dependencies {
     kapt _dependencies.glide_compiler
     /** eventbus3 **/
     api _dependencies.eventbus3
+    /** recyclerview  **/
+    api _dependencies.recyclerview
 }
 
