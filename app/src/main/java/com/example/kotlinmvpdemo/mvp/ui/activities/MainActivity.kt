@@ -104,6 +104,7 @@ class MainActivity : BaseActivity(), MainView {
                         Intent.FLAG_ACTIVITY_CLEAR_TOP
                     )
                     9 -> testEventBus()
+                    10 -> presenter.testBuilder()
                 }
             }
         })
@@ -154,7 +155,8 @@ class MainActivity : BaseActivity(), MainView {
         "User表插入数据",
         "加载网络图片",
         "跳转到TestProductFlavorsActivity页面",
-        "EventBus"
+        "EventBus",
+        "设计模式---建造者模式"
     )
 
 

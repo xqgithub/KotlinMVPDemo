@@ -5,6 +5,9 @@ import com.example.baselibrary.data.api.ApiResponse2
 import com.example.baselibrary.data.api.ApiService
 import com.example.baselibrary.data.api.BaseSubscriber
 import com.example.baselibrary.data.database.datasource.User
+import com.example.baselibrary.designpatterns.builder.Builder
+import com.example.baselibrary.designpatterns.builder.ConcreteBuilder
+import com.example.baselibrary.designpatterns.builder.Director
 import com.example.baselibrary.di.modules.DBHelperModule
 import com.example.baselibrary.mvp.entity.Translation
 import com.example.baselibrary.utils.LogUtils
@@ -305,6 +308,24 @@ class MainPresenter @Inject constructor(
      */
     fun deleteDatas() {
         dbHelperModule.deleteAll(User::class.java, daoSession)
+    }
+
+    /**
+     * 设计模式---建造者模式
+     */
+    fun testBuilder() {
+        //1.创建建造者实例
+        val builder: Builder = ConcreteBuilder()
+        //2.创建指挥者实例，并分配相应的建造者
+        val director = Director(builder)
+        //3.开始干活
+        director.Constructor("i7-6700", "三星DDR4", "希捷1T")
+        LogUtils.i(
+            "testBuilder",
+            "cpu:${builder.getCreateComputer().mCPU}",
+            "memory:${builder.getCreateComputer().mMemory}",
+            "mHD:${builder.getCreateComputer().mHD}"
+        )
     }
 }
 
