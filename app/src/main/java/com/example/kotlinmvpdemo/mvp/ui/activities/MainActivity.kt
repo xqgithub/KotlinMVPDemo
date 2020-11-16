@@ -105,6 +105,9 @@ class MainActivity : BaseActivity(), MainView {
                     )
                     9 -> testEventBus()
                     10 -> presenter.testBuilder()
+                    11 -> presenter.testFactory()
+                    12 -> presenter.testSimpleFactory()
+                    13 -> presenter.testAbstractFactory()
                 }
             }
         })
@@ -156,7 +159,10 @@ class MainActivity : BaseActivity(), MainView {
         "加载网络图片",
         "跳转到TestProductFlavorsActivity页面",
         "EventBus",
-        "设计模式---建造者模式"
+        "设计模式---建造者模式",
+        "设计模式---工厂方法模式",
+        "设计模式---简单工厂模式",
+        "设计模式---抽象工厂模式"
     )
 
 

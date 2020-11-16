@@ -5,9 +5,16 @@ import com.example.baselibrary.data.api.ApiResponse2
 import com.example.baselibrary.data.api.ApiService
 import com.example.baselibrary.data.api.BaseSubscriber
 import com.example.baselibrary.data.database.datasource.User
+import com.example.baselibrary.designpatterns.abstractfactory.ConcreteFactoryAbstract
+import com.example.baselibrary.designpatterns.abstractfactory.FactoryAbstract
 import com.example.baselibrary.designpatterns.builder.Builder
 import com.example.baselibrary.designpatterns.builder.ConcreteBuilder
 import com.example.baselibrary.designpatterns.builder.Director
+import com.example.baselibrary.designpatterns.factory.ConcreteFactory
+import com.example.baselibrary.designpatterns.factory.Factory
+import com.example.baselibrary.designpatterns.factory.Product
+import com.example.baselibrary.designpatterns.simplefactory.ConcreteProductSimple
+import com.example.baselibrary.designpatterns.simplefactory.FactorySimple
 import com.example.baselibrary.di.modules.DBHelperModule
 import com.example.baselibrary.mvp.entity.Translation
 import com.example.baselibrary.utils.LogUtils
@@ -326,6 +333,57 @@ class MainPresenter @Inject constructor(
             "memory:${builder.getCreateComputer().mMemory}",
             "mHD:${builder.getCreateComputer().mHD}"
         )
+    }
+
+    /**
+     * 设计模式---工厂方法模式
+     */
+    fun testFactory() {
+        //1.产品A
+        val factoryA: Factory = ConcreteFactory.FactoryA()
+        val productA: Product = factoryA.create()
+        productA.show()
+        //2.产品B
+        val factoryB: Factory = ConcreteFactory.FactoryB()
+        val productB: Product = factoryB.create()
+        productB.show()
+    }
+
+    /**
+     * 设计模式---简单工厂模式
+     */
+    fun testSimpleFactory() {
+        //1.产品A
+        FactorySimple.create("A")!!.show()
+        //2.产品B
+        FactorySimple.create("B")!!.show()
+        //3.产品C
+        try {
+            FactorySimple.create("C")!!.show()
+        } catch (e: Exception) {
+            LogUtils.i("没有C产品")
+        }
+
+        //4.反射实现工厂类
+        FactorySimple.create(ConcreteProductSimple.ProductA().javaClass)!!.show()
+        FactorySimple.create(ConcreteProductSimple.ProductB().javaClass)!!.show()
+    }
+
+    /**
+     * 设计模式---抽象工厂模式
+     */
+    fun testAbstractFactory() {
+
+        //1.产品1
+        val factoryabstract: FactoryAbstract = ConcreteFactoryAbstract.lianxiang()
+        factoryabstract.createCPU().showCpu()
+        factoryabstract.createMemory().showMemory()
+        factoryabstract.createHD().showHD()
+        //2.产品2
+        val factoryabstract2: FactoryAbstract = ConcreteFactoryAbstract.HP()
+        factoryabstract2.createCPU().showCpu()
+        factoryabstract2.createMemory().showMemory()
+        factoryabstract2.createHD().showHD()
     }
 }
 
