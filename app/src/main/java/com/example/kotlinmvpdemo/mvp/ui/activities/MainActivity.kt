@@ -108,6 +108,8 @@ class MainActivity : BaseActivity(), MainView {
                     11 -> presenter.testFactory()
                     12 -> presenter.testSimpleFactory()
                     13 -> presenter.testAbstractFactory()
+                    14 -> presenter.testCloneMode()
+                    15 -> presenter.testStragety()
                 }
             }
         })
@@ -162,7 +164,9 @@ class MainActivity : BaseActivity(), MainView {
         "设计模式---建造者模式",
         "设计模式---工厂方法模式",
         "设计模式---简单工厂模式",
-        "设计模式---抽象工厂模式"
+        "设计模式---抽象工厂模式",
+        "设计模式---原型模式",
+        "设计模式---策略模式"
     )
 
 

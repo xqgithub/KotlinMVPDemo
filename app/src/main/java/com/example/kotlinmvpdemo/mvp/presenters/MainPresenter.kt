@@ -10,11 +10,14 @@ import com.example.baselibrary.designpatterns.abstractfactory.FactoryAbstract
 import com.example.baselibrary.designpatterns.builder.Builder
 import com.example.baselibrary.designpatterns.builder.ConcreteBuilder
 import com.example.baselibrary.designpatterns.builder.Director
+import com.example.baselibrary.designpatterns.clonemode.Card
 import com.example.baselibrary.designpatterns.factory.ConcreteFactory
 import com.example.baselibrary.designpatterns.factory.Factory
 import com.example.baselibrary.designpatterns.factory.Product
 import com.example.baselibrary.designpatterns.simplefactory.ConcreteProductSimple
 import com.example.baselibrary.designpatterns.simplefactory.FactorySimple
+import com.example.baselibrary.designpatterns.strategy.ConcreteStragety
+import com.example.baselibrary.designpatterns.strategy.Environment
 import com.example.baselibrary.di.modules.DBHelperModule
 import com.example.baselibrary.mvp.entity.Translation
 import com.example.baselibrary.utils.LogUtils
@@ -384,6 +387,37 @@ class MainPresenter @Inject constructor(
         factoryabstract2.createCPU().showCpu()
         factoryabstract2.createMemory().showMemory()
         factoryabstract2.createHD().showHD()
+    }
+
+    /**
+     * 设计模式---原型模式
+     */
+    fun testCloneMode() {
+        //模型1
+        val card1 = Card()
+        card1.setNum(9527)
+        card1.setSpec(10, 20)
+        System.out.println(card1.toString())
+        println("----------------------")
+        //模型2
+        val card2 = card1.clone()
+        System.out.println(card2.toString())
+        System.out.println("----------------------")
+    }
+
+    /**
+     * 设计模式---原型模式
+     */
+    fun testStragety() {
+        //策略1
+        val environment = Environment(ConcreteStragety.ConcreteStragetyA())
+        environment.chase()
+        //策略2
+        val environment2 = Environment(ConcreteStragety.ConcreteStragetyB())
+        environment2.chase()
+        //策略3
+        val environment3 = Environment(ConcreteStragety.ConcreteStragetyC())
+        environment3.chase()
     }
 }
 
