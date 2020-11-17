@@ -16,6 +16,7 @@ import com.example.baselibrary.designpatterns.factory.Factory
 import com.example.baselibrary.designpatterns.factory.Product
 import com.example.baselibrary.designpatterns.simplefactory.ConcreteProductSimple
 import com.example.baselibrary.designpatterns.simplefactory.FactorySimple
+import com.example.baselibrary.designpatterns.state.ChangeState
 import com.example.baselibrary.designpatterns.strategy.ConcreteStragety
 import com.example.baselibrary.designpatterns.strategy.Environment
 import com.example.baselibrary.di.modules.DBHelperModule
@@ -418,6 +419,21 @@ class MainPresenter @Inject constructor(
         //策略3
         val environment3 = Environment(ConcreteStragety.ConcreteStragetyC())
         environment3.chase()
+    }
+
+    /**
+     * 设计模式---状态模式
+     */
+    fun testState() {
+        //状态1
+        val changestate: ChangeState = ChangeState()
+        changestate.disappointmentInLove()
+        changestate.movies()
+        changestate.shopping()
+        //状态2
+        changestate.fallInLove()
+        changestate.movies()
+        changestate.shopping()
     }
 }
 
