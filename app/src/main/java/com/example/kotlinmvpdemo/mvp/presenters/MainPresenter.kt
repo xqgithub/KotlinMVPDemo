@@ -10,6 +10,8 @@ import com.example.baselibrary.designpatterns.abstractfactory.FactoryAbstract
 import com.example.baselibrary.designpatterns.builder.Builder
 import com.example.baselibrary.designpatterns.builder.ConcreteBuilder
 import com.example.baselibrary.designpatterns.builder.Director
+import com.example.baselibrary.designpatterns.chainresponsibility.ConcretePostman
+import com.example.baselibrary.designpatterns.chainresponsibility.Postman
 import com.example.baselibrary.designpatterns.clonemode.Card
 import com.example.baselibrary.designpatterns.factory.ConcreteFactory
 import com.example.baselibrary.designpatterns.factory.Factory
@@ -434,6 +436,25 @@ class MainPresenter @Inject constructor(
         changestate.fallInLove()
         changestate.movies()
         changestate.shopping()
+    }
+
+    /**
+     * 设计模式---责任链模式
+     */
+    fun testResponsibility() {
+        //创建不同的快递员对象
+        val beijingpostman: Postman = ConcretePostman.BeijingPostman()
+        val shanghaipostman: Postman = ConcretePostman.ShangHaiPostman()
+        val guangzhoupostman: Postman = ConcretePostman.GuangZhouPostman()
+
+        beijingpostman.nextPostman = shanghaipostman
+        shanghaipostman.nextPostman = guangzhoupostman
+
+        //处理不同地区的快递，都是从首结点北京快递员开始
+        LogUtils.i("有一个上海的快递需要派送")
+        beijingpostman.handleCourier("shanghai")
+        LogUtils.i("有一个广州的快递需要派送")
+        beijingpostman.handleCourier("guangzhou")
     }
 }
 
