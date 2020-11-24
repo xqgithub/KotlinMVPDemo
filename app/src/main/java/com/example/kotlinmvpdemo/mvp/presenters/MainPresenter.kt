@@ -16,6 +16,9 @@ import com.example.baselibrary.designpatterns.clonemode.Card
 import com.example.baselibrary.designpatterns.factory.ConcreteFactory
 import com.example.baselibrary.designpatterns.factory.Factory
 import com.example.baselibrary.designpatterns.factory.Product
+import com.example.baselibrary.designpatterns.observer.ConcreteObservable
+import com.example.baselibrary.designpatterns.observer.ConcreteObserver
+import com.example.baselibrary.designpatterns.observer.Observerdesign
 import com.example.baselibrary.designpatterns.simplefactory.ConcreteProductSimple
 import com.example.baselibrary.designpatterns.simplefactory.FactorySimple
 import com.example.baselibrary.designpatterns.state.ChangeState
@@ -455,6 +458,26 @@ class MainPresenter @Inject constructor(
         beijingpostman.handleCourier("shanghai")
         LogUtils.i("有一个广州的快递需要派送")
         beijingpostman.handleCourier("guangzhou")
+    }
+
+    /**
+     * 设计模式---观察者模式
+     */
+    fun testObserver() {
+        //快递员 被观察者
+        val postman: ConcreteObservable = ConcreteObservable()
+
+        //观察者1
+        val observer1: Observerdesign = ConcreteObserver.Boy("路飞")
+        //观察者2
+        val observer2: Observerdesign = ConcreteObserver.Girl("娜美")
+
+        //添加观察者
+        postman.add(observer1)
+        postman.add(observer2)
+
+        //被观察者开始做动作
+        postman.notify("快递到了，速度下来拿")
     }
 }
 
