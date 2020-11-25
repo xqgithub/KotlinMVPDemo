@@ -16,6 +16,10 @@ import com.example.baselibrary.designpatterns.clonemode.Card
 import com.example.baselibrary.designpatterns.factory.ConcreteFactory
 import com.example.baselibrary.designpatterns.factory.Factory
 import com.example.baselibrary.designpatterns.factory.Product
+import com.example.baselibrary.designpatterns.iterator.Aggregate
+import com.example.baselibrary.designpatterns.iterator.ConcreteAggregate
+import com.example.baselibrary.designpatterns.iterator.ConcreteIteratorMe
+import com.example.baselibrary.designpatterns.iterator.IteratorMe
 import com.example.baselibrary.designpatterns.observer.ConcreteObservable
 import com.example.baselibrary.designpatterns.observer.ConcreteObserver
 import com.example.baselibrary.designpatterns.observer.Observerdesign
@@ -414,7 +418,7 @@ class MainPresenter @Inject constructor(
     }
 
     /**
-     * 设计模式---原型模式
+     * 设计模式---策略模式
      */
     fun testStragety() {
         //策略1
@@ -492,6 +496,24 @@ class MainPresenter @Inject constructor(
         //B
         val postmantemplateB: PostmanTemplate = ConcretePostManTemplate.PostManB()
         postmantemplateB.post()
+    }
+
+    /**
+     * 设计模式---迭代器模式
+     */
+    fun testIterator() {
+        val aggregate: Aggregate = ConcreteAggregate()
+        aggregate.add("1111")
+        aggregate.add("2222")
+        aggregate.add("3333")
+        aggregate.add("9527")
+
+        val iteratorme: IteratorMe = ConcreteIteratorMe(aggregate)
+        while (iteratorme.hasnext()) {
+            var tel = iteratorme.next().toString()
+            LogUtils.i("当前号码为：${tel}")
+        }
+        LogUtils.i("后面没有了")
     }
 }
 
