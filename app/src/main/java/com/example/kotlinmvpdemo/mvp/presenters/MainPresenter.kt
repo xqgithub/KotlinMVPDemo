@@ -24,6 +24,8 @@ import com.example.baselibrary.designpatterns.simplefactory.FactorySimple
 import com.example.baselibrary.designpatterns.state.ChangeState
 import com.example.baselibrary.designpatterns.strategy.ConcreteStragety
 import com.example.baselibrary.designpatterns.strategy.Environment
+import com.example.baselibrary.designpatterns.template.ConcretePostManTemplate
+import com.example.baselibrary.designpatterns.template.PostmanTemplate
 import com.example.baselibrary.di.modules.DBHelperModule
 import com.example.baselibrary.mvp.entity.Translation
 import com.example.baselibrary.utils.LogUtils
@@ -478,6 +480,18 @@ class MainPresenter @Inject constructor(
 
         //被观察者开始做动作
         postman.notify("快递到了，速度下来拿")
+    }
+
+    /**
+     * 设计模式---模板方法模式
+     */
+    fun testTemplate() {
+        //A
+        val postmantemplateA: PostmanTemplate = ConcretePostManTemplate.PostManA()
+        postmantemplateA.post()
+        //B
+        val postmantemplateB: PostmanTemplate = ConcretePostManTemplate.PostManB()
+        postmantemplateB.post()
     }
 }
 
