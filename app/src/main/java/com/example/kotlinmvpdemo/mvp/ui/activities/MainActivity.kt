@@ -115,6 +115,7 @@ class MainActivity : BaseActivity(), MainView {
                     18 -> presenter.testObserver()
                     19 -> presenter.testTemplate()
                     20 -> presenter.testIterator()
+                    21 -> presenter.testMemo()
                 }
             }
         })
@@ -176,7 +177,8 @@ class MainActivity : BaseActivity(), MainView {
         "设计模式---责任链模式",
         "设计模式---观察者模式",
         "设计模式---模板方法模式",
-        "设计模式---迭代器模式"
+        "设计模式---迭代器模式",
+        "设计模式---备忘录模式"
     )
 
 

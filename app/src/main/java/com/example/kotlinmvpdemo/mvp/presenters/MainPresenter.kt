@@ -20,6 +20,9 @@ import com.example.baselibrary.designpatterns.iterator.Aggregate
 import com.example.baselibrary.designpatterns.iterator.ConcreteAggregate
 import com.example.baselibrary.designpatterns.iterator.ConcreteIteratorMe
 import com.example.baselibrary.designpatterns.iterator.IteratorMe
+import com.example.baselibrary.designpatterns.memo.Caretaker
+import com.example.baselibrary.designpatterns.memo.Memento
+import com.example.baselibrary.designpatterns.memo.Originator
 import com.example.baselibrary.designpatterns.observer.ConcreteObservable
 import com.example.baselibrary.designpatterns.observer.ConcreteObserver
 import com.example.baselibrary.designpatterns.observer.Observerdesign
@@ -514,6 +517,34 @@ class MainPresenter @Inject constructor(
             LogUtils.i("当前号码为：${tel}")
         }
         LogUtils.i("后面没有了")
+    }
+
+
+    /**
+     * 设计模式---备忘录模式
+     */
+    fun testMemo() {
+        LogUtils.i("首次进入游戏")
+        //创建游戏实例
+        val originator = Originator()
+        //开始玩游戏
+        originator.play()
+        //创建存档
+        val memento: Memento = originator.createMemento()
+        //开始存档
+        val caretaker = Caretaker()
+        caretaker.setMemento(memento)
+        //退出游戏
+        originator.exit()
+        LogUtils.i("=======分割线=======")
+        LogUtils.i("第二次进入游戏")
+        val originator2 = Originator()
+        //读取存档
+        originator2.getMemento(caretaker.getMemento())
+        //继续玩游戏
+        originator2.play()
+        //退出游戏
+        originator2.exit()
     }
 }
 
