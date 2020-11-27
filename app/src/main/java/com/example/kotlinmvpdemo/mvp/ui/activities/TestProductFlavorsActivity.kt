@@ -1,5 +1,6 @@
 package com.example.kotlinmvpdemo.mvp.ui.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
@@ -32,6 +33,7 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
         return R.layout.activity_productflavors
     }
 
+    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //获得版本的package_id

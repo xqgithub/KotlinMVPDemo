@@ -1,5 +1,7 @@
 package com.example.kotlinmvpdemo.mvp.presenters
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import com.example.baselibrary.data.api.ApiResponse2
 import com.example.baselibrary.data.api.ApiService
@@ -36,8 +38,10 @@ import com.example.baselibrary.designpatterns.template.PostmanTemplate
 import com.example.baselibrary.di.modules.DBHelperModule
 import com.example.baselibrary.mvp.entity.Translation
 import com.example.baselibrary.utils.LogUtils
+import com.example.baselibrary.utils.NotificationHelperUtils
 import com.example.baselibrary.utils.runRx
 import com.example.kotlinmvpdemo.DaoSession
+import com.example.kotlinmvpdemo.mvp.ui.activities.TestProductFlavorsActivity
 import com.example.kotlinmvpdemo.mvp.views.MainView
 import io.reactivex.Observable
 import io.reactivex.Observer
@@ -545,6 +549,23 @@ class MainPresenter @Inject constructor(
         originator2.play()
         //退出游戏
         originator2.exit()
+    }
+
+    /**
+     * 弹出通知栏
+     */
+     //表示versionCode=19 也就是4.4的系统以及以上的系统生效。4.4以下系统默认全部打开状态。
+    @SuppressLint("NewApi")
+    fun testNotification(context: Context) {
+        NotificationHelperUtils.getInstance().getNotificationManager(context)
+        if (NotificationHelperUtils.getInstance().isNotifacationEnabled(context)) {
+            NotificationHelperUtils.getInstance().sendNotification(
+                context, TestProductFlavorsActivity::class.java,
+                111, "海贼王", "我要成为海贼王的男人"
+            )
+        } else {
+            NotificationHelperUtils.getInstance().openPermission(context as Activity)
+        }
     }
 }
 
