@@ -4,16 +4,14 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
-import com.example.baselibrary.constants.EventTag
 import com.example.baselibrary.di.componets.MyAppComponet
-import com.example.baselibrary.mvp.entity.MessageEvent
+import com.example.baselibrary.utils.NotificationHelperUtils
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import com.example.kotlinmvpdemo.R
 import com.example.kotlinmvpdemo.di.componets.DaggerProductFlavorsComponet
 import com.example.kotlinmvpdemo.di.modules.ProductFlavorsModule
 import com.example.kotlinmvpdemo.mvp.views.ProductFlavorsView
 import kotlinx.android.synthetic.main.activity_productflavors.*
-import org.greenrobot.eventbus.EventBus
 
 /**
  * 测试多版本差异化
@@ -48,11 +46,31 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
 
         //发送eventbus测试消息
         tv_eventbus.setOnClickListener {
-            var messageevent: MessageEvent = MessageEvent()
-            messageevent.message_type = EventTag.event_test
-            messageevent.message = "测试eventbus消息"
-            EventBus.getDefault().post(messageevent)
-            finish()
+            //            var messageevent: MessageEvent = MessageEvent()
+//            messageevent.message_type = EventTag.event_test
+//            messageevent.message = "测试eventbus消息"
+//            EventBus.getDefault().post(messageevent)
+//            finish()
+
+            if (NotificationHelperUtils.getInstance().isNotifacationEnabled(this@TestProductFlavorsActivity)) {
+                //应为自定义中有点击事件，所有先注册广播
+//                val receiver = NotificationBrodcaseReceiver()
+//                NotificationHelperUtils.getInstance().registerNotificationBrodcaseRecever(
+//                    this@TestProductFlavorsActivity, receiver, ConfigConstants.notifacatio_close
+//                )
+
+
+
+
+                NotificationHelperUtils.getInstance().sendNotification2(
+                    this@TestProductFlavorsActivity, TestProductFlavorsActivity::class.java,
+                    111, "海贼王", "我要成为海贼王的男人"
+                )
+            } else {
+                NotificationHelperUtils.getInstance().openPermission(this@TestProductFlavorsActivity)
+            }
+
+
         }
     }
 }

@@ -554,12 +554,28 @@ class MainPresenter @Inject constructor(
     /**
      * 弹出通知栏
      */
-     //表示versionCode=19 也就是4.4的系统以及以上的系统生效。4.4以下系统默认全部打开状态。
+    //表示versionCode=19 也就是4.4的系统以及以上的系统生效。4.4以下系统默认全部打开状态。
     @SuppressLint("NewApi")
     fun testNotification(context: Context) {
         NotificationHelperUtils.getInstance().getNotificationManager(context)
+        //1.发送普通通知
+//        if (NotificationHelperUtils.getInstance().isNotifacationEnabled(context)) {
+//            NotificationHelperUtils.getInstance().sendNotification(
+//                context, TestProductFlavorsActivity::class.java,
+//                111, "海贼王", "我要成为海贼王的男人"
+//            )
+//        } else {
+//            NotificationHelperUtils.getInstance().openPermission(context as Activity)
+//        }
+        //2.发送自定义通知
         if (NotificationHelperUtils.getInstance().isNotifacationEnabled(context)) {
-            NotificationHelperUtils.getInstance().sendNotification(
+            //应为自定义中有点击事件，所有先注册广播
+//            val receiver = NotificationBrodcaseReceiver()
+//            NotificationHelperUtils.getInstance().registerNotificationBrodcaseRecever(
+//                context as Activity, receiver, ConfigConstants.notifacatio_close
+//            )
+
+            NotificationHelperUtils.getInstance().sendNotification2(
                 context, TestProductFlavorsActivity::class.java,
                 111, "海贼王", "我要成为海贼王的男人"
             )

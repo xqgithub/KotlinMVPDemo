@@ -39,6 +39,16 @@
         <meta-data
                 android:name="app_version"
                 android:value="${app_version}"/>
+
+
+        <!-- 注册自定义静态广播接收器 -->
+        <receiver android:name="com.example.baselibrary.mvp.boradcastreceiver.NotificationBrodcaseReceiver">
+            <intent-filter>
+                <action android:name="notifacatio_close"/>
+            </intent-filter>
+        </receiver>
+
+
     </application>
 
 </manifest>

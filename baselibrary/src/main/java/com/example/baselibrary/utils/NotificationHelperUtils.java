@@ -5,11 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Build;
 import android.provider.Settings;
+import android.widget.RemoteViews;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import com.example.baselibrary.R;
+import com.example.baselibrary.constants.ConfigConstants;
+import com.example.baselibrary.mvp.boradcastreceiver.NotificationBrodcaseReceiver;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -18,7 +22,7 @@ import java.lang.reflect.Method;
 /**
  * 通知栏工具
  */
-public class NotificationHelperUtils {
+public class NotificationHelperUtils implements NotificationBrodcaseReceiver.ICallBack {
 
     //通道渠道id
     public static final String PRIMARY_CHANNEL = "default";
@@ -150,6 +154,12 @@ public class NotificationHelperUtils {
         intent.putExtra("key", "haha");//传递字段
         intent.putExtra("fromPush", "true");//传递字段
         int pushid = (int) System.currentTimeMillis();
+        /**
+         * PendingIntent.FLAG_ONE_SHOT 相同的PendingIntent只能使用一次，且遇到相同的PendingIntent时不会去更新PendingIntent中封装的Intent的extra部分的内容
+         * PendingIntent.FLAG_NO_CREATE 如果要创建的PendingIntent尚未存在，则不创建新的PendingIntent，直接返回null
+         * PendingIntent.FLAG_CANCEL_CURRENT 如果要创建的PendingIntent已经存在了，那么在创建新的PendingIntent之前，原先已经存在的PendingIntent中的intent将不能使用
+         * PendingIntent.FLAG_UPDATE_CURRENT 如果要创建的PendingIntent已经存在了，那么在保留原先PendingIntent的同时，将原先PendingIntent封装的Intent中的extra部分替换为现在新创建的PendingIntent的intent中extra的内容
+         */
         PendingIntent pendingIntent = PendingIntent.getActivity(context, pushid, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         builder.setContentIntent(pendingIntent);//提供单击通知时发送的PendingIntent
 
@@ -204,5 +214,103 @@ public class NotificationHelperUtils {
         getNotificationManager(context).notify(id, notification);
     }
 
+    /**
+     * 发送自定义通知
+     */
+    public void sendNotification2(final Context context, Class<?> cla, int id,
+                                  String contenttitile, String contenttext) {
+        //判断是否是8.0Android.O
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(PRIMARY_CHANNEL, "Test Channel", NotificationManager.IMPORTANCE_HIGH);
+            getNotificationManager(context).createNotificationChannel(channel);
+            //是否绕过请勿打扰模式
+            channel.canBypassDnd();
+            //闪光灯
+            channel.enableLights(true);
+            //锁屏显示通知
+            channel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
+            //闪关灯的灯光颜色
+            channel.setLightColor(Color.RED);
+            //桌面launcher的消息角标
+            channel.canShowBadge();
+            //是否允许震动
+            channel.enableVibration(true);
+            //获取系统通知响铃声音的配置
+            channel.getAudioAttributes();
+            //获取通知取到组
+            channel.getGroup();
+            //设置可绕过  请勿打扰模式
+            channel.setBypassDnd(true);
+            //设置震动模式
+            channel.setVibrationPattern(new long[]{100, 100, 200});
+            //是否会有灯光
+            channel.shouldShowLights();
+            channel.setDescription(PRIMARY_CHANNEL);
+            getNotificationManager(context).createNotificationChannel(channel);
+        }
 
+        //通知栏广播回调初始化
+        NotificationBrodcaseReceiver.setiCallBack(this);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, PRIMARY_CHANNEL);
+        builder.setContentTitle(contenttitile);//标题
+        builder.setContentText(contenttext);//内容
+        builder.setSmallIcon(R.mipmap.app_logo_shandian);//小图标
+        builder.setDefaults(NotificationCompat.DEFAULT_ALL);//设置通知选项
+        builder.setOnlyAlertOnce(true);//设置只提醒一次
+        builder.setOngoing(false);//设置这是否是正在进行的通知。 用户无法取消正在进行的通知
+        builder.setPriority(Notification.PRIORITY_HIGH);//优先级
+        builder.setChannelId(PRIMARY_CHANNEL);
+        /**
+         * RemoteViews 只支持
+         * 1.FrameLayout  LinearLayout  RelativeLayout  GridLayout
+         * 2.AnalogClock, button, Chronometer, ImageButton, ImageView ,ProgressBar ,TextView,  ViewFlipper ListView , GridView ,StackVie,AdapterViewFlipper,ViewStub
+         */
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.view_notification_customize);
+        remoteViews.setTextViewText(R.id.tv_title, contenttitile);
+        remoteViews.setTextViewText(R.id.tv_subtitle, contenttext);
+        builder.setCustomContentView(remoteViews);
+
+
+        //关闭按钮点击事件
+        Intent intent = new Intent();
+        intent.setAction(ConfigConstants.notifacatio_close);
+        intent.putExtra("id", id);
+        PendingIntent pi_close = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        remoteViews.setOnClickPendingIntent(R.id.iv_close, pi_close);
+
+
+        Notification notification = builder.build();
+//        notification.flags = Notification.FLAG_ONLY_ALERT_ONCE | Notification.FLAG_AUTO_CANCEL;
+
+        getNotificationManager(context).notify(id, notification);
+    }
+
+    /**
+     * 广播回调方法
+     *
+     * @param id
+     */
+    @Override
+    public void callBack(int id) {
+        //清除广播
+        mManager.cancel(id);
+    }
+
+//    /**
+//     * 通知栏点击事件动态广播注册
+//     */
+//    public void registerNotificationBrodcaseRecever(Activity activity,
+//                                                    NotificationBrodcaseReceiver receiver, String action) {
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction(action);
+//        activity.registerReceiver(receiver, filter);
+//    }
+//
+//    /**
+//     * 通知栏点击事件动态广播注销
+//     */
+//    public void unRegisterNotificationBrodcaseRecever(Activity activity) {
+//        activity.unregisterReceiver(receiver);
+//    }
 }

@@ -81,4 +81,8 @@ object ConfigConstants {
     const val shengchan = "package_10002"
 
 
+    /** 广播action字段 **/
+    const val notifacatio_close = "notifacatio_close"
+
+
 }

@@ -3,6 +3,48 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <color name="appwhite">#ffffffff</color>
+    <color name="appblack">#000000</color>
     <color name="transparent">#00000000</color>
     <color name="transparent2">#80000000</color>
+    <color name="activity_bg">#03092C</color>
+    <color name="line_selected">#008BE3</color>
+    <color name="line_unselected">#8F8F8F</color>
+    <color name="login_et_username_hint">#9093A0</color>
+    <color name="login_et_password_hint">#9093A0</color>
+    <color name="login_submit_bg_start">#00C4E3</color>
+    <color name="login_submit_bg_end">#008BE3</color>
+    <color name="popup_loginrecord_tv_username">#00C4E3</color>
+    <color name="main_tv_connectionmode_intelligent">#00C4E3</color>
+    <color name="main_connectionmode_bg">#00C4E3</color>
+    <color name="main_tv_intelligentagent_unselected">#00C4E3</color>
+    <color name="changepassword_et_oldpassword_hint">#9093A0</color>
+    <color name="aboutus_tv_versionupdatestatus">#99ffffff</color>
+    <color name="dedicatedline_bg">#03092C</color>
+    <color name="dedicatedline_open_dedicatedline_bg">#0C1033</color>
+    <color name="dedicatedline_tv_dedicated_line_illustration_bg">#00C4E3</color>
+    <color name="dedicatedline_add_submit_bg_start">#00C4E3</color>
+    <color name="dedicatedline_add_submit_bg_end">#008BE3</color>
+    <color name="dedicatedline_item_list_bg">#0C1033</color>
+    <color name="dedicatedline_item_tv_address_ip">#00C4E3</color>
+    <color name="dedicatedline_dialog_tv_title">#00C4E3</color>
+    <color name="dedicatedline_dialog_tv_cofirm">#00C4E3</color>
+    <color name="dedicatedline_dialog_tv_cancle">#232323</color>
+    <color name="dedicatedline_view_divider">#00C4E3</color>
+    <color name="dedicatedline_add_submit_gray_bg">#14183e</color>
+    <color name="dedicatedline_unselect_dedicatedline">#80FFFFFF</color>
+    <color name="dialog_update_tv_saynexttime">#008BE3</color>
+    <color name="dialog_update_confirm_bg_start">#00C4E3</color>
+    <color name="dialog_update_confirm_bg_end">#008BE3</color>
+    <color name="dialog_update_tv_updateing">#999999</color>
+    <color name="exception_warning">#008BE3</color>
+    <color name="exception_content">#333333</color>
+    <color name="dialog_notify_cancle">#6A6A6A</color>
+    <color name="dialog_notify_divider_line">#9D9D9D</color>
+
+    <color name="website_navigation_bg">#03092C</color>
+    <color name="website_navigation_list_bg">#0C1033</color>
+    <color name="website_navigation_item_description">#9093A0</color>
 </resources>
