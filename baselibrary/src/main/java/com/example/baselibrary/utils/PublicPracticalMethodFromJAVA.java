@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 
+import java.text.DecimalFormat;
+
 /**
  * 公共实用类(java方法2)
  */
@@ -137,5 +139,38 @@ public class PublicPracticalMethodFromJAVA {
         }
     }
 
+    /**
+     * 00004
+     * 屏幕适配最小宽度 生成
+     */
+    public void smallWidth() {
+        // 基础数据以360DP
+        double original_width = 360;
+        double target_width = 720;
+        int width_num = 360;
+
+        DecimalFormat df = new DecimalFormat("#.0");
+        String result = "";
+        for (int i = 1; i <= width_num; i++) {
+            String aString = "<dimen name='dimen_" + i + "x'" + ">" + df.format(target_width
+                    * i / original_width) + "dp</dimen>";
+            System.out.println(aString);
+        }
+    }
+
+    /**
+     * 00005
+     * 获得手机屏幕信息
+     */
+    public void getPhoneScreenInfo(Context context) {
+        LogUtils.i("MyApp",
+                "手机屏幕宽度(像素): " + ScreenUtils.getScreenWidth(),
+                "手机屏幕高度(像素): " + ScreenUtils.getScreenHeight(),
+                "手机屏幕密度: " + ScreenUtils.getScreenDensity(context),
+                "手机屏幕densityDpi: " + ScreenUtils.getScreendensityDpi(context),
+                "手机屏幕宽度(dp): " + ScreenUtils.getScreenWidthDP(context),
+                "手机屏幕高度(dp): " + ScreenUtils.getScreenHeightDP(context),
+                "手机cpu_abi: " + DeviceUtils.getSupportedabis());
+    }
 
 }

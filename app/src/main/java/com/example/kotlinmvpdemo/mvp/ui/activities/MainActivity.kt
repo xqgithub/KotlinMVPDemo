@@ -11,11 +11,8 @@ import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.EventTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.mvp.entity.MessageEvent
-import com.example.baselibrary.utils.LogUtils
-import com.example.baselibrary.utils.SPreferenceUtils
-import com.example.baselibrary.utils.ScreenUtils
+import com.example.baselibrary.utils.*
 import com.example.baselibrary.utils.glideutils.GlideUtils
-import com.example.baselibrary.utils.intentToJump
 import com.example.kotlinmvpdemo.R
 import com.example.kotlinmvpdemo.di.componets.DaggerMainComponet
 import com.example.kotlinmvpdemo.di.modules.MainModule
@@ -60,6 +57,9 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun init() {
         LogUtils.i("=-= 我要开始初始化了")
+        //获得手机屏幕信息
+        PublicPracticalMethodFromJAVA.getInstance().getPhoneScreenInfo(this@MainActivity)
+
         //1.初始化recyerview
         val linearlayoutmanager = LinearLayoutManager(this@MainActivity)
         linearlayoutmanager.orientation = RecyclerView.VERTICAL
