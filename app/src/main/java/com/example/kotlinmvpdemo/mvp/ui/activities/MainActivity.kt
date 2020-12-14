@@ -60,6 +60,7 @@ class MainActivity : BaseActivity(), MainView {
         //获得手机屏幕信息
         PublicPracticalMethodFromJAVA.getInstance().getPhoneScreenInfo(this@MainActivity)
 
+
         //1.初始化recyerview
         val linearlayoutmanager = LinearLayoutManager(this@MainActivity)
         linearlayoutmanager.orientation = RecyclerView.VERTICAL
@@ -80,9 +81,10 @@ class MainActivity : BaseActivity(), MainView {
                         LogUtils.i("SP_TEST_USER文件中haha字段 =-= $test_sp")
                     }
                     6 -> {
-                        presenter.deleteDatas()
-                        presenter.insertData()
-                        presenter.insertData2()
+//                        presenter.deleteDatas()
+//                        presenter.insertData()
+//                        presenter.insertData2()
+                        PublicPracticalMethodFromJAVA.getInstance().smallWidth()
                     }
                     7 -> {
                         var picPath =
@@ -92,8 +94,8 @@ class MainActivity : BaseActivity(), MainView {
                             this@MainActivity,
                             picPath,
                             imageView,
-                            ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.deimen_70x)),
-                            ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.deimen_70x)),
+                            ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.dimen_70x)),
+                            ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.dimen_70x)),
                             R.mipmap.ic_launcher,
                             R.mipmap.ic_launcher
                         )

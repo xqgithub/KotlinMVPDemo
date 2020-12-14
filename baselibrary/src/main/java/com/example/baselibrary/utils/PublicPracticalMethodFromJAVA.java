@@ -145,9 +145,9 @@ public class PublicPracticalMethodFromJAVA {
      */
     public void smallWidth() {
         // 基础数据以360DP
-        double original_width = 360;
-        double target_width = 720;
-        int width_num = 360;
+        double original_width = 420;
+        double target_width = 360;
+        int width_num = 420;
 
         DecimalFormat df = new DecimalFormat("#.0");
         String result = "";

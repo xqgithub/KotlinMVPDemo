@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -9,9 +8,10 @@
             android:id="@+id/ll_content"
             android:layout_width="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="@dimen/deimen_20x"
+            android:layout_marginLeft="@dimen/dimen_20x"
             android:layout_centerVertical="true"
             android:layout_height="wrap_content">
+
         <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
                 android:gravity="center"
                 android:textColor="@color/appblack"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:textSize="@dimen/deimen_16x"/>
+                android:textSize="@dimen/dimen_16x" />
 
         <TextView
                 android:id="@+id/tv_subtitle"
@@ -29,7 +29,7 @@
                 android:text="我叫路飞"
                 android:gravity="center"
                 android:textColor="@color/appblack"
-                android:textSize="@dimen/deimen_16x"/>
+                android:textSize="@dimen/dimen_16x" />
     </LinearLayout>
 
 
@@ -38,22 +38,23 @@
             android:layout_width="wrap_content"
             android:layout_toRightOf="@+id/ll_content"
             android:layout_height="wrap_content">
+
         <ImageView
                 android:id="@+id/iv_icon"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="@dimen/deimen_120x"
+                android:layout_width="@dimen/dimen_120x"
                 android:visibility="visible"
                 android:src="@mipmap/error_null"
-                android:layout_height="@dimen/deimen_120x"/>
+                android:layout_height="@dimen/dimen_120x" />
 
         <ImageView
                 android:id="@+id/iv_close"
-                android:layout_width="@dimen/deimen_30x"
+                android:layout_width="@dimen/dimen_30x"
                 android:layout_alignRight="@+id/iv_icon"
                 app:layout_constraintTop_toTopOf="@+id/iv_icon"
                 app:layout_constraintRight_toRightOf="@+id/iv_icon"
                 android:src="@mipmap/cac_clear"
-                android:layout_height="@dimen/deimen_30x"/>
+                android:layout_height="@dimen/dimen_30x" />
     </RelativeLayout>
 
 </RelativeLayout>
