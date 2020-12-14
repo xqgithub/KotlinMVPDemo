@@ -35,6 +35,10 @@ import com.example.baselibrary.designpatterns.strategy.ConcreteStragety
 import com.example.baselibrary.designpatterns.strategy.Environment
 import com.example.baselibrary.designpatterns.template.ConcretePostManTemplate
 import com.example.baselibrary.designpatterns.template.PostmanTemplate
+import com.example.baselibrary.designpatterns.visitor.ConcreteVisitor
+import com.example.baselibrary.designpatterns.visitor.ConcreteWebVideoStie
+import com.example.baselibrary.designpatterns.visitor.Visitor
+import com.example.baselibrary.designpatterns.visitor.WebVideoSite
 import com.example.baselibrary.di.modules.DBHelperModule
 import com.example.baselibrary.mvp.entity.Translation
 import com.example.baselibrary.utils.LogUtils
@@ -581,6 +585,35 @@ class MainPresenter @Inject constructor(
             )
         } else {
             NotificationHelperUtils.getInstance().openPermission(context as Activity)
+        }
+    }
+
+    /**
+     * 设计模式---访问者模式
+     */
+    fun testVisitor() {
+        //创建不同的元素
+        val music: ConcreteWebVideoStie.Music = ConcreteWebVideoStie.Music("网易云")
+        val music2: ConcreteWebVideoStie.Music = ConcreteWebVideoStie.Music("酷狗")
+        val video: ConcreteWebVideoStie.Video = ConcreteWebVideoStie.Video("优酷")
+        val video2: ConcreteWebVideoStie.Video = ConcreteWebVideoStie.Video("爱奇艺")
+
+        val mutableList = mutableListOf<WebVideoSite>()
+        mutableList.add(music)
+        mutableList.add(music2)
+        mutableList.add(video)
+        mutableList.add(video2)
+
+        //闲人1号
+        val visitor: Visitor = ConcreteVisitor.Idler("闲人1号")
+        for (m in mutableList) {
+            m.accept(visitor)
+        }
+
+        //忙人1号
+        val visitor2: Visitor = ConcreteVisitor.Busy("忙人1号")
+        for (m in mutableList) {
+            m.accept(visitor2)
         }
     }
 }

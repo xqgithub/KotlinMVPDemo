@@ -119,6 +119,7 @@ class MainActivity : BaseActivity(), MainView {
                     20 -> presenter.testIterator()
                     21 -> presenter.testMemo()
                     22 -> presenter.testNotification(this@MainActivity)
+                    23 -> presenter.testVisitor()
                 }
             }
         })
@@ -182,7 +183,8 @@ class MainActivity : BaseActivity(), MainView {
         "设计模式---模板方法模式",
         "设计模式---迭代器模式",
         "设计模式---备忘录模式",
-        "弹出通知栏"
+        "弹出通知栏",
+        "设计模式---访问者模式"
     )
 
 
