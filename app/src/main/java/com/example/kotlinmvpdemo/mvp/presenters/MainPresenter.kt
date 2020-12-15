@@ -18,6 +18,8 @@ import com.example.baselibrary.designpatterns.clonemode.Card
 import com.example.baselibrary.designpatterns.factory.ConcreteFactory
 import com.example.baselibrary.designpatterns.factory.Factory
 import com.example.baselibrary.designpatterns.factory.Product
+import com.example.baselibrary.designpatterns.intermediary.ConcreteHouseMediator
+import com.example.baselibrary.designpatterns.intermediary.ConcreteHousePerson
 import com.example.baselibrary.designpatterns.iterator.Aggregate
 import com.example.baselibrary.designpatterns.iterator.ConcreteAggregate
 import com.example.baselibrary.designpatterns.iterator.ConcreteIteratorMe
@@ -615,6 +617,24 @@ class MainPresenter @Inject constructor(
         for (m in mutableList) {
             m.accept(visitor2)
         }
+    }
+
+    /**
+     * 设计模式---中介者模式
+     */
+    fun testIntermediary() {
+        //房屋中介
+        val lianjia = ConcreteHouseMediator.Lianjia()
+        //卖房者
+        val landlord = ConcreteHousePerson.Landlord(lianjia)
+        //买房者
+        val purchaser = ConcreteHousePerson.Purchaser(lianjia)
+
+        lianjia.setLandlord(landlord)
+        lianjia.setPurchaser(purchaser)
+
+        purchaser.send("求购一套学区房子")
+        landlord.send("出售一套别墅")
     }
 }
 
