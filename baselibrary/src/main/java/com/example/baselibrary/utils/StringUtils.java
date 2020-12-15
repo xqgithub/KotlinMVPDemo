@@ -214,9 +214,9 @@ public class StringUtils {
     public static boolean compared(Object source, Object target) {
         boolean flag = false;
         try {
-            if (target instanceof String) {//String 类型
+            if (target instanceof String) {//String   类型
                 return target.equals(source.toString());
-            } else if (target instanceof Integer) {//int类型
+            } else if (target instanceof Integer) {//int  类型
                 return Integer.parseInt(target.toString()) == Integer.parseInt(source.toString());
             } else if (isBlank(target)) {//要对比的数据为null
                 return flag;
