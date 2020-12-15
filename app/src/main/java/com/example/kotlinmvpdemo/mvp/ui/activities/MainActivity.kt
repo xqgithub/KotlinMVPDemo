@@ -2,7 +2,6 @@ package com.example.kotlinmvpdemo.mvp.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -69,7 +68,7 @@ class MainActivity : BaseActivity(), MainView {
         rv_main.adapter = mainlistadapter
         //2.Item的点击事件
         mainlistadapter.setOnItemClickListener(object : MainListAdapter.OnItemClickListener {
-            override fun setItemOnClick(position: Int, imageView: ImageView) {
+            override fun setItemOnClick(position: Int, imageView: ImageView, picPath: String) {
                 when (position) {
                     0 -> presenter.getTestData(this@MainActivity)
                     1 -> presenter.getTestData2(this@MainActivity)
@@ -81,24 +80,23 @@ class MainActivity : BaseActivity(), MainView {
                         LogUtils.i("SP_TEST_USER文件中haha字段 =-= $test_sp")
                     }
                     6 -> {
-//                        presenter.deleteDatas()
-//                        presenter.insertData()
-//                        presenter.insertData2()
-                        PublicPracticalMethodFromJAVA.getInstance().smallWidth()
+                        presenter.deleteDatas()
+                        presenter.insertData()
+                        presenter.insertData2()
+//                        PublicPracticalMethodFromJAVA.getInstance().smallWidth()
                     }
                     7 -> {
-                        var picPath =
-                            "https://n.sinaimg.cn/sinacn20200204ac/551/w816h535/20200204/cc25-inzcrxs3080005.png"
-                        imageView.visibility = View.VISIBLE
-                        GlideUtils.getInstance().loadUrlToImagaViewActivity(
-                            this@MainActivity,
-                            picPath,
-                            imageView,
-                            ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.dimen_70x)),
-                            ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.dimen_70x)),
-                            R.mipmap.ic_launcher,
-                            R.mipmap.ic_launcher
-                        )
+                        if (StringUtils.compared(picPath, imageView.tag)) {
+                            GlideUtils.getInstance().loadUrlToImagaViewActivity(
+                                this@MainActivity,
+                                imageView.tag.toString(),
+                                imageView,
+                                ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.dimen_70x)),
+                                ScreenUtils.dip2px(this@MainActivity, resources.getDimension(R.dimen.dimen_70x)),
+                                R.mipmap.ic_launcher,
+                                R.mipmap.ic_launcher
+                            )
+                        }
                     }
                     8 -> intentToJump(
                         this@MainActivity,

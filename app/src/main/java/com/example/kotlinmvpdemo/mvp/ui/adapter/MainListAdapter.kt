@@ -47,15 +47,30 @@ class MainListAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        var picPath: String = ""
+        if (position == 7) {
+            picPath = "https://n.sinaimg.cn/sinacn20200204ac/551/w816h535/20200204/cc25-inzcrxs3080005.png"
+            holder.iv_test.tag = picPath
+            holder.iv_test.visibility = View.VISIBLE
+        } else {
+            holder.iv_test.visibility = View.INVISIBLE
+        }
         holder.tv_test.apply {
             text = items[position]
         }.setOnClickListener {
-            onItemClickListener.setItemOnClick(position, holder.iv_test)
+            onItemClickListener.setItemOnClick(position, holder.iv_test, picPath)
         }
     }
 
+    /**
+     * 防止滑动后，数据错乱，但是对于多布局的时候 貌似会失效
+     */
+//    override fun getItemViewType(position: Int): Int {
+//        return position
+//    }
+
     interface OnItemClickListener {
-        fun setItemOnClick(position: Int, imageView: ImageView)
+        fun setItemOnClick(position: Int, imageView: ImageView, srcpath: String)
     }
 
 

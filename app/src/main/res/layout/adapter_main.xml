@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_70x">
+
 
     <TextView
-            android:id="@+id/tv_test"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimen_50x"
-            android:text="这是一个测试文字"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="@+id/iv_test"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_test"
-            android:layout_marginLeft="@dimen/dimen_20x"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:textSize="@dimen/dimen_14x" />
+        android:id="@+id/tv_test"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_50x"
+        android:layout_marginLeft="@dimen/dimen_20x"
+        android:gravity="center"
+        android:text="这是一个测试文字"
+        android:textSize="@dimen/dimen_14x"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_test"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_test" />
 
     <ImageView
-            app:layout_constraintLeft_toRightOf="@+id/tv_test"
-            android:id="@+id/iv_test"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="@dimen/dimen_70x"
-            android:layout_marginLeft="@dimen/dimen_20x"
-            android:visibility="invisible"
-            android:layout_height="@dimen/dimen_70x" />
+        android:id="@+id/iv_test"
+        android:layout_width="@dimen/dimen_70x"
+        android:layout_height="@dimen/dimen_70x"
+        android:layout_marginLeft="@dimen/dimen_20x"
+        android:src="@mipmap/app_logo_shandian"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toRightOf="@+id/tv_test"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
