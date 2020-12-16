@@ -119,6 +119,7 @@ class MainActivity : BaseActivity(), MainView {
                     22 -> presenter.testNotification(this@MainActivity)
                     23 -> presenter.testVisitor()
                     24 -> presenter.testIntermediary()
+                    25 -> presenter.testInterpreter()
                 }
             }
         })
@@ -184,7 +185,8 @@ class MainActivity : BaseActivity(), MainView {
         "设计模式---备忘录模式",
         "弹出通知栏",
         "设计模式---访问者模式",
-        "设计模式---中介者模式"
+        "设计模式---中介者模式",
+        "设计模式---解释器模式"
     )
 
 

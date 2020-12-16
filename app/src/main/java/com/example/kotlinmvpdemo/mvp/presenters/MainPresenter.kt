@@ -20,6 +20,7 @@ import com.example.baselibrary.designpatterns.factory.Factory
 import com.example.baselibrary.designpatterns.factory.Product
 import com.example.baselibrary.designpatterns.intermediary.ConcreteHouseMediator
 import com.example.baselibrary.designpatterns.intermediary.ConcreteHousePerson
+import com.example.baselibrary.designpatterns.interpreter.Calculator
 import com.example.baselibrary.designpatterns.iterator.Aggregate
 import com.example.baselibrary.designpatterns.iterator.ConcreteAggregate
 import com.example.baselibrary.designpatterns.iterator.ConcreteIteratorMe
@@ -635,6 +636,21 @@ class MainPresenter @Inject constructor(
 
         purchaser.send("求购一套学区房子")
         landlord.send("出售一套别墅")
+    }
+
+    /**
+     * 设计模式---解释器模式
+     */
+    fun testInterpreter() {
+        val calculator = Calculator()
+        //先给a赋值
+        calculator.read("a = 3")
+        //再给b赋值
+        calculator.read("b = 4")
+        //读取表达式
+        calculator.read("a + b")
+        val result = calculator.calculate()
+        LogUtils.i("a 加 b 的结果是:${result}")
     }
 }
 
