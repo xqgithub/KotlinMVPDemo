@@ -1,6 +1,7 @@
 package com.example.baselibrary.application
 
 import androidx.multidex.MultiDexApplication
+import com.alibaba.android.arouter.launcher.ARouter
 import com.example.baselibrary.di.componets.DaggerMyAppComponet
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.di.modules.MyAppModule
@@ -62,6 +63,10 @@ class MyApplication : MultiDexApplication() {
         crashhandler.init(this)
         //3.初始化Stetho出正式包的时候，建议屏蔽掉
         Stetho.initializeWithDefaults(this)
+        //4.ARouter初始化
+        ARouter.openDebug()
+        ARouter.openLog()
+        ARouter.init(this)
     }
 
 }

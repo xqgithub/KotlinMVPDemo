@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.launcher.ARouter
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.EventTag
+import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.mvp.entity.MessageEvent
 import com.example.baselibrary.utils.*
@@ -120,6 +122,8 @@ class MainActivity : BaseActivity(), MainView {
                     23 -> presenter.testVisitor()
                     24 -> presenter.testIntermediary()
                     25 -> presenter.testInterpreter()
+                    26 -> ARouter.getInstance().build(RouterTag.TestProductFlavorsActivity).navigation()
+                    27 -> ARouter.getInstance().build(RouterTag.TestMainActivity).navigation()
                 }
             }
         })
@@ -186,7 +190,9 @@ class MainActivity : BaseActivity(), MainView {
         "弹出通知栏",
         "设计模式---访问者模式",
         "设计模式---中介者模式",
-        "设计模式---解释器模式"
+        "设计模式---解释器模式",
+        "ARouter跳转测试---同一个module",
+        "ARouter跳转测试---不同的module"
     )
 
 

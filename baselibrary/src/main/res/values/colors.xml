@@ -47,4 +47,114 @@
     <color name="website_navigation_bg">#03092C</color>
     <color name="website_navigation_list_bg">#0C1033</color>
     <color name="website_navigation_item_description">#9093A0</color>
+
+
+    <!--XQ-->
+    <color name="dividingline_horizontal">#d9d9d9</color>
+    <color name="appgay">#f3f3f3</color>
+    <color name="appblue">#209bf4</color>
+    <color name="appgreen">#00e600</color>
+    <color name="appgreen1">#7dd7d0</color>
+    <color name="font_gray">#666666</color>
+    <color name="font_gray1">#999999</color>
+    <color name="font_gray2">#888888</color>
+    <color name="font_gray3">#b0b0b0</color>
+    <color name="feedback_bg_pre">#0182e2</color>
+    <color name="feedback_bg_nor">#0091fd</color>
+    <color name="button_pre">#80ffffff</color>
+    <color name="update_normal">#ff6a6e</color>
+    <color name="update_press_bg">#e95d61</color>
+    <color name="smooth_green">#00e600</color>
+    <color name="crowded_yellow">#ffc000</color>
+    <color name="full_red">#ff4545</color>
+    <color name="history_pressed">#cc275edb</color>
+    <color name="history_pressed2">#f3f3f3</color>
+    <color name="history_default">#cc275edb</color>
+    <color name="button_normal">#7dd7d0</color>
+    <color name="button_press">#2cb9af</color>
+    <color name="button_normal2">#a630d9c2</color>
+    <color name="button_press2">#2ccbb5</color>
+    <color name="button_clickable">#2ec5b9</color>
+    <color name="button_update_nor">#30d9c2</color>
+    <color name="button_update_pre">#9930d9c2</color>
+    <color name="exitapp_nor">#7b7f85</color>
+    <color name="exitaccount_nor">#2ec5b7</color>
+    <color name="circle_color">#f8f1a0</color>
+    <color name="ring_color">#f8f1a0</color>
+    <color name="translucent">#a0000000</color>
+    <color name="font_blue">#1999fc</color>
+    <color name="feedback_processing">#e96e6a</color>
+    <color name="feedback_solved">#a0bed0</color>
+    <!--XQ-->
+
+
+    <!--Z-->
+
+    <color name="main_background">#f3f3f3</color>
+    <color name="title_bar_background">#2ec5b9</color>
+    <color name="navbar_textcolor">#7b7f88</color>
+    <color name="navbar_textcolor_selection">#2fc4ba</color>
+    <color name="blue">#3d7dff</color>
+    <color name="green">#2cf52c</color>
+    <color name="white">#fafafa</color>
+    <color name="serverlist_bttv_blue">#991999fc</color>
+    <color name="serverlist_bttv_orange">#99ffa200</color>
+    <color name="line">#cecece</color>
+    <color name="button_pre_second">#99ffffff</color>
+    <color name="full_button">#30d9c2</color>
+    <color name="sign">#ffe241</color>
+    <color name="feedback_record_type">#243886</color>
+
+    <drawable name="history_pressed2">#f3f3f3</drawable>
+    <color name="norwhite">#ffffff</color>
+    <color name="mRingColorwhite">#56585d</color>
+    <color name="user_black_bg">#212122</color>
+    <color name="nuts_141526">#141526</color>
+    <color name="nuts_515a90">#515a90</color>
+    <color name="nuts_fab51a">#fab51a</color>
+    <color name="nuts_8b9bff">#8b9bff</color>
+    <color name="nuts_6f6f6a">#6f6f6a</color>
+    <color name="nuts_aeaeae">#aeaeae</color>
+    <color name="nuts_181d30">#181d30</color>
+    <color name="nuts_99181d30">#99181d30</color>
+    <color name="nuts_99ffffff">#99ffffff</color>
+    <color name="nuts_fdb41a">#fdb41a</color>
+    <color name="nuts_b4b4db">#b4b4db</color>
+    <color name="nuts_5b5e85">#5b5e85</color>
+    <color name="nuts_3b4b72">#3b4b72</color>
+    <color name="nuts_49ad00">#49ad00</color>
+    <color name="nuts_9c9ccb">#9c9ccb</color>
+    <color name="nuts_767796">#767796</color>
+    <color name="nuts_a0b2cb">#a0b2cb</color>
+    <color name="nuts_bcc9db">#bcc9db</color>
+    <color name="nuts_dbeaff">#dbeaff</color>
+    <color name="nuts_1a000000">#1a000000</color>
+    <color name="nuts_0d000000">#0d000000</color>
+    <color name="nuts_dcdcf1">#dcdcf1</color>
+    <color name="nuts_b5bdfd">#b5bdfd</color>
+    <color name="nuts_8c26273d">#8c26273d</color>
+    <color name="nuts_8f8fc7">#8f8fc7</color>
+    <color name="nuts_3c4168">#3c4168</color>
+    <color name="nuts_8026273d">#8026273d</color>
+    <color name="nuts_7a81b3">#7a81b3</color>
+    <color name="nuts_9925263d">#9925263d</color>
+    <color name="nuts_ced4ff">#ced4ff</color>
+    <color name="nuts_8790d1">#8790d1</color>
+    <color name="nuts_caceec">#caceec</color>
+    <color name="nuts_01bf4d">#01bf4d</color>
+    <color name="nuts_393b62">#393b62</color>
+    <color name="nuts_35dbff">#35dbff</color>
+    <color name="nuts_949abf">#949abf</color>
+    <color name="nuts_3f4363">#3f4363</color>
+    <color name="nuts_991c1d33">#991c1d33</color>
+    <color name="nuts_ebeff2">#ebeff2</color>
+    <color name="nuts_a1a6cc">#a1a6cc</color>
+    <color name="nuts_c1c5e4">#c1c5e4</color>
+    <color name="nuts_1d1e33">#1d1e33</color>
+    <color name="nuts_a2a7c6">#a2a7c6</color>
+    <color name="nuts_c8c9dd">#c8c9dd</color>
+    <color name="nuts_979cb7">#979cb7</color>
+    <color name="nuts_aba2c6">#aba2c6</color>
+    <color name="nuts_f2aba2c6">#f2aba2c6</color>
+    <color name="nuts_f70046">#f70046</color>
 </resources>

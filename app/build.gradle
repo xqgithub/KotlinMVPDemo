@@ -64,6 +64,14 @@ android {
     }
 }
 
+/*******AROUTER 配置*******/
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
@@ -74,8 +82,11 @@ dependencies {
     implementation _dependencies.dagger2
     kapt _dependencies.dagger_compiler2
 
+    kapt _dependencies.arouter_compiler
+
     /**
      * 引入module
      */
     implementation project(':baselibrary')
+    implementation project(':testlibrary')
 }

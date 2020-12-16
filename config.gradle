@@ -42,6 +42,8 @@ ext {
             glide_compiler       : "4.11.0",
             eventbus3            : "3.1.1",
             recyclerview         : "1.1.0",
+            arouter              : "1.5.0",
+            arouter_compiler     : "1.2.2",
     ]
 
     /**
@@ -71,6 +73,8 @@ ext {
             glide_compiler       : "com.github.bumptech.glide:compiler:${dependenciesversion.glide_compiler}",
             eventbus3            : "org.greenrobot:eventbus:${dependenciesversion.eventbus3}",
             recyclerview         : "androidx.recyclerview:recyclerview:${dependenciesversion.recyclerview}",
+            arouter              : "com.alibaba:arouter-api:${dependenciesversion.arouter}",
+            arouter_compiler     : "com.alibaba:arouter-compiler:${dependenciesversion.arouter_compiler}",
     ]
 
     /**

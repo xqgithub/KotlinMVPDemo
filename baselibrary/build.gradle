@@ -53,6 +53,14 @@ android {
     }
 }
 
+
+/*******AROUTER 配置*******/
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
@@ -91,5 +99,8 @@ dependencies {
     api _dependencies.eventbus3
     /** recyclerview  **/
     api _dependencies.recyclerview
+    /** Arouter **/
+    api _dependencies.arouter
+    kapt _dependencies.arouter_compiler
 }
 

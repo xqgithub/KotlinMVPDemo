@@ -2,8 +2,10 @@ package com.example.kotlinmvpdemo.mvp.ui.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
+import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.utils.NotificationHelperUtils
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
@@ -16,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_productflavors.*
 /**
  * 测试多版本差异化
  */
+@Route(path = RouterTag.TestProductFlavorsActivity)
 class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
 
 
@@ -58,8 +61,6 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
 //                NotificationHelperUtils.getInstance().registerNotificationBrodcaseRecever(
 //                    this@TestProductFlavorsActivity, receiver, ConfigConstants.notifacatio_close
 //                )
-
-
 
 
                 NotificationHelperUtils.getInstance().sendNotification2(
