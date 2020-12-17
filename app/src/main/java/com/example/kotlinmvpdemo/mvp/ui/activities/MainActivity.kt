@@ -156,12 +156,17 @@ class MainActivity : BaseActivity(), MainView {
                             })
                             .withObject("key6", mutableListOf)
                             .withObject("key7", mutablemap)
+//                            .navigation()
                             .navigation(this@MainActivity, object : NavCallback() {
 
                                 override fun onFound(postcard: Postcard?) {
                                     LogUtils.i(ConfigConstants.TAG_ALL, "拦截找到了")
                                 }
 
+                                /**
+                                 * 单独降解处理
+                                 * 跳转失败的时候会回调
+                                 */
                                 override fun onLost(postcard: Postcard?) {
                                     LogUtils.i(ConfigConstants.TAG_ALL, "拦截没有找到了")
                                 }
