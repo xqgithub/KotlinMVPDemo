@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.facade.Postcard
+import com.alibaba.android.arouter.facade.callback.NavCallback
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
@@ -154,7 +156,27 @@ class MainActivity : BaseActivity(), MainView {
                             })
                             .withObject("key6", mutableListOf)
                             .withObject("key7", mutablemap)
-                            .navigation()
+                            .navigation(this@MainActivity, object : NavCallback() {
+
+                                override fun onFound(postcard: Postcard?) {
+                                    LogUtils.i(ConfigConstants.TAG_ALL, "拦截找到了")
+                                }
+
+                                override fun onLost(postcard: Postcard?) {
+                                    LogUtils.i(ConfigConstants.TAG_ALL, "拦截没有找到了")
+                                }
+
+                                override fun onInterrupt(postcard: Postcard?) {
+                                    LogUtils.i(ConfigConstants.TAG_ALL, "拦截器拦截了,查处了问题需要做其他处理")
+                                }
+
+                                override fun onArrival(postcard: Postcard?) {
+                                    LogUtils.i(
+                                        ConfigConstants.TAG_ALL, "${postcard!!.extras.getString("interceptor_key1")
+                                        }", "拦截离开了"
+                                    )
+                                }
+                            })
                     }
                     27 -> ARouter.getInstance().build(RouterTag.TestMainActivity).navigation()
                 }

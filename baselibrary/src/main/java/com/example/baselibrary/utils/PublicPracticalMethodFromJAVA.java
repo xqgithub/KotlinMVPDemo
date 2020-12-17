@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 
+import com.example.baselibrary.constants.ConfigConstants;
+
 import java.text.DecimalFormat;
 
 /**
@@ -163,7 +165,7 @@ public class PublicPracticalMethodFromJAVA {
      * 获得手机屏幕信息
      */
     public void getPhoneScreenInfo(Context context) {
-        LogUtils.i("MyApp",
+        LogUtils.i(ConfigConstants.TAG_ALL,
                 "手机屏幕宽度(像素): " + ScreenUtils.getScreenWidth(),
                 "手机屏幕高度(像素): " + ScreenUtils.getScreenHeight(),
                 "手机屏幕密度: " + ScreenUtils.getScreenDensity(context),

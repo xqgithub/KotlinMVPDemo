@@ -113,7 +113,7 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
         ARouter.getInstance().inject(this)
         //通过ARouter跳转穿过来的值
         LogUtils.i(
-            "TestProductFlavorsActivity",
+            ConfigConstants.TAG_ALL,
             "key1 = ${key1}",
             "key2=${key2}",
             "key3=${key3}",
@@ -123,13 +123,13 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
 
         for (k in key6!!) {
             LogUtils.i(
-                "TestProductFlavorsActivity",
+                ConfigConstants.TAG_ALL,
                 "key6.age=${k.age},key6.name=${k.name}"
             )
         }
 
         LogUtils.i(
-            "TestProductFlavorsActivity",
+            ConfigConstants.TAG_ALL,
             "key7.age=${key7!!["person1"]!!.age},key7.name=${key7!!["person1"]!!.name}"
         )
     }

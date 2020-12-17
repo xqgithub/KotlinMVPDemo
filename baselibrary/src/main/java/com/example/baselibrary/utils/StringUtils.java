@@ -219,6 +219,7 @@ public class StringUtils {
             } else if (target instanceof Integer) {//int  类型
                 return Integer.parseInt(target.toString()) == Integer.parseInt(source.toString());
             } else if (isBlank(target)) {//要对比的数据为null
+                LogUtils.e("要对比的数据为空，请查看！！！");
                 return flag;
             }
         } catch (Exception e) {

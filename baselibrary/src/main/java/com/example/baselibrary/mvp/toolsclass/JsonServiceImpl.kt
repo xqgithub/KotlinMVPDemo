@@ -1,4 +1,4 @@
-package com.example.baselibrary.mvp.entity
+package com.example.baselibrary.mvp.toolsclass
 
 import android.content.Context
 import com.alibaba.android.arouter.facade.annotation.Route
