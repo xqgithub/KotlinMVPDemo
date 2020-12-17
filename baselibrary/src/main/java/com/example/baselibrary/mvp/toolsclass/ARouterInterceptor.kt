@@ -31,7 +31,7 @@ class ARouterInterceptor {
             if (StringUtils.compared(RouterTag.TestProductFlavorsActivity, path)) {
                 LogUtils.i(ConfigConstants.TAG_ALL, "拦截器 ${Test1Interceptor::class.java.name} 进行了拦截")
             }
-
+            
             //传值，这里的key如果跟ARouter.getInstance().build中的一样会导致外面的值被替换掉
             postcard.withString("interceptor_key1", "haha")
             //继续执行
@@ -51,22 +51,22 @@ class ARouterInterceptor {
     /**
      * 测试拦截器2
      */
-    @Interceptor(priority = 10)
-    class Test2Interceptor : IInterceptor {
-        override fun process(postcard: Postcard?, callback: InterceptorCallback?) {
-            //要拦截的地址
-            val path = postcard!!.path
-            if (StringUtils.compared(RouterTag.TestProductFlavorsActivity, path)) {
-                LogUtils.i(ConfigConstants.TAG_ALL, "拦截器 ${Test2Interceptor::class.java.name} 进行了拦截")
-            }
-            //继续执行
-            callback!!.onContinue(postcard)
-        }
-
-        override fun init(context: Context?) {
-            LogUtils.i(ConfigConstants.TAG_ALL, "拦截器 ${Test2Interceptor::class.java.name} 初始化")
-        }
-    }
+//    @Interceptor(priority = 10)
+//    class Test2Interceptor : IInterceptor {
+//        override fun process(postcard: Postcard?, callback: InterceptorCallback?) {
+//            //要拦截的地址
+//            val path = postcard!!.path
+//            if (StringUtils.compared(RouterTag.TestProductFlavorsActivity, path)) {
+//                LogUtils.i(ConfigConstants.TAG_ALL, "拦截器 ${Test2Interceptor::class.java.name} 进行了拦截")
+//            }
+//            //继续执行
+//            callback!!.onContinue(postcard)
+//        }
+//
+//        override fun init(context: Context?) {
+//            LogUtils.i(ConfigConstants.TAG_ALL, "拦截器 ${Test2Interceptor::class.java.name} 初始化")
+//        }
+//    }
 
 
 }

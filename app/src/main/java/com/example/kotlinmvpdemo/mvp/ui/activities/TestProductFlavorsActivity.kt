@@ -21,8 +21,9 @@ import kotlinx.android.synthetic.main.activity_productflavors.*
 
 /**
  * 测试多版本差异化
+ * @param extras 标识，告诉拦截器 该页面准备做什么
  */
-@Route(path = RouterTag.TestProductFlavorsActivity)
+@Route(path = RouterTag.TestProductFlavorsActivity, extras = RouterTag.login)
 class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
 
     //通过ARouter跳转传过来的值
