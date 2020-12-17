@@ -2,11 +2,15 @@ package com.example.kotlinmvpdemo.mvp.ui.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
+import com.example.baselibrary.mvp.entity.Person
+import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.NotificationHelperUtils
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import com.example.kotlinmvpdemo.R
@@ -20,6 +24,35 @@ import kotlinx.android.synthetic.main.activity_productflavors.*
  */
 @Route(path = RouterTag.TestProductFlavorsActivity)
 class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
+
+    //通过ARouter跳转传过来的值
+    @JvmField
+    @Autowired(name = "key1")
+    var key1: String = ""
+
+    @JvmField
+    @Autowired(name = "key2")
+    var key2: Int = 0
+
+    @JvmField
+    @Autowired(name = "key3")
+    var key3: Long = 0L
+
+    @JvmField
+    @Autowired(name = "key4")
+    var key4: Boolean = false
+
+    @JvmField
+    @Autowired(name = "key5")
+    var key5: Person? = null
+
+    @JvmField
+    @Autowired(name = "key6")
+    var key6: MutableList<Person>? = null
+
+    @JvmField
+    @Autowired(name = "key7")
+    var key7: MutableMap<String, Person>? = null
 
 
     override fun setupComponent(myAppComponet: MyAppComponet) {
@@ -70,8 +103,34 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
             } else {
                 NotificationHelperUtils.getInstance().openPermission(this@TestProductFlavorsActivity)
             }
-
-
         }
+
+
+        /**
+         * 使用@Autowired 注解时, 必须要在对应的Activity中 调用 ARouter.getInstance().inject(this);
+         * Kotlin 代码编写的项目 在 @Autowired 标注的变量上, 还需要添加注解 @JvmField
+         */
+        ARouter.getInstance().inject(this)
+        //通过ARouter跳转穿过来的值
+        LogUtils.i(
+            "TestProductFlavorsActivity",
+            "key1 = ${key1}",
+            "key2=${key2}",
+            "key3=${key3}",
+            "key4=${key4}",
+            "key5.age=${key5!!.age},key5.name=${key5!!.name}"
+        )
+
+        for (k in key6!!) {
+            LogUtils.i(
+                "TestProductFlavorsActivity",
+                "key6.age=${k.age},key6.name=${k.name}"
+            )
+        }
+
+        LogUtils.i(
+            "TestProductFlavorsActivity",
+            "key7.age=${key7!!["person1"]!!.age},key7.name=${key7!!["person1"]!!.name}"
+        )
     }
 }

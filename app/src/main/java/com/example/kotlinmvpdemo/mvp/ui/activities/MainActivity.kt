@@ -12,6 +12,7 @@ import com.example.baselibrary.constants.EventTag
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.mvp.entity.MessageEvent
+import com.example.baselibrary.mvp.entity.Person
 import com.example.baselibrary.utils.*
 import com.example.baselibrary.utils.glideutils.GlideUtils
 import com.example.kotlinmvpdemo.R
@@ -122,7 +123,39 @@ class MainActivity : BaseActivity(), MainView {
                     23 -> presenter.testVisitor()
                     24 -> presenter.testIntermediary()
                     25 -> presenter.testInterpreter()
-                    26 -> ARouter.getInstance().build(RouterTag.TestProductFlavorsActivity).navigation()
+                    26 -> {
+                        //1.测试withObject  传递list集合的值
+                        val mutableListOf = mutableListOf<Person>()
+                        mutableListOf.add(Person().apply {
+                            this.age = 24
+                            this.name = "路飞"
+                        })
+                        mutableListOf.add(Person().apply {
+                            this.age = 25
+                            this.name = "索隆"
+                        })
+
+                        //2.测试withObject 传递map集合的值
+                        val mutablemap = mutableMapOf<String, Person>()
+                        mutablemap.put("person1", Person().apply {
+                            this.age = 23
+                            this.name = "娜美"
+                        })
+
+
+                        ARouter.getInstance().build(RouterTag.TestProductFlavorsActivity)
+                            .withString("key1", "我叫路飞")
+                            .withInt("key2", 100)
+                            .withLong("key3", 200L)
+                            .withBoolean("key4", true)
+                            .withObject("key5", Person().apply {
+                                this.age = 24
+                                this.name = "lufei"
+                            })
+                            .withObject("key6", mutableListOf)
+                            .withObject("key7", mutablemap)
+                            .navigation()
+                    }
                     27 -> ARouter.getInstance().build(RouterTag.TestMainActivity).navigation()
                 }
             }
