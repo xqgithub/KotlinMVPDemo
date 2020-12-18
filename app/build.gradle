@@ -80,8 +80,6 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
-
     implementation _dependencies.dagger2
     kapt _dependencies.dagger_compiler2
 
@@ -91,6 +89,6 @@ dependencies {
      * 引入module
      */
     implementation project(':baselibrary')
-    //需要在不同模块使用ARouter 需要引导该模块
+    //需要在不同模块使用ARouter 需要引入该模块
     implementation project(':testlibrary')
 }

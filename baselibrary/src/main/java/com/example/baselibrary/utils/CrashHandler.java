@@ -68,19 +68,33 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
 
-        if (!handleException(ex) && mDefaultHandler != null) {
-            // 如果用户没有处理则让系统默认的异常处理器来处理
-            mDefaultHandler.uncaughtException(thread, ex);
-        } else {
+//        if (!handleException(ex) && mDefaultHandler != null) {
+//            // 如果用户没有处理则让系统默认的异常处理器来处理
+//            mDefaultHandler.uncaughtException(thread, ex);
+//        } else {
+//            try {
+//                saveErrorMessageToFile(mContext, errormessage);
+//                Thread.sleep(3000);
+//            } catch (InterruptedException e) {
+//                Log.e(TAG, "----->" + e.getMessage());
+//            }
+//            // 退出程序
+//            android.os.Process.killProcess(android.os.Process.myPid());
+//            System.exit(1);
+//        }
+
+        if (mDefaultHandler != null && ex != null) {
+            // 收集设备参数信息
+            collectDeviceInfo(mContext);
+            // 生存日志文件信息
+            errormessage = saveCrashInfo2File(ex);
+            saveErrorMessageToFile(mContext, errormessage);
             try {
-                saveErrorMessageToFile(mContext, errormessage);
                 Thread.sleep(3000);
+                mDefaultHandler.uncaughtException(thread, ex);
             } catch (InterruptedException e) {
-                Log.e(TAG, "----->" + e.getMessage());
+                e.printStackTrace();
             }
-            // 退出程序
-            android.os.Process.killProcess(android.os.Process.myPid());
-            System.exit(1);
         }
     }
 

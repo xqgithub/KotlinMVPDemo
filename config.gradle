@@ -44,6 +44,7 @@ ext {
             recyclerview         : "1.1.0",
             arouter              : "1.5.0",
             arouter_compiler     : "1.2.2",
+            viewpager2           : "1.0.0",
     ]
 
     /**
@@ -75,6 +76,7 @@ ext {
             recyclerview         : "androidx.recyclerview:recyclerview:${dependenciesversion.recyclerview}",
             arouter              : "com.alibaba:arouter-api:${dependenciesversion.arouter}",
             arouter_compiler     : "com.alibaba:arouter-compiler:${dependenciesversion.arouter_compiler}",
+            viewpager2           : "androidx.viewpager2:viewpager2:${dependenciesversion.viewpager2}",
     ]
 
     /**

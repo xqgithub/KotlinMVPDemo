@@ -2,27 +2,30 @@ package com.example.kotlinmvpdemo.mvp.ui.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.fragment.app.*
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
+import com.example.baselibrary.constants.EventTag
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
+import com.example.baselibrary.mvp.entity.MessageEvent
 import com.example.baselibrary.mvp.entity.Person
 import com.example.baselibrary.utils.LogUtils
-import com.example.baselibrary.utils.NotificationHelperUtils
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import com.example.kotlinmvpdemo.R
 import com.example.kotlinmvpdemo.di.componets.DaggerProductFlavorsComponet
 import com.example.kotlinmvpdemo.di.modules.ProductFlavorsModule
+import com.example.kotlinmvpdemo.mvp.ui.adapter.ViewPager2Adapter
 import com.example.kotlinmvpdemo.mvp.ui.fragments.OneFragment
 import com.example.kotlinmvpdemo.mvp.views.ProductFlavorsView
 import kotlinx.android.synthetic.main.activity_productflavors.*
+import org.greenrobot.eventbus.EventBus
 
 /**
  * 测试多版本差异化
@@ -77,10 +80,9 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
 
     /** Fragment **/
 
-    /** ViewPager **/
-    lateinit var viewpager: ViewPager
+    /** ViewPager2 **/
+    lateinit var viewpager2adapter: ViewPager2Adapter
 
-    /** ViewPager **/
 
     override fun setupComponent(myAppComponet: MyAppComponet) {
         DaggerProductFlavorsComponet.builder()
@@ -145,28 +147,11 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
 
         tv_eventbus.setOnClickListener {
             /**发送eventbus测试消息**/
-//            var messageevent: MessageEvent = MessageEvent()
-//            messageevent.message_type = EventTag.event_test
-//            messageevent.message = "测试eventbus消息"
-//            EventBus.getDefault().post(messageevent)
-//            finish()
-
-            /**通知**/
-            if (NotificationHelperUtils.getInstance().isNotifacationEnabled(this@TestProductFlavorsActivity)) {
-                //应为自定义中有点击事件，所有先注册广播
-//                val receiver = NotificationBrodcaseReceiver()
-//                NotificationHelperUtils.getInstance().registerNotificationBrodcaseRecever(
-//                    this@TestProductFlavorsActivity, receiver, ConfigConstants.notifacatio_close
-//                )
-
-
-                NotificationHelperUtils.getInstance().sendNotification2(
-                    this@TestProductFlavorsActivity, TestProductFlavorsActivity::class.java,
-                    111, "海贼王", "我要成为海贼王的男人"
-                )
-            } else {
-                NotificationHelperUtils.getInstance().openPermission(this@TestProductFlavorsActivity)
-            }
+            var messageevent: MessageEvent = MessageEvent()
+            messageevent.message_type = EventTag.event_test
+            messageevent.message = "测试eventbus消息"
+            EventBus.getDefault().post(messageevent)
+            finish()
         }
 
 
@@ -190,13 +175,28 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
         fragments.add(onefragment)
         fragments.add(twofragment)
 
-        val MyViewPagerAdapter = MyViewPagerAdapter(fragmentManager, fragments)
-        vp_fragment_container.adapter = MyViewPagerAdapter
-        vp_fragment_container.addOnPageChangeListener(onPageChangeListener!!)
-        /** 当需要显示除0外的其他页码的时候 需要延迟加载，因为这个时候Fragment 还没有初始化 **/
-        Handler(Looper.getMainLooper()).postDelayed({
-            vp_fragment_container.currentItem = 0
-        }, 20)
+//        val MyViewPagerAdapter = MyViewPagerAdapter(fragmentManager, fragments)
+//        vp_fragment_container.adapter = MyViewPagerAdapter
+//        vp_fragment_container.addOnPageChangeListener(onPageChangeListener)
+//        /** 当需要显示除0外的其他页码的时候 需要延迟加载，因为这个时候Fragment 还没有初始化 **/
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            vp_fragment_container.currentItem = 0
+//        }, 20)
+
+        /** viewPager2 **/
+//        var colors = arrayOf("#CCFF99", "#41F1E5", "#8D41F1", "#FF99CC")
+//        viewpager2adapter = ViewPager2Adapter(this@TestProductFlavorsActivity, colors)
+//        vp2_fragment_container.adapter = viewpager2adapter
+//        //是否静止滑动禁止滑动
+//        vp2_fragment_container.isUserInputEnabled = false
+//        //设置ViewPager2的滑动方向
+//        vp2_fragment_container.orientation = ViewPager2.ORIENTATION_VERTICAL
+
+        /** viewPager2 Fragment **/
+        val adapterfragmentpager = AdapterFragmentPager(this@TestProductFlavorsActivity, fragments)
+        vp2_fragment_container.adapter = adapterfragmentpager
+        vp2_fragment_container.offscreenPageLimit = 2
+        vp2_fragment_container.registerOnPageChangeCallback(onPageChangeCallback)
     }
 
     /**
@@ -228,7 +228,7 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
     /**
      * ViewPager 监听
      */
-    private var onPageChangeListener: ViewPager.OnPageChangeListener? = object : ViewPager.OnPageChangeListener {
+    private var onPageChangeListener: ViewPager.OnPageChangeListener = object : ViewPager.OnPageChangeListener {
         override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
         }
@@ -249,6 +249,40 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
         }
     }
 
+
+    /**
+     * Viewpager2  Fragment 适配器
+     * 本身就时候懒加载的
+     */
+    class AdapterFragmentPager(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+        lateinit var fragments: MutableList<Fragment>
+
+        constructor(fragmentActivity: FragmentActivity, fragments: MutableList<Fragment>) : this(fragmentActivity) {
+            this.fragments = fragments
+        }
+
+        override fun getItemCount(): Int {
+            return fragments.size
+        }
+
+        override fun createFragment(position: Int): Fragment {
+            return fragments[position]
+        }
+    }
+
+    /**
+     * ViewPager2的滑动监听
+     */
+    private val onPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            when (position) {
+                0 -> onefragment.setParameter("这是FragmentOne")
+                1 -> twofragment.setParameter("这是FragmentTwo")
+            }
+            LogUtils.i(ConfigConstants.TAG_ALL, "被选择的是页面号码：${position}")
+        }
+    }
 
     override fun onResume() {
         super.onResume()

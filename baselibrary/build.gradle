@@ -102,5 +102,7 @@ dependencies {
     /** Arouter **/
     api _dependencies.arouter
     kapt _dependencies.arouter_compiler
+    /**ViewPager2**/
+    api _dependencies.viewpager2
 }
 

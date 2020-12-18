@@ -1,7 +1,7 @@
 package com.example.baselibrary.base
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import com.example.baselibrary.application.MyApplication
 import com.example.baselibrary.di.componets.MyAppComponet
 
@@ -9,7 +9,7 @@ import com.example.baselibrary.di.componets.MyAppComponet
 /**
  * activity 的 基类
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
