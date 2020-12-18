@@ -2,6 +2,8 @@ package com.example.kotlinmvpdemo.mvp.ui.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -16,6 +18,7 @@ import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import com.example.kotlinmvpdemo.R
 import com.example.kotlinmvpdemo.di.componets.DaggerProductFlavorsComponet
 import com.example.kotlinmvpdemo.di.modules.ProductFlavorsModule
+import com.example.kotlinmvpdemo.mvp.ui.fragments.OneFragment
 import com.example.kotlinmvpdemo.mvp.views.ProductFlavorsView
 import kotlinx.android.synthetic.main.activity_productflavors.*
 
@@ -55,7 +58,17 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
     @Autowired(name = "key7")
     var key7: MutableMap<String, Person>? = null
 
+    /** Fragment **/
+    //Fragment管理器
+    lateinit var fragmentManager: FragmentManager
 
+    //Fragment的事务
+    lateinit var transaction: FragmentTransaction
+
+    //Fragment 1号页面
+    lateinit var onefragment: OneFragment
+
+    /** Fragment **/
     override fun setupComponent(myAppComponet: MyAppComponet) {
         DaggerProductFlavorsComponet.builder()
             .myAppComponet(myAppComponet)
@@ -68,9 +81,45 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
         return R.layout.activity_productflavors
     }
 
-    @SuppressLint("NewApi")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initData()
+    }
+
+    /**
+     * 初始化数据
+     */
+    @SuppressLint("NewApi")
+    private fun initData() {
+        /**
+         * 使用@Autowired 注解时, 必须要在对应的Activity中 调用 ARouter.getInstance().inject(this);
+         * Kotlin 代码编写的项目 在 @Autowired 标注的变量上, 还需要添加注解 @JvmField
+         */
+        ARouter.getInstance().inject(this)
+        //通过ARouter跳转穿过来的值
+        LogUtils.i(
+            ConfigConstants.TAG_ALL,
+            "key1 = ${key1}",
+            "key2=${key2}",
+            "key3=${key3}",
+            "key4=${key4}",
+            "key5.age=${key5!!.age},key5.name=${key5!!.name}"
+        )
+
+        for (k in key6!!) {
+            LogUtils.i(
+                ConfigConstants.TAG_ALL,
+                "key6.age=${k.age},key6.name=${k.name}"
+            )
+        }
+
+        LogUtils.i(
+            ConfigConstants.TAG_ALL,
+            "key7.age=${key7!!["person1"]!!.age},key7.name=${key7!!["person1"]!!.name}"
+        )
+
+
         //获得版本的package_id
         val package_id = PublicPracticalMethodFromJAVA.getInstance()
             .getMetaDataValue(this@TestProductFlavorsActivity, ConfigConstants.PACKAGE_ID)
@@ -79,7 +128,6 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
         } else if (package_id == ConfigConstants.shengchan) {
             tv_name.text = getString(R.string.productflavors_shengchan)
         }
-
 
         //发送eventbus测试消息
         tv_eventbus.setOnClickListener {
@@ -107,31 +155,21 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
         }
 
 
-        /**
-         * 使用@Autowired 注解时, 必须要在对应的Activity中 调用 ARouter.getInstance().inject(this);
-         * Kotlin 代码编写的项目 在 @Autowired 标注的变量上, 还需要添加注解 @JvmField
-         */
-        ARouter.getInstance().inject(this)
-        //通过ARouter跳转穿过来的值
-        LogUtils.i(
-            ConfigConstants.TAG_ALL,
-            "key1 = ${key1}",
-            "key2=${key2}",
-            "key3=${key3}",
-            "key4=${key4}",
-            "key5.age=${key5!!.age},key5.name=${key5!!.name}"
-        )
+        //初始化FragmentManager
+        fragmentManager = supportFragmentManager
+        //开始事务
+        transaction = fragmentManager.beginTransaction()
+        //Fragment初始化
+        onefragment = OneFragment()
+        //添加Fragment
+        transaction.add(R.id.fl_fragment_container, onefragment)
+        transaction.commit()
+        transaction.show(onefragment)
 
-        for (k in key6!!) {
-            LogUtils.i(
-                ConfigConstants.TAG_ALL,
-                "key6.age=${k.age},key6.name=${k.name}"
-            )
-        }
-
-        LogUtils.i(
-            ConfigConstants.TAG_ALL,
-            "key7.age=${key7!!["person1"]!!.age},key7.name=${key7!!["person1"]!!.name}"
-        )
     }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
 }

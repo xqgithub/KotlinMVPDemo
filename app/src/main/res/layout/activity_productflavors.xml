@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mvp.ui.activities.MainActivity">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_30x"
+        android:gravity="center"
+        android:text="这是版本差异化"
+        android:textSize="@dimen/dimen_20x"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_eventbus"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_30x"
+        android:layout_marginTop="@dimen/dimen_20x"
+        android:gravity="center"
+        android:text="发送eventbus消息"
+        android:textSize="@dimen/dimen_20x"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+    <FrameLayout
+        android:id="@+id/fl_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".mvp.ui.activities.MainActivity">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_eventbus">
 
-    <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimen_30x"
-            android:text="这是版本差异化"
-            android:gravity="center"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:textSize="@dimen/dimen_20x"
-            app:layout_constraintTop_toTopOf="parent" />
+    </FrameLayout>
 
 
-    <TextView
-            android:id="@+id/tv_eventbus"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimen_30x"
-            android:text="发送eventbus消息"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/dimen_20x"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name"
-            android:textSize="@dimen/dimen_20x" />
 </androidx.constraintlayout.widget.ConstraintLayout>
