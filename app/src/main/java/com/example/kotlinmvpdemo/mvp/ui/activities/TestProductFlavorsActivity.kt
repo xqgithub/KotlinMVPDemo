@@ -2,8 +2,10 @@ package com.example.kotlinmvpdemo.mvp.ui.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import android.os.Handler
+import android.os.Looper
+import androidx.fragment.app.*
+import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -68,7 +70,18 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
     //Fragment 1号页面
     lateinit var onefragment: OneFragment
 
+    //Fragment 2号页面
+    lateinit var twofragment: OneFragment
+
+    lateinit var fragments: MutableList<Fragment>
+
     /** Fragment **/
+
+    /** ViewPager **/
+    lateinit var viewpager: ViewPager
+
+    /** ViewPager **/
+
     override fun setupComponent(myAppComponet: MyAppComponet) {
         DaggerProductFlavorsComponet.builder()
             .myAppComponet(myAppComponet)
@@ -129,14 +142,16 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
             tv_name.text = getString(R.string.productflavors_shengchan)
         }
 
-        //发送eventbus测试消息
+
         tv_eventbus.setOnClickListener {
-            //            var messageevent: MessageEvent = MessageEvent()
+            /**发送eventbus测试消息**/
+//            var messageevent: MessageEvent = MessageEvent()
 //            messageevent.message_type = EventTag.event_test
 //            messageevent.message = "测试eventbus消息"
 //            EventBus.getDefault().post(messageevent)
 //            finish()
 
+            /**通知**/
             if (NotificationHelperUtils.getInstance().isNotifacationEnabled(this@TestProductFlavorsActivity)) {
                 //应为自定义中有点击事件，所有先注册广播
 //                val receiver = NotificationBrodcaseReceiver()
@@ -155,18 +170,85 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
         }
 
 
+        /**Fragment**/
         //初始化FragmentManager
         fragmentManager = supportFragmentManager
         //开始事务
         transaction = fragmentManager.beginTransaction()
         //Fragment初始化
         onefragment = OneFragment()
-        //添加Fragment
-        transaction.add(R.id.fl_fragment_container, onefragment)
-        transaction.commit()
-        transaction.show(onefragment)
+        twofragment = OneFragment()
+
+        //添加Fragment, Activity 页面显示Fragment页面
+//        transaction.add(R.id.fl_fragment_container, onefragment)
+//        transaction.commit()
+//        transaction.show(onefragment)
+
+        /**ViewPager**/
+        //添加Fragment的集合
+        fragments = mutableListOf<Fragment>()
+        fragments.add(onefragment)
+        fragments.add(twofragment)
+
+        val MyViewPagerAdapter = MyViewPagerAdapter(fragmentManager, fragments)
+        vp_fragment_container.adapter = MyViewPagerAdapter
+        vp_fragment_container.addOnPageChangeListener(onPageChangeListener!!)
+        /** 当需要显示除0外的其他页码的时候 需要延迟加载，因为这个时候Fragment 还没有初始化 **/
+        Handler(Looper.getMainLooper()).postDelayed({
+            vp_fragment_container.currentItem = 0
+        }, 20)
+    }
+
+    /**
+     * 配合ViewPager的Fragment的适配器
+     * 1.behavior参数传入FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,那么就调用setMaxLifecycle()方法将上一个Fragment的状态设置为STARTED，将当前要显示的Fragment的状态设置为RESUMED
+     * 2.mBehavior的值为BEHAVIOR_SET_USER_VISIBLE_HINT，那么依然使用setUserVisibleHint()方法设置Fragment的可见性，相应地可以根据getUserVisibleHint()方法获取到Fragment是否可见，从而实现懒加载
+     */
+    @Suppress("DEPRECATION")
+    @SuppressLint("WrongConstant")
+    class MyViewPagerAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
+        lateinit var fragments: MutableList<Fragment>
+
+        constructor(manager: FragmentManager, fragments: MutableList<Fragment>) : this(manager) {
+            this.fragments = fragments
+        }
+
+        override fun getItem(position: Int): Fragment {
+            return fragments[position]
+        }
+
+        override fun getCount(): Int {
+            return fragments.size
+        }
+
 
     }
+
+    /**
+     * ViewPager 监听
+     */
+    private var onPageChangeListener: ViewPager.OnPageChangeListener? = object : ViewPager.OnPageChangeListener {
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+        }
+
+        /**
+         *  当currentItem 初始化为0 的时候  是不会走该方法的，其余的页码是会走的
+         */
+        override fun onPageSelected(position: Int) {
+            when (position) {
+                0 -> onefragment.setParameter("这是FragmentOne")
+                1 -> twofragment.setParameter("这是FragmentTwo")
+            }
+            LogUtils.i(ConfigConstants.TAG_ALL, "被选择的是页面号码：${position}")
+        }
+
+        override fun onPageScrollStateChanged(state: Int) {
+
+        }
+    }
+
 
     override fun onResume() {
         super.onResume()

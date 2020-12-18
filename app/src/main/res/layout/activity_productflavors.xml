@@ -30,14 +30,33 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
-    <FrameLayout
-        android:id="@+id/fl_fragment_container"
+    <!-- Activity中单独加载Fragment -->
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/fl_fragment_container"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/tv_eventbus"></FrameLayout>-->
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:overScrollMode="never"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_eventbus">
+        app:layout_constraintTop_toBottomOf="@+id/tv_eventbus"
+        tools:visibility="visible" />
 
-    </FrameLayout>
+    <!--    <androidx.viewpager2.widget.ViewPager2-->
+    <!--        android:id="@+id/vp_fragment_container"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:overScrollMode="never"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/tv_eventbus"-->
+    <!--        tools:visibility="visible" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

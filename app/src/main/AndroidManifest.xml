@@ -29,6 +29,7 @@
             android:theme="@style/myTransparent2" />
         <activity
             android:name=".mvp.ui.activities.MainActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".mvp.ui.activities.TestProductFlavorsActivity"
