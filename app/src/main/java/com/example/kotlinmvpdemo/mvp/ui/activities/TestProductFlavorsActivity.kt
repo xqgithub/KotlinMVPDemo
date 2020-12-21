@@ -5,15 +5,19 @@ import android.os.Bundle
 import androidx.fragment.app.*
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.example.baselibrary.application.MyApplication
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.EventTag
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
+import com.example.baselibrary.mvp.customizeviews.ScaleInTransformer
 import com.example.baselibrary.mvp.entity.MessageEvent
 import com.example.baselibrary.mvp.entity.Person
 import com.example.baselibrary.utils.LogUtils
@@ -195,7 +199,18 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
         /** viewPager2 Fragment **/
         val adapterfragmentpager = AdapterFragmentPager(this@TestProductFlavorsActivity, fragments)
         vp2_fragment_container.adapter = adapterfragmentpager
+        //预加载多少页
         vp2_fragment_container.offscreenPageLimit = 2
+        //ViewPager2的滑动方向
+        vp2_fragment_container.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        //ViewPager2是否允许滑动
+        vp2_fragment_container.isUserInputEnabled = true
+        //组合的PageTransformer
+        val compositePageTransformer = CompositePageTransformer()
+        compositePageTransformer.addTransformer(ScaleInTransformer())
+        compositePageTransformer.addTransformer(MarginPageTransformer(MyApplication.myapplication.resources.getDimension(R.dimen.dimen_50x).toInt()))
+        vp2_fragment_container.setPageTransformer(compositePageTransformer)
+        //ViewPager2的滑动监听
         vp2_fragment_container.registerOnPageChangeCallback(onPageChangeCallback)
     }
 
