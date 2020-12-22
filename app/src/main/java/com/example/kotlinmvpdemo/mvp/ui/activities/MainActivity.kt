@@ -257,7 +257,6 @@ class MainActivity : BaseActivity(), MainView {
         "ARouter跳转测试---不同的module"
     )
 
-
     override fun onDestroy() {
         super.onDestroy()
         //注销EventBus

@@ -117,6 +117,7 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
          * Kotlin 代码编写的项目 在 @Autowired 标注的变量上, 还需要添加注解 @JvmField
          */
         ARouter.getInstance().inject(this)
+
         //通过ARouter跳转穿过来的值
         LogUtils.i(
             ConfigConstants.TAG_ALL,
