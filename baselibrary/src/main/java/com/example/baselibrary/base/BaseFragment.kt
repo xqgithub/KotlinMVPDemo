@@ -15,8 +15,8 @@ import com.example.baselibrary.di.componets.MyAppComponet
 abstract class BaseFragment : Fragment() {
 
 
-    //Fragment 是否是第一次加载
-    var isFirstLoad: Boolean = true
+    //Fragment 是否加载数据
+    var isLoadData: Boolean = true
 
     /**
      * Fragment和Activity建立关联的时候调用，被附加到Activity中去。
@@ -67,10 +67,10 @@ abstract class BaseFragment : Fragment() {
      */
     override fun onResume() {
         super.onResume()
-        if (isFirstLoad) {
+        if (isLoadData) {
             //延迟加载的逻辑放到里面
             lazyLoad()
-            isFirstLoad = false
+            isLoadData = false
         }
     }
 

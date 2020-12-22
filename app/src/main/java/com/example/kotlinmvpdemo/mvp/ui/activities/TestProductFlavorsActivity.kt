@@ -27,6 +27,7 @@ import com.example.kotlinmvpdemo.di.componets.DaggerProductFlavorsComponet
 import com.example.kotlinmvpdemo.di.modules.ProductFlavorsModule
 import com.example.kotlinmvpdemo.mvp.ui.adapter.ViewPager2Adapter
 import com.example.kotlinmvpdemo.mvp.ui.fragments.OneFragment
+import com.example.kotlinmvpdemo.mvp.ui.fragments.TwoFragment
 import com.example.kotlinmvpdemo.mvp.views.ProductFlavorsView
 import kotlinx.android.synthetic.main.activity_productflavors.*
 import org.greenrobot.eventbus.EventBus
@@ -78,7 +79,7 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
     lateinit var onefragment: OneFragment
 
     //Fragment 2号页面
-    lateinit var twofragment: OneFragment
+    lateinit var twofragment: TwoFragment
 
     lateinit var fragments: MutableList<Fragment>
 
@@ -166,7 +167,7 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
         transaction = fragmentManager.beginTransaction()
         //Fragment初始化
         onefragment = OneFragment()
-        twofragment = OneFragment()
+        twofragment = TwoFragment()
 
         //添加Fragment, Activity 页面显示Fragment页面
 //        transaction.add(R.id.fl_fragment_container, onefragment)
@@ -253,8 +254,6 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
          */
         override fun onPageSelected(position: Int) {
             when (position) {
-                0 -> onefragment.setParameter("这是FragmentOne")
-                1 -> twofragment.setParameter("这是FragmentTwo")
             }
             LogUtils.i(ConfigConstants.TAG_ALL, "被选择的是页面号码：${position}")
         }
@@ -292,8 +291,6 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
             when (position) {
-                0 -> onefragment.setParameter("这是FragmentOne")
-                1 -> twofragment.setParameter("这是FragmentTwo")
             }
             LogUtils.i(ConfigConstants.TAG_ALL, "被选择的是页面号码：${position}")
         }
