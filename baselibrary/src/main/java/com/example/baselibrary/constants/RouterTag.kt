@@ -7,6 +7,9 @@ object RouterTag {
     //app---TestProductFlavorsActivity
     const val TestProductFlavorsActivity = "/app/TestProductFlavorsActivity"
 
+    //app---MainActivity
+    const val MainActivity = "/app/MainActivity"
+
 
     //全局降解
     const val DegradeService = "/service/degradeservice"

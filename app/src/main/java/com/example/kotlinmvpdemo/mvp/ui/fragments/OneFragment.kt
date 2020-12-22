@@ -8,13 +8,13 @@ import com.example.baselibrary.utils.LogUtils
 import com.example.kotlinmvpdemo.R
 import com.example.kotlinmvpdemo.di.componets.DaggerOneFragmentComponet
 import com.example.kotlinmvpdemo.di.modules.OneFragmentModule
-import com.example.kotlinmvpdemo.mvp.views.FragmentOneView
+import com.example.kotlinmvpdemo.mvp.views.OneFragmentView
 import kotlinx.android.synthetic.main.fragment_one.*
 
 /**
  * Fragment 1号页面
  */
-class OneFragment : BaseFragment(), FragmentOneView {
+class OneFragment : BaseFragment(), OneFragmentView {
 
     override fun setupComponent(myAppComponet: MyAppComponet) {
         DaggerOneFragmentComponet.builder()

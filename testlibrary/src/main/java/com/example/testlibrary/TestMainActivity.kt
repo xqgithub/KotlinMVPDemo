@@ -14,7 +14,7 @@ class TestMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_test)
         tv_test_main.setOnClickListener {
-            ARouter.getInstance().build(RouterTag.TestProductFlavorsActivity).navigation()
+            ARouter.getInstance().build(RouterTag.MainActivity).navigation()
             finish()
         }
     }
