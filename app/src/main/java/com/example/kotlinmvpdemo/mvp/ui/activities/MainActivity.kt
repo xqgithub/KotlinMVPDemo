@@ -158,6 +158,7 @@ class MainActivity : BaseActivity(), MainView {
                             })
                             .withObject("key6", mutableListOf)
                             .withObject("key7", mutablemap)
+                            .withTransition(R.anim.slide_in_right, 0)
 //                            .navigation()
                             .navigation(this@MainActivity, object : NavCallback() {
 
