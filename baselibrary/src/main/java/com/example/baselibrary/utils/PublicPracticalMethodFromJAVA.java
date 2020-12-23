@@ -147,9 +147,9 @@ public class PublicPracticalMethodFromJAVA {
      */
     public void smallWidth() {
         // 基础数据以360DP
-        double original_width = 420;
-        double target_width = 360;
-        int width_num = 420;
+        double original_width = 360;
+        double target_width = 480;
+        int width_num = 360;
 
         DecimalFormat df = new DecimalFormat("#.0");
         String result = "";
@@ -175,4 +175,75 @@ public class PublicPracticalMethodFromJAVA {
                 "手机cpu_abi: " + DeviceUtils.getSupportedabis());
     }
 
+    /**
+     * 00006
+     * 2进制、10进制、16进制之间的转换
+     */
+    //2进制转10进制
+    public int twoBinaryToTenHex(String parameter) {
+        if (!StringUtils.isBlank(parameter)) {
+            int result = Integer.parseInt(parameter, 2);
+            return result;
+        } else {
+            LogUtils.e(ConfigConstants.TAG_ALL, "参数为空，请查看");
+            return -1;
+        }
+    }
+
+    //10进制转2进制
+    public String tenHexToTwoBinary(int parameter) {
+        if (!StringUtils.isBlank(parameter)) {
+            String result = Integer.toBinaryString(parameter);
+            return result;
+        } else {
+            LogUtils.e(ConfigConstants.TAG_ALL, "参数为空，请查看");
+            return "";
+        }
+    }
+
+    //10进制转16进制
+    public String tenHexToHexadecimal(int parameter) {
+        if (!StringUtils.isBlank(parameter)) {
+            String result = Integer.toHexString(parameter);
+            return result;
+        } else {
+            LogUtils.e(ConfigConstants.TAG_ALL, "参数为空，请查看");
+            return "";
+        }
+    }
+
+    //16进制转10进制
+    public int hexadecimalToTenHex(String parameter) {
+        if (!StringUtils.isBlank(parameter)) {
+            int result = Integer.parseInt(parameter, 16);
+            return result;
+        } else {
+            LogUtils.e(ConfigConstants.TAG_ALL, "参数为空，请查看");
+            return -1;
+        }
+    }
+
+    //2进制转16进制
+    public String twoBinaryToHexadecimal(String parameter) {
+        if (!StringUtils.isBlank(parameter)) {
+            int ten = Integer.parseInt(parameter, 2);
+            String result = Integer.toHexString(ten);
+            return result;
+        } else {
+            LogUtils.e(ConfigConstants.TAG_ALL, "参数为空，请查看");
+            return "";
+        }
+    }
+
+    //16进制转2进制
+    public String hexadecimalTotwoBinary(String parameter) {
+        if (!StringUtils.isBlank(parameter)) {
+            int ten = Integer.parseInt(parameter, 16);
+            String result = Integer.toBinaryString(ten);
+            return result;
+        } else {
+            LogUtils.e(ConfigConstants.TAG_ALL, "参数为空，请查看");
+            return "";
+        }
+    }
 }

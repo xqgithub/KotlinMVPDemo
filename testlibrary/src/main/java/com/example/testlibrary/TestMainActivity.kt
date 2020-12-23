@@ -1,6 +1,5 @@
 package com.example.testlibrary
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
@@ -11,6 +10,8 @@ import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.baselibrary.constants.RouterTag
+import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
+import com.example.baselibrary.utils.ScreenUtils
 import kotlinx.android.synthetic.main.activity_main_test.*
 
 
@@ -27,51 +28,88 @@ class TestMainActivity : AppCompatActivity() {
     /**
      * 初始化数据
      */
-    @SuppressLint("ResourceType")
+
     fun initData() {
 
         tv_test_main.apply {
             text = "跳转到主程序app中的MainActivity"
         }.setOnClickListener {
             ARouter.getInstance().build(RouterTag.MainActivity).navigation()
-//            finish()
+            finish()
         }
 
+        addUiDynamic()
+    }
+
+    /**
+     *  动态添加UI控件
+     */
+    private fun addUiDynamic() {
+        PublicPracticalMethodFromJAVA.getInstance().tenHexToHexadecimal(99999)
         //1.自定义一个TextView1
         val textView = TextView(this@TestMainActivity)
-        textView.text = "我是动态添加1"
-        textView.textSize = this.resources.getDimension(R.dimen.dimen_10x)
-        textView.setTextColor(ContextCompat.getColor(this@TestMainActivity, R.color.black))
-        textView.setBackgroundColor(ContextCompat.getColor(this@TestMainActivity, R.color.full_red))
-        textView.gravity = Gravity.LEFT
-        val vlp = RelativeLayout.LayoutParams(
+        textView.apply {
+            text = "动态添加的TextView1"
+            textSize = this.resources.getDimensionPixelSize(R.dimen.dimen_14x) / ScreenUtils.getScreenDensity(context)
+            setTextColor(ContextCompat.getColor(this@TestMainActivity, R.color.black))
+            setBackgroundColor(ContextCompat.getColor(this@TestMainActivity, R.color.full_red))
+            gravity = Gravity.LEFT
+            //自定义控件id
+            val typedArray = this@TestMainActivity.obtainStyledAttributes(R.styleable.textviewhaha)
+            val textviewID = typedArray.getInt(
+                R.styleable.textviewhaha_textview1,
+                99999
+            )
+            id = textviewID
+        }
+        val rlp = RelativeLayout.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
-        //自定义控件id
-        textView.id = 99999999
-        textView.layoutParams = vlp
-        //2.自定义一个TextView2
-        val textView2 = TextView(this@TestMainActivity)
-        textView2.text = "你个小雀雀"
-        textView2.textSize = this.resources.getDimension(R.dimen.dimen_10x)
-        textView2.setTextColor(ContextCompat.getColor(this@TestMainActivity, R.color.black))
-        textView2.setBackgroundColor(ContextCompat.getColor(this@TestMainActivity, R.color.full_red))
-        textView2.gravity = Gravity.CENTER
-        val vlp2 = RelativeLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        //添加控件位置规则
-        vlp2.addRule(RelativeLayout.RIGHT_OF, textView.id)
-
-        textView2.layoutParams = vlp2
-
+        textView.layoutParams = rlp
         //添加控件
         rl_test_main.addView(textView)
+
+        //2.自定义一个textView2
+        val textView2 = TextView(this@TestMainActivity)
+        textView2.apply {
+            val lambdaTest = { a: String, b: String -> "$a VS $b" }
+            val lambdaTest2 = { a: String, b: String -> "$a VS $b" }
+            text = "动态添加的TextView_${lambdaTest("路飞", "索隆")}"
+            textSize = this.resources.getDimensionPixelSize(R.dimen.dimen_14x) / ScreenUtils.getScreenDensity(context)
+            setTextColor(ContextCompat.getColor(this@TestMainActivity, R.color.black))
+            setBackgroundColor(ContextCompat.getColor(this@TestMainActivity, R.color.crowded_yellow))
+            gravity = Gravity.LEFT
+        }
+        val rlp2 = RelativeLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        /**
+         *layoutParams.alignWithParent = true  如果对应的兄弟元素找不到的话就以父元素做参照物
+         *RelativeLayout.CENTER_HORIZONTAL   在父控件中水平居中
+         *RelativeLayout.CENTER_VERTICAL   在父控件中垂直居中
+         *RelativeLayout.CENTER_IN_PARENT  相对于父控件完全居中
+         *RelativeLayout.ALIGN_PARENT_BOTTOM  紧贴父控件的下边缘
+         *RelativeLayout.ALIGN_PARENT_TOP  紧贴父控件的上边缘
+         *RelativeLayout.ALIGN_PARENT_LEFT紧贴父控件的左边边缘
+         *RelativeLayout.ALIGN_PARENT_RIGHT  紧贴父控件的右边缘
+         *RelativeLayout.ABOVE 在某元素的上方  需要第二个参数为某元素的ID
+         *RelativeLayout.BELOW 在某元素的下方 需要第二个参数为某元素的ID
+         *RelativeLayout.LEFT_OF 在某元素的左边 需要第二个参数为某元素的ID
+         *RelativeLayout.RIGHT_OF  在某元素的右边 需要第二个参数为 某元素的ID
+         *RelativeLayout.ALIGN_TOP 本元素的上边缘和某元素的的上边缘对齐 需要第二个参数为某元素的ID
+         *RelativeLayout.ALIGN_BOTTOM 本元素的上边缘和某元素的的下边缘对齐 需要第二个参数为某元素的ID
+         *RelativeLayout.ALIGN_LEFT  本元素的上边缘和某元素的的左边缘对齐 需要第二个参数为某元素的ID
+         *RelativeLayout.ALIGN_RIGHT  本元素的上边缘和某元素的的右边缘对齐 需要第二个参数为某元素的ID
+         *RelativeLayout.ALIGN_BASELINE   本元素的基线和某元素的的基线对齐 需要第二个参数为某元素的ID
+         */
+        rlp2.addRule(RelativeLayout.BELOW, textView.id)
+        rlp2.setMargins(0, this.resources.getDimensionPixelSize(R.dimen.dimen_10x), 0, 0)
+        textView2.layoutParams = rlp2
+        //添加控件
         rl_test_main.addView(textView2)
-
-
     }
 
     override fun onDestroy() {
