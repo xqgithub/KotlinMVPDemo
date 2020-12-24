@@ -104,5 +104,7 @@ dependencies {
     kapt _dependencies.arouter_compiler
     /**ViewPager2**/
     api _dependencies.viewpager2
+    /**协程**/
+    api _dependencies.coroutines
 }
 
