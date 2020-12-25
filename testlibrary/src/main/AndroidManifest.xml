@@ -6,6 +6,9 @@
         <activity
             android:name="com.example.testlibrary.TestMainActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.testlibrary.CoroutineActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

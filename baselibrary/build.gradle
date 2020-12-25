@@ -105,6 +105,9 @@ dependencies {
     /**ViewPager2**/
     api _dependencies.viewpager2
     /**协程**/
-    api _dependencies.coroutines
+    //依赖协程核心库
+    api _dependencies.coroutines_core
+    //依赖当前平台所对应的平台库
+    api _dependencies.coroutines_android
 }
 

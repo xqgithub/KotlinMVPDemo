@@ -23,17 +23,4 @@
         android:layout_height="wrap_content"
         android:background="@color/blue"
         app:layout_constraintTop_toBottomOf="@+id/tv_test_main" />
-
-    <TextView
-        android:id="@+id/tv_test_main2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_10x"
-        android:text="启动协程"
-        android:textColor="@color/black"
-        android:textSize="@dimen/dimen_20x"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rl_test_main" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

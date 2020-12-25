@@ -187,6 +187,7 @@ class MainActivity : BaseActivity(), MainView {
                             })
                     }
                     27 -> ARouter.getInstance().build(RouterTag.TestMainActivity).navigation()
+                    28 -> ARouter.getInstance().build(RouterTag.CoroutineActivity).navigation()
                 }
             }
         })
@@ -255,7 +256,8 @@ class MainActivity : BaseActivity(), MainView {
         "设计模式---中介者模式",
         "设计模式---解释器模式",
         "ARouter跳转测试---同一个module",
-        "ARouter跳转测试---不同的module"
+        "ARouter跳转测试---不同的module",
+        "协程Coroutine测试"
     )
 
     override fun onDestroy() {
