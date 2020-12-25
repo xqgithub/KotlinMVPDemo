@@ -6,10 +6,7 @@ import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
-import com.example.baselibrary.utils.FileUtils
-import com.example.baselibrary.utils.LogUtils
-import com.example.baselibrary.utils.SDCardUtils
-import com.example.baselibrary.utils.StringUtils
+import com.example.baselibrary.utils.*
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import kotlinx.android.synthetic.main.activity_coroutine.*
 import kotlinx.coroutines.*
@@ -37,9 +34,19 @@ class CoroutineActivity : BaseActivity() {
     override fun setupComponent(myAppComponet: MyAppComponet) {
     }
 
+    override fun onBeforeSetContentLayout() {
+        PublicPracticalMethodFromJAVA.getInstance()
+            .transparentStatusBar(
+                this,
+                false, true,
+                R.color.full_red
+            )
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.activity_coroutine
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -449,6 +456,4 @@ class CoroutineActivity : BaseActivity() {
         }
         LogUtils.i(ConfigConstants.TAG_ALL, "写入文件耗时为：${time} ms")
     }
-
-
 }

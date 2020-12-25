@@ -52,9 +52,19 @@ class MainActivity : BaseActivity(), MainView {
             .inject(this)
     }
 
+    override fun onBeforeSetContentLayout() {
+        PublicPracticalMethodFromJAVA.getInstance()
+            .transparentStatusBar(
+                this,
+                false, true,
+                R.color.full_red
+            )
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.activity_main
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

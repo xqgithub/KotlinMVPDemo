@@ -5,25 +5,40 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.RouterTag
+import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import com.example.baselibrary.utils.ScreenUtils
 import kotlinx.android.synthetic.main.activity_main_test.*
 
 
 @Route(path = RouterTag.TestMainActivity)
-class TestMainActivity : AppCompatActivity() {
+class TestMainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_test)
         initData()
     }
 
+    override fun setupComponent(myAppComponet: MyAppComponet) {
+    }
+
+    override fun onBeforeSetContentLayout() {
+        PublicPracticalMethodFromJAVA.getInstance()
+            .transparentStatusBar(
+                this,
+                false, true,
+                R.color.full_red
+            )
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main_test
+    }
 
     /**
      * 初始化数据

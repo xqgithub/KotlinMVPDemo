@@ -97,6 +97,16 @@ class TestProductFlavorsActivity : BaseActivity(), ProductFlavorsView {
             .inject(this)
     }
 
+    override fun onBeforeSetContentLayout() {
+        PublicPracticalMethodFromJAVA.getInstance()
+            .transparentStatusBar(
+                this,
+                false, true,
+                R.color.full_red
+            )
+    }
+
+
     override fun getLayoutId(): Int {
         return R.layout.activity_productflavors
     }
