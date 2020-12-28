@@ -5,16 +5,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.view.Display;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.baselibrary.R;
 import com.example.baselibrary.constants.ConfigConstants;
 
 import java.text.DecimalFormat;
@@ -328,4 +337,66 @@ public class PublicPracticalMethodFromJAVA {
             }
         }
     }
+
+    /**
+     * 00008
+     * 设置状态栏的高度
+     *
+     * @param mActivity
+     * @param v_statusBar_top
+     */
+    public void setBarHeight(Activity mActivity, TextView v_statusBar_top) {
+        int BarHeight = BarUtils.getStatusBarHeight(mActivity);
+        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) v_statusBar_top.getLayoutParams();
+        layoutParams.height = BarHeight;
+        v_statusBar_top.setLayoutParams(layoutParams);
+    }
+
+    /**
+     * 00009
+     * 判断底部导航栏是否显示
+     */
+    private boolean isNavigationBarShow(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            Display display = activity.getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            Point realSize = new Point();
+            display.getSize(size);
+            display.getRealSize(realSize);
+            return realSize.y != size.y;
+        } else {
+            boolean menu = ViewConfiguration.get(activity).hasPermanentMenuKey();
+            boolean back = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
+            if (menu || back) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+
+    /**
+     * 00009
+     * 设置底部导航栏高度
+     */
+    public void setNavigationBarHeight(Activity mActivity, TextView v_statusBar_bottom) {
+        if (!isNavigationBarShow(mActivity)) {
+            int height = mActivity.getResources().getDimensionPixelSize(R.dimen.dimen_20x);
+            ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) v_statusBar_bottom.getLayoutParams();
+            layoutParams.height = height;
+            v_statusBar_bottom.setLayoutParams(layoutParams);
+        } else {
+            Resources resources = mActivity.getResources();
+            int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+            int height = resources.getDimensionPixelSize(resourceId);//导航栏的高度
+            int height1 = mActivity.getResources().getDimensionPixelSize(R.dimen.dimen_10x);
+//            LogUtils.i("Navi height----->:" + height);
+            ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) v_statusBar_bottom.getLayoutParams();
+            layoutParams.height = (height + height1);
+            v_statusBar_bottom.setLayoutParams(layoutParams);
+        }
+    }
+
+
 }
