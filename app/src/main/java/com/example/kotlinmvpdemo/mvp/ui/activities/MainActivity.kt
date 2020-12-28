@@ -198,6 +198,7 @@ class MainActivity : BaseActivity(), MainView {
                     }
                     27 -> ARouter.getInstance().build(RouterTag.TestMainActivity).navigation()
                     28 -> ARouter.getInstance().build(RouterTag.CoroutineActivity).navigation()
+                    29 -> ARouter.getInstance().build(RouterTag.LambdaActivity).navigation()
                 }
             }
         })
@@ -267,7 +268,8 @@ class MainActivity : BaseActivity(), MainView {
         "设计模式---解释器模式",
         "ARouter跳转测试---同一个module",
         "ARouter跳转测试---不同的module",
-        "协程Coroutine测试"
+        "协程Coroutine测试",
+        "lambda方法使用和高级函数的使用"
     )
 
     override fun onDestroy() {

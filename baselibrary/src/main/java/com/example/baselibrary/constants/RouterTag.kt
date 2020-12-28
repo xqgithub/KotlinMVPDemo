@@ -7,6 +7,9 @@ object RouterTag {
     //testlibary---CoroutineActivity
     const val CoroutineActivity = "/testlibary/CoroutineActivity"
 
+    //testlibary---LambdaActivity
+    const val LambdaActivity = "/testlibary/LambdaActivity"
+
     //app---TestProductFlavorsActivity
     const val TestProductFlavorsActivity = "/app/TestProductFlavorsActivity"
 

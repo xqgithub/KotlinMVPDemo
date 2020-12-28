@@ -353,6 +353,7 @@ class CoroutineActivity : BaseActivity() {
     }
 
     //线程的局部变量
+    //1.yield在协程中就可以简单的理解为，挂起当前任务（注意是任务），释放此线程的monitor让其他正在等待的任务公平的竞争，去获得执行权
     val threadLocal = ThreadLocal<String?>() // 声明线程局部变量
     private fun testCoroutines15() {
         runBlocking<Unit> {
