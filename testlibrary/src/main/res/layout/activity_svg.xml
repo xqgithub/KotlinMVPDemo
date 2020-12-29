@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".TestSVGActivity">
+
+    <TextView
+        android:id="@+id/tv_svg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_20x"
+        android:layout_marginTop="@dimen/dimen_10x"
+        android:text="下面是静态的SVG图："
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen_18x"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_svg2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="静态图不存在兼容问题"
+        android:textColor="@color/full_red"
+        android:textSize="@dimen/dimen_11x"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_svg"
+        app:layout_constraintTop_toBottomOf="@+id/tv_svg" />
+
+
+    <ImageView
+        android:id="@+id/iv_svg"
+        android:layout_width="@dimen/dimen_50x"
+        android:layout_height="@dimen/dimen_50x"
+        android:layout_marginTop="@dimen/dimen_20x"
+        android:src="@drawable/vector_drawable_daizi"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_svg"
+        app:layout_constraintTop_toBottomOf="@+id/tv_svg" />
+
+    <ImageView
+        android:id="@+id/iv_svg2"
+        android:layout_width="@dimen/dimen_50x"
+        android:layout_height="@dimen/dimen_50x"
+        android:layout_marginLeft="@dimen/dimen_20x"
+        android:src="@drawable/vector_drawable_satisfaction"
+        app:layout_constraintLeft_toRightOf="@+id/iv_svg"
+        app:layout_constraintTop_toTopOf="@+id/iv_svg" />
+
+    <ImageView
+        android:id="@+id/iv_svg3"
+        android:layout_width="@dimen/dimen_50x"
+        android:layout_height="@dimen/dimen_50x"
+        android:layout_marginLeft="@dimen/dimen_20x"
+        android:src="@drawable/vector_drawable_shengdanlaoren"
+        app:layout_constraintLeft_toRightOf="@+id/iv_svg2"
+        app:layout_constraintTop_toTopOf="@+id/iv_svg" />
+
+    <ImageView
+        android:id="@+id/iv_svg4"
+        android:layout_width="@dimen/dimen_50x"
+        android:layout_height="@dimen/dimen_50x"
+        android:layout_marginLeft="@dimen/dimen_20x"
+        android:src="@drawable/vector_drawable_xiaojingling"
+        app:layout_constraintLeft_toRightOf="@+id/iv_svg3"
+        app:layout_constraintTop_toTopOf="@+id/iv_svg" />
+
+
+    <TextView
+        android:id="@+id/tv_svg3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_20x"
+        android:layout_marginTop="@dimen/dimen_10x"
+        android:text="下面是动态的SVG图："
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen_18x"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_svg" />
+
+    <ImageView
+        android:id="@+id/iv_svg5"
+        android:layout_width="@dimen/dimen_50x"
+        android:layout_height="@dimen/dimen_50x"
+        android:layout_marginTop="@dimen/dimen_20x"
+        android:src="@drawable/vector_drawable_menu"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_svg3"
+        app:layout_constraintTop_toBottomOf="@+id/tv_svg3" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

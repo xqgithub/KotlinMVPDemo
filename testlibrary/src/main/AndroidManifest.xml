@@ -12,6 +12,9 @@
         <activity
             android:name="com.example.testlibrary.LambdaActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.testlibrary.TestSVGActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

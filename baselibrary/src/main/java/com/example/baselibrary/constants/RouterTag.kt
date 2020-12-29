@@ -1,6 +1,7 @@
 package com.example.baselibrary.constants
 
 object RouterTag {
+
     //testlibary---testMainActivity
     const val TestMainActivity = "/testlibary/TestMainActivity"
 
@@ -10,11 +11,14 @@ object RouterTag {
     //testlibary---LambdaActivity
     const val LambdaActivity = "/testlibary/LambdaActivity"
 
-    //app---TestProductFlavorsActivity
-    const val TestProductFlavorsActivity = "/app/TestProductFlavorsActivity"
+    //testlibary---TestSVGActivity
+    const val TestSVGActivity = "/testlibary/TestSVGActivity"
 
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
+
+    //app---TestProductFlavorsActivity
+    const val TestProductFlavorsActivity = "/app/TestProductFlavorsActivity"
 
 
     //全局降解
