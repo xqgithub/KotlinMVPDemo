@@ -24,6 +24,8 @@ import com.example.kotlinmvpdemo.di.modules.MainModule
 import com.example.kotlinmvpdemo.mvp.presenters.MainPresenter
 import com.example.kotlinmvpdemo.mvp.ui.adapter.MainListAdapter
 import com.example.kotlinmvpdemo.mvp.views.MainView
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -76,14 +78,70 @@ class MainActivity : BaseActivity(), MainView {
         //获得手机屏幕信息
         PublicPracticalMethodFromJAVA.getInstance().getPhoneScreenInfo(this@MainActivity)
 
+        //初始化recyclerview
+        initRecyclerview(true)
+    }
 
-        //1.初始化recyerview
+
+    /**
+     * 初始化recyclerview
+     * @param isOpenRefresh 是否开启下拉刷新，上推加载更多功能
+     */
+    private fun initRecyclerview(isOpenRefresh: Boolean) {
+        if (isOpenRefresh) {
+            //1.下拉刷新
+            srl_main.setRefreshHeader(ClassicsHeader(this@MainActivity))
+            //下拉刷新监听
+            srl_main.setOnRefreshListener {
+                LogUtils.i(ConfigConstants.TAG_ALL, "我被下拉刷新了")
+
+                //数据还原
+                tempnum = 0
+                items_remaining = items.size
+                tempList.clear()
+                takeDataFromItems()
+                (rv_main.adapter as MainListAdapter).notifyDataSetChanged()
+
+                it.finishRefresh(500)
+            }
+            //3.上推加载
+            srl_main.setRefreshFooter(ClassicsFooter(this@MainActivity))
+            //上推加载监听
+            srl_main.setOnLoadMoreListener {
+                LogUtils.i(ConfigConstants.TAG_ALL, "我被上推加载了")
+
+                takeDataFromItems()
+
+                if (items_remaining > 0) {//表示剩余数据
+                    it.finishLoadMore(500)
+                } else {
+                    it.finishLoadMoreWithNoMoreData()
+                }
+
+                (rv_main.adapter as MainListAdapter).notifyDataSetChanged()
+            }
+
+            //从测试数据中取数据
+            takeDataFromItems()
+
+        } else {
+            srl_main.setEnableRefresh(isOpenRefresh)
+            srl_main.setEnableLoadMore(isOpenRefresh)
+        }
+
+        //4.创建一个layout管理器
         val linearlayoutmanager = LinearLayoutManager(this@MainActivity)
         linearlayoutmanager.orientation = RecyclerView.VERTICAL
-        val mainlistadapter = MainListAdapter(this@MainActivity, items)
         rv_main.layoutManager = linearlayoutmanager
+
+        //5.初始化recyclerview的适配器
+        val mainlistadapter = MainListAdapter(this@MainActivity, if (isOpenRefresh) tempList else items)
         rv_main.adapter = mainlistadapter
-        //2.Item的点击事件
+
+        //6.数据刷新
+        (rv_main.adapter as MainListAdapter).notifyDataSetChanged()
+
+        //7.Item的点击事件
         mainlistadapter.setOnItemClickListener(object : MainListAdapter.OnItemClickListener {
             override fun setItemOnClick(position: Int, imageView: ImageView, picPath: String) {
                 when (position) {
@@ -205,6 +263,7 @@ class MainActivity : BaseActivity(), MainView {
         })
     }
 
+
     /**
      * 先注册EventBus，再跳转到TestProductFlavorsActivity1
      */
@@ -236,6 +295,7 @@ class MainActivity : BaseActivity(), MainView {
             LogUtils.i("收到测试消息 =-= ${messageevent.message}")
         }
     }
+
 
     /**
      *测试数据
@@ -273,6 +333,41 @@ class MainActivity : BaseActivity(), MainView {
         "lambda方法使用和高级函数的使用",
         "SVG动画测试"
     )
+
+    /**
+     * 从测试数据集合中取一定数量的数据
+     */
+    //标记号
+    var tempnum = 0
+
+    //每次取多少
+    var pernum = 10
+
+    //测试数据中剩余的数
+    var items_remaining = items.size
+
+    //测试数据临时数据，随时变化
+    var tempList = mutableListOf<String>()
+
+    private fun takeDataFromItems() {
+        if (tempnum == 0 || tempnum > 0 && items_remaining > pernum) {//第一次取 或者 items_remaining大于pernum
+            for (i in tempnum until tempnum + pernum) {
+                tempList.add(items[i])
+            }
+            tempnum += pernum
+            items_remaining = (items_remaining - pernum)
+        } else if (items_remaining == 0) {//剩余为0
+            return
+        } else {//items_remaining小于pernum
+            for (i in tempnum until items.size) {
+                tempList.add(items[i])
+                tempnum = i
+            }
+            tempnum = items.size
+            items_remaining = 0
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

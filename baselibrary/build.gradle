@@ -109,5 +109,10 @@ dependencies {
     api _dependencies.coroutines_core
     //依赖当前平台所对应的平台库
     api _dependencies.coroutines_android
+    /**SmartRefreshLayout 智能下拉刷新框架**/
+    api _dependencies.smartrefreshlayout_kernel
+    api _dependencies.smartrefreshlayout_header_radar
+    api _dependencies.smartrefreshlayout_header_classics
+    api _dependencies.smartrefreshlayout_footer_classics
 }
 
