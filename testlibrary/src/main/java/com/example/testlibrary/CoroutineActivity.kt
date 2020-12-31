@@ -10,6 +10,9 @@ import com.example.baselibrary.utils.*
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import kotlinx.android.synthetic.main.activity_coroutine.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlin.system.measureTimeMillis
 
 /**
@@ -72,6 +75,8 @@ class CoroutineActivity : BaseActivity() {
                 15 -> testCoroutines15()
                 16 -> testCoroutines16()
                 17 -> testCoroutines17()
+                18 -> testCoroutines18()
+                19 -> testCoroutines19()
                 else -> showShortToastSafe("序号错误，请检查")
             }
         }
@@ -457,4 +462,69 @@ class CoroutineActivity : BaseActivity() {
         }
         LogUtils.i(ConfigConstants.TAG_ALL, "写入文件耗时为：${time} ms")
     }
+
+    /**
+     * 异步流
+     * 1.异步挂起函数能够返回单一值
+     * 2.那么我们如何返回多个异步计算的值呢？而这个就是Kotlin Flow需要解决地
+     * */
+    //序列  List和Sequence对比
+    //1. 当不需要中间操作时，使用List
+    //2. 当仅仅只有map操作时，使用sequence
+    //3. 当仅仅只有filter操作时，使用List
+    //4. 如果末端操作是first时，使用sequence
+    private fun testCoroutines18() {
+        val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7)
+        val result = list.map {
+            LogUtils.i(ConfigConstants.TAG_ALL, "In Map")
+            it * 2
+        }.filter {
+            LogUtils.i(ConfigConstants.TAG_ALL, "In filter")
+            it % 3 == 0
+        }
+        LogUtils.i(ConfigConstants.TAG_ALL, "Before Average")
+        LogUtils.i(ConfigConstants.TAG_ALL, "result.average的值： ${result.average()}")
+
+
+        val result2 = list.asSequence().map {
+            LogUtils.i(ConfigConstants.TAG_ALL, "In Map")
+            it * 2
+        }.filter {
+            LogUtils.i(ConfigConstants.TAG_ALL, "In filter")
+            it % 3 == 0
+        }
+        LogUtils.i(ConfigConstants.TAG_ALL, "Before Average")
+        LogUtils.i(ConfigConstants.TAG_ALL, "result.average的值： ${result2.average()}")
+    }
+
+
+    //flow
+    //1.flow{}内部代码是可以挂起的
+    //2.函数 foo()不再需要suspend修饰符
+    //3.使用emit函数发射值
+    //4.使用collect函数收集值
+    private fun testCoroutines19() {
+
+        fun foo(): Flow<Int> = flow { // 流生成器
+            for (i in 1..3) {
+                delay(100) // 假装我们在这里做一些有用的事情
+                emit(i) // 发出下一个值
+            }
+        }
+
+        runBlocking {
+            //启动并发协程以检查主线程是否被阻塞
+            launch {
+                for (k in 1..3) {
+                    println("I'm not blocked $k")
+                    delay(100)
+                }
+            }
+
+            // Collect the flow
+            foo().collect { value -> println(value) }
+        }
+    }
+
+
 }

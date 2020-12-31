@@ -79,7 +79,7 @@ class MainActivity : BaseActivity(), MainView {
         PublicPracticalMethodFromJAVA.getInstance().getPhoneScreenInfo(this@MainActivity)
 
         //初始化recyclerview
-        initRecyclerview(true)
+        initRecyclerview(false)
     }
 
 
