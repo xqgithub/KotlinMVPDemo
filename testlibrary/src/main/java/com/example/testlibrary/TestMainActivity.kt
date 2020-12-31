@@ -9,10 +9,14 @@ import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.baselibrary.base.BaseActivity
+import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
+import com.example.baselibrary.mvp.customizeviews.DropDownHeaderView
+import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import com.example.baselibrary.utils.ScreenUtils
+import com.scwang.smart.refresh.footer.ClassicsFooter
 import kotlinx.android.synthetic.main.activity_main_test.*
 
 
@@ -54,6 +58,7 @@ class TestMainActivity : BaseActivity() {
         }
 
         addUiDynamic()
+        addRefreshUi(true)
     }
 
     /**
@@ -131,6 +136,35 @@ class TestMainActivity : BaseActivity() {
         //添加控件
         rl_test_main.addView(textView2)
     }
+
+    /**
+     * 添加刷新控件
+     * @param isOpenRefresh 是否添加刷新UI
+     */
+    private fun addRefreshUi(isOpenRefresh: Boolean) {
+        if (isOpenRefresh) {
+            //1.下拉刷新
+//            srl_main.setRefreshHeader(ClassicsHeader(this@TestMainActivity))
+            srl_main.setRefreshHeader(DropDownHeaderView(this@TestMainActivity))
+            //下拉刷新监听
+            srl_main.setOnRefreshListener {
+                LogUtils.i(ConfigConstants.TAG_ALL, "我被下拉刷新了")
+                it.finishRefresh(5000)
+            }
+
+            //3.上推加载
+            srl_main.setRefreshFooter(ClassicsFooter(this@TestMainActivity))
+            //上推加载监听
+            srl_main.setOnLoadMoreListener {
+                LogUtils.i(ConfigConstants.TAG_ALL, "我被上推加载了")
+                it.finishLoadMore(500)
+            }
+        } else {
+            srl_main.setEnableRefresh(isOpenRefresh)
+            srl_main.setEnableLoadMore(isOpenRefresh)
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

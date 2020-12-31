@@ -17,11 +17,34 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 往该布局中添加一个TextView -->
-    <RelativeLayout
-        android:id="@+id/rl_test_main"
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue"
-        app:layout_constraintTop_toBottomOf="@+id/tv_test_main" />
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_test_main">
+
+        <!--        <com.scwang.smart.refresh.header.ClassicsHeader-->
+        <!--            android:id="@+id/header_main"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content" />-->
+
+        <com.example.baselibrary.mvp.customizeviews.DropDownHeaderView
+            android:id="@+id/header_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- 往该布局中添加一个TextView -->
+        <RelativeLayout
+            android:id="@+id/rl_test_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue" />
+
+        <com.scwang.smart.refresh.footer.ClassicsFooter
+            android:id="@+id/footer_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
