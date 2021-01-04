@@ -49,7 +49,7 @@ class TestSVGActivity : BaseActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//SVG动画是在5.0之后推出的
                 (iv_svg5.drawable as Animatable).start()
             } else {
-                iv_svg5.setImageDrawable(ContextCompat.getDrawable(this@TestSVGActivity, R.drawable.ic_back))
+                iv_svg5.setImageDrawable(ContextCompat.getDrawable(this@TestSVGActivity, R.drawable.ic_back2))
             }
         }
     }
