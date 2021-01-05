@@ -258,6 +258,7 @@ class MainActivity : BaseActivity(), MainView {
                     28 -> ARouter.getInstance().build(RouterTag.CoroutineActivity).navigation()
                     29 -> ARouter.getInstance().build(RouterTag.LambdaActivity).navigation()
                     30 -> ARouter.getInstance().build(RouterTag.TestSVGActivity).navigation()
+                    31 -> presenter.testCommand()
                 }
             }
         })
@@ -331,7 +332,8 @@ class MainActivity : BaseActivity(), MainView {
         "ARouter跳转测试---不同的module",
         "协程Coroutine测试",
         "lambda方法使用和高级函数的使用",
-        "SVG动画测试"
+        "SVG动画测试",
+        "设计模式---命令模式"
     )
 
     /**

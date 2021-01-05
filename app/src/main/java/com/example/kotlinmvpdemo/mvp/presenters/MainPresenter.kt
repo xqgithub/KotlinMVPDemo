@@ -15,6 +15,9 @@ import com.example.baselibrary.designpatterns.builder.Director
 import com.example.baselibrary.designpatterns.chainresponsibility.ConcretePostman
 import com.example.baselibrary.designpatterns.chainresponsibility.Postman
 import com.example.baselibrary.designpatterns.clonemode.Card
+import com.example.baselibrary.designpatterns.command.Invoker
+import com.example.baselibrary.designpatterns.command.Receiver
+import com.example.baselibrary.designpatterns.command.ShutdownCommand
 import com.example.baselibrary.designpatterns.factory.ConcreteFactory
 import com.example.baselibrary.designpatterns.factory.Factory
 import com.example.baselibrary.designpatterns.factory.Product
@@ -651,6 +654,20 @@ class MainPresenter @Inject constructor(
         calculator.read("a + b")
         val result = calculator.calculate()
         LogUtils.i("a 加 b 的结果是:${result}")
+    }
+
+    /**
+     * 设计模式---命令模式
+     */
+    fun testCommand() {
+        //创建命令接收者
+        val receiver = Receiver()
+        //创建一个命令的具体实现对象，并指定命令接收者
+        val command = ShutdownCommand(receiver)
+        //创建一个命令调用者，并指定具体命令
+        val invoker = Invoker(command)
+        //发起命令请求
+        invoker.action()
     }
 }
 
