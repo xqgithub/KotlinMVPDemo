@@ -53,8 +53,7 @@ class CoroutineActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        tv_coroutines.setOnClickListener {
+        tv_coroutines.clickWithTrigger(500) {
             val branch = et_coroutines.text.toString().toInt()
             when (branch) {
                 0 -> showShortToastSafe("请从序号1开始，哈哈")
