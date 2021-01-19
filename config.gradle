@@ -26,7 +26,7 @@ ext {
             dagger_compiler2           : "2.11",
             multidex_version           : "2.0.1",
             rxandroid2                 : "2.0.1",
-            rxjava2                    : "2.0.1",
+            rxjava2                    : "2.1.1",
             retrofit                   : "2.3.0",
             converter_gson             : "2.3.0",
             adapter_rxjava2            : "2.3.0",
