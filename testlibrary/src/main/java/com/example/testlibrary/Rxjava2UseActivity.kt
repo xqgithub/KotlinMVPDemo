@@ -10,17 +10,17 @@ import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.StringUtils
 import com.example.baselibrary.utils.clickWithTrigger
 import example.com.testkotlin.haha.utils.showShortToastSafe
-import io.reactivex.Observable
-import io.reactivex.ObservableOnSubscribe
-import io.reactivex.ObservableSource
-import io.reactivex.Observer
+import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiFunction
+import io.reactivex.functions.Consumer
 import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_rxjava2_use.*
+import java.util.concurrent.Callable
 import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
 
 /**
@@ -47,19 +47,27 @@ class Rxjava2UseActivity : BaseActivity() {
             when (brand) {
                 0 -> showShortToastSafe("请从序号1开始，哈哈")
                 1 -> testrxjava2()
-                2 -> testrxjava2_2()
-                3 -> testrxjava2_3()
-                4 -> testrxjava2_4()
-                5 -> testrxjava2_5()
-                6 -> testrxjava2_6()
-                7 -> testrxjava2_7()
-                8 -> testrxjava2_8()
-                9 -> testrxjava2_9()
-                10 -> testrxjava2_10()
-                11 -> testrxjava2_11()
-                12 -> testrxjava2_12()
-                13 -> testrxjava2_13()
-                14 -> testrxjava2_14()
+                2 -> testrxjava2_2()//map
+                3 -> testrxjava2_3()//zip
+                4 -> testrxjava2_4()//concat
+                5 -> testrxjava2_5()//flatMap
+                6 -> testrxjava2_6()//concatMap
+                7 -> testrxjava2_7()//distinct
+                8 -> testrxjava2_8()//Filter
+                9 -> testrxjava2_9()//buffer
+                10 -> testrxjava2_10()//timer
+                11 -> testrxjava2_11()//interval
+                12 -> testrxjava2_12()//doOnNext
+                13 -> testrxjava2_13()//skip
+                14 -> testrxjava2_14()//take
+                15 -> testrxjava2_15()//Single
+                16 -> testrxjava2_16()//debounce
+                17 -> testrxjava2_17()//defer
+                18 -> testrxjava2_18()//last
+                19 -> testrxjava2_19()//merge
+                20 -> testrxjava2_20()//reduce
+                21 -> testrxjava2_21()//scan
+                22 -> testrxjava2_22()//window
                 else -> showShortToastSafe("序号错误，请检查")
             }
         }
@@ -377,6 +385,156 @@ class Rxjava2UseActivity : BaseActivity() {
         }).take(2)
             .subscribe {
                 LogUtils.i(ConfigConstants.TAG_ALL, "take subscribe->:$it")
+            }
+    }
+
+    /**
+     * Single
+     * 1.只会接收一个参数，而 SingleObserver 只会调用 onError() 或者 onSuccess()
+     */
+    fun testrxjava2_15() {
+        Single.just(Random.nextInt(100))
+            .subscribe(object : SingleObserver<Int> {
+                override fun onSubscribe(d: Disposable) {
+                }
+
+                override fun onSuccess(value: Int) {
+                    LogUtils.i(ConfigConstants.TAG_ALL, "Single onSuccess->:$value")
+                }
+
+
+                override fun onError(e: Throwable) {
+                    LogUtils.i(ConfigConstants.TAG_ALL, "Single onError->:${e.message}")
+                }
+            })
+    }
+
+    /**
+     * debounce
+     * 1.去除发送频率过快的项
+     */
+    fun testrxjava2_16() {
+        Observable.create(ObservableOnSubscribe<Int> { e ->
+            e.onNext(1)
+            Thread.sleep(400)
+
+            e.onNext(2)
+            Thread.sleep(505)
+
+            e.onNext(3)
+            Thread.sleep(300)
+
+            e.onNext(4)
+            Thread.sleep(510)
+
+            e.onNext(5)
+            Thread.sleep(520)
+            //去除间隔时间小于500ms的事件
+        }).debounce(500, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                LogUtils.i(ConfigConstants.TAG_ALL, "debounce subscribe->:${it}")
+            }
+    }
+
+    /**
+     * defer
+     * 1.每次订阅都会创建一个新的 Observable，并且如果没有被订阅，就不会产生新的 Observable。
+     */
+    fun testrxjava2_17() {
+        val observable = Observable.defer(Callable<ObservableSource<Int>> {
+            Observable.just(1, 2, 3, 4, 5)
+        })
+
+        observable.subscribe(object : Observer<Int> {
+
+            override fun onSubscribe(d: Disposable) {
+            }
+
+            override fun onNext(value: Int) {
+                LogUtils.i(ConfigConstants.TAG_ALL, "defer onNext->:${value}")
+            }
+
+
+            override fun onComplete() {
+                LogUtils.i(ConfigConstants.TAG_ALL, "defer onComplete->:")
+            }
+
+            override fun onError(e: Throwable) {
+                LogUtils.i(ConfigConstants.TAG_ALL, "defer onError->:${e.message}")
+            }
+        })
+    }
+
+    /**
+     * last
+     * 1.仅取出可观察到的最后一个值，或者是满足某些条件的最后一项
+     */
+    fun testrxjava2_18() {
+        Observable.just(1, 2, 3).last(1)
+            .subscribe(Consumer<Int> {
+                LogUtils.i(ConfigConstants.TAG_ALL, "last subscribe->:${it}")
+            })
+    }
+
+    /**
+     * merge
+     * 1.把多个 Observable 结合起来，接受可变参数，也支持迭代器集合
+     * 2.和 concat 的区别在于，不用等到 发射器 A 发送完所有的事件再进行发射器 B 的发送
+     */
+    fun testrxjava2_19() {
+        Observable.merge(Observable.just(1, 3), Observable.just(2, 4, 5))
+            .subscribe {
+                LogUtils.i(ConfigConstants.TAG_ALL, "merge subscribe->:${it}")
+            }
+    }
+
+    /**
+     * reduce
+     * 1.每次用一个方法处理一个值，可以有一个 seed 作为初始值
+     * 2.只追求结果
+     */
+    fun testrxjava2_20() {
+        Observable.just(1, 2, 3, 4, 5)
+            .reduce { t1, t2 ->
+                t1 + t2
+            }.subscribe {
+                LogUtils.i(ConfigConstants.TAG_ALL, "reduce subscribe->:${it}")
+            }
+    }
+
+    /**
+     * scan
+     * 1.scan 操作符作用和上面的 reduce 一致
+     * 2.scan 会始终如一地把每一个步骤都输出
+     */
+    fun testrxjava2_21() {
+        Observable.just(1, 2, 3, 4, 5)
+            .scan { t1, t2 ->
+                t1 + t2
+            }.subscribe {
+                LogUtils.i(ConfigConstants.TAG_ALL, "scan subscribe->:${it}")
+            }
+    }
+
+    /**
+     * window
+     * 1.按照实际划分窗口，将数据发送给不同的 Observable
+     */
+    fun testrxjava2_22() {
+        Observable.interval(1, TimeUnit.SECONDS)//间隔一秒发一次
+            .take(15)//最多接受15个
+            .window(3, TimeUnit.SECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                LogUtils.i(ConfigConstants.TAG_ALL, "Sub Divide begin...")
+                it.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        LogUtils.i(ConfigConstants.TAG_ALL, "window subscribe->:${it}")
+                    }
             }
     }
 
