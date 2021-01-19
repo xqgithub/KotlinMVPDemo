@@ -7,6 +7,7 @@ import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.utils.LogUtils
+import com.example.baselibrary.utils.StringUtils
 import com.example.baselibrary.utils.clickWithTrigger
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import io.reactivex.Observable
@@ -51,6 +52,14 @@ class Rxjava2UseActivity : BaseActivity() {
                 4 -> testrxjava2_4()
                 5 -> testrxjava2_5()
                 6 -> testrxjava2_6()
+                7 -> testrxjava2_7()
+                8 -> testrxjava2_8()
+                9 -> testrxjava2_9()
+                10 -> testrxjava2_10()
+                11 -> testrxjava2_11()
+                12 -> testrxjava2_12()
+                13 -> testrxjava2_13()
+                14 -> testrxjava2_14()
                 else -> showShortToastSafe("序号错误，请检查")
             }
         }
@@ -157,7 +166,7 @@ class Rxjava2UseActivity : BaseActivity() {
     }
 
     /**
-     * concat:发生器B把自己的元素传递给了发生器A
+     * concat:发射器B把自己的元素传递给了发射器A
      */
     fun testrxjava2_4() {
         Observable.concat(Observable.just(1, 2, 3), Observable.just(4, 5, 6)).subscribe {
@@ -207,17 +216,174 @@ class Rxjava2UseActivity : BaseActivity() {
             e.onNext(3)
             LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 4")
             e.onNext(4)
-        }).concatMap(Function<Int, ObservableSource<String>> {
+        }).concatMap {
             val list = ArrayList<String>()
             for (i in 0 until 2) {
                 list.add("I am value $it")
             }
             Observable.fromIterable(list).delay((1..5).random() * 100L, TimeUnit.MILLISECONDS)
-        }).subscribeOn(Schedulers.io())
+        }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 LogUtils.i(ConfigConstants.TAG_ALL, "flatMap subscribe: $it")
             }
+    }
+
+    /**
+     * distinct
+     * 1.去重
+     */
+    fun testrxjava2_7() {
+        Observable.create(ObservableOnSubscribe<Int> { e ->
+            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
+            e.onNext(1)
+            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
+            e.onNext(2)
+            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
+            e.onNext(1)
+            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
+            e.onNext(2)
+        }).distinct()
+            .subscribe {
+                LogUtils.i(ConfigConstants.TAG_ALL, "distinct subscribe: $it")
+            }
+    }
+
+    /**
+     * Filter
+     * 1.过滤
+     */
+    fun testrxjava2_8() {
+        Observable.create(ObservableOnSubscribe<Int> { e ->
+            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
+            e.onNext(1)
+            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
+            e.onNext(2)
+            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 3")
+            e.onNext(3)
+            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 4")
+            e.onNext(4)
+        }).filter {
+            it < 2
+        }.subscribe {
+            LogUtils.i(ConfigConstants.TAG_ALL, "filter subscribe: $it")
+        }
+    }
+
+    /**
+     * buffer
+     * 1.buffer 操作符接受两个参数，buffer(count,skip)，作用是将 Observable 中的数据按 skip (步长) 分成最大不超过 count 的 buffer ，然后生成一个 Observable
+     */
+    fun testrxjava2_9() {
+        Observable.create(ObservableOnSubscribe<Int> { e ->
+            e.onNext(1)
+            e.onNext(2)
+            e.onNext(3)
+            e.onNext(4)
+            e.onNext(5)
+            e.onNext(6)
+        }).buffer(3, 2)
+            .subscribe {
+                LogUtils.i(ConfigConstants.TAG_ALL, "buffer subscribe->size:${it.size}")
+                it.forEach {
+                    LogUtils.i(ConfigConstants.TAG_ALL, "buffer subscribe->value:$it")
+                }
+            }
+    }
+
+    /**
+     * timer
+     * 1.相当于一个定时任务
+     * 2.默认在新线程
+     */
+    fun testrxjava2_10() {
+        LogUtils.i(ConfigConstants.TAG_ALL, "timer Start->")
+        //延迟两秒开始执行
+        Observable.timer(2, TimeUnit.SECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                LogUtils.i(ConfigConstants.TAG_ALL, "timer subscribe->:$it")
+            }
+    }
+
+
+    /**
+     * interval
+     * 1.间隔时间执行某个操作
+     * 2.默认在新线程
+     * 3.取消间隔任务使用 disposable.dispose()方法
+     */
+    private lateinit var disposable: Disposable
+    fun testrxjava2_11() {
+        LogUtils.i(ConfigConstants.TAG_ALL, "interval Start->")
+        //初始化延迟3秒执行一次，后续每2秒执行一次
+        disposable = Observable.interval(3, 2, TimeUnit.SECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                LogUtils.i(ConfigConstants.TAG_ALL, "interval subscribe->:$it")
+            }
+    }
+
+    /**
+     * doOnNext
+     * 1.不算一个操作符,但是比较常用
+     * 2.让订阅者在接收到数据之前干点有意思的事情
+     */
+    fun testrxjava2_12() {
+        Observable.create(ObservableOnSubscribe<Int> { e ->
+            e.onNext(1)
+            e.onNext(2)
+            e.onNext(3)
+            e.onNext(4)
+            e.onNext(5)
+        }).doOnNext {
+            LogUtils.i(ConfigConstants.TAG_ALL, "doOnNext 保存->:$it")
+        }.subscribe {
+            LogUtils.i(ConfigConstants.TAG_ALL, "doOnNext subscribe->:$it")
+        }
+    }
+
+    /**
+     * skip
+     * 1.接受一个 long 型参数 count ，代表跳过 count 个数目开始接收
+     */
+    fun testrxjava2_13() {
+        Observable.create(ObservableOnSubscribe<Int> { e ->
+            e.onNext(1)
+            e.onNext(2)
+            e.onNext(3)
+            e.onNext(4)
+            e.onNext(5)
+        }).skip(2)
+            .subscribe {
+                LogUtils.i(ConfigConstants.TAG_ALL, "skip subscribe->:$it")
+            }
+    }
+
+
+    /**
+     * take
+     * 1.接受一个 long 型参数 count ，代表至多接收 count 个数据
+     */
+    fun testrxjava2_14() {
+        Observable.create(ObservableOnSubscribe<Int> { e ->
+            e.onNext(1)
+            e.onNext(2)
+            e.onNext(3)
+            e.onNext(4)
+            e.onNext(5)
+        }).take(2)
+            .subscribe {
+                LogUtils.i(ConfigConstants.TAG_ALL, "take subscribe->:$it")
+            }
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!StringUtils.isBlank(disposable) && !disposable.isDisposed) disposable.dispose()
     }
 
 }
