@@ -8,6 +8,8 @@ import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.clickWithTrigger
+import com.example.baselibrary.utils.flowableToMain
+import com.example.baselibrary.utils.observableToMain
 import com.trello.rxlifecycle3.android.ActivityEvent
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import io.reactivex.*
@@ -347,6 +349,10 @@ class Rxjava2UseActivity : BaseActivity() {
      * 1.间隔时间执行某个操作
      * 2.默认在新线程
      * 3.取消间隔任务使用 disposable.dispose()方法
+     *
+     * compose
+     * 1.封装成一个简单的工具类来使用
+     * 2.rxlifecycle使用
      */
     private var disposable11: Disposable? = null
     fun testrxjava2_11() {
@@ -366,8 +372,7 @@ class Rxjava2UseActivity : BaseActivity() {
             }
 //            .compose(this.bindToLifecycle())
             .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .compose(observableToMain())
             .subscribe {
                 LogUtils.i(ConfigConstants.TAG_ALL, "interval subscribe->:$it")
             }
@@ -596,8 +601,7 @@ class Rxjava2UseActivity : BaseActivity() {
                 fle.onNext("路飞海贼王：$i")
             }
         }, BackpressureStrategy.BUFFER)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .compose(flowableToMain())
             .subscribe {
                 LogUtils.i(ConfigConstants.TAG_ALL, "backpressure subscribe->:${it}")
             }

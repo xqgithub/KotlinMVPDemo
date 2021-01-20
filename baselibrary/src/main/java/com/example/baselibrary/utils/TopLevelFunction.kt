@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.util.SparseArray
 import android.view.View
+import io.reactivex.FlowableTransformer
 import io.reactivex.Observable
+import io.reactivex.ObservableTransformer
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -121,6 +123,33 @@ interface OnLazyClickListener : View.OnClickListener {
     fun onLazyClick(v: View)
 }
 /**00004 kotlin 防止重复点击 end **/
+
+
+/**
+ * 00005
+ * Observable 切换到主线程
+ */
+fun <T> observableToMain(): ObservableTransformer<T, T> {
+    return ObservableTransformer { ob ->
+        ob.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+}
+
+/**
+ * 00006
+ * Flowable 切换到主线程
+ */
+fun <T> flowableToMain(): FlowableTransformer<T, T> {
+    return FlowableTransformer { fb ->
+        fb.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+}
+
+
+
+
 
 
 
