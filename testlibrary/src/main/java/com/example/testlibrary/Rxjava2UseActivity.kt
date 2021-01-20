@@ -39,6 +39,7 @@ class Rxjava2UseActivity : BaseActivity() {
         return R.layout.activity_rxjava2_use
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -68,10 +69,34 @@ class Rxjava2UseActivity : BaseActivity() {
                 20 -> testrxjava2_20()//reduce
                 21 -> testrxjava2_21()//scan
                 22 -> testrxjava2_22()//window
+                23 -> testrxjava2_23()//backpressure
                 else -> showShortToastSafe("序号错误，请检查")
             }
         }
     }
+
+    /**
+     * Rxjava2
+     * 一、两种观察者模式
+     * 1.Observable ( 被观察者 ) / Observer ( 观察者 )：不支持背压
+     * 2.Flowable （被观察者）/ Subscriber （观察者）：支持背压
+     *
+     * 二、四种线程模式
+     * 1.Schedulers.io():代表io操作的线程, 通常用于网络,读写文件等io密集型的操作
+     * 2.Schedulers.computation():代表CPU计算密集型的操作, 例如需要大量计算的操作
+     * 3.Schedulers.newThread():代表一个常规的新线程
+     * 4.AndroidSchedulers.mainThread():代表Android的主线程
+     *
+     * 三、背压产生的条件：必须是异步的场景下才会出现，即被观察者和观察者处于不同的线程中
+     * 1.Rxjava1有背压处理方案：
+     * (1)onBackpressureBuffer，onBackpressureDrop，onBackpressureLatest方法
+     * (2)但是设计部够完善，缓存池大小只有16，而且被观察者无法得知下游观察者对事件的处理速度，一次性把事件抛给了下游观察者
+     * 2.Rxjava2背压处理
+     * (1)Flowable用来专门支持背压，默认队列大小128，并且其所有的操作符都强制支持背压
+     * (2)Flowable使用create的时候使用背压策略来处理
+     * (3)Flowable 也可以使用 onBackpressureBuffer，onBackpressureDrop，onBackpressureLatest方法
+     */
+
 
     /**
      * 1.Disposable.dispose 方法可以直接切断接受事件，但是事件还是会继续发送
@@ -174,10 +199,12 @@ class Rxjava2UseActivity : BaseActivity() {
     }
 
     /**
-     * concat:发射器B把自己的元素传递给了发射器A
+     * concat
+     * 1.发射器B把自己的元素传递给了发射器A
      */
     fun testrxjava2_4() {
-        Observable.concat(Observable.just(1, 2, 3), Observable.just(4, 5, 6)).subscribe {
+        Observable.concat(Observable.just(1, 2, 3), Observable.just(4, 5, 6))
+            .subscribe {
             LogUtils.i(ConfigConstants.TAG_ALL, "concat subscribe: $it")
         }
     }
@@ -290,7 +317,7 @@ class Rxjava2UseActivity : BaseActivity() {
             e.onNext(4)
             e.onNext(5)
             e.onNext(6)
-        }).buffer(3, 2)
+        }).buffer(2, 3)
             .subscribe {
                 LogUtils.i(ConfigConstants.TAG_ALL, "buffer subscribe->size:${it.size}")
                 it.forEach {
@@ -322,11 +349,11 @@ class Rxjava2UseActivity : BaseActivity() {
      * 2.默认在新线程
      * 3.取消间隔任务使用 disposable.dispose()方法
      */
-    private lateinit var disposable: Disposable
+    private var disposable11: Disposable? = null
     fun testrxjava2_11() {
         LogUtils.i(ConfigConstants.TAG_ALL, "interval Start->")
         //初始化延迟3秒执行一次，后续每2秒执行一次
-        disposable = Observable.interval(3, 2, TimeUnit.SECONDS)
+        disposable11 = Observable.interval(3, 2, TimeUnit.SECONDS)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -523,7 +550,7 @@ class Rxjava2UseActivity : BaseActivity() {
      * 1.按照实际划分窗口，将数据发送给不同的 Observable
      */
     fun testrxjava2_22() {
-        Observable.interval(1, TimeUnit.SECONDS)//间隔一秒发一次
+        val disposable22 = Observable.interval(1, TimeUnit.SECONDS)//间隔一秒发一次
             .take(15)//最多接受15个
             .window(3, TimeUnit.SECONDS)
             .subscribeOn(Schedulers.io())
@@ -539,9 +566,33 @@ class Rxjava2UseActivity : BaseActivity() {
     }
 
 
+    /**
+     * 背压实例
+     * 1.背压的模式：
+     * (1).BackpressureStrategy.MISSING 不支持背压
+     * (2).BackpressureStrategy.ERROR  出现背压就抛出异常
+     * (3).BackpressureStrategy.BUFFER  指定无限大小的缓存池，此时不会出现异常，但无限制大量发送会发生OOM
+     * (4).BackpressureStrategy.DROP  如果缓存池满了就丢弃掉之后发出的事件
+     * (5).BackpressureStrategy.LATEST 在DROP的基础上，强制将最后一条数据加入到缓存池中
+     */
+    private var disposable23: Disposable? = null
+    fun testrxjava2_23() {
+        disposable23 = Flowable.create(FlowableOnSubscribe<String> { fle ->
+            for (i in 0..500) {
+                fle.onNext("路飞海贼王：$i")
+            }
+        }, BackpressureStrategy.BUFFER)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                LogUtils.i(ConfigConstants.TAG_ALL, "backpressure subscribe->:${it}")
+            }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        if (!StringUtils.isBlank(disposable) && !disposable.isDisposed) disposable.dispose()
+        if (!StringUtils.isBlank(disposable11) && !disposable11!!.isDisposed) disposable11!!.dispose()
+        if (!StringUtils.isBlank(disposable23) && !disposable23!!.isDisposed) disposable23!!.dispose()
     }
 
 }

@@ -197,14 +197,15 @@ class MainPresenter @Inject constructor(
                 override fun onComplete() {
                 }
 
-                override fun onSubscribe(d: Disposable?) {
+                override fun onSubscribe(d: Disposable) {
                 }
 
-                override fun onNext(value: Long?) {
+                override fun onNext(value: Long) {
                 }
 
-                override fun onError(e: Throwable?) {
+                override fun onError(e: Throwable) {
                 }
+
             })
     }
 
