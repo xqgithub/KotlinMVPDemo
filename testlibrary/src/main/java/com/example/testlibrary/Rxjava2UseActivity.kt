@@ -7,8 +7,8 @@ import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.utils.LogUtils
-import com.example.baselibrary.utils.StringUtils
 import com.example.baselibrary.utils.clickWithTrigger
+import com.trello.rxlifecycle3.android.ActivityEvent
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.activity_rxjava2_use.*
 import java.util.concurrent.Callable
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
-
 
 /**
  * Rxjava2使用方法
@@ -205,8 +204,8 @@ class Rxjava2UseActivity : BaseActivity() {
     fun testrxjava2_4() {
         Observable.concat(Observable.just(1, 2, 3), Observable.just(4, 5, 6))
             .subscribe {
-            LogUtils.i(ConfigConstants.TAG_ALL, "concat subscribe: $it")
-        }
+                LogUtils.i(ConfigConstants.TAG_ALL, "concat subscribe: $it")
+            }
     }
 
     /**
@@ -353,12 +352,27 @@ class Rxjava2UseActivity : BaseActivity() {
     fun testrxjava2_11() {
         LogUtils.i(ConfigConstants.TAG_ALL, "interval Start->")
         //初始化延迟3秒执行一次，后续每2秒执行一次
-        disposable11 = Observable.interval(3, 2, TimeUnit.SECONDS)
+//        disposable11 = Observable.interval(3, 2, TimeUnit.SECONDS)
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe {
+//                LogUtils.i(ConfigConstants.TAG_ALL, "interval subscribe->:$it")
+//            }
+
+
+        Observable.interval(3, 2, TimeUnit.SECONDS)
+            .doOnDispose {
+                LogUtils.i(ConfigConstants.TAG_ALL, "interval 已经停止")
+            }
+//            .compose(this.bindToLifecycle())
+            .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 LogUtils.i(ConfigConstants.TAG_ALL, "interval subscribe->:$it")
             }
+
+
     }
 
     /**
@@ -591,8 +605,8 @@ class Rxjava2UseActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (!StringUtils.isBlank(disposable11) && !disposable11!!.isDisposed) disposable11!!.dispose()
-        if (!StringUtils.isBlank(disposable23) && !disposable23!!.isDisposed) disposable23!!.dispose()
+//        if (!StringUtils.isBlank(disposable11) && !disposable11!!.isDisposed) disposable11!!.dispose()
+//        if (!StringUtils.isBlank(disposable23) && !disposable23!!.isDisposed) disposable23!!.dispose()
     }
 
 }

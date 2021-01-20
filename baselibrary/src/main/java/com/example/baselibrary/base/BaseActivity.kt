@@ -3,15 +3,15 @@ package com.example.baselibrary.base
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.Window
-import androidx.fragment.app.FragmentActivity
 import com.example.baselibrary.application.MyApplication
 import com.example.baselibrary.di.componets.MyAppComponet
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
 
 
 /**
  * activity 的 基类
  */
-abstract class BaseActivity : FragmentActivity() {
+abstract class BaseActivity : RxAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

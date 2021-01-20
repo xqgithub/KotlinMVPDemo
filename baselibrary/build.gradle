@@ -114,5 +114,9 @@ dependencies {
     api _dependencies.smartrefreshlayout_header_radar
     api _dependencies.smartrefreshlayout_header_classics
     api _dependencies.smartrefreshlayout_footer_classics
+    /** Rxlifecyle **/
+//    api _dependencies.rxlifecycle
+//    api _dependencies.rxlifecycle_android
+    api _dependencies.rxlifecycle_components
 }
 
