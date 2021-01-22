@@ -1,0 +1,59 @@
+Android Studio NDK开发-环境配置
+一、NDK
+1.NDK全称Native Development Kit
+2.NDK提供了一系列的工具，可以帮助开发者在Android平台上面进行c/c++的开发，并能自动将.so打包金apk中
+3.NDK集成了交叉编译器，并提供mk文件可以做到隔离CPU,平台以及ABI等差异，只需修改mk文件即可。开发人员只需要简单修改mk文件，就可以创建出适应各平台的.so文件
+4.NDK开发就是使用c/c++开发Android应用或者开发Android应用的某一个功能，使用NDK有时是为了调用底层的库,有时是为了c/c++开发带来的应用性能上的提高
+
+二、使用流程
+1.在main文件夹中创建cpp文件夹，cpp中创建CMakeLists.txt
+
+2.编写CMakeLists.txt最常用的功能就是调用其他的.h头文件和.so/.a库文件，将.cpp/.c/.cc文件编译成可执行文件或者新的库文件
+
+3.创建一个native-lib.cpp文件
+里面方法是kotlin要去调用的，编写规则是Java_com_example_kotlinmvpdemo_ndk_nativelib_stringFromJNI
+(1)com_example_kotlinmvpdemo_ndk_nativelib 路径
+(2)stringFromJNI 方法名
+
+4.在nativelib类中
+(1)初始化加载动态库native-lib.so文件
+    companion object {
+        // Used to load the 'native-lib' library on application startup.
+        init {
+            System.loadLibrary("native-lib")
+        }
+    }
+(2)Java 中使用 native 声明 ndk 方法 , 在 Kotlin 中 , 使用 external 声明 ndk 方法
+external fun stringFromJNI(): String
+
+5.模块build.gradle中配置
+
+android{
+...
+
+defaultConfig{
+...
+
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+                //生成一下文件夹中的so文件，生成的文件路径：build/intermediates/cmake/debug/.....
+                abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
+            }
+        }
+
+...
+
+}
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "3.10.2"
+        }
+    }
+
+...
+}
+
+==================================================== 分割线 ====================================================

@@ -24,6 +24,7 @@ import com.example.kotlinmvpdemo.di.modules.MainModule
 import com.example.kotlinmvpdemo.mvp.presenters.MainPresenter
 import com.example.kotlinmvpdemo.mvp.ui.adapter.MainListAdapter
 import com.example.kotlinmvpdemo.mvp.views.MainView
+import com.example.kotlinmvpdemo.ndk.nativelib
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import kotlinx.android.synthetic.main.activity_main.*
@@ -155,10 +156,15 @@ class MainActivity : BaseActivity(), MainView {
                         LogUtils.i("SP_TEST_USER文件中haha字段 =-= $test_sp")
                     }
                     6 -> {
-                        presenter.deleteDatas()
-                        presenter.insertData()
-                        presenter.insertData2()
+//                        presenter.deleteDatas()
+//                        presenter.insertData()
+//                        presenter.insertData2()
 //                        PublicPracticalMethodFromJAVA.getInstance().smallWidth()
+
+                        val nativelib = nativelib()
+                        val a = nativelib.sum(3, 4)
+                        val b = nativelib.stringFromJNI()
+                        LogUtils.i(ConfigConstants.TAG_ALL, "返回的值为：${b + a}")
                     }
                     7 -> {
                         if (StringUtils.compared(picPath, imageView.tag)) {
@@ -380,6 +386,4 @@ class MainActivity : BaseActivity(), MainView {
             EventBus.getDefault().unregister(this)
         }
     }
-
-
 }

@@ -1,0 +1,20 @@
+Android架构
+一、Linux 内核
+由于Android 系统是基础Linux 内核构建的，所以Linux是Android系统的基础。事实上，Android 的硬件驱动、进程管理、内存管理、网络管理都是在这一层。
+
+二、硬件抽象层
+硬件抽象层（Hardware Abstraction Layer缩写），硬件抽象层主要为上层提供标准显示界面，并向更高级别的 Java API 框架提供显示设备硬件功能。HAL 包含多个库模块，其中每个模块都为特定类型的硬件组件实现一个界面，例如相机或蓝牙模块。当框架 API 要求访问设备硬件时，Android 系统将为该硬件组件加载对应的库模块
+
+三、系统运行库和运行环境层
+(1)Android Runtime
+a.Android 5.0（API 21）之前，使用的是Dalvik虚拟机，之后被ART所取代
+b.ART是Android操作系统的运行环境，通过运行虚拟机来执行dex文件
+c.dex文件是专为安卓设计的的字节码格式，Android打包和运行的就是dex文件，而Android toolchain（一种编译工具）可以将Java代码编译为dex字节码格式
+(2)原生C/C++ 库
+很多核心 Android 系统组件和服务都是使用C 和 C++ 编写的，为了方便开发者调用这些原生库功能，Android的Framework提供了调用相应的API。例如，您可以通过 Android 框架的 Java OpenGL API 访问 OpenGL ES，以支持在应用中绘制和操作 2D 和 3D 图形
+
+四、应用程序框架层
+Android平台最常用的组件和服务都在这一层，是每个Android开发者必须熟悉和掌握的一层，是应用开发的基础
+
+五、Application层
+Android系统App，如电子邮件、短信、日历、互联网浏览和联系人等系统应用。我们可以像调用Java API Framework层一样直接调用系统的App
