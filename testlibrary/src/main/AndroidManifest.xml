@@ -18,6 +18,9 @@
         <activity
             android:name="com.example.testlibrary.Rxjava2UseActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.testlibrary.ReflectionActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

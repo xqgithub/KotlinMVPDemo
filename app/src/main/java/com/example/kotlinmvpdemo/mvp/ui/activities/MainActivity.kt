@@ -266,6 +266,7 @@ class MainActivity : BaseActivity(), MainView {
                     30 -> ARouter.getInstance().build(RouterTag.TestSVGActivity).navigation()
                     31 -> presenter.testCommand()
                     32 -> ARouter.getInstance().build(RouterTag.Rxjava2UseActivity).navigation()
+                    33 -> ARouter.getInstance().build(RouterTag.ReflectionActivity).navigation()
                 }
             }
         })
@@ -341,7 +342,8 @@ class MainActivity : BaseActivity(), MainView {
         "lambda方法使用和高级函数的使用",
         "SVG动画测试",
         "设计模式---命令模式",
-        "Rxjava2使用方法"
+        "Rxjava2使用方法",
+        "反射的使用方法"
     )
 
     /**

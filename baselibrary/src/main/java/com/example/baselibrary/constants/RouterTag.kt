@@ -17,6 +17,9 @@ object RouterTag {
     //testlibary---Rxjava2UseActivity
     const val Rxjava2UseActivity = "/testlibary/Rxjava2UseActivity"
 
+    //testlibary---ReflectionActivity
+    const val ReflectionActivity = "/testlibary/ReflectionActivity"
+
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
 
