@@ -24,7 +24,6 @@ import com.example.kotlinmvpdemo.di.modules.MainModule
 import com.example.kotlinmvpdemo.mvp.presenters.MainPresenter
 import com.example.kotlinmvpdemo.mvp.ui.adapter.MainListAdapter
 import com.example.kotlinmvpdemo.mvp.views.MainView
-import com.example.kotlinmvpdemo.ndk.nativelib
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import kotlinx.android.synthetic.main.activity_main.*
@@ -159,12 +158,12 @@ class MainActivity : BaseActivity(), MainView {
 //                        presenter.deleteDatas()
 //                        presenter.insertData()
 //                        presenter.insertData2()
-//                        PublicPracticalMethodFromJAVA.getInstance().smallWidth()
+                        PublicPracticalMethodFromJAVA.getInstance().smallWidth()
 
-                        val nativelib = nativelib()
-                        val a = nativelib.sum(3, 4)
-                        val b = nativelib.stringFromJNI()
-                        LogUtils.i(ConfigConstants.TAG_ALL, "返回的值为：${b + a}")
+//                        val nativelib = nativelib()
+//                        val a = nativelib.sum(3, 4)
+//                        val b = nativelib.stringFromJNI()
+//                        LogUtils.i(ConfigConstants.TAG_ALL, "返回的值为：${b + a}")
                     }
                     7 -> {
                         if (StringUtils.compared(picPath, imageView.tag)) {

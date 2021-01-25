@@ -8,6 +8,7 @@ import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
+import com.example.baselibrary.utils.ReflectionUtils
 import com.example.baselibrary.utils.clickWithTrigger
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import kotlinx.android.synthetic.main.activity_reflection.*
@@ -50,6 +51,8 @@ class ReflectionActivity : BaseActivity() {
             when (branch) {
                 0 -> showShortToastSafe("请从序号1开始，哈哈")
                 1 -> testreflection()
+                2 -> testreflection2()
+                3 -> testreflection3()
                 else -> showShortToastSafe("序号错误，请检查")
             }
         }
@@ -115,10 +118,58 @@ class ReflectionActivity : BaseActivity() {
     }
 
 
+    /**
+     * 调用反射工具类，无参构造
+     */
+    private fun testreflection2() {
+        val classname = Person::class.java.name
+        //1.初始化类
+        val aclass = ReflectionUtils.getInstance().getMyClass(classname)
+        //2.初始化空构造
+        val constructor = aclass.getConstructor().newInstance()
+        //设置属性
+        ReflectionUtils.getInstance().setField(aclass, constructor, "name", "娜美", true)
+        //获取属性的值
+        val a = ReflectionUtils.getInstance().getField(aclass, constructor, "name", true)
+        LogUtils.i(ConfigConstants.TAG_ALL, "name:$a")
+        //执行方法
+        val result = ReflectionUtils.getInstance().runMethod(aclass, constructor, "getName1", true)
+        LogUtils.i(ConfigConstants.TAG_ALL, "name:$result")
+    }
+
+    /**
+     * 调用反射工具类，有参构造
+     */
+    private fun testreflection3() {
+        val classname = Person::class.java.name
+        //1.初始化类
+        val aclass = ReflectionUtils.getInstance().getMyClass(classname)
+        //2.初始化构造
+        val p3 = arrayOf<Class<*>>(String::class.java, Int::class.java)
+        val constructor = aclass.getConstructor(*p3).newInstance("乌索普", 30)
+        //获取属性的值
+        val a = ReflectionUtils.getInstance().getField(aclass, constructor, "name", true)
+        LogUtils.i(ConfigConstants.TAG_ALL, "name:$a")
+        //执行方法
+        val result = ReflectionUtils.getInstance().runMethod(aclass, constructor, "getAge1", true)
+        LogUtils.i(ConfigConstants.TAG_ALL, "age:$result")
+    }
+
+
     class Person {
-        var name: String = ""
+        var name: String = "1111"
         var age: Int = 0
         private val address: Int = 1
+
+        constructor() {
+
+        }
+
+        constructor(name: String, age: Int) {
+            this.name = name
+            this.age = age
+        }
+
 
         fun getName1(): String {
             return "我的名字是：$name"
