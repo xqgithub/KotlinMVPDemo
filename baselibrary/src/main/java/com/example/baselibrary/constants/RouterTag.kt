@@ -20,6 +20,9 @@ object RouterTag {
     //testlibary---ReflectionActivity
     const val ReflectionActivity = "/testlibary/ReflectionActivity"
 
+    //testlibary---TestScreenRecordActivity
+    const val TestScreenRecordActivity = "/testlibary/TestScreenRecordActivity"
+
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
 

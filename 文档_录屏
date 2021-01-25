@@ -1,0 +1,77 @@
+Android Studio 录屏
+一、录屏服务使用
+1.从Android 5.0开始，可以对手机进行录屏
+2.录屏服务使用介绍
+(1)MediaProjection
+(2)MediaRecorder
+(3)VirtualDisplay
+
+二、录屏主要工具介绍
+1.MediaProjection
+是一个5.0之后给开发者提供的新的截屏或者录屏的新手段。MediaProjection可以用来捕捉屏幕
+主要用到的一个方法
+public VirtualDisplay createVirtualDisplay(String name, int width, int height, int dpi, int flags, Surface surface, android.hardware.display.VirtualDisplay.Callback callback, Handler handler) {
+        throw new RuntimeException("Stub!");
+    }
+(1).参数1：实际的流媒体显示实体名字，不能为null;
+(2).参数2：实际的流媒体显示实体的宽度，单位为像素，必须大于0;
+(3).参数3：实际的流媒体显示实体的高度，单位为像素，必须大于0;
+(4).参数4：实际的流媒体显示实体的像素密度，单位为dp，必须大于0;
+(5).参数5：实际的流媒体显示实体标志的结合，更多请查看 DisplayManager里头的标志，取值是{VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR，VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY，VIRTUAL_DISPLAY_FLAG_PRESENTATION，
+   VIRTUAL_DISPLAY_FLAG_PUBLIC，
+   VIRTUAL_DISPLAY_FLAG_SECURE}中的一个
+(6).参数6：播放流媒体的surface实例，可为null，如果木有;
+(7).参数7：实际的流媒体显示实体状态改变时的回调方法，可能为null;
+(8).参数8：调用参数7回调方法的handler;
+
+返回VirtualDisplay实例，具体请查看VirtualDisplay类;
+
+2.MediaRecorder
+增加对录制音视频的支持，Android系统提供了这个类。该类的使用也非常简单
+以下是对MediaRecorder的配置
+
+setAudioSource(MediaRecorder.AudioSource.);
+设置声音来源，一般传入 MediaRecorder. AudioSource.MIC参数指定录制来自麦克风的声音。（这里如果只录屏可以不设置）
+setVideoSource(MediaRecorder.VideoSource.SURFACE);
+设置用于录制的视频来源。如屏幕等
+setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+设置所录制的音视频文件的格式。
+setOutputFile(getsaveDirectory() + temp + “.mp4”);
+设置录制的音频文件的保存位置。
+setVideoSize(width, height);最高只能设置640x480
+设置要拍摄的宽度和视频的高度。
+setVideoEncoder(MediaRecorder.VideoEncoder.H264);
+设置视频的编码格式
+setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+设置音频编码格式
+setVideoEncodingBitRate(1024 * 1024);
+设置所录制视频的编码位率。
+setVideoFrameRate(18);
+设置录制视频的捕获帧速率。
+setOrientationHint(90);
+设置输出的视频播放的方向提示。
+setMaxDuration(30*1000);
+设置录制会话的最长持续时间（以ms为单位）。
+prepare();
+准备录制
+
+3.VirtualDisplay
+(1)代表一个虚拟显示器，需要调用DisplayManager 类的 createVirtualDisplay()方法，将虚拟显示器的内容渲染在一个Surface控件上，当进程终止时虚拟显示器会被自动的释放，并且所有的Window都会被强制移除。
+(2)当不再使用他时，你应该调用release() 方法来释放资源。
+(3)主要有6个主要方法，主要是用来操作显示器，例如获取显示器，设置/得到surface
+有些app例如游戏的每一次操作的录制，如果频繁的创建这个VirtualDisplay，会让手机内存持续消耗，让手机变卡，所以创建的操作放在服务中，系统会自动提用当前创建的VirtualDisplay不会频繁创建和不释放
+
+简单的方法
+Surface getSurface ()
+获取虚拟显示器的surface。
+release ()
+释放显示器，并且销毁其所依据的surface
+resize (int width, int height, int densityDpi)
+运行应用程序使用虚拟现实器去适应改变的条件状态，而不用销毁再重建一个实例。
+setSurface (Surface surface)
+设置虚拟显示器依靠的surface。移除虚拟显示器所依靠的surface相当于关闭屏幕的操作。调用者///需要手动的销毁surface。
+
+测试代码在
+
+
+==================================================== 分割线 ====================================================

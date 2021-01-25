@@ -24,7 +24,8 @@ class CheckPermissionsActivity : Activity() {
     val PERMISSIONS = arrayOf<String>(
         READ_PHONE_STATE,
         WRITE_EXTERNAL_STORAGE,
-        READ_EXTERNAL_STORAGE
+        READ_EXTERNAL_STORAGE,
+        RECORD_AUDIO
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

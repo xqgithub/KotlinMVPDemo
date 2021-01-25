@@ -156,7 +156,10 @@ class ReflectionActivity : BaseActivity() {
     }
 
 
-    class Person {
+    /**
+     * 父类 人
+     */
+    open class Person {
         var name: String = "1111"
         var age: Int = 0
         private val address: Int = 1
@@ -178,6 +181,15 @@ class ReflectionActivity : BaseActivity() {
         private fun getAge1(): Int {
             return age
         }
+    }
+
+    /**
+     * 继承类  男人
+     */
+    class Man : Person() {
+        val gender = "male"
 
     }
+
+
 }

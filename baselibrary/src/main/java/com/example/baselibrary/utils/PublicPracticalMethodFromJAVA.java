@@ -399,4 +399,23 @@ public class PublicPracticalMethodFromJAVA {
     }
 
 
+    /**
+     * 00010
+     * 示例 Build.VERSION_CODES.LOLLIPOP
+     *
+     * @param sdkVersion 需要对比的sdk版本号
+     */
+    public boolean isHigherSpecifySDKVersion(int sdkVersion) {
+        return Build.VERSION.SDK_INT >= sdkVersion;
+    }
+
+    /**
+     * 00010
+     * 示例 Build.VERSION_CODES.LOLLIPOP
+     *
+     * @param sdkVersion 需要对比的sdk版本号
+     */
+    public boolean isLowerSpecifySDKVersion(int sdkVersion) {
+        return Build.VERSION.SDK_INT < sdkVersion;
+    }
 }

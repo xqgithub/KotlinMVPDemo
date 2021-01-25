@@ -266,6 +266,7 @@ class MainActivity : BaseActivity(), MainView {
                     31 -> presenter.testCommand()
                     32 -> ARouter.getInstance().build(RouterTag.Rxjava2UseActivity).navigation()
                     33 -> ARouter.getInstance().build(RouterTag.ReflectionActivity).navigation()
+                    34 -> ARouter.getInstance().build(RouterTag.TestScreenRecordActivity).navigation()
                 }
             }
         })
@@ -342,7 +343,8 @@ class MainActivity : BaseActivity(), MainView {
         "SVG动画测试",
         "设计模式---命令模式",
         "Rxjava2使用方法",
-        "反射的使用方法"
+        "反射的使用方法",
+        "录屏测试"
     )
 
     /**

@@ -105,4 +105,15 @@ object ConfigConstants {
     const val TAG_ALL = "KotlinMVPDemo"
 
 
+    /** 录屏功能 **/
+    //录屏的名字
+    const val screenrecord_name = "myfirstscreenrecord"
+
+    //视频保存的目录
+    const val screenrecord_dir = "AScreenRecord"
+
+    //视频的文件名
+    const val screenrecord_filename = "haha.mp4"
+
+
 }
