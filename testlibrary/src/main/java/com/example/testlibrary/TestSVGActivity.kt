@@ -3,6 +3,7 @@ package com.example.testlibrary
 import android.graphics.drawable.Animatable
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.baselibrary.base.BaseActivity
@@ -12,7 +13,8 @@ import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import kotlinx.android.synthetic.main.activity_svg.*
 
 /**
- * SVG 动画测试
+ * 1.SVG 动画测试
+ * 2.自定义View---Canvas的使用
  */
 @Route(path = RouterTag.TestSVGActivity)
 class TestSVGActivity : BaseActivity() {
@@ -35,6 +37,7 @@ class TestSVGActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initData()
+        group_svg.visibility = View.GONE
     }
 
     /**

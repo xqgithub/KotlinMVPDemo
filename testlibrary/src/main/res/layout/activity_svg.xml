@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/appwhite"
     android:fitsSystemWindows="true"
     tools:context=".TestSVGActivity">
 
@@ -81,12 +82,30 @@
 
     <ImageView
         android:id="@+id/iv_svg5"
-        android:layout_width="@dimen/dimen_250x"
-        android:layout_height="@dimen/dimen_250x"
+        android:layout_width="@dimen/dimen_50x"
+        android:layout_height="@dimen/dimen_50x"
         android:layout_marginTop="@dimen/dimen_20x"
         android:src="@drawable/vector_drawable_menu"
         app:layout_constraintLeft_toLeftOf="@+id/tv_svg3"
         app:layout_constraintTop_toBottomOf="@+id/tv_svg3" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_svg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tv_svg,tv_svg2,iv_svg,
+            iv_svg2,iv_svg3,iv_svg4,
+              tv_svg3,iv_svg5" />
+
+
+    <com.example.baselibrary.mvp.view.TestCustomView
+        android:id="@+id/tcv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:background="@color/full_red"
+        android:layout_height="match_parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

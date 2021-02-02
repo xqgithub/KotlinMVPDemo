@@ -1,0 +1,411 @@
+Canvas类的最全面详解
+一、画布
+1.是一种绘制时的规则
+2.规定绘制内容时的规则 & 内容
+(1).记住：绘制内容是根据画布的规定绘制在屏幕上的
+(2).理解为：画布只是绘制时的规则，但内容实际上是绘制在屏幕上的
+
+二、Canvas的本质
+1.绘制内容是根据画布（Canvas）的规定绘制在屏幕上的
+2.画布（Canvas）只是绘制时的规则，但内容实际上是绘制在屏幕上的
+总结：
+(1).内容实际上是绘制在屏幕上；
+(2).画布，即Canvas，只是规定了绘制内容时的规则；
+(3).内容的位置由坐标决定，而坐标是相对于画布而言的
+
+三、基础
+1.Paint 画笔
+确定绘制内容的具体效果（如颜色、大小等等）
+具体使用：
+步骤1：创建一个画笔对象
+步骤2：画笔设置，即设置绘制内容的具体效果（如颜色、大小等等）
+步骤3：初始化画笔（尽量选择在View的构造函数）
+
+2.Path类
+具体请看我写的另外一篇文章：Path类的最全面详解 - 自定义View应用系列
+
+3.关闭硬件加速
+在Android4.0的设备上，在打开硬件加速的情况下，使用自定义View可能会出现问题
+所以测试前，请先关闭硬件加速。具体关闭方式如下：
+*在AndroidMenifest.xml的application节点添加： *
+android:hardwareAccelerated="false"
+
+四.Canvas的使用
+1.Canvas对象 & 获取的方法有4个
+(1).利用空构造方法直接创建对象
+Canvas canvas = new Canvas()；
+(2).通过传入装载画布Bitmap对象创建Canvas对象
+Canvas canvas = new Canvas(bitmap)
+(3).通过重写View.onDraw（）创建Canvas对象
+在该方法里可以获得这个View对应的Canvas对象
+   @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        //在这里获取Canvas对象
+    }
+(4).在SurfaceView里画图时创建Canvas对象
+        SurfaceView surfaceView = new SurfaceView(this);
+        // 从SurfaceView的surfaceHolder里锁定获取Canvas
+        SurfaceHolder surfaceHolder = surfaceView.getHolder();
+        //获取Canvas
+        Canvas c = surfaceHolder.lockCanvas();
+
+        // ...（进行Canvas操作）
+        // Canvas操作结束之后解锁并执行Canvas
+        surfaceHolder.unlockCanvasAndPost(c);
+
+官方推荐方法4来创建并获取Canvas，原因：
+SurfaceView里有一条线程是专门用于画图，所以方法4的画图性能最好，并适用于高质量的、刷新频率高的图形
+而方法3刷新频率低于方法3，但系统花销小，节省资源
+
+2.绘制方法使用
+利用Canvas类可绘画出很多内容，如图形、文字、线条等等
+特别注意：Canvas具体使用时是在复写的onDraw（）里
+ @Override
+    protected void onDraw(Canvas canvas){
+
+        super.onDraw(canvas);
+
+    // 对Canvas进行一系列设置
+    //  如画圆、画直线等等
+   canvas.drawColor(Color.BLUE);
+    // ...
+    }
+
+}
+
+(1).绘制颜色
+作用：颜色填充整个画布，常用于绘制底色
+// 传入一个Color类的常量参数来设置画布颜色
+// 绘制蓝色
+canvas.drawColor(Color.BLUE);
+
+(2)绘制基本图形
+a.绘制点（drawPoint）
+原理：在某个坐标处绘制点
+可画一个点或一组点（多个点）
+// 特别注意：需要用到画笔Paint
+// 所以之前记得创建画笔
+// 为了区分，这里使用了两个不同颜色的画笔
+
+// 描绘一个点
+// 在坐标(200,200)处
+canvas.drawPoint(300, 300, mPaint1);
+
+// 绘制一组点，坐标位置由float数组指定
+// 此处画了3个点，位置分别是：（600,500）、（600,600）、（600,700）
+canvas.drawPoints(new float[]{
+                600,500,
+                600,600,
+                600,700
+        },mPaint2);
+
+b.绘制直线（drawLine）
+原理：两点（初始点 & 结束点）确定一条直线
+// 画一条直线
+// 在坐标(100,200)，(700,200)之间绘制一条直线
+   canvas.drawLine(100,200,700,200,mPaint1);
+
+// 绘制一组线
+// 在坐标(400,500)，(500,500)之间绘制直线1
+// 在坐标(400,600)，(500,600)之间绘制直线2
+        canvas.drawLines(new float[]{
+                400,500,500,500,
+                400,600,500,600
+        },mPaint2);
+    }
+
+c. 绘制矩形（drawRect）
+原理：矩形的对角线顶点确定一个矩形
+一般是采用左上角和右下角的两个点的坐标。
+// 关于绘制矩形，Canvas提供了三种重载方法
+
+       // 方法1：直接传入两个顶点的坐标
+       // 两个顶点坐标分别是：（100,100），（800,400）
+        canvas.drawRect(100,100,800,400,mPaint);
+
+        // 方法2：将两个顶点坐标封装为RectRectF
+        Rect rect = new Rect(100,100,800,400);
+        canvas.drawRect(rect,mPaint);
+
+        // 方法3：将两个顶点坐标封装为RectF
+        RectF rectF = new RectF(100,100,800,400);
+        canvas.drawRect(rectF,mPaint);
+
+        // 特别注意：Rect类和RectF类的区别
+        // 精度不同：Rect = int & RectF = float
+
+        // 三种方法画出来的效果是一样的。
+
+d. 绘制圆角矩形
+原理：矩形的对角线顶点确定一个矩形
+       // 方法1：直接传入两个顶点的坐标
+       // API21时才可使用
+       // 第5、6个参数：rx、ry是圆角的参数，下面会详细描述
+       canvas.drawRoundRect(100,100,800,400,30,30,mPaint);
+
+        // 方法2：使用RectF类
+        RectF rectF = new RectF(100,100,800,400);
+        canvas.drawRoundRect(rectF,30,30,mPaint);
+与矩形相比，圆角矩形多了两个参数rx 和 ry
+圆角矩形的角是椭圆的圆弧，rx 和 ry实际上是椭圆的两个半径
+特别注意：当 rx大于宽度的一半， ry大于高度一半 时，画出来的为椭圆
+实际上，在rx为宽度的一半，ry为高度的一半时，刚好是一个椭圆；但由于当rx大于宽度一半，ry大于高度一半时，无法计算出圆弧，所以drawRoundRect对大于该数值的参数进行了修正，凡是大于一半的参数均按照一半来处理
+
+e. 绘制椭圆
+原理：矩形的对角线顶点确定矩形，根据传入矩形的长宽作为长轴和短轴画椭圆
+椭圆传入的参数和矩形是一样的；
+绘制椭圆实际上是绘制一个矩形的内切图形。
+        // 方法1：使用RectF类
+        RectF rectF = new RectF(100,100,800,400);
+        canvas.drawOval(rectF,mPaint);
+
+        // 方法2：直接传入与矩形相关的参数
+        canvas.drawOval(100,100,800,400,mPaint);
+
+        // 为了方便表示，画一个和椭圆一样参数的矩形
+         canvas.drawRect(100,100,800,400,mPaint);
+
+f. 绘制圆
+原理：圆心坐标+半径决定圆
+// 参数说明：
+// 1、2：圆心坐标
+// 3：半径
+// 4：画笔
+
+// 绘制一个圆心坐标在(500,500)，半径为400 的圆。
+    canvas.drawCircle(500,500,400,mPaint);
+
+g. 绘制圆弧
+原理：通过圆弧角度的起始位置和扫过的角度确定圆弧
+// 绘制圆弧共有两个方法
+// 相比于绘制椭圆，绘制圆弧多了三个参数：
+startAngle  // 确定角度的起始位置
+sweepAngle // 确定扫过的角度
+useCenter   // 是否使用中心（下面会详细说明）
+
+// 方法1
+public void drawArc(@NonNull RectF oval, float startAngle, float sweepAngle, boolean useCenter, @NonNull Paint paint){}
+
+// 方法2
+public void drawArc(float left, float top, float right, float bottom, float startAngle,
+            float sweepAngle, boolean useCenter, @NonNull Paint paint) {}
+
+
+// 以下示例：绘制两个起始角度为0度、扫过90度的圆弧
+// 两者的唯一区别就是是否使用了中心点
+
+    // 绘制圆弧1(无使用中心)
+        RectF rectF = new RectF(100, 100, 800,400);
+        // 绘制背景矩形
+        canvas.drawRect(rectF, mPaint1);
+        // 绘制圆弧
+        canvas.drawArc(rectF, 0, 90, false, mPaint2);
+
+   // 绘制圆弧2(使用中心)
+        RectF rectF2 = new RectF(100,600,800,900);
+        // 绘制背景矩形
+        canvas.drawRect(rectF2, mPaint1);
+        // 绘制圆弧
+        canvas.drawArc(rectF2,0,90,true,mPaint2);
+
+不使用中心点：圆弧的形状 = （起、止点连线+圆弧）构成的面积
+使用中心店：圆弧面积 = （起点、圆心连线 + 止点、圆心连线+圆弧）构成的面积
+
+(3).绘制文字
+绘制文字分为三种应用场景：
+情况1：指定文本开始的位置
+即指定文本基线位置
+基线x默认在字符串左侧，基线y默认在字符串下方
+情况2：指定每个文字的位置
+情况3：指定路径，并根据路径绘制文字
+
+(4).绘制图片
+绘制图片分为：绘制矢量图（drawPicture）和 绘制位图（drawBitmap)
+
+a.绘制矢量图（drawPicture）
+作用：绘制矢量图的内容，即绘制存储在矢量图里某个时刻Canvas绘制内容的操作
+矢量图（Picture）的作用：存储（录制）某个时刻Canvas绘制内容的操作
+应用场景：绘制之前绘制过的内容
+相比于再次调用各种绘图API，使用Picture能节省操作 & 时间
+如果不手动调用，录制的内容不会显示在屏幕上，只是存储起来
+
+Picture.draw (Canvas canvas):// 注：此方法绘制后可能会影响Canvas状态，不建议使用
+Canvas.drawPicture（）:不会影响Canvas状态
+PictureDrawable.draw（）
+
+b.绘制位图（drawBitmap）
+作用：将已有的图片转换为位图（Bitmap），最后再绘制到Canvas上
+位图，即平时我们使用的图片资源
+
+(5).绘制路径
+// 通过传入具体路径Path对象 & 画笔
+canvas.drawPath(mPath, mPaint)
+关于Path类，具体请看我写的文章： Path类的最全面详解 - 自定义View应用系列
+
+(6).画布操作
+作用：改变画布的性质
+改变之后，任何的后续操作都会受到影响
+A. 画布变换
+a.平移（translate）
+作用：移动画布（实际上是移动坐标系，如下图）
+// 将画布原点向右移200px，向下移100px
+canvas.translate(200, 100)
+// 注：位移是基于当前位置移动，而不是每次都是基于屏幕左上角的(0,0)点移动
+
+b. 缩放（scale）
+作用：放大 / 缩小 画布的倍数
+// 共有两个方法
+// 方法1
+// 以(px,py)为中心，在x方向缩放sx倍，在y方向缩放sy倍
+// 缩放中心默认为（0,0）
+public final void scale(float sx, float sy)
+
+// 方法2
+// 比方法1多了两个参数（px,py），用于控制缩放中心位置
+// 缩放中心为（px,py）
+ public final void scale (float sx, float sy, float px, float py)
+
+ 当缩放倍数为负数时，会先进行缩放，然后根据不同情况进行图形翻转：
+ a<0，b>0：以px为轴翻转
+ a>0，b<0：以py为轴翻转
+ a<0，b<0：以旋转中心翻转
+
+ c. 旋转（rotate）
+ 注意：角度增加方向为顺时针（区别于数学坐标系）
+
+ // 方法1
+ // 以原点(0,0)为中心旋转 degrees 度
+ public final void rotate(float degrees)
+   // 以原点(0,0)为中心旋转 90 度
+ canvas.rotate(90);
+
+ // 方法2
+ // 以(px,py)点为中心旋转degrees度
+ public final void rotate(float degrees, float px, float py)
+ // 以(30,50)为中心旋转 90 度
+ canvas.rotate(90,30,50);
+
+ d. 错切（skew）
+ 作用：将画布在x方向倾斜a角度、在y方向倾斜b角度
+ // 参数 sx = tan a ，sx>0时表示向X正方向倾斜（即向左）
+ // 参数 sy = tan b ，sy>0时表示向Y正方向倾斜（即向下）
+ public void skew(float sx, float sy)
+
+ B. 画布裁剪
+即从画布上裁剪一块区域，之后仅能编辑该区域
+特别注意：其余的区域只是不能编辑，但是并没有消失，如下图
+裁剪共分为：裁剪路径、裁剪矩形、裁剪区域
+
+// 裁剪路径
+// 方法1
+public boolean clipPath(@NonNull Path path)
+// 方法2
+public boolean clipPath(@NonNull Path path, @NonNull Region.Op op)
+
+
+// 裁剪矩形
+// 方法1
+public boolean clipRect(int left, int top, int right, int bottom)
+// 方法2
+public boolean clipRect(float left, float top, float right, float bottom)
+// 方法3
+public boolean clipRect(float left, float top, float right, float bottom,
+            @NonNull Region.Op op)
+
+// 裁剪区域
+// 方法1
+public boolean clipRegion(@NonNull Region region)
+// 方法2
+public boolean clipRegion(@NonNull Region region, @NonNull Region.Op op)
+
+这里特别说明一下参数Region.Op op
+作用：在剪下多个区域下来的情况，当这些区域有重叠的时候，这个参数决定重叠部分该如何处理，多次裁剪之后究竟获得了哪个区域，有以下几种参数：
+
+C. 画布快照
+画布状态：当前画布经过的一系列操作
+状态栈：存放画布状态和图层的栈（后进先出）
+画布的构成：由多个图层构成
+..在画布上操作 = 在图层上操作
+..如无设置，绘制操作和画布操作是默认在默认图层上进行
+..在通常情况下，使用默认图层就可满足需求；若需要绘制复杂的内容（如地图），则需使用更多的图层
+..最终显示的结果 = 所有图层叠在一起的效果
+
+a. 保存当前画布状态（save）
+作用：保存画布状态（即保存画布的一系列操作）
+应用场景：画布的操作是不可逆的，而且会影响后续的步骤，假如需要回到之前画布的状态去进行下一次操作，就需要对画布的状态进行保存和回滚
+
+// 方法1:
+  // 保存全部状态
+  public int save ()
+
+// 方法2：
+  // 根据saveFlags参数保存一部分状态
+  // 使用该参数可以只保存一部分状态，更加灵活
+  public int save (int saveFlags)
+
+// saveFlags参数说明：
+// 1.ALL_SAVE_FLAG（默认）：保存全部状态
+// 2. CLIP_SAVE_FLAG：保存剪辑区
+// 3. CLIP_TO_LAYER_SAVE_FLAG：剪裁区作为图层保存
+// 4. FULL_COLOR_LAYER_SAVE_FLAG：保存图层的全部色彩通道
+// 5. HAS_ALPHA_LAYER_SAVE_FLAG：保存图层的alpha(不透明度)通道
+// 6. MATRIX_SAVE_FLAG：保存Matrix信息(translate, rotate, scale, skew)
+
+// 每调用一次save（），都会在栈顶添加一条状态信息（入栈）
+
+b. 保存某个图层状态（saveLayer）
+作用：新建一个图层，并放入特定的栈中
+使用起来非常复杂，因为图层之间叠加会导致计算量成倍增长，营尽量避免使用。
+// 无图层alpha(不透明度)通道
+public int saveLayer (RectF bounds, Paint paint)
+public int saveLayer (RectF bounds, Paint paint, int saveFlags)
+public int saveLayer (float left, float top, float right, float bottom, Paint paint)
+public int saveLayer (float left, float top, float right, float bottom, Paint paint, int saveFlags)
+
+// 有图层alpha(不透明度)通道
+public int saveLayerAlpha (RectF bounds, int alpha)
+public int saveLayerAlpha (RectF bounds, int alpha, int saveFlags)
+public int saveLayerAlpha (float left, float top, float right, float bottom, int alpha)
+public int saveLayerAlpha (float left, float top, float right, float bottom, int alpha, int saveFlags)
+
+c. 回滚上一次保存的状态（restore）
+作用：恢复上一次保存的画布状态
+// 采取状态栈的形式。即从栈顶取出一个状态进行恢复。
+canvas.restore();
+
+d. 回滚指定保存的状态（restoreToCount）
+作用：恢复指定状态；将指定位置以及以上所有状态出栈
+ canvas.restoreToCount(3) ；
+// 弹出 3、4、5的状态，并恢复第3次保存的画布状态
+
+e. 获取保存的次数（getSaveCount）
+作用：获取保存过图层的次数
+即获取状态栈中保存状态的数量
+canvas.getSaveCount（）；
+// 以上面栈为例，则返回5
+// 注：即使弹出所有的状态，返回值依旧为1，代表默认状态。（返回值最小为1）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==================================================== 分割线 ====================================================

@@ -340,7 +340,7 @@ class MainActivity : BaseActivity(), MainView {
         "ARouter跳转测试---不同的module",
         "协程Coroutine测试",
         "lambda方法使用和高级函数的使用",
-        "SVG动画测试",
+        "SVG动画测试,自定义View---Canvas的使用",
         "设计模式---命令模式",
         "Rxjava2使用方法",
         "反射的使用方法",
