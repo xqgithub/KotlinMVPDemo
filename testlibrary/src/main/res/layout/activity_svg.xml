@@ -103,9 +103,22 @@
         android:id="@+id/tcv"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="#242530"
         android:layout_width="match_parent"
-        android:background="@color/full_red"
         android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/tv_clearscreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_10x"
+        android:text="清屏"
+        android:layout_marginTop="@dimen/dimen_10x"
+        android:layout_marginRight="@dimen/dimen_10x"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_18x"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

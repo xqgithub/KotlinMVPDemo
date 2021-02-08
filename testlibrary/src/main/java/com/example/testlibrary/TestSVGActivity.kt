@@ -19,7 +19,9 @@ import kotlinx.android.synthetic.main.activity_svg.*
 @Route(path = RouterTag.TestSVGActivity)
 class TestSVGActivity : BaseActivity() {
 
+
     override fun setupComponent(myAppComponet: MyAppComponet) {
+
     }
 
     override fun onBeforeSetContentLayout() {
@@ -38,6 +40,11 @@ class TestSVGActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         initData()
         group_svg.visibility = View.GONE
+
+
+        tv_clearscreen.setOnClickListener {
+            tcv.mDrawSave()
+        }
     }
 
     /**

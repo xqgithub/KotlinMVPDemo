@@ -1,5 +1,6 @@
 package com.example.baselibrary.mvp.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +9,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Picture;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Region;
@@ -18,7 +21,11 @@ import android.view.View;
 import androidx.core.content.ContextCompat;
 
 import com.example.baselibrary.R;
+import com.example.baselibrary.constants.ConfigConstants;
+import com.example.baselibrary.utils.LogUtils;
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA;
+import com.example.baselibrary.utils.ScreenUtils;
+import com.example.baselibrary.utils.StringUtils;
 
 /**
  * Created by  on 2021/2/2.
@@ -27,6 +34,7 @@ import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA;
 public class TestCustomView extends View {
 
     private Context mContext;
+    private Canvas mCanvas;
 
     public TestCustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -67,7 +75,9 @@ public class TestCustomView extends View {
 //        mDrawTranslate(canvas);
 //        mDrawScale(canvas);
 //        mDrawSkew(canvas);
-        mDrawClip(canvas);
+//        mDrawClip(canvas);
+        mDrawSaveLayer(canvas);
+        this.mCanvas = canvas;
     }
 
 
@@ -375,9 +385,10 @@ public class TestCustomView extends View {
      * 绘制图片
      * 情况2：绘制矢量图
      */
-
+    @SuppressLint("ResourceType")
     private void mDrawBitmap(Canvas canvas) {
-        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.test_ad_one);
+        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.error_null);
+
         // 后两个参数matrix, paint是在绘制时对图片进行一些改变
         // 后面会专门说matrix
         // 如果只是将图片内容绘制出来只需将传入新建的matrix, paint对象即可：
@@ -394,10 +405,14 @@ public class TestCustomView extends View {
         //参数（src，dst） = 两个矩形区域
         // Rect src：指定需要绘制图片的区域（即要绘制图片的哪一部分）
         // Rect dst 或RectF dst：指定图片在屏幕上显示(绘制)的区域
-        Rect src = new Rect(0, 0, bitmap.getWidth() / 2, bitmap.getHeight());
-        // 指定图片在屏幕上显示的区域
-        Rect dst = new Rect(100, 100, 250, 250);
-        // 绘制图片
+        Rect src = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+//        // 指定图片在屏幕上显示的区域
+        int screenwidth = ScreenUtils.getScreenWidth();
+        int screenheight = ScreenUtils.getScreenHeight();
+
+
+        Rect dst = new Rect(0, 0, screenwidth, screenheight);
+//        // 绘制图片
         canvas.drawBitmap(bitmap, src, dst, null);
     }
 
@@ -496,6 +511,109 @@ public class TestCustomView extends View {
         canvas.clipRect(0, 200, 300, 300, Region.Op.REPLACE);
         //将第一次裁剪与第二次裁剪不重叠的区域设置为黑色
         canvas.drawColor(Color.BLACK);
+    }
+
+    /**
+     * saveLayer 使用
+     * <p>
+     * PorterDuff.Mode.CLEAR 清除画布上图像
+     * PorterDuff.Mode.SRC 显示上层图像
+     * PorterDuff.Mode.DST 显示下层图像
+     * PorterDuff.Mode.SRC_OVER上下层图像都显示，上层居上显示
+     * PorterDuff.Mode.DST_OVER 上下层都显示,下层居上显示
+     * PorterDuff.Mode.SRC_IN 取两层图像交集部门,只显示上层图像
+     * PorterDuff.Mode.DST_IN 取两层图像交集部门,只显示下层图像
+     * PorterDuff.Mode.SRC_OUT 取上层图像非交集部门
+     * PorterDuff.Mode.DST_OUT 取下层图像非交集部门
+     * PorterDuff.Mode.SRC_ATOP 取下层图像非交集部门与上层图像交集部门
+     * PorterDuff.Mode.DST_ATOP 取上层图像非交集部门与下层图像交集部门
+     * PorterDuff.Mode.XOR 取两层图像的非交集部门
+     * <p>
+     * <p>saveLayer的saveFlags
+     * MATRIX_SAVE_FLAG:只保存图层的matrix矩阵
+     * CLIP_SAVE_FLAG:只保存大小信息
+     * HAS_ALPHA_LAYER_SAVE_FLAG：表明该图层有透明度，和下面的标识冲突，都设置时以下面的标志为准（只适用于saveLayer）
+     * FULL_COLOR_LAYER_SAVE_FLAG：完全保留该图层颜色（和上一图层合并时，清空上一图层的重叠区域，保留该图层的颜色）（只适用于saveLayer）
+     * CLIP_TO_LAYER_SAVE_：创建图层时，会把canvas（所有图层）裁剪到参数指定的范围，如果省略这个flag将导致图层开销巨大（实际上图层没有裁剪，与原图层一样大）
+     * ALL_SAVE_FLAG。//保存全部
+     */
+    private RectF m_rcBK;
+
+    private void mDrawSaveLayer(Canvas canvas) {
+        int saveCount = 0;
+        LogUtils.i(ConfigConstants.TAG_ALL, "getSaveCount =-= " + canvas.getSaveCount());
+        int ScreenWidth = ScreenUtils.getScreenWidth();
+        int ScreenHeight = ScreenUtils.getScreenHeight();
+        if (StringUtils.isBlank(m_rcBK) || m_rcBK.isEmpty()) {
+            //绘制背景
+            m_rcBK = new RectF(0, 0, ScreenWidth, ScreenHeight);
+            Paint linePaint = new Paint();
+            linePaint.setAntiAlias(true);
+            linePaint.setColor(Color.GREEN);
+            canvas.drawRoundRect(m_rcBK, 0, 0, linePaint);
+
+            Paint paint = new Paint();
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            saveCount = canvas.saveLayer(m_rcBK, paint);
+//        } else {
+//            saveCount = canvas.saveLayer(m_rcBK, paint, Canvas.ALL_SAVE_FLAG);
+//        }
+
+            LogUtils.i(ConfigConstants.TAG_ALL, "saveCount =-= " + saveCount, "getSaveCount =-= " + canvas.getSaveCount());
+
+            Bitmap bitmap = PublicPracticalMethodFromJAVA.getInstance().martixCompress(mContext, R.mipmap.app_logo_shandian)
+                    .copy(Bitmap.Config.ARGB_4444, true);
+            Paint paint2 = new Paint();
+            paint2.setAntiAlias(true);
+            if (!StringUtils.isBlank(bitmap)) {
+                canvas.translate(100, 100);
+                Rect rect_image_src = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+                RectF rectf = new RectF(0, 0, bitmap.getWidth() + 20, bitmap.getHeight() + 20);
+                //画圆角
+                paint2.setColor(Color.RED);
+                canvas.drawRoundRect(rectf, 20, 20, paint2);
+                paint2.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+                canvas.drawBitmap(bitmap, rect_image_src, rect_image_src, paint2);
+            }
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            saveCount = canvas.saveLayer(m_rcBK, paint);
+//        } else {
+//            saveCount = canvas.saveLayer(m_rcBK, paint, Canvas.ALL_SAVE_FLAG);
+//        }
+
+            LogUtils.i(ConfigConstants.TAG_ALL, "saveCount =-= " + saveCount, "getSaveCount =-= " + canvas.getSaveCount());
+
+            Bitmap bitmap2 = PublicPracticalMethodFromJAVA.getInstance().martixCompress(mContext, R.mipmap.app_logo_jingyong)
+                    .copy(Bitmap.Config.ARGB_4444, true);
+            Paint paint3 = new Paint();
+            paint3.setAntiAlias(true);
+            if (!StringUtils.isBlank(bitmap)) {
+                canvas.translate(20, 20);
+                Rect rect_image_src = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+                paint3.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+                canvas.drawBitmap(bitmap2, rect_image_src, rect_image_src, paint3);
+            }
+            LogUtils.i(ConfigConstants.TAG_ALL, "getSaveCount =-= " + canvas.getSaveCount());
+        } else {
+            //绘制背景
+            Paint linePaint = new Paint();
+            linePaint.setAntiAlias(true);
+            linePaint.setColor(Color.RED);
+            mCanvas.drawRoundRect(m_rcBK, 0, 0, linePaint);
+        }
+    }
+
+
+    /**
+     * 替换背景图
+     */
+    public void mDrawSave() {
+        Paint paint = new Paint();
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        mCanvas.drawPaint(paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC));
+        invalidate();
     }
 
 }
