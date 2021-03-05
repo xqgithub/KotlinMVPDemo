@@ -168,11 +168,11 @@ public class PublicPracticalMethodFromJAVA {
      */
     public void smallWidth() {
         // 基础数据以360DP
-        double original_width = 360;
-        double target_width = 640;
+        double original_width = 550;
+        double target_width = 600;
         int width_num = 360;
 
-        DecimalFormat df = new DecimalFormat("#.0");
+        DecimalFormat df = new DecimalFormat("#0.0");
         String result = "";
         for (int i = 1; i <= width_num; i++) {
             String aString = "<dimen name='dimen_" + i + "x'" + ">" + df.format(target_width
