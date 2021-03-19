@@ -166,7 +166,7 @@ public class PublicPracticalMethodFromJAVA {
 
     /**
      * 00004
-     * 屏幕适配最小宽度 生成
+     * 屏幕适配最小宽度 生成111
      */
     int targetwidth[] = {360, 410, 480, 550, 600, 768};
 
