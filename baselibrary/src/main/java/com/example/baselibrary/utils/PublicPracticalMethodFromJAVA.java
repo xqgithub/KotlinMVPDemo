@@ -31,6 +31,8 @@ import com.example.baselibrary.constants.ConfigConstants;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 
@@ -166,18 +168,37 @@ public class PublicPracticalMethodFromJAVA {
      * 00004
      * 屏幕适配最小宽度 生成
      */
-    public void smallWidth() {
-        // 基础数据以360DP
-        double original_width = 360;
-        double target_width = 360;
-        int width_num = 360;
+    int targetwidth[] = {360, 410, 480, 550, 600, 768};
 
-        DecimalFormat df = new DecimalFormat("#0.0");
-        String result = "";
-        for (int i = 1; i <= width_num; i++) {
-            String aString = "<dimen name='dimen_" + i + "x'" + ">" + df.format(target_width
-                    * i / original_width) + "dp</dimen>";
-            System.out.println(aString);
+    public void smallWidth() {
+
+        for (int i = 0; i < targetwidth.length; i++) {
+            int width_num = 768;
+            double original_width = width_num;
+            double target_width = targetwidth[i];
+            int fileparam = targetwidth[i];
+            String filedirPath = SDCardUtils.getExternalStorageDirectory() + File.separator + "values-sw" + fileparam + "dp";
+            if (FileUtils.createOrExistsDir(filedirPath)) {
+                DecimalFormat df = new DecimalFormat("#0.0");
+                String result = "";
+                StringBuilder sbstr = new StringBuilder();
+                sbstr.append("<resources>\r\n");
+                for (int j = 1; j <= width_num; j++) {
+                    String aString = "<dimen name='dimen_" + j + "x'" + ">" + df.format(target_width
+                            * j / original_width) + "dp</dimen>\r\n";
+//                System.out.println(aString);
+                    sbstr.append(aString);
+                }
+                sbstr.append("</resources>");
+                try {
+                    FileWriter fileWriter = new FileWriter(filedirPath + File.separator +
+                            "dimens.xml", true);
+                    fileWriter.write(sbstr.toString());
+                    fileWriter.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
