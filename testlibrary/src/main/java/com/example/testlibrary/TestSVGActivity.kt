@@ -10,6 +10,7 @@ import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
+import com.jarvislau.destureviewbinder.GestureViewBinder
 import kotlinx.android.synthetic.main.activity_svg.*
 
 /**
@@ -42,9 +43,14 @@ class TestSVGActivity : BaseActivity() {
         group_svg.visibility = View.GONE
 
 
+        var gestureViewBinder = GestureViewBinder.bind(this, groupView, targetView)
+        gestureViewBinder.isFullGroup = true
+
         tv_clearscreen.setOnClickListener {
-            tcv.mDrawSave()
+//            tcv.mDrawSave()
+            gestureViewBinder = null
         }
+
     }
 
     /**

@@ -120,5 +120,8 @@ dependencies {
     api _dependencies.rxlifecycle_components
     /** 支持反射 **/
     api "org.jetbrains.kotlin:kotlin-reflect:$rootProject.ext.kotlin_version"
+    /** 手指放大缩小移动 **/
+//    api _dependencies.gestureviewbinder
+    api 'com.github.xqgithub:GestureViewBinder:1.0.4'
 }
 
