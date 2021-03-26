@@ -105,7 +105,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="#242530"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -130,6 +130,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
         android:layout_width="@dimen/dimen_150x"
         android:layout_height="@dimen/dimen_150x">
 

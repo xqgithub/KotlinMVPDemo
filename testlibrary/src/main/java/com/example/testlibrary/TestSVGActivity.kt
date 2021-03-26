@@ -43,12 +43,13 @@ class TestSVGActivity : BaseActivity() {
         group_svg.visibility = View.GONE
 
 
+        //手指放大、缩小
         var gestureViewBinder = GestureViewBinder.bind(this, groupView, targetView)
         gestureViewBinder.isFullGroup = true
 
         tv_clearscreen.setOnClickListener {
-//            tcv.mDrawSave()
-            gestureViewBinder = null
+            tcv.mDrawSave()
+//            gestureViewBinder = null
         }
 
     }

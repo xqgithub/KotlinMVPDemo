@@ -168,7 +168,14 @@ public class PublicPracticalMethodFromJAVA {
      * 00004
      * 屏幕适配最小宽度 生成
      */
-    int targetwidth[] = {360, 410, 480, 550, 600, 768};
+    int targetwidth[] = {360, 384, 392,
+            400, 410, 411, 428, 432, 480,
+            533, 550, 592,
+            600, 640, 662,
+            720, 768,
+            800, 811, 820,
+            960,
+            1024, 1280, 1365};
 
     public void smallWidth() {
 
