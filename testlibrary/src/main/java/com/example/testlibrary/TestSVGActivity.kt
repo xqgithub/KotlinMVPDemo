@@ -10,7 +10,9 @@ import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
-import com.jarvislau.destureviewbinder.GestureViewBinder
+import com.example.baselibrary.utils.clickWithTrigger
+import example.com.testkotlin.haha.utils.showShortToastSafe
+import kotlinx.android.synthetic.main.activity_coroutine.*
 import kotlinx.android.synthetic.main.activity_svg.*
 
 /**
@@ -44,12 +46,19 @@ class TestSVGActivity : BaseActivity() {
 
 
         //手指放大、缩小
-        var gestureViewBinder = GestureViewBinder.bind(this, groupView, targetView)
-        gestureViewBinder.isFullGroup = true
+//        var gestureViewBinder = GestureViewBinder.bind(this, groupView, targetView)
+//        gestureViewBinder.isFullGroup = true
 
-        tv_clearscreen.setOnClickListener {
-            tcv.mDrawSave()
+        tv_clearscreen.clickWithTrigger(500) {
 //            gestureViewBinder = null
+            val branch = et_testcustom.text.toString().toInt()
+            when (branch) {
+                0 -> showShortToastSafe("请从序号1开始，哈哈")
+                else -> {
+                    tcv.methodNums = branch
+                }
+            }
+
         }
 
     }

@@ -35,6 +35,7 @@ public class TestCustomView extends View {
 
     private Context mContext;
     private Canvas mCanvas;
+    private int methodNums = -1;
 
     public TestCustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -58,26 +59,69 @@ public class TestCustomView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-//        mDrawColor(canvas);
-//        mDrawPoints(canvas);
-//        mDrawLine(canvas);
-//        mDrawRect(canvas);
-//        mDrawRoundRect(canvas);
-//        mDrawOval(canvas);
-//        mDrawCircle(canvas);
-//        mDrawArc(canvas);
-//        mDrawText(canvas);
-//        mDrawText2(canvas);
-//        mDrawText3(canvas);
-//        mDrawPicture(canvas);
-//        mDrawBitmap(canvas);
-//        mDrawTranslate(canvas);
-//        mDrawScale(canvas);
-//        mDrawSkew(canvas);
-//        mDrawClip(canvas);
-        mDrawSaveLayer(canvas);
+//        super.onDraw(canvas);
         this.mCanvas = canvas;
+        if (methodNums == 1) {
+            mDrawClearScreen(canvas);
+            mDrawColor(canvas);
+        } else if (methodNums == 2) {
+            mDrawClearScreen(canvas);
+            mDrawPoints(canvas);
+        } else if (methodNums == 3) {
+            mDrawClearScreen(canvas);
+            mDrawLine(canvas);
+        } else if (methodNums == 4) {
+            mDrawClearScreen(canvas);
+            mDrawRect(canvas);
+        } else if (methodNums == 5) {
+            mDrawClearScreen(canvas);
+            mDrawRoundRect(canvas);
+        } else if (methodNums == 6) {
+            mDrawClearScreen(canvas);
+            mDrawOval(canvas);
+        } else if (methodNums == 7) {
+            mDrawClearScreen(canvas);
+            mDrawCircle(canvas);
+        } else if (methodNums == 8) {
+            mDrawClearScreen(canvas);
+            mDrawArc(canvas);
+        } else if (methodNums == 9) {
+            mDrawClearScreen(canvas);
+            mDrawText(canvas);
+        } else if (methodNums == 10) {
+            mDrawClearScreen(canvas);
+            mDrawText2(canvas);
+        } else if (methodNums == 11) {
+            mDrawClearScreen(canvas);
+            mDrawText3(canvas);
+        } else if (methodNums == 12) {
+            mDrawClearScreen(canvas);
+            mDrawPicture(canvas);
+        } else if (methodNums == 13) {
+            mDrawClearScreen(canvas);
+            mDrawBitmap(canvas);
+        } else if (methodNums == 14) {
+            mDrawClearScreen(canvas);
+            mDrawTranslate(canvas);
+        } else if (methodNums == 15) {
+            mDrawClearScreen(canvas);
+            mDrawScale(canvas);
+        } else if (methodNums == 16) {
+            mDrawClearScreen(canvas);
+            mDrawSkew(canvas);
+        } else if (methodNums == 17) {
+            mDrawClearScreen(canvas);
+            mDrawClip(canvas);
+        } else if (methodNums == 18) {
+            mDrawClearScreen(canvas);
+            mDrawSave(canvas);
+        } else if (methodNums == 19) {
+            mDrawClearScreen(canvas);
+            mDrawSaveLayer(canvas);
+        } else if (methodNums == 20) {
+            mDrawClearScreen(canvas);
+            mDrawSetXfermode(canvas);
+        }
     }
 
 
@@ -104,7 +148,7 @@ public class TestCustomView extends View {
 
     private Paint mPaint;
 
-    private void initPaint() {
+    public void initPaint() {
         mPaint = new Paint();
         mPaint.setColor(Color.RED);
         //类型1：Paint.Style.FILLANDSTROKE（描边+填充）
@@ -121,7 +165,7 @@ public class TestCustomView extends View {
 
     private Paint mPaint2;
 
-    private void initPaint2() {
+    public void initPaint2() {
         mPaint2 = new Paint();
         mPaint2.setColor(Color.BLUE);
         mPaint2.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -135,7 +179,7 @@ public class TestCustomView extends View {
 
     private Paint mPaint3;
 
-    private void initPaint3(Context context) {
+    public void initPaint3(Context context) {
         mPaint3 = new Paint();
         mPaint3.setColor(ContextCompat.getColor(context, R.color.update_normal));
         mPaint3.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -145,10 +189,27 @@ public class TestCustomView extends View {
     }
 
     /**
+     * 绘制画布的背景
+     */
+    public void mDrawBG(Canvas canvas) {
+        Paint paint = new Paint();
+        paint.setColor(ContextCompat.getColor(mContext, R.color.appgay));
+        paint.setStrokeWidth(1f);
+        paint.setAntiAlias(true);
+
+        int ScreenWidth = ScreenUtils.getScreenWidth();
+        int ScreenHeight = ScreenUtils.getScreenHeight();
+
+        RectF m_rcBK = new RectF(0, 0, ScreenWidth, ScreenHeight);
+        canvas.drawRect(m_rcBK, paint);
+    }
+
+
+    /**
      * 绘制颜色
      */
 
-    private void mDrawColor(Canvas canvas) {
+    public void mDrawColor(Canvas canvas) {
         // 传入一个Color类的常量参数来设置画布颜色
         // 绘制蓝色
         canvas.drawColor(Color.BLUE);
@@ -158,7 +219,7 @@ public class TestCustomView extends View {
      * 绘制点
      */
 
-    private void mDrawPoints(Canvas canvas) {
+    public void mDrawPoints(Canvas canvas) {
         // 特别注意：需要用到画笔Paint
         // 所以之前记得创建画笔
         // 为了区分，这里使用了两个不同颜色的画笔
@@ -180,7 +241,7 @@ public class TestCustomView extends View {
      * 绘制直线
      */
 
-    private void mDrawLine(Canvas canvas) {
+    public void mDrawLine(Canvas canvas) {
         // 画一条直线
         // 在坐标(100,200)，(700,200)之间绘制一条直线
         canvas.drawLine(100, 200, 700, 200, mPaint);
@@ -198,7 +259,7 @@ public class TestCustomView extends View {
      * 绘制矩形
      */
 
-    private void mDrawRect(Canvas canvas) {
+    public void mDrawRect(Canvas canvas) {
         // 关于绘制矩形，Canvas提供了三种重载方法
 
         // 方法1：直接传入两个顶点的坐标
@@ -223,7 +284,7 @@ public class TestCustomView extends View {
      * 绘制圆角矩形
      */
 
-    private void mDrawRoundRect(Canvas canvas) {
+    public void mDrawRoundRect(Canvas canvas) {
         // 方法1：直接传入两个顶点的坐标
         // API21时才可使用
         // 第5、6个参数：rx、ry是圆角的参数，下面会详细描述
@@ -239,7 +300,7 @@ public class TestCustomView extends View {
      * 绘制椭圆
      */
 
-    private void mDrawOval(Canvas canvas) {
+    public void mDrawOval(Canvas canvas) {
         // 方法1：使用RectF类
         RectF rectF = new RectF(100, 100, 600, 400);
         canvas.drawOval(rectF, mPaint);
@@ -256,7 +317,7 @@ public class TestCustomView extends View {
      * 绘制圆
      */
 
-    private void mDrawCircle(Canvas canvas) {
+    public void mDrawCircle(Canvas canvas) {
         // 参数说明：
         // 1、2：圆心坐标
         // 3：半径
@@ -269,7 +330,7 @@ public class TestCustomView extends View {
      * 绘制圆弧
      */
 
-    private void mDrawArc(Canvas canvas) {
+    public void mDrawArc(Canvas canvas) {
         // 以下示例：绘制两个起始角度为0度、扫过90度的圆弧
         // 两者的唯一区别就是是否使用了中心点
 
@@ -293,7 +354,7 @@ public class TestCustomView extends View {
      * 情况1：指定文本开始的位置
      */
 
-    private void mDrawText(Canvas canvas) {
+    public void mDrawText(Canvas canvas) {
         // 参数text：要绘制的文本
         // 参数x，y：指定文本开始的位置（坐标）
         canvas.drawText("abcdefg", 300, 400, mPaint3);
@@ -315,7 +376,7 @@ public class TestCustomView extends View {
      * 情况2：分别指定文本的位置
      */
 
-    private void mDrawText2(Canvas canvas) {
+    public void mDrawText2(Canvas canvas) {
         // 参数text：绘制的文本
         // 参数pos：数组类型，存放每个字符的位置（坐标）
         // 注意：必须指定所有字符位置
@@ -334,7 +395,7 @@ public class TestCustomView extends View {
      * 情况3：指定路径，并根据路径绘制文字
      */
 
-    private void mDrawText3(Canvas canvas) {
+    public void mDrawText3(Canvas canvas) {
 
         // 在路径(540,750,640,450,840,600)写上"在Path上写的字:Carson_Ho"字样
         // 1.创建路径对象
@@ -353,7 +414,7 @@ public class TestCustomView extends View {
      * 情况1：绘制矢量图
      */
 
-    private void mDrawPicture(Canvas canvas) {
+    public void mDrawPicture(Canvas canvas) {
         //方法2:
         //创建Picture对象
         Picture mPicture = new Picture();
@@ -386,7 +447,7 @@ public class TestCustomView extends View {
      * 情况2：绘制矢量图
      */
     @SuppressLint("ResourceType")
-    private void mDrawBitmap(Canvas canvas) {
+    public void mDrawBitmap(Canvas canvas) {
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.error_null);
 
         // 后两个参数matrix, paint是在绘制时对图片进行一些改变
@@ -420,7 +481,7 @@ public class TestCustomView extends View {
      * 画布变换---平移
      */
 
-    private void mDrawTranslate(Canvas canvas) {
+    public void mDrawTranslate(Canvas canvas) {
         // 记得先创建一个画笔
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
@@ -439,7 +500,7 @@ public class TestCustomView extends View {
      * 画布变换---缩放
      */
 
-    private void mDrawScale(Canvas canvas) {
+    public void mDrawScale(Canvas canvas) {
         // 记得先创建一个画笔
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
@@ -465,7 +526,7 @@ public class TestCustomView extends View {
      * 画布变换---错切
      */
 
-    private void mDrawSkew(Canvas canvas) {
+    public void mDrawSkew(Canvas canvas) {
         // 记得先创建一个画笔
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
@@ -491,7 +552,7 @@ public class TestCustomView extends View {
      * 画布裁剪
      */
 
-    private void mDrawClip(Canvas canvas) {
+    public void mDrawClip(Canvas canvas) {
         // 记得先创建一个画笔
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
@@ -514,21 +575,39 @@ public class TestCustomView extends View {
     }
 
     /**
+     * save的使用
+     * 1.save()方法会保存当前Canvas的matrix和clip到一个私有栈中
+     * 2.save方法调用之后，仍然可以像平常一样调用translate,scale,rotate,skew,concat或者clipRect
+     * 3.如果稍后调用了restore()方法，那么之前调用的方法并不会影响之后的操作，会将canvas恢复至save之前的状态
+     * 4.save()方法是有返回值的，通过restoreToCount方法返回到save之前的状态
+     */
+    public void mDrawSave(Canvas canvas) {
+        LogUtils.i(ConfigConstants.TAG_ALL, "getSaveCount1 =-= " + canvas.getSaveCount());
+        Paint paint = new Paint();
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setStrokeWidth(1f);
+        paint.setAntiAlias(true);
+        Rect rect = new Rect(100, 100, 800, 400);
+        canvas.drawRect(rect, paint);
+        int count = canvas.save();
+        LogUtils.i(ConfigConstants.TAG_ALL, "count =-= " + count);
+        canvas.translate(100, 100);
+        paint.setColor(Color.BLUE);
+        canvas.drawRect(rect, paint);
+        int count2 = canvas.save();
+        LogUtils.i(ConfigConstants.TAG_ALL, "count2 =-= " + count2);
+        canvas.restoreToCount(count);
+        canvas.translate(150, 150);
+        paint.setColor(Color.GREEN);
+        canvas.drawRect(rect, paint);
+        LogUtils.i(ConfigConstants.TAG_ALL, "getSaveCount3 =-= " + canvas.getSaveCount());
+    }
+
+
+    /**
      * saveLayer 使用
-     * <p>
-     * PorterDuff.Mode.CLEAR 清除画布上图像
-     * PorterDuff.Mode.SRC 显示上层图像
-     * PorterDuff.Mode.DST 显示下层图像
-     * PorterDuff.Mode.SRC_OVER上下层图像都显示，上层居上显示
-     * PorterDuff.Mode.DST_OVER 上下层都显示,下层居上显示
-     * PorterDuff.Mode.SRC_IN 取两层图像交集部门,只显示上层图像
-     * PorterDuff.Mode.DST_IN 取两层图像交集部门,只显示下层图像
-     * PorterDuff.Mode.SRC_OUT 取上层图像非交集部门
-     * PorterDuff.Mode.DST_OUT 取下层图像非交集部门
-     * PorterDuff.Mode.SRC_ATOP 取下层图像非交集部门与上层图像交集部门
-     * PorterDuff.Mode.DST_ATOP 取上层图像非交集部门与下层图像交集部门
-     * PorterDuff.Mode.XOR 取两层图像的非交集部门
-     * <p>
+     *
      * <p>saveLayer的saveFlags
      * MATRIX_SAVE_FLAG:只保存图层的matrix矩阵
      * CLIP_SAVE_FLAG:只保存大小信息
@@ -536,12 +615,19 @@ public class TestCustomView extends View {
      * FULL_COLOR_LAYER_SAVE_FLAG：完全保留该图层颜色（和上一图层合并时，清空上一图层的重叠区域，保留该图层的颜色）（只适用于saveLayer）
      * CLIP_TO_LAYER_SAVE_：创建图层时，会把canvas（所有图层）裁剪到参数指定的范围，如果省略这个flag将导致图层开销巨大（实际上图层没有裁剪，与原图层一样大）
      * ALL_SAVE_FLAG。//保存全部
+     * <p>
+     * saveLayer与save的不同点
+     * 1.saveLayer()是生成一个独立的图层，而save()只是保存了一下画布的状态，这里说的画布的状态类似一个还原点。
+     * 2.saveLayer()由于会生成一个新的图层，所以更加耗费内存，需要慎用。
+     * 3.saveLayer()可以保存特定的区域
+     * 4.在使用混合模式setXfermode时会产生不同的影响
      */
     private RectF m_rcBK;
 
-    private void mDrawSaveLayer(Canvas canvas) {
+    public void mDrawSaveLayer(Canvas canvas) {
         int saveCount = 0;
         LogUtils.i(ConfigConstants.TAG_ALL, "getSaveCount =-= " + canvas.getSaveCount());
+
         int ScreenWidth = ScreenUtils.getScreenWidth();
         int ScreenHeight = ScreenUtils.getScreenHeight();
         if (StringUtils.isBlank(m_rcBK) || m_rcBK.isEmpty()) {
@@ -553,11 +639,11 @@ public class TestCustomView extends View {
             canvas.drawRoundRect(m_rcBK, 0, 0, linePaint);
 
             Paint paint = new Paint();
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            saveCount = canvas.saveLayer(m_rcBK, paint);
-//        } else {
-//            saveCount = canvas.saveLayer(m_rcBK, paint, Canvas.ALL_SAVE_FLAG);
-//        }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                saveCount = canvas.saveLayer(m_rcBK, paint);
+            } else {
+                saveCount = canvas.saveLayer(m_rcBK, paint, Canvas.ALL_SAVE_FLAG);
+            }
 
             LogUtils.i(ConfigConstants.TAG_ALL, "saveCount =-= " + saveCount, "getSaveCount =-= " + canvas.getSaveCount());
 
@@ -575,23 +661,31 @@ public class TestCustomView extends View {
                 paint2.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
                 canvas.drawBitmap(bitmap, rect_image_src, rect_image_src, paint2);
             }
+            //将画布移动恢复
+            canvas.translate(-100, -100);
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            saveCount = canvas.saveLayer(m_rcBK, paint);
-//        } else {
-//            saveCount = canvas.saveLayer(m_rcBK, paint, Canvas.ALL_SAVE_FLAG);
-//        }
-
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                saveCount = canvas.saveLayer(m_rcBK, paint);
+            } else {
+                saveCount = canvas.saveLayer(m_rcBK, paint, Canvas.ALL_SAVE_FLAG);
+            }
             LogUtils.i(ConfigConstants.TAG_ALL, "saveCount =-= " + saveCount, "getSaveCount =-= " + canvas.getSaveCount());
 
             Bitmap bitmap2 = PublicPracticalMethodFromJAVA.getInstance().martixCompress(mContext, R.mipmap.app_logo_jingyong)
                     .copy(Bitmap.Config.ARGB_4444, true);
-            Paint paint3 = new Paint();
-            paint3.setAntiAlias(true);
             if (!StringUtils.isBlank(bitmap)) {
-                canvas.translate(20, 20);
+
+                //绘制背景
+                linePaint.setColor(Color.parseColor("#40ff4545"));
+                canvas.drawRoundRect(m_rcBK, 0, 0, linePaint);
+
+                canvas.translate(200, 200);
+
+
+                Paint paint3 = new Paint();
+                paint3.setAntiAlias(true);
                 Rect rect_image_src = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-                paint3.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+                paint3.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC));
                 canvas.drawBitmap(bitmap2, rect_image_src, rect_image_src, paint3);
             }
             LogUtils.i(ConfigConstants.TAG_ALL, "getSaveCount =-= " + canvas.getSaveCount());
@@ -604,16 +698,80 @@ public class TestCustomView extends View {
         }
     }
 
+    /**
+     * setXfermode：设置图形混合模式
+     * <p>
+     * PorterDuff.Mode.CLEAR 清除画布上图像
+     * PorterDuff.Mode.SRC 显示上层图像
+     * PorterDuff.Mode.DST 显示下层图像
+     * PorterDuff.Mode.SRC_OVER上下层图像都显示，上层居上显示
+     * PorterDuff.Mode.DST_OVER 上下层都显示,下层居上显示
+     * PorterDuff.Mode.SRC_IN 取两层图像交集部门,只显示上层图像
+     * PorterDuff.Mode.DST_IN 取两层图像交集部门,只显示下层图像
+     * PorterDuff.Mode.SRC_OUT 取上层图像非交集部门
+     * PorterDuff.Mode.DST_OUT 取下层图像非交集部门
+     * PorterDuff.Mode.SRC_ATOP 取下层图像非交集部门与上层图像交集部门
+     * PorterDuff.Mode.DST_ATOP 取上层图像非交集部门与下层图像交集部门
+     * PorterDuff.Mode.XOR 取两层图像的非交集部门
+     * <p>
+     */
+    public void mDrawSetXfermode(Canvas canvas) {
+
+        int saveCount = 0;
+        int ScreenWidth = ScreenUtils.getScreenWidth();
+        int ScreenHeight = ScreenUtils.getScreenHeight();
+        //1.绘制背景
+        m_rcBK = new RectF(0, 0, ScreenWidth, ScreenHeight);
+        Paint linePaint = new Paint();
+        linePaint.setAntiAlias(true);
+        linePaint.setColor(ContextCompat.getColor(mContext, R.color.nuts_515a90));
+        canvas.drawRoundRect(m_rcBK, 0, 0, linePaint);
+        //2.保存到新的图层
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            saveCount = canvas.saveLayer(m_rcBK, linePaint);
+        } else {
+            saveCount = canvas.saveLayer(m_rcBK, linePaint, Canvas.ALL_SAVE_FLAG);
+        }
+        //3.dest bitmap
+        Bitmap bitmap = PublicPracticalMethodFromJAVA.getInstance().martixCompress(mContext, R.mipmap.app_logo_shandian)
+                .copy(Bitmap.Config.ARGB_4444, true);
+        Rect rect_image_src = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        canvas.drawBitmap(bitmap, rect_image_src, rect_image_src, linePaint);
+        //4.设置 Xfermode
+        linePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        //5.src bitmap
+        canvas.translate(50, 50);
+        Bitmap bitmap2 = PublicPracticalMethodFromJAVA.getInstance().martixCompress(mContext, R.mipmap.app_logo_jingyong)
+                .copy(Bitmap.Config.ARGB_4444, true);
+        Rect rect_image_src2 = new Rect(0, 0, bitmap2.getWidth(), bitmap2.getHeight());
+        canvas.drawBitmap(bitmap2, rect_image_src2, rect_image_src2, linePaint);
+
+    }
+
 
     /**
-     * 替换背景图
+     * 清理屏幕
      */
-    public void mDrawSave() {
+    public void mDrawClearScreen(Canvas canvas) {
         Paint paint = new Paint();
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         mCanvas.drawPaint(paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC));
         invalidate();
+        mDrawBG(canvas);
     }
+
+    public Canvas getmCanvas() {
+        return mCanvas;
+    }
+
+    public int getMethodNums() {
+        return methodNums;
+    }
+
+    public void setMethodNums(int methodNums) {
+        this.methodNums = methodNums;
+    }
+
 
 }

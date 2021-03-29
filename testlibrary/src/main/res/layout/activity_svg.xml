@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/appwhite"
     android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".TestSVGActivity">
 
     <TextView
@@ -102,48 +104,65 @@
 
     <com.example.baselibrary.mvp.view.TestCustomView
         android:id="@+id/tcv"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="#242530"
         android:visibility="visible"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_clearscreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/dimen_10x"
-        android:text="清屏"
-        android:layout_marginTop="@dimen/dimen_10x"
-        android:layout_marginRight="@dimen/dimen_10x"
+        android:text="运行"
         android:textColor="@color/appblack"
         android:textSize="@dimen/dimen_18x"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/et_testcustom"
+        app:layout_constraintEnd_toStartOf="@+id/et_testcustom"
+        app:layout_constraintTop_toTopOf="@+id/et_testcustom" />
+
+    <EditText
+        android:id="@+id/et_testcustom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10x"
+        android:layout_marginEnd="@dimen/dimen_10x"
+        android:background="@null"
+        android:digits="1234567890"
+        android:hint="请输入你要选择序号"
+        android:inputType="textNoSuggestions"
+        android:maxLength="2"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorHint="@color/nuts_7a81b3"
+        android:textSize="@dimen/dimen_16x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/targetView"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/appgreen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone"
         android:layout_width="@dimen/dimen_150x"
-        android:layout_height="@dimen/dimen_150x">
+        android:layout_height="@dimen/dimen_150x"
+        android:background="@color/appgreen"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/iv_targetview"
             android:layout_width="@dimen/dimen_100x"
             android:layout_height="@dimen/dimen_100x"
+            android:scaleType="fitXY"
             android:src="@mipmap/test_ad_one"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:scaleType="fitXY"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
