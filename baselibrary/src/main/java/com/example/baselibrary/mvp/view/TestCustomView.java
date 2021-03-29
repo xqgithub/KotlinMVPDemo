@@ -700,6 +700,7 @@ public class TestCustomView extends View {
 
     /**
      * setXfermode：设置图形混合模式
+     * <p>
      * PorterDuff.Mode.CLEAR 清除画布上图像
      * PorterDuff.Mode.SRC 显示上层图像
      * PorterDuff.Mode.DST 显示下层图像
