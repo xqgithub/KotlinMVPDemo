@@ -47,5 +47,9 @@ abstract class BaseActivity : RxAppCompatActivity() {
      */
     protected abstract fun getLayoutId(): Int
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
 
 }

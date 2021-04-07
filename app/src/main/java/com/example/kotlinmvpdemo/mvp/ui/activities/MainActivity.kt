@@ -16,6 +16,7 @@ import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.mvp.entity.MessageEvent
 import com.example.baselibrary.mvp.entity.Person
+import com.example.baselibrary.mvp.service.TaskRemovedService
 import com.example.baselibrary.utils.*
 import com.example.baselibrary.utils.glideutils.GlideUtils
 import com.example.kotlinmvpdemo.R
@@ -80,6 +81,9 @@ class MainActivity : BaseActivity(), MainView {
 
         //初始化recyclerview
         initRecyclerview(false)
+
+        //启动服务当应用被移除的时候，做操作
+        startTaskRemovedService()
     }
 
 
@@ -305,6 +309,22 @@ class MainActivity : BaseActivity(), MainView {
         }
     }
 
+    /**
+     * TaskRemovedService
+     */
+    var serviceIntent: Intent? = null
+
+    //启动服务
+    private fun startTaskRemovedService() {
+        serviceIntent = Intent(this@MainActivity, TaskRemovedService::class.java)
+        startService(serviceIntent)
+    }
+
+    private fun stopTaskRemovedService() {
+        if (!StringUtils.isBlank(serviceIntent)) {
+            stopService(serviceIntent)
+        }
+    }
 
     /**
      *测试数据
@@ -388,5 +408,7 @@ class MainActivity : BaseActivity(), MainView {
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this)
         }
+
+        stopTaskRemovedService();
     }
 }
