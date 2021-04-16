@@ -1,21 +1,33 @@
 package com.example.testlibrary
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.widget.TextView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
+import com.example.baselibrary.utils.HandlerUtils
+import com.example.baselibrary.utils.HandlerUtils.OnReceiveMessageListener
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
+import com.example.baselibrary.utils.StringUtils
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import kotlinx.android.synthetic.main.activity_lambda.*
+import java.lang.ref.WeakReference
 
 /**
  *  lambda函数和高级函数的一些用法
  */
 @Route(path = RouterTag.LambdaActivity)
-class LambdaActivity : BaseActivity() {
+class LambdaActivity : BaseActivity(), OnReceiveMessageListener {
+
+    val handlerwhat = 1
+    var handler: Handler? = null
+
+
     override fun setupComponent(myAppComponet: MyAppComponet) {
     }
 
@@ -44,7 +56,9 @@ class LambdaActivity : BaseActivity() {
             try {
                 when (et_lambda.text.toString()) {
                     "1" -> {
-                        testLambda()
+//                        testLambda()
+                        handler = HandlerUtils.HandlerHolder(Looper.myLooper(), this@LambdaActivity, this)
+                        PublicPracticalMethodFromJAVA.getInstance().runHandlerFun(handler, handlerwhat, 100)
                     }
                     "2" -> {
                         LogUtils.i("testa的值为：${testa(7)}")
@@ -125,4 +139,21 @@ class LambdaActivity : BaseActivity() {
             LogUtils.i("a和b想加的值为:${c(a, b)}")
         }
     }
+
+    /**
+     * handlerMessage回调
+     */
+    override fun handlerMessage(msg: Message) {
+        when (msg.what) {
+            handlerwhat -> testLambda()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!StringUtils.isBlank(handler)) {
+            handler!!.removeCallbacksAndMessages(null)
+        }
+    }
+
 }

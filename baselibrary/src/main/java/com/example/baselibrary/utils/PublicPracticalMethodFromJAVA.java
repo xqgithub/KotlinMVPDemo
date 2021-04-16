@@ -13,6 +13,8 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.view.Display;
 import android.view.KeyCharacterMap;
@@ -171,16 +173,16 @@ public class PublicPracticalMethodFromJAVA {
     int targetwidth[] = {360, 384, 392,
             400, 410, 411, 428, 432, 480,
             533, 550, 592,
-            600, 640, 662,
+            600, 640, 662, 665, 670, 675, 680, 695,
             720, 768,
-            800, 811, 820,
-            960,
-            1024, 1280, 1365};
+            800, 805, 811, 820, 855, 860, 865, 895,
+            930, 960, 970,
+            1024, 1230, 1280, 1365};
 
     public void smallWidth() {
 
         for (int i = 0; i < targetwidth.length; i++) {
-            int width_num = 768;
+            int width_num = 360;
             double original_width = width_num;
             double target_width = targetwidth[i];
             int fileparam = targetwidth[i];
@@ -540,5 +542,17 @@ public class PublicPracticalMethodFromJAVA {
         LogUtils.i("压缩后图片的大小" + (bitmap.getByteCount() / 1024 / 1024)
                 + "M 宽度为" + bitmap.getWidth() + " 高度为" + bitmap.getHeight());
     }
+
+
+    /**
+     * 00012
+     * handler运行
+     */
+    public void runHandlerFun(Handler handler, int whatcode, long delayMillis) {
+        Message message = Message.obtain();
+        message.what = whatcode;
+        handler.sendMessageDelayed(message, delayMillis);
+    }
+
 
 }
