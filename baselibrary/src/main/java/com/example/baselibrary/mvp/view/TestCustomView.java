@@ -16,6 +16,7 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.core.content.ContextCompat;
@@ -60,70 +61,90 @@ public class TestCustomView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 //        super.onDraw(canvas);
+        LogUtils.i(ConfigConstants.TAG_ALL, "onDraw =-=");
+
         this.mCanvas = canvas;
+
+        if (methodNums == -1) {
+            return;
+        }
+
+        //清理屏幕
+        mDrawClearScreen();
+        //绘制背景
+        mDrawBG(mCanvas);
+
         if (methodNums == 1) {
-            mDrawClearScreen(canvas);
             mDrawColor(canvas);
         } else if (methodNums == 2) {
-            mDrawClearScreen(canvas);
             mDrawPoints(canvas);
         } else if (methodNums == 3) {
-            mDrawClearScreen(canvas);
             mDrawLine(canvas);
         } else if (methodNums == 4) {
-            mDrawClearScreen(canvas);
             mDrawRect(canvas);
         } else if (methodNums == 5) {
-            mDrawClearScreen(canvas);
             mDrawRoundRect(canvas);
         } else if (methodNums == 6) {
-            mDrawClearScreen(canvas);
             mDrawOval(canvas);
         } else if (methodNums == 7) {
-            mDrawClearScreen(canvas);
             mDrawCircle(canvas);
         } else if (methodNums == 8) {
-            mDrawClearScreen(canvas);
             mDrawArc(canvas);
         } else if (methodNums == 9) {
-            mDrawClearScreen(canvas);
             mDrawText(canvas);
         } else if (methodNums == 10) {
-            mDrawClearScreen(canvas);
             mDrawText2(canvas);
         } else if (methodNums == 11) {
-            mDrawClearScreen(canvas);
             mDrawText3(canvas);
         } else if (methodNums == 12) {
-            mDrawClearScreen(canvas);
             mDrawPicture(canvas);
         } else if (methodNums == 13) {
-            mDrawClearScreen(canvas);
             mDrawBitmap(canvas);
         } else if (methodNums == 14) {
-            mDrawClearScreen(canvas);
             mDrawTranslate(canvas);
         } else if (methodNums == 15) {
-            mDrawClearScreen(canvas);
             mDrawScale(canvas);
         } else if (methodNums == 16) {
-            mDrawClearScreen(canvas);
             mDrawSkew(canvas);
         } else if (methodNums == 17) {
-            mDrawClearScreen(canvas);
             mDrawClip(canvas);
         } else if (methodNums == 18) {
-            mDrawClearScreen(canvas);
             mDrawSave(canvas);
         } else if (methodNums == 19) {
-            mDrawClearScreen(canvas);
             mDrawSaveLayer(canvas);
         } else if (methodNums == 20) {
-            mDrawClearScreen(canvas);
             mDrawSetXfermode(canvas);
+        } else if (methodNums == 21) {
+            mDrawPath(canvas);
+        } else if (methodNums == 22) {
+            mDrawPath2(canvas);
+        } else if (methodNums == 23) {
+            mDrawPath3(canvas);
+        } else if (methodNums == 24) {
+            mDrawPath4(canvas);
+        } else if (methodNums == 25) {
+            mDrawPath5(canvas);
+        } else if (methodNums == 26) {
+            mDrawPath6(canvas);
+        } else if (methodNums == 27) {
+            mDrawPath7(canvas);
+        } else if (methodNums == 28) {
+            mDrawPath8(canvas);
+        } else if (methodNums == 29) {
+            mDrawPath9(canvas);
+        } else if (methodNums == 30) {
+            mDrawPath10(canvas);
+        } else {
+
         }
     }
 
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        LogUtils.i(ConfigConstants.TAG_ALL, "event.getAction() =-=" + event.getAction());
+        return super.onTouchEvent(event);
+    }
 
     private int getMySize(int defaultSize, int measureSpec) {
         int mySize = defaultSize;
@@ -691,10 +712,13 @@ public class TestCustomView extends View {
             LogUtils.i(ConfigConstants.TAG_ALL, "getSaveCount =-= " + canvas.getSaveCount());
         } else {
             //绘制背景
-            Paint linePaint = new Paint();
-            linePaint.setAntiAlias(true);
-            linePaint.setColor(Color.RED);
-            mCanvas.drawRoundRect(m_rcBK, 0, 0, linePaint);
+//            Paint linePaint = new Paint();
+//            linePaint.setAntiAlias(true);
+//            linePaint.setColor(Color.RED);
+//            mCanvas.drawRoundRect(m_rcBK, 0, 0, linePaint);
+
+            m_rcBK.setEmpty();
+            mDrawSaveLayer(canvas);
         }
     }
 
@@ -748,18 +772,413 @@ public class TestCustomView extends View {
 
     }
 
+    /***** Path 功能 start *****/
+
+    private Path path = new Path();
 
     /**
+     * moveTo方法
+     */
+    public void mDrawPath(Canvas canvas) {
+        // 使用moveTo（）
+        Paint mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        //类型1：Paint.Style.FILLANDSTROKE（描边+填充）
+        //类型2：Paint.Style.FILL（只填充不描边）
+        //类型3：Paint.Style.STROKE（只描边不填充）
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(3f);
+        mPaint.setAntiAlias(true);
+
+        //清除之前的绘制路径
+        path.reset();
+
+        // 起点默认是(0,0)
+        //连接点(400,500)
+        path.lineTo(400, 500);
+        // 将当前点移动到(300, 300)
+        path.moveTo(300, 300);
+        //连接点(900, 800)
+        path.lineTo(900, 800);
+        //连接点(200,700)
+        path.lineTo(200, 700);
+        // 闭合路径，即连接当前点和起点
+        // 即连接(200,700)与起点2(300, 300)
+        // 注:此时起点已经进行变换
+        path.close();
+        // 画出路径
+        canvas.drawPath(path, mPaint);
+    }
+
+    /**
+     * setLastPoint方法
+     */
+    public void mDrawPath2(Canvas canvas) {
+        // 使用setLastPoint（）
+        Paint mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        //类型1：Paint.Style.FILLANDSTROKE（描边+填充）
+        //类型2：Paint.Style.FILL（只填充不描边）
+        //类型3：Paint.Style.STROKE（只描边不填充）
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(3f);
+        mPaint.setAntiAlias(true);
+
+        //清除之前的绘制路径
+        path.reset();
+
+        // 起点默认是(0,0)
+        //连接点(400,500)
+        path.lineTo(400, 500);
+        // 将当前点移动到(300, 300),会影响之前的操作,但不将此设置为新起点
+        path.setLastPoint(300, 300);
+        //连接点(900, 800)
+        path.lineTo(900, 800);
+        //连接点(200,700)
+        path.lineTo(200, 700);
+        // 闭合路径，即连接当前点和起点
+        // 即连接(200,700)与起点2(300, 300)
+        // 注:此时起点已经进行变换
+        path.close();
+        // 画出路径
+        canvas.drawPath(path, mPaint);
+    }
+
+    /**
+     * 添加圆弧
+     * 方法1
+     * addArc (RectF oval, float startAngle, float sweepAngle)
+     * startAngle：确定角度的起始位置
+     * sweepAngle ： 确定扫过的角度
+     * <p>
+     * 方法2
+     * arcTo (RectF oval, float startAngle, float sweepAngle)
+     * 与上面方法唯一不同的是：如果圆弧的起点和上次最后一个坐标点不相同，就连接两个点
+     * <p>
+     * 方法3
+     * arcTo (RectF oval, float startAngle, float sweepAngle, boolean forceMoveTo)
+     * 参数forceMoveTo：是否将之前路径的结束点设置为圆弧起点
+     * true：在新的起点画圆弧，不连接最后一个点与圆弧起点，即与之前路径没有交集（同addArc（））
+     * false：在新的起点画圆弧，但会连接之前路径的结束点与圆弧起点，即与之前路径有交集（同arcTo（3参数））
+     */
+    public void mDrawPath3(Canvas canvas) {
+        Paint mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        //类型1：Paint.Style.FILLANDSTROKE（描边+填充）
+        //类型2：Paint.Style.FILL（只填充不描边）
+        //类型3：Paint.Style.STROKE（只描边不填充）
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(3f);
+        mPaint.setAntiAlias(true);
+
+        //清除之前的绘制路径
+        path.reset();
+
+        // 将一个圆弧路径添加到一条直线路径里
+        // 为了方便观察,平移坐标系
+        canvas.translate(350, 500);
+        // 先将原点(0,0)连接点(100,100)
+        path.lineTo(50, 200);
+        // 添加圆弧路径(2分之1圆弧)
+        // 不连接最后一个点与圆弧起点
+        RectF rectF = new RectF(200, 200, 300, 300);
+
+//        path.addArc(rectF, 0, 180);
+//        path.arcTo(rectF, 0, 180, true);
+
+        //连接之前路径的结束点与圆弧起点
+//        path.arcTo(rectF, 0, 180);
+        path.arcTo(rectF, 0, 180, false);
+
+
+        // 画出路径
+        canvas.drawPath(path, mPaint);
+    }
+
+    /**
+     * 加入圆形路径
+     * 起点：x轴正方向的0度
+     * 其中参数dir：指定绘制时是顺时针还是逆时针:CW为顺时针，  CCW为逆时针
+     * 路径起点变为圆在X轴正方向最大的点
+     * addCircle(float x, float y, float radius, Path.Direction dir)
+     * <p>
+     * 图形绘制的本质：先画点，再将点连接起来。所以，点与点之间是存在一个先后顺序的；顺时针和逆时针用户确定这些点的顺序
+     * 图形的方向影响的是：添加图形时确定闭合顺序(各个点的记录顺序)；图形的渲染结果(是判断图形渲染的重要条件)
+     */
+    public void mDrawPath4(Canvas canvas) {
+        Paint mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        //类型1：Paint.Style.FILLANDSTROKE（描边+填充）
+        //类型2：Paint.Style.FILL（只填充不描边）
+        //类型3：Paint.Style.STROKE（只描边不填充）
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(3f);
+        mPaint.setAntiAlias(true);
+
+        //清除之前的绘制路径
+        path.reset();
+        // 为了方便观察,平移坐标系
+        canvas.translate(350, 500);
+        // 先将原点(0,0)连接点(100,100)
+        path.lineTo(50, 200);
+
+        //添加圆
+        path.addCircle(50, 200, 50, Path.Direction.CW);
+
+        // 画出路径
+        canvas.drawPath(path, mPaint);
+    }
+
+    /**
+     * 加入椭圆形路径
+     * 其中，参数oval作为椭圆的外切矩形区域
+     * addOval(RectF oval, Path.Direction dir)
+     */
+    public void mDrawPath5(Canvas canvas) {
+        Paint mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        //类型1：Paint.Style.FILLANDSTROKE（描边+填充）
+        //类型2：Paint.Style.FILL（只填充不描边）
+        //类型3：Paint.Style.STROKE（只描边不填充）
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(3f);
+        mPaint.setAntiAlias(true);
+
+        //清除之前的绘制路径
+        path.reset();
+        // 为了方便观察,平移坐标系
+        canvas.translate(350, 500);
+        // 先将原点(0,0)连接点(100,100)
+        path.lineTo(50, 200);
+
+        //添加椭圆
+        RectF rectF = new RectF(200, 100, 300, 300);
+        path.addOval(rectF, Path.Direction.CW);
+
+        // 画出路径
+        canvas.drawPath(path, mPaint);
+    }
+
+
+    /**
+     * 添加矩形
+     * 路径起点变为矩形的左上角顶点
+     * addRect(RectF rect, Path.Direction dir)
+     */
+    public void mDrawPath6(Canvas canvas) {
+        Paint mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        //类型1：Paint.Style.FILLANDSTROKE（描边+填充）
+        //类型2：Paint.Style.FILL（只填充不描边）
+        //类型3：Paint.Style.STROKE（只描边不填充）
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(3f);
+        mPaint.setAntiAlias(true);
+
+        //清除之前的绘制路径
+        path.reset();
+        // 为了方便观察,平移坐标系
+        canvas.translate(350, 500);
+        // 先将原点(0,0)连接点(100,100)
+        path.lineTo(50, 200);
+
+        //添加矩形
+        RectF rectF = new RectF(200, 200, 300, 300);
+        path.addRect(rectF, Path.Direction.CW);
+
+        // 画出路径
+        canvas.drawPath(path, mPaint);
+    }
+
+    /**
+     * 添加圆角矩形路径
+     * 路径起点变为矩形的左上角顶点
+     * addRoundRect(RectF rect, float rx, float ry, Path.Direction dir)
+     */
+    public void mDrawPath7(Canvas canvas) {
+        Paint mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        //类型1：Paint.Style.FILLANDSTROKE（描边+填充）
+        //类型2：Paint.Style.FILL（只填充不描边）
+        //类型3：Paint.Style.STROKE（只描边不填充）
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(3f);
+        mPaint.setAntiAlias(true);
+
+        //清除之前的绘制路径
+        path.reset();
+        // 为了方便观察,平移坐标系
+        canvas.translate(350, 500);
+        // 先将原点(0,0)连接点(100,100)
+        path.lineTo(50, 200);
+
+        //添加矩形
+        RectF rectF = new RectF(200, 200, 300, 300);
+        path.addRoundRect(rectF, 10, 10, Path.Direction.CW);
+
+        // 画出路径
+        canvas.drawPath(path, mPaint);
+    }
+
+
+    /**
+     * 关于加入图形路径后会影响路径的起点
+     */
+    public void mDrawPath8(Canvas canvas) {
+
+        Paint mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        //类型1：Paint.Style.FILLANDSTROKE（描边+填充）
+        //类型2：Paint.Style.FILL（只填充不描边）
+        //类型3：Paint.Style.STROKE（只描边不填充）
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(3f);
+        mPaint.setAntiAlias(true);
+
+        //清除之前的绘制路径
+        path.reset();
+
+        //轨迹1
+/*        // 为了方便观察,平移坐标系
+        canvas.translate(400, 500);
+        // 起点是(0,0)，连接点(-100,0)
+        path.lineTo(-100, 0);
+        // 连接点(-100,200)
+        path.lineTo(-100, 200);
+        // 连接点(200,200)
+        path.lineTo(200, 200);
+        // 闭合路径，即连接当前点和起点
+        // 即连接(200,200)与起点是(0,0)
+        path.close();*/
+
+        //轨迹2
+        // 将Canvas坐标系移到屏幕正中
+        canvas.translate(400, 500);
+        // 起点是(0,0)，连接点(-100,0)
+        path.lineTo(-100, 0);
+        // 画圆：圆心=(0,0)，半径=100px
+        // 此时路径起点改变 = (0,100)（记为起点2）
+        // 起点改变原则：新画图形在x轴正方向的最后一个坐标
+        // 后面路径的变化以这个点继续下去
+        path.addCircle(0, 0, 100, Path.Direction.CCW);
+        // 起点为：(0,100)，连接 (-100,200)
+        path.lineTo(-100, 200);
+        // 连接 (200,200)
+        path.lineTo(200, 200);
+        // 闭合路径，即连接当前点和起点（注：闭合的是起点2）
+        // 即连接(200,200)与起点2(0,100)
+        path.close();
+
+
+        // 画出路径
+        canvas.drawPath(path, mPaint);
+    }
+
+    /**
+     * 添加路径
+     * 将路径1加到路径2里
+     * <p>
+     * 方法1
+     * addPath (Path src)
+     * <p>
+     * 方法2
+     * 先将src进行（x,y）位移之后再添加到当前path
+     * addPath (Path src, float dx, float dy)
+     * <p>
+     * 方法3
+     * 先将src进行Matrix变换再添加到当前path
+     * addPath (Path src, Matrix matrix)
+     */
+    //矩形路径对象
+    Path pathRect = new Path();
+    //圆形路径对象
+    Path pathCircle = new Path();
+
+    public void mDrawPath9(Canvas canvas) {
+
+        Paint mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        //类型1：Paint.Style.FILLANDSTROKE（描边+填充）
+        //类型2：Paint.Style.FILL（只填充不描边）
+        //类型3：Paint.Style.STROKE（只描边不填充）
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(3f);
+        mPaint.setAntiAlias(true);
+
+        //清除之前的绘制路径
+        pathRect.reset();
+
+        // 实例：合并矩形路径和圆形路径
+        // 为了方便观察,平移坐标系
+        canvas.translate(350, 500);
+        // 画一个矩形路径
+        pathRect.addRect(-200, -200, 200, 200, Path.Direction.CW);
+        //画一个圆形路径
+        pathCircle.addCircle(0, 0, 100, Path.Direction.CW);
+
+        // 将圆形路径移动(0,200),再添加到矩形路径里
+        pathRect.addPath(pathCircle, 0, 200);
+
+        // 画出路径
+        canvas.drawPath(pathRect, mPaint);
+    }
+
+
+    /**
+     * 判断路径属性
+     * 1.isEmpty ():判断path中是否包含内容
+     * 2.isRect (RectF rect):判断path是否是一个矩形,如果是一个矩形的话，会将矩形的信息存放进参数rect中。
+     * 3.set (Path src):将新的路径替代现有路径
+     * <p>
+     * 3.平移路径:与Canvas.translate （）平移画布类似
+     * 方法1：
+     * 参数x,y：平移位置
+     * offset (float dx, float dy)
+     * 方法2：
+     * 参数dst：存储平移后的路径状态，但不影响当前path，可通过dst参数绘制存储的路径
+     * offset (float dx, float dy, Path dst)
+     */
+    public void mDrawPath10(Canvas canvas) {
+
+        Paint mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        //类型1：Paint.Style.FILLANDSTROKE（描边+填充）
+        //类型2：Paint.Style.FILL（只填充不描边）
+        //类型3：Paint.Style.STROKE（只描边不填充）
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(3f);
+        mPaint.setAntiAlias(true);
+
+        //清除之前的绘制路径
+        path.reset();
+
+        boolean pathisEmpty = path.isEmpty();
+        LogUtils.i(ConfigConstants.TAG_ALL, "pathisEmpty1 =-=" + pathisEmpty);
+        path.lineTo(100, 100);
+        LogUtils.i(ConfigConstants.TAG_ALL, "pathisEmpty2 =-=" + pathisEmpty);
+
+    }
+
+
+    /***** Path 功能 end ***** /
+
+     /**
      * 清理屏幕
      */
-    public void mDrawClearScreen(Canvas canvas) {
+    public void mDrawClearScreen() {
         Paint paint = new Paint();
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         mCanvas.drawPaint(paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC));
-        invalidate();
-        mDrawBG(canvas);
     }
+
+    /**
+     * 刷新View
+     */
+    public void refreshInvalidate() {
+        invalidate();
+    }
+
 
     public Canvas getmCanvas() {
         return mCanvas;

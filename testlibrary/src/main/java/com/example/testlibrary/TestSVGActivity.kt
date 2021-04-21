@@ -1,19 +1,22 @@
 package com.example.testlibrary
 
+import android.R.attr
 import android.graphics.drawable.Animatable
-import android.os.Build
-import android.os.Bundle
+import android.os.*
+import android.view.MotionEvent
 import android.view.View
+import android.widget.EditText
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.baselibrary.base.BaseActivity
+import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
-import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
-import com.example.baselibrary.utils.clickWithTrigger
+import com.example.baselibrary.utils.*
 import example.com.testkotlin.haha.utils.showShortToastSafe
-import kotlinx.android.synthetic.main.activity_coroutine.*
 import kotlinx.android.synthetic.main.activity_svg.*
+
 
 /**
  * 1.SVG 动画测试
@@ -39,6 +42,7 @@ class TestSVGActivity : BaseActivity() {
         return R.layout.activity_svg
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initData()
@@ -51,16 +55,19 @@ class TestSVGActivity : BaseActivity() {
 
         tv_clearscreen.clickWithTrigger(500) {
 //            gestureViewBinder = null
+            if (StringUtils.isBlank(et_testcustom.text.toString())) {
+                return@clickWithTrigger
+            }
             val branch = et_testcustom.text.toString().toInt()
             when (branch) {
                 0 -> showShortToastSafe("请从序号1开始，哈哈")
                 else -> {
                     tcv.methodNums = branch
+                    et_testcustom!!.clearFocus()
+                    LogUtils.i(ConfigConstants.TAG_ALL, "tcv.methodNums =-=${tcv.methodNums}")
                 }
             }
-
         }
-
     }
 
     /**
@@ -79,4 +86,42 @@ class TestSVGActivity : BaseActivity() {
             }
         }
     }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        LogUtils.i(ConfigConstants.TAG_ALL, "ev.getAction() =-=" + ev.action)
+
+        if (ev.action == MotionEvent.ACTION_DOWN) {
+//            var v = currentFocus
+//            //清除EditText的焦点
+//            et_testcustom!!.clearFocus()
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
+    private var editText: EditText? = null
+
+    /**
+     *  判断是否点击在EditText内部
+     */
+    private fun isShouldEditTextInternal(v: View, event: MotionEvent): Boolean {
+        if (v != null && (v is EditText)) {
+            editText = v
+            val leftTop = intArrayOf(0, 0)
+            //获取输入框当前的location位置
+            v.getLocationInWindow(leftTop)
+            val left = leftTop[0]
+            val top = leftTop[1]
+            val bottom = top + v.getHeight()
+            val right = left + v.getWidth()
+            return !(event.x > left && event.x < right
+                    && event.y > top && event.y < bottom)
+        }
+        return false
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
 }
