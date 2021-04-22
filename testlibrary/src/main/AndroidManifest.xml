@@ -25,6 +25,10 @@
             android:name="com.example.testlibrary.TestScreenRecordActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.example.testlibrary.TestBezierActivity"
+            android:screenOrientation="portrait" />
+
         <service android:name="com.example.baselibrary.utils.screenrecord.RecordService" />
     </application>
 

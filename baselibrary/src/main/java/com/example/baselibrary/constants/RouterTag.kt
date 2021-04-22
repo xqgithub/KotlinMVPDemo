@@ -23,6 +23,9 @@ object RouterTag {
     //testlibary---TestScreenRecordActivity
     const val TestScreenRecordActivity = "/testlibary/TestScreenRecordActivity"
 
+    //testlibary---TestBezierActivity
+    const val TestBezierActivity = "/testlibary/TestBezierActivity"
+
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
 
