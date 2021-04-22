@@ -64,7 +64,7 @@ class TestSVGActivity : BaseActivity() {
                 else -> {
                     tcv.methodNums = branch
                     et_testcustom!!.clearFocus()
-                    LogUtils.i(ConfigConstants.TAG_ALL, "tcv.methodNums =-=${tcv.methodNums}")
+//                    LogUtils.i(ConfigConstants.TAG_ALL, "tcv.methodNums =-=${tcv.methodNums}")
                 }
             }
         }
@@ -88,7 +88,7 @@ class TestSVGActivity : BaseActivity() {
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        LogUtils.i(ConfigConstants.TAG_ALL, "ev.getAction() =-=" + ev.action)
+//        LogUtils.i(ConfigConstants.TAG_ALL, "ev.getAction() =-=" + ev.action)
 
         if (ev.action == MotionEvent.ACTION_DOWN) {
 //            var v = currentFocus

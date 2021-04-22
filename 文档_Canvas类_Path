@@ -56,3 +56,41 @@ B.b.具体使用 addPath
 A.采用isEmpty（）、 isRect（）、isConvex（）、 set（） 和 offset（）组合
 B.具体使用
 
+(6).设置路径填充颜色
+A.有四种填充模式,均封装在Path类中
+A.a. EVEN_ODD:奇偶规则(取path所在并不相交区域)
+A.b. INVERSE_EVEN_ODD:反奇偶规则(取path未占或相交区域)
+A.c. WINDING:非零环绕数规则(取path所有所在区域)
+A.d. NVERSE_WINDING:反非零环绕数规则(取path所有未占区域)
+
+(7).布尔操作
+A.作用：两个路径Path之间的运算
+B.应用场景:用简单的图形通过特定规则合成相对复杂的图形
+C.具体使用  参数：Path.Op.XXXXX的类型
+a.Path.Op.DIFFERENCE：path1不同于path2的区域
+b.Path.Op.REVERSE_DIFFERENCE：path2不同于path1的区域
+c.Path.Op.INTERSECT：path1与path2相交的区域
+d.Path.Op.UNION：path1与path2的和
+e.Path.Op.XOR：path1与path2的和并减去重叠的部分
+
+四、贝赛尔曲线
+1. 定义：计算曲线的数学公式
+2. 作用：计算并表示曲线
+任何一条曲线都可以用贝塞尔曲线表示
+3.具体使用：贝塞尔曲线可通过1数据点和若干个控制点描述
+(1).数据点：指路径的起始点和终止点；
+(2).控制点：决定了路径的弯曲轨迹；
+(3).n+1阶贝塞尔曲线 = 有n个控制点；
+(4).1阶 = 一条直线，高阶可以拆解为多条低阶曲线
+4.Canvas提供了画二阶 & 三阶贝塞尔曲线的方法
+// 绘制二阶贝塞尔曲线
+//  (x1,y1)为控制点，(x2,y2)为终点
+quadTo(float x1, float y1, float x2, float y2)
+//  (x1,y1)为控制点距离起点的偏移量，(x2,y2)为终点距离起点的偏移量
+rQuadTo(float x1, float y1, float x2, float y2)
+
+// 绘制三阶贝塞尔曲线
+// (x1,y1),(x2,y2)为控制点，(x3,y3)为终点
+cubicTo(float x1, float y1, float x2, float y2, float x3, float y3)
+// (x1,y1)，(x2,y2)为控制点距离起点的偏移量，(x3,y3)为终点距离起点的偏移量
+rCubicTo(float x1, float y1, float x2, float y2, float x3, float y3)

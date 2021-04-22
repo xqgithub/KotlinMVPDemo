@@ -61,7 +61,7 @@ public class TestCustomView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 //        super.onDraw(canvas);
-        LogUtils.i(ConfigConstants.TAG_ALL, "onDraw =-=");
+//        LogUtils.i(ConfigConstants.TAG_ALL, "onDraw =-=");
 
         this.mCanvas = canvas;
 
@@ -134,8 +134,10 @@ public class TestCustomView extends View {
             mDrawPath9(canvas);
         } else if (methodNums == 30) {
             mDrawPath10(canvas);
-        } else {
-
+        } else if (methodNums == 31) {
+            mDrawPath11(canvas);
+        } else if (methodNums == 32) {
+            mDrawPath12(canvas);
         }
     }
 
@@ -1152,11 +1154,123 @@ public class TestCustomView extends View {
         //清除之前的绘制路径
         path.reset();
 
-        boolean pathisEmpty = path.isEmpty();
-        LogUtils.i(ConfigConstants.TAG_ALL, "pathisEmpty1 =-=" + pathisEmpty);
-        path.lineTo(100, 100);
-        LogUtils.i(ConfigConstants.TAG_ALL, "pathisEmpty2 =-=" + pathisEmpty);
+        //判断path路径是否为空
+//        boolean pathisEmpty = path.isEmpty();
+//        LogUtils.i(ConfigConstants.TAG_ALL, "pathisEmpty1 =-=" + pathisEmpty);
+//        path.lineTo(100, 100);
+//        boolean pathisEmpty2 = path.isEmpty();
+//        LogUtils.i(ConfigConstants.TAG_ALL, "pathisEmpty2 =-=" + pathisEmpty2);
 
+        //判断path路径是否是一个矩形
+//        path.lineTo(0, 400);
+//        path.lineTo(400, 400);
+//        path.lineTo(400, 0);
+//        path.lineTo(0, 0);
+//        RectF rect = new RectF();
+//        boolean pathisRectF = path.isRect(rect);
+//        LogUtils.i(ConfigConstants.TAG_ALL, "pathisRectF =-=" + pathisRectF);
+
+
+        //将新的路径替代现有路径
+//        canvas.translate(300, 500);
+//        Path path = new Path();
+//        path.addRect(-200, -200, 200, 200, Path.Direction.CW);
+//        // 设置一圆形路径
+//        Path src = new Path();
+//        src.addCircle(0, 0, 100, Path.Direction.CW);
+//        // 将圆形路径代替矩形路径
+//        path.set(src);
+
+        //平移路径
+        canvas.translate(350, 500);
+        // path中添加一个圆形(圆心在坐标原点)
+        path = new Path();
+        path.addCircle(0, 0, 100, Path.Direction.CW);
+        // 平移路径并存储平移后的状态
+        Path dst = new Path();
+        path.offset(400, 0, dst);
+        // 画出路径
+        canvas.drawPath(path, mPaint);
+        // 通过dst绘制平移后的图形(蓝色)
+        mPaint.setColor(Color.BLUE);
+        canvas.drawPath(dst, mPaint);
+
+    }
+
+    /**
+     * 设置路径填充颜色
+     * 1.path.setFillType():设置填充规则
+     * 2.path.getFillType():获取当前填充规则
+     * 3.path.isInverseFillType():判断是否是反向(INVERSE)规则
+     * 4.path.toggleInverseFillType():切换填充规则(即原有规则与反向规则之间相互切换)
+     */
+    public void mDrawPath11(Canvas canvas) {
+
+        Paint mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        //类型1：Paint.Style.FILLANDSTROKE（描边+填充）
+        //类型2：Paint.Style.FILL（只填充不描边）
+        //类型3：Paint.Style.STROKE（只描边不填充）
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setStrokeWidth(3f);
+        mPaint.setAntiAlias(true);
+
+        //清除之前的绘制路径
+        path.reset();
+
+        // 为了方便观察,平移坐标系
+        canvas.translate(350, 500);
+        // 在Path中添加一个矩形
+        path.addCircle(300, 300, 150, Path.Direction.CW);
+        path.addCircle(380, 380, 150, Path.Direction.CW);
+//        path.setFillType(Path.FillType.EVEN_ODD);
+//        path.setFillType(Path.FillType.INVERSE_EVEN_ODD);
+//        path.setFillType(Path.FillType.WINDING);
+        path.setFillType(Path.FillType.INVERSE_WINDING);
+        // 画出路径
+        canvas.drawPath(path, mPaint);
+    }
+
+    /**
+     * 布尔操作
+     * 1.op (Path path, Path.Op op)
+     * 对 path1 和 path2 执行布尔运算，运算方式由第二个参数指定,运算结果存入到path1中
+     * <p>
+     * 2.op (Path path1, Path path2, Path.Op op)
+     * 对 path1 和 path2 执行布尔运算，运算方式由第三个参数指定，运算结果存入到path3中
+     */
+    public void mDrawPath12(Canvas canvas) {
+
+        Paint mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        //类型1：Paint.Style.FILLANDSTROKE（描边+填充）
+        //类型2：Paint.Style.FILL（只填充不描边）
+        //类型3：Paint.Style.STROKE（只描边不填充）
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setStrokeWidth(3f);
+        mPaint.setAntiAlias(true);
+
+        //清除之前的绘制路径
+        path.reset();
+
+        // 为了方便观察,平移坐标系
+        canvas.translate(550, 550);
+
+
+        Path path1 = new Path();
+        Path path2 = new Path();
+
+        // 画两个圆
+        // 圆1:圆心 = (0,0),半径 = 100
+        // 圆2:圆心 = (50,0),半径 = 100
+        path1.addCircle(0, 0, 100, Path.Direction.CW);
+        path2.addCircle(50, 0, 100, Path.Direction.CW);
+//        path1.op(path2, Path.Op.DIFFERENCE);
+//        path1.op(path2, Path.Op.REVERSE_DIFFERENCE);
+//        path1.op(path2, Path.Op.INTERSECT);
+//        path1.op(path2, Path.Op.UNION);
+        path1.op(path2, Path.Op.XOR);
+        canvas.drawPath(path1, mPaint);
     }
 
 
