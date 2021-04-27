@@ -58,6 +58,7 @@ class TestBezierActivity : BaseActivity() {
                         pmb_view.visibility = View.GONE
                         wb_view.visibility = View.GONE
                         pb_view.visibility = View.GONE
+                        cbp_view.visibility = View.GONE
                     }
                     "2" -> {
                         sob_view.visibility = View.GONE
@@ -66,6 +67,7 @@ class TestBezierActivity : BaseActivity() {
                         pmb_view.visibility = View.GONE
                         wb_view.visibility = View.GONE
                         pb_view.visibility = View.GONE
+                        cbp_view.visibility = View.GONE
                     }
                     "3" -> {
                         sob_view.visibility = View.GONE
@@ -74,6 +76,7 @@ class TestBezierActivity : BaseActivity() {
                         pmb_view.visibility = View.GONE
                         wb_view.visibility = View.GONE
                         pb_view.visibility = View.GONE
+                        cbp_view.visibility = View.GONE
                     }
                     "4" -> {
                         sob_view.visibility = View.GONE
@@ -82,6 +85,7 @@ class TestBezierActivity : BaseActivity() {
                         pmb_view.visibility = View.VISIBLE
                         wb_view.visibility = View.GONE
                         pb_view.visibility = View.GONE
+                        cbp_view.visibility = View.GONE
                     }
                     "5" -> {
                         sob_view.visibility = View.GONE
@@ -90,6 +94,7 @@ class TestBezierActivity : BaseActivity() {
                         pmb_view.visibility = View.GONE
                         wb_view.visibility = View.VISIBLE
                         pb_view.visibility = View.GONE
+                        cbp_view.visibility = View.GONE
                     }
                     "6" -> {
                         sob_view.visibility = View.GONE
@@ -98,6 +103,16 @@ class TestBezierActivity : BaseActivity() {
                         pmb_view.visibility = View.GONE
                         wb_view.visibility = View.GONE
                         pb_view.visibility = View.VISIBLE
+                        cbp_view.visibility = View.GONE
+                    }
+                    "7" -> {
+                        sob_view.visibility = View.GONE
+                        tob_view.visibility = View.GONE
+                        dpb_view.visibility = View.GONE
+                        pmb_view.visibility = View.GONE
+                        wb_view.visibility = View.GONE
+                        pb_view.visibility = View.GONE
+                        cbp_view.visibility = View.VISIBLE
                     }
                     else -> {
                         showShortToastSafe("序号错误，请检查")
