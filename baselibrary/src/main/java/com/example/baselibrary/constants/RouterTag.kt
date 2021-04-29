@@ -26,6 +26,9 @@ object RouterTag {
     //testlibary---TestBezierActivity
     const val TestBezierActivity = "/testlibary/TestBezierActivity"
 
+    //testlibary---TestPropertyAnimationActivity
+    const val TestPropertyAnimationActivity = "/testlibary/TestPropertyAnimationActivity"
+
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
 

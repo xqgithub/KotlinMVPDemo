@@ -1,0 +1,65 @@
+Android动画---属性动画
+一、属性动画出现的原因:为了解决视图动画的缺陷，android系统提供了属性动画
+1.属性动画（Property Animation）是在 Android 3.0（API 11）后才提供的一种全新动画模式
+2.一开始就提供了两种实现动画的方式：
+(1)逐帧动画（Frame Animation）
+(2)补间动画（ Tweened animation ）
+3.逐帧动画 & 补间动画存在一定的缺点:
+(1)作用对象局限：View   只能够作用在视图View上，即只可以对一个Button、TextView、甚至是LinearLayout、或者其它继承自View的组件进行动画操作，但无法对非View的对象进行动画操作
+A.有些情况下的动画效果只是视图的某个属性 & 对象而不是整个视图；
+B.如，现需要实现视图的颜色动态变化，那么就需要操作视图的颜色属性从而实现动画效果，而不是针对整个视图进行动画操作
+(2)没有改变View的属性，只是改变视觉效果
+A.补间动画只是改变了View的视觉效果，而不会真正去改变View的属性
+(3)动画效果单一
+A.补间动画只能实现平移、旋转、缩放 & 透明度这些简单的动画需求
+B.一旦遇到相对复杂的动画效果，即超出了上述4种动画效果，那么补间动画则无法实现
+
+二、属性动画简介
+1.作用对象：任意 Java 对象
+2.实现的动画效果：可自定义各种动画效果
+
+三、特点
+1.作用对象进行了扩展：不只是View对象，甚至没对象也可以
+2.动画效果：不只是4种基本变换，还有其他动画效果
+3.作用领域：API11后引入的
+
+四、工作原理
+1.在一定时间间隔内，通过不断对值进行改变，并不断将该值赋给对象的属性，从而实现该对象在该属性上的动画效果
+2.从上述工作原理可以看出属性动画有两个非常重要的类：ValueAnimator 类 & ObjectAnimator 类
+
+五、ValueAnimator类
+1.属性动画机制中 最核心的一个类
+2.实现动画的原理：通过不断控制 值 的变化，再不断 手动 赋给对象的属性，从而实现动画效果
+3.三个重要方法：
+(1)ValueAnimator.ofInt（int values）
+A.将初始值 以整型数值的形式 过渡到结束值
+(2)ValueAnimator.ofFloat（float values）
+A.将初始值 以浮点型数值的形式 过渡到结束值
+B.ValueAnimator.oFloat（）采用默认的浮点型估值器 (FloatEvaluator),ValueAnimator.ofInt（）采用默认的整型估值器（IntEvaluator）
+(3)ValueAnimator.ofObject（int values）
+A.作用：**将初始值 以对象的形式 过渡到结束值 **
+B.需自定义估值器（TypeEvaluator）来告知系统如何进行从 初始对象 过渡到 结束对象的逻辑
+C.本质还是操作 ** 值 **，只是是采用将 多个值 封装到一个对象里的方式 同时对多个值一起操作而已
+
+
+六、ObjectAnimator类
+1.直接对对象的属性值进行改变操作，从而实现动画效果
+(1)如直接改变 View的 alpha 属性 从而实现透明度的动画效果
+(2)继承自ValueAnimator类，即底层的动画实现机制是基于ValueAnimator类
+2.工作原理可以看出：ObjectAnimator与 ValueAnimator类的区别
+(1)ValueAnimator 类是先改变值，然后 手动赋值 给对象的属性从而实现动画；是 间接 对对象属性进行操作
+(2)ObjectAnimator 类是先改变值，然后 自动赋值 给对象的属性从而实现动画；是 直接 对对象属性进行操作
+3.自定义ObjectAnimator
+(1)ObjectAnimator.ofFloat(Object object, String property, float ....values),第二个参数传入值的作用是：让ObjectAnimator类根据传入的属性名 去寻找 该对象对应属性名的 set（） & get（）方法，从而进行对象属性值的赋值
+(2)对象必须要提供属性a的set（）方法
+(3)对象提供的 属性a的set（）方法 对 属性a的改变 必须通过某种方法反映出来
+
+
+七、动画组合（AnimatorSet 类）
+1.
+
+
+八、估值器（TypeEvaluator） 介绍
+1.设置动画 如何从初始值 过渡到 结束值 的逻辑
+A.插值器（Interpolator）决定 值 的变化模式（匀速、加速blabla）;
+B.估值器（TypeEvaluator）决定 值 的具体变化数值

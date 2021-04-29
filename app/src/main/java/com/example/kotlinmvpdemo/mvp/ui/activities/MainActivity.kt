@@ -272,6 +272,7 @@ class MainActivity : BaseActivity(), MainView {
                     33 -> ARouter.getInstance().build(RouterTag.ReflectionActivity).navigation()
                     34 -> ARouter.getInstance().build(RouterTag.TestScreenRecordActivity).navigation()
                     35 -> ARouter.getInstance().build(RouterTag.TestBezierActivity).navigation()
+                    36 -> ARouter.getInstance().build(RouterTag.TestPropertyAnimationActivity).navigation()
                 }
             }
         })
@@ -366,7 +367,8 @@ class MainActivity : BaseActivity(), MainView {
         "Rxjava2使用方法",
         "反射的使用方法",
         "录屏测试",
-        "贝塞尔曲线"
+        "贝塞尔曲线",
+        "属性动画和视图动画"
     )
 
     /**
