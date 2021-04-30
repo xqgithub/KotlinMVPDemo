@@ -87,4 +87,25 @@
         android:layout_height="wrap_content" />
 
 
+    <!--帧动画-->
+    <RelativeLayout
+        android:id="@+id/rl_frameanimation"
+        android:layout_width="@dimen/dimen_100x"
+        android:layout_height="@dimen/dimen_90x"
+        android:background="@drawable/dialog_shape_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_loading_animation"
+            android:layout_width="@dimen/dimen_50x"
+            android:layout_height="@dimen/dimen_50x"
+            android:layout_centerInParent="true"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

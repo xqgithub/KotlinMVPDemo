@@ -56,10 +56,59 @@ C.本质还是操作 ** 值 **，只是是采用将 多个值 封装到一个对
 
 
 七、动画组合（AnimatorSet 类）
-1.
+AnimatorSet.play(Animator anim)   ：播放当前动画
+AnimatorSet.after(long delay)   ：将现有动画延迟x毫秒后执行
+AnimatorSet.with(Animator anim)   ：将现有动画和传入的动画同时执行
+AnimatorSet.after(Animator anim)   ：将现有动画插入到传入的动画之后执行
+AnimatorSet.before(Animator anim) ：  将现有动画插入到传入的动画之前执行
 
+八、ViewPropertyAnimator用法
+1.作用：面向对象操作的属性动画使用 - ViewPropertyAnimator类
+2.示例：View.animate().xxx().xxx()
 
-八、估值器（TypeEvaluator） 介绍
+九、估值器（TypeEvaluator） 介绍
 1.设置动画 如何从初始值 过渡到 结束值 的逻辑
 A.插值器（Interpolator）决定 值 的变化模式（匀速、加速blabla）;
 B.估值器（TypeEvaluator）决定 值 的具体变化数值
+
+
+
+Android动画---视图动画
+一、视图动画分类
+1.补间动画
+2.逐帧动画
+
+二、作用对象
+1.视图控件(view)
+2.如android的TextView、Button等等
+3.不可作用于view的组件，如颜色、背景、长度等等
+
+三、原理
+通过确定开始的视图样式 & 结束的视图样式、中间动画变化过程由系统补全来确定一个动画
+1.结束的视图样式：平移、缩放、旋转 & 透明度样式
+2.即补间动画的动画效果就是：平移、缩放、旋转 & 透明度动画
+
+四、分类
+1.平移动画（Translate）
+(1)对应的子类：TranslateAnimation
+(2)原理：移动视图的位置
+2.缩放动画（scale）
+(1)对应的子类：ScaleAnimation
+(2)原理：放大/缩小 视图的大小
+3.旋转动画（rotate）
+(1)对应的子类：RotateAnimation
+(2)原理：旋转视图的角度
+4.透明度动画（alpha）
+(1)对应的子类：AlphaAnimation
+(2)原理:改变视图的透明度
+
+
+
+
+
+
+
+
+
+
+

@@ -4,4 +4,29 @@
         <attr name="textview1" format="integer" />
         <attr name="textview2" format="integer" />
     </declare-styleable>
+
+
+    <string-array name="loading_anim">
+        <item>@mipmap/progress_circle_animation1</item>
+        <item>@mipmap/progress_circle_animation2</item>
+        <item>@mipmap/progress_circle_animation3</item>
+        <item>@mipmap/progress_circle_animation4</item>
+        <item>@mipmap/progress_circle_animation5</item>
+        <item>@mipmap/progress_circle_animation6</item>
+        <item>@mipmap/progress_circle_animation7</item>
+        <item>@mipmap/progress_circle_animation8</item>
+        <item>@mipmap/progress_circle_animation9</item>
+        <item>@mipmap/progress_circle_animation10</item>
+        <item>@mipmap/progress_circle_animation11</item>
+        <item>@mipmap/progress_circle_animation12</item>
+        <item>@mipmap/progress_circle_animation13</item>
+        <item>@mipmap/progress_circle_animation14</item>
+        <item>@mipmap/progress_circle_animation15</item>
+        <item>@mipmap/progress_circle_animation16</item>
+        <item>@mipmap/progress_circle_animation17</item>
+        <item>@mipmap/progress_circle_animation18</item>
+        <item>@mipmap/progress_circle_animation19</item>
+        <item>@mipmap/progress_circle_animation20</item>
+    </string-array>
+
 </resources>

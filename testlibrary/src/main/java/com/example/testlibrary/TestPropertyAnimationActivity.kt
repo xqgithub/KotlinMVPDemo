@@ -1,9 +1,12 @@
 package com.example.testlibrary
 
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
+import android.view.animation.*
+import androidx.core.animation.*
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
@@ -11,6 +14,7 @@ import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.mvp.view.ObjectAnimatorCustomView
 import com.example.baselibrary.mvp.view.typeevaluator.ColorEvaluator
+import com.example.baselibrary.utils.AnimationsContainer
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import example.com.testkotlin.haha.utils.showShortToastSafe
@@ -57,6 +61,7 @@ class TestPropertyAnimationActivity : BaseActivity() {
                     vacv_view.visibility = View.GONE
                     btn2.visibility = View.GONE
                     oacv_view.visibility = View.GONE
+                    rl_frameanimation.visibility = View.GONE
                     playValueAnimator()
                 }
                 "2" -> {
@@ -64,12 +69,14 @@ class TestPropertyAnimationActivity : BaseActivity() {
                     vacv_view.visibility = View.VISIBLE
                     btn2.visibility = View.GONE
                     oacv_view.visibility = View.GONE
+                    rl_frameanimation.visibility = View.GONE
                 }
                 "3" -> {
                     btn.visibility = View.GONE
                     vacv_view.visibility = View.GONE
                     btn2.visibility = View.VISIBLE
                     oacv_view.visibility = View.GONE
+                    rl_frameanimation.visibility = View.GONE
                     playObjectAnimator()
                 }
                 "4" -> {
@@ -77,11 +84,42 @@ class TestPropertyAnimationActivity : BaseActivity() {
                     vacv_view.visibility = View.GONE
                     btn2.visibility = View.GONE
                     oacv_view.visibility = View.VISIBLE
+                    rl_frameanimation.visibility = View.GONE
                     playObjectAnimator2()
+                }
+                "5" -> {
+                    btn.visibility = View.GONE
+                    vacv_view.visibility = View.GONE
+                    btn2.visibility = View.VISIBLE
+                    oacv_view.visibility = View.GONE
+                    rl_frameanimation.visibility = View.GONE
+                    playAnimatorSet()
+                }
+                "6" -> {
+                    btn.visibility = View.GONE
+                    vacv_view.visibility = View.GONE
+                    btn2.visibility = View.VISIBLE
+                    oacv_view.visibility = View.GONE
+                    rl_frameanimation.visibility = View.GONE
+                    playViewAnimation()
+                }
+                "7" -> {
+                    btn.visibility = View.GONE
+                    vacv_view.visibility = View.GONE
+                    btn2.visibility = View.VISIBLE
+                    oacv_view.visibility = View.GONE
+                    rl_frameanimation.visibility = View.VISIBLE
+                    playframeAnimation()
                 }
                 else -> showShortToastSafe("序号错误，请检查")
             }
         }
+
+
+        //初始化帧动画
+        var animationscontainer = AnimationsContainer.getInstance()
+        animationscontainer.setResourceValue(this@TestPropertyAnimationActivity, R.array.loading_anim, 58)
+        animation_framessequenceanimation = animationscontainer.createProgressDialogAnim(iv_loading_animation)
     }
 
 
@@ -141,6 +179,7 @@ class TestPropertyAnimationActivity : BaseActivity() {
         animator.repeatMode = ObjectAnimator.RESTART
         animator.start()
 
+
         //翻转动画
         var animator2 = ObjectAnimator.ofFloat(btn2, "rotation", 0f, 360f)
         animator2.duration = 3000
@@ -177,6 +216,95 @@ class TestPropertyAnimationActivity : BaseActivity() {
         objectAnimator.repeatMode = ObjectAnimator.RESTART
         objectAnimator.start()
     }
+
+    /**
+     * 组合动画
+     */
+    private fun playAnimatorSet() {
+        //透明度动画
+        var animator = ObjectAnimator.ofFloat(btn2, "alpha", 1f, 0f, 1f)
+
+
+        //翻转动画
+        var animator2 = ObjectAnimator.ofFloat(btn2, "rotation", 0f, 360f)
+
+
+        //平移动画
+        var curTranslationX = btn2.translationX
+        var animator3 = ObjectAnimator.ofFloat(btn2, "translationX", curTranslationX, 400f, curTranslationX)
+
+
+        //缩放动画
+        var animator4 = ObjectAnimator.ofFloat(btn2, "scaleX", 1f, 3f, 1f)
+
+        //创建组合动画的对象
+        var animatorset = AnimatorSet()
+        //1.运行animator4；2.运行animator和animator2；3.运行animator3
+        animatorset.play(animator).with(animator2).before(animator3).after(animator4)
+        animatorset.duration = 3000
+        animatorset.start()
+    }
+
+    /**
+     * 视图动画---补间动画
+     */
+    private fun playViewAnimation() {
+        //平移动画
+        var translateAnimation = TranslateAnimation(0f, 300f, 0f, 300f)
+        translateAnimation.duration = 3000
+//        btn2.startAnimation(translateAnimation)
+
+        //缩放动画
+        var scaleAnimation = ScaleAnimation(0f, 2f, 0f, 2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        scaleAnimation.duration = 3000
+//        btn2.startAnimation(scaleAnimation)
+
+        //旋转动画
+        var rotateAnimation = RotateAnimation(0f, 270f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        rotateAnimation.duration = 3000
+//        btn2.startAnimation(rotateAnimation)
+
+        //透明度动画
+        var alphaAnimation = AlphaAnimation(1f, 0f)
+        alphaAnimation.duration = 3000
+//        btn2.startAnimation(alphaAnimation)
+
+
+        //组合动画
+        var setAnimation = AnimationSet(true)
+        setAnimation.repeatMode = 1
+        setAnimation.repeatMode = Animation.RESTART
+        setAnimation.addAnimation(translateAnimation)
+        setAnimation.addAnimation(scaleAnimation)
+        setAnimation.addAnimation(rotateAnimation)
+        setAnimation.addAnimation(alphaAnimation)
+        btn2.startAnimation(setAnimation)
+    }
+
+
+    /**
+     * 视图动画---帧动画
+     */
+    private var animation_framessequenceanimation: AnimationsContainer.FramesSequenceAnimation? = null
+    private var framesAnimationIsRunning = false
+    private fun playframeAnimation() {
+        if (framesAnimationIsRunning) {
+            animation_framessequenceanimation!!.stop()
+        } else {
+            animation_framessequenceanimation!!.start()
+        }
+
+        animation_framessequenceanimation!!.setOnAnimListener(object : AnimationsContainer.OnAnimationListener {
+            override fun AnimationStarted() {
+                framesAnimationIsRunning = true
+            }
+
+            override fun AnimationStopped() {
+                framesAnimationIsRunning = false
+            }
+        })
+    }
+
 
     override fun onStart() {
         super.onStart()
