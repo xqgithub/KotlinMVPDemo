@@ -36,6 +36,12 @@ android {
 //        }
 //    }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
     signingConfigs {
         jks_config {
             keyAlias rootProject.ext.signingConfig.keyAlias

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".TestCustomInputBoxActivity">
+
+    <com.wynsbin.vciv.VerificationCodeInputView
+        android:id="@+id/et_vciv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_30x"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dimen_30x"
+        app:vciv_et_background="@color/transparent"
+        app:vciv_et_foucs_background="@color/transparent"
+        app:vciv_et_cursor_color="@color/login_submit_bg_end"
+        app:vciv_et_spacing="@dimen/dimen_20x"
+        app:vciv_et_height="@dimen/dimen_30x"
+        app:vciv_et_inputType="number"
+        app:vciv_et_number="5"
+        app:vciv_et_text_color="@color/appblack"
+        app:vciv_et_text_size="@dimen/dimen_18x"
+        app:vciv_et_underline_default_color="@color/line_unselected"
+        app:vciv_et_underline_focus_color="@color/line_unselected"
+        app:vciv_et_underline_height="@dimen/dimen_1x"
+        app:vciv_et_underline_show="true"
+        app:vciv_et_width="@dimen/dimen_30x"
+        android:orientation="horizontal" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

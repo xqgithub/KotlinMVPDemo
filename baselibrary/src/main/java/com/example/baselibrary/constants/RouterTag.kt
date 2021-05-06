@@ -29,6 +29,9 @@ object RouterTag {
     //testlibary---TestPropertyAnimationActivity
     const val TestPropertyAnimationActivity = "/testlibary/TestPropertyAnimationActivity"
 
+    //testlibary---TestCustomInputBoxActivity
+    const val TestCustomInputBoxActivity = "/testlibary/TestCustomInputBoxActivity"
+
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
 

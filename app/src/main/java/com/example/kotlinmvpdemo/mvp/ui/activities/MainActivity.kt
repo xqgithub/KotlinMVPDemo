@@ -273,6 +273,7 @@ class MainActivity : BaseActivity(), MainView {
                     34 -> ARouter.getInstance().build(RouterTag.TestScreenRecordActivity).navigation()
                     35 -> ARouter.getInstance().build(RouterTag.TestBezierActivity).navigation()
                     36 -> ARouter.getInstance().build(RouterTag.TestPropertyAnimationActivity).navigation()
+                    37 -> ARouter.getInstance().build(RouterTag.TestCustomInputBoxActivity).navigation()
                 }
             }
         })
@@ -368,7 +369,8 @@ class MainActivity : BaseActivity(), MainView {
         "反射的使用方法",
         "录屏测试",
         "贝塞尔曲线",
-        "属性动画和视图动画"
+        "属性动画和视图动画",
+        "自定义验证码输入框样式"
     )
 
     /**
