@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_week"
+    android:layout_width="0dp"
+    android:layout_height="@dimen/dimen_40x"
+    android:background="#FFFFFF"
+    android:minHeight="@dimen/dimen_40x"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/dimen_8x"
+    android:paddingTop="@dimen/dimen_8x"
+    tools:ignore="HardcodedText">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/dimen_7x"
+        android:gravity="center"
+        android:text="@string/sun"
+        android:textColor="@color/full_red"
+        android:textSize="@dimen/dimen_12x" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/mon"
+        android:textColor="#e1e1e1"
+        android:textSize="@dimen/dimen_12x" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/tue"
+        android:textColor="#e1e1e1"
+        android:textSize="@dimen/dimen_12x" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/wed"
+        android:textColor="#e1e1e1"
+        android:textSize="@dimen/dimen_12x" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/thu"
+        android:textColor="#e1e1e1"
+        android:textSize="@dimen/dimen_12x" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/fri"
+        android:textColor="#e1e1e1"
+        android:textSize="@dimen/dimen_12x" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/sat"
+        android:layout_marginRight="@dimen/dimen_7x"
+        android:textColor="@color/full_red"
+        android:textSize="@dimen/dimen_12x" />
+</merge>

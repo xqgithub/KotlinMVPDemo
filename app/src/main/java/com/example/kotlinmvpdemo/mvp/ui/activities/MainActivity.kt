@@ -274,6 +274,7 @@ class MainActivity : BaseActivity(), MainView {
                     35 -> ARouter.getInstance().build(RouterTag.TestBezierActivity).navigation()
                     36 -> ARouter.getInstance().build(RouterTag.TestPropertyAnimationActivity).navigation()
                     37 -> ARouter.getInstance().build(RouterTag.TestCustomInputBoxActivity).navigation()
+                    38 -> ARouter.getInstance().build(RouterTag.TestCalendarViewActivity).navigation()
                 }
             }
         })
@@ -370,7 +371,8 @@ class MainActivity : BaseActivity(), MainView {
         "录屏测试",
         "贝塞尔曲线",
         "属性动画和视图动画",
-        "自定义验证码输入框样式"
+        "自定义验证码输入框样式",
+        "自定义日历控件"
     )
 
     /**

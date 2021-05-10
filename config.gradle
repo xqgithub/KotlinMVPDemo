@@ -57,8 +57,9 @@ ext {
             rxlifecycle                       : "3.0.0",
             rxlifecycle_android               : "3.0.0",
             rxlifecycle_components            : "3.0.0",
-            gestureviewbinder                 : "1.0.1",
+            gestureviewbinder                 : "1.0.4",
             VerificationCodeInputView         : "1.0.2",
+            calendarview                      : "3.7.1",
     ]
 
     /**
@@ -100,8 +101,9 @@ ext {
             rxlifecycle                       : "com.trello.rxlifecycle3:rxlifecycle:${dependenciesversion.rxlifecycle}",
             rxlifecycle_android               : "com.trello.rxlifecycle3:rxlifecycle-android:${dependenciesversion.rxlifecycle_android}",
             rxlifecycle_components            : "com.trello.rxlifecycle3:rxlifecycle-components:${dependenciesversion.rxlifecycle_components}",
-            gestureviewbinder                 : "com.github.GeniusLiu:GestureViewBinder:${dependenciesversion.gestureviewbinder}",
+            gestureviewbinder                 : "com.github.xqgithub:GestureViewBinder:${dependenciesversion.gestureviewbinder}",
             VerificationCodeInputView         : "com.github.Wynsbin:VerificationCodeInputView:${dependenciesversion.VerificationCodeInputView}",
+            calendarview                      : "com.haibin:calendarview:${dependenciesversion.calendarview}",
     ]
 
     /**

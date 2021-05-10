@@ -121,11 +121,12 @@ dependencies {
     /** 支持反射 **/
     api "org.jetbrains.kotlin:kotlin-reflect:$rootProject.ext.kotlin_version"
     /** 手指放大缩小移动 **/
-//    api _dependencies.gestureviewbinder
-    api 'com.github.xqgithub:GestureViewBinder:1.0.4'
-
+    api _dependencies.gestureviewbinder
+//    api 'com.github.xqgithub:GestureViewBinder:1.0.4'
     /** 自定义验证码输入框 **/
     api _dependencies.VerificationCodeInputView
+    /** 日历控件calendarview **/
+    api _dependencies.calendarview
 
 }
 

@@ -10,4 +10,14 @@
     <string name="prompt_busynetwork">网络繁忙:</string>
     <string name="error_nonetwork">手机无网络</string>
     <string name="prompt_requestfailed">请求失败:</string>
+
+    <string-array name="chinese_week_string_array">
+        <item>日</item>
+        <item>一</item>
+        <item>二</item>
+        <item>三</item>
+        <item>四</item>
+        <item>五</item>
+        <item>六</item>
+    </string-array>
 </resources>

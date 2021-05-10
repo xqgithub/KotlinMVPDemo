@@ -32,6 +32,9 @@ object RouterTag {
     //testlibary---TestCustomInputBoxActivity
     const val TestCustomInputBoxActivity = "/testlibary/TestCustomInputBoxActivity"
 
+    //testlibary---TestCalendarViewActivity
+    const val TestCalendarViewActivity = "/testlibary/TestCalendarViewActivity"
+
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
 
