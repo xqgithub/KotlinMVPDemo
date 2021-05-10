@@ -49,12 +49,30 @@
         <!-- app_version配置 -->
         <meta-data
             android:name="app_version"
-            android:value="${app_version}" /> <!-- 注册自定义静态广播接收器 -->
+            android:value="${app_version}" />
+
+
+        <!-- 注册自定义静态广播接收器 -->
         <receiver android:name="com.example.baselibrary.mvp.boradcastreceiver.NotificationBrodcaseReceiver">
             <intent-filter>
                 <action android:name="notifacatio_close" />
             </intent-filter>
         </receiver>
+
+
+        <!-- FileProvider配置使用 -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.kotlinmvpdemo.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path">
+            </meta-data>
+        </provider>
+
+
     </application>
 
 </manifest>
