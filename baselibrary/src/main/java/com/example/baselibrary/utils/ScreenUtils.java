@@ -11,7 +11,9 @@ import android.util.DisplayMetrics;
 import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
+
 import com.example.baselibrary.application.MyApplication;
+import com.example.baselibrary.constants.ConfigConstants;
 
 /**
  * desc  : 屏幕相关工具类
@@ -229,6 +231,71 @@ public class ScreenUtils {
     public static int getScreenHeightDP(Context context) {
         int HeightDP = (int) (getScreenHeight() / getScreenDensity(context));
         return HeightDP;
+    }
+
+    /**
+     * 获得设备真实的信息
+     * 实际显示区域 指定包含系统装饰的内容的显示部分。 即便如此，如果窗口管理器使用（adb shell wm size）模拟较小的显示器，则实际显示区域可能小于显示器的物理尺寸。 使用以下方法查询实际显示区域：getRealSize(Point)、getRealMetrics(DisplayMetrics)。
+     */
+    public static void getEquipmentInformation(Context mContext) {
+        WindowManager windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getRealMetrics(outMetrics);
+        int widthPixel = outMetrics.widthPixels;
+        int heightPixel = outMetrics.heightPixels;
+        // 屏幕密度表示为每英寸点数。
+        int densityDpi = outMetrics.densityDpi;//屏幕密度dpi（120 / 160 / 240）
+        // 显示器的逻辑密度。
+        float density = outMetrics.density;//屏幕密度（0.75 / 1.0 / 1.5）
+        // 显示屏上显示的字体缩放系数。
+        float scaledDensity = outMetrics.scaledDensity;
+
+        int screenWidth = (int) (widthPixel / density);  // 屏幕宽度(dp)
+        int screenHeight = (int) (heightPixel / density);// 屏幕高度(dp)
+
+        LogUtils.i(ConfigConstants.TAG_ALL,
+                "手机设备屏幕宽度(px) =-= " + widthPixel,
+                "手机设备屏幕高度(px) =-= " + heightPixel,
+                "手机屏幕密度 density =-= " + density,
+                "手机屏幕密度 densityDpi =-= " + densityDpi,
+                "手机屏幕宽度(dp) =-= " + screenWidth,
+                "手机屏幕高度(dp) =-= " + screenHeight,
+                "字体缩放系数 =-= " + scaledDensity,
+                "手机的cpu型号 =-= " + DeviceUtils.getSupportedabis()
+        );
+    }
+
+    /**
+     * 获得设备的显示区域的信息
+     * <p>
+     * 应用程序显示区域 指定可能包含应用程序窗口的显示部分，不包括系统装饰。 应用程序显示区域可以小于实际显示区域，因为系统减去诸如状态栏之类的装饰元素所需的空间。 使用以下方法查询应用程序显示区域：getSize(Point)、getRectSize(Rect)和getMetrics(DisplayMetrics)。
+     */
+    public static void getDisplayAreaInformation(Context mContext) {
+        WindowManager windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(outMetrics);
+        int widthPixel = outMetrics.widthPixels;
+        int heightPixel = outMetrics.heightPixels;
+        // 屏幕密度表示为每英寸点数。
+        int densityDpi = outMetrics.densityDpi;//屏幕密度dpi（120 / 160 / 240）
+        // 显示器的逻辑密度。
+        float density = outMetrics.density;//屏幕密度（0.75 / 1.0 / 1.5）
+        // 显示屏上显示的字体缩放系数。
+        float scaledDensity = outMetrics.scaledDensity;
+
+        int screenWidth = (int) (widthPixel / density);  // 屏幕宽度(dp)
+        int screenHeight = (int) (heightPixel / density);// 屏幕高度(dp)
+
+        LogUtils.i(ConfigConstants.TAG_ALL,
+                "手机显示屏幕宽度(px) =-= " + widthPixel,
+                "手机显示屏幕高度(px) =-= " + heightPixel,
+                "手机屏幕密度 density =-= " + density,
+                "手机屏幕密度 densityDpi =-= " + densityDpi,
+                "手机屏幕宽度(dp) =-= " + screenWidth,
+                "手机屏幕高度(dp) =-= " + screenHeight,
+                "字体缩放系数 =-= " + scaledDensity,
+                "手机的cpu型号 =-= " + DeviceUtils.getSupportedabis()
+        );
     }
 
 

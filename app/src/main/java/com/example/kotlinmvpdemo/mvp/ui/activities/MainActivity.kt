@@ -305,6 +305,8 @@ class MainActivity : BaseActivity(), MainView {
      * @param ThreadMode.MAIN_ORDERED:无论在哪个线程发送事件，都将事件加入到队列中，然后通过Handler切换到主线程，依次处理事件
      * @param ThreadMode.BACKGROUND:与ThreadMode.MAIN相反，如果在子线程发送事件，则直接在子线程处理事件；如果在主线程上发送事件，则先将事件入队列，然后通过线程池处理事件
      * @param ThreadMode.ASYNC:与ThreadMode.MAIN_ORDERED相反，无论在哪个线程发送事件，都将事件加入到队列中，然后通过线程池执行事件
+     *
+     * priority 数值越大，优先级越高,默认优先级为0
      */
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 100)
     fun EventBusTestMessage(messageevent: MessageEvent) {

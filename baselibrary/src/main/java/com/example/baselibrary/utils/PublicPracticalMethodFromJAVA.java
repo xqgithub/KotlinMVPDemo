@@ -170,10 +170,10 @@ public class PublicPracticalMethodFromJAVA {
      * 00004
      * 屏幕适配最小宽度 生成
      */
-    int targetwidth[] = {360, 384, 392,
+    int targetwidth[] = {360, 375, 384, 392,
             400, 410, 411, 428, 432, 480,
             533, 550, 592,
-            600, 640, 662, 665, 670, 675, 680, 695,
+            600, 617, 640, 662, 665, 670, 675, 680, 695,
             720, 768,
             800, 805, 811, 820, 855, 860, 865, 895,
             930, 960, 970,
@@ -182,8 +182,10 @@ public class PublicPracticalMethodFromJAVA {
     public void smallWidth() {
 
         for (int i = 0; i < targetwidth.length; i++) {
-            int width_num = 360;
+            int width_num = 768;
+            int width_num2 = 375;
             double original_width = width_num;
+            double original_width2 = width_num2;
             double target_width = targetwidth[i];
             int fileparam = targetwidth[i];
             String filedirPath = SDCardUtils.getExternalStorageDirectory() + File.separator + "values-sw" + fileparam + "dp";
@@ -192,12 +194,22 @@ public class PublicPracticalMethodFromJAVA {
                 String result = "";
                 StringBuilder sbstr = new StringBuilder();
                 sbstr.append("<resources>\r\n");
+                sbstr.append("<!--以" + width_num + "为基准-->\r\n");
                 for (int j = 1; j <= width_num; j++) {
                     String aString = "<dimen name='dimen_" + j + "x'" + ">" + df.format(target_width
                             * j / original_width) + "dp</dimen>\r\n";
 //                System.out.println(aString);
                     sbstr.append(aString);
                 }
+
+                sbstr.append("<!--以" + width_num2 + "为基准-->\r\n");
+                for (int j = 1; j <= width_num2; j++) {
+                    String aString = "<dimen name='dimen_" + j + "xx'" + ">" + df.format(target_width
+                            * j / original_width2) + "dp</dimen>\r\n";
+//                System.out.println(aString);
+                    sbstr.append(aString);
+                }
+
                 sbstr.append("</resources>");
                 try {
                     FileWriter fileWriter = new FileWriter(filedirPath + File.separator +
@@ -216,14 +228,17 @@ public class PublicPracticalMethodFromJAVA {
      * 获得手机屏幕信息
      */
     public void getPhoneScreenInfo(Context context) {
-        LogUtils.i(ConfigConstants.TAG_ALL,
-                "手机屏幕宽度(像素): " + ScreenUtils.getScreenWidth(),
-                "手机屏幕高度(像素): " + ScreenUtils.getScreenHeight(),
-                "手机屏幕密度: " + ScreenUtils.getScreenDensity(context),
-                "手机屏幕densityDpi: " + ScreenUtils.getScreendensityDpi(context),
-                "手机屏幕宽度(dp): " + ScreenUtils.getScreenWidthDP(context),
-                "手机屏幕高度(dp): " + ScreenUtils.getScreenHeightDP(context),
-                "手机cpu_abi: " + DeviceUtils.getSupportedabis());
+//        LogUtils.i(ConfigConstants.TAG_ALL,
+//                "手机屏幕宽度(像素): " + ScreenUtils.getScreenWidth(),
+//                "手机屏幕高度(像素): " + ScreenUtils.getScreenHeight(),
+//                "手机屏幕密度: " + ScreenUtils.getScreenDensity(context),
+//                "手机屏幕densityDpi: " + ScreenUtils.getScreendensityDpi(context),
+//                "手机屏幕宽度(dp): " + ScreenUtils.getScreenWidthDP(context),
+//                "手机屏幕高度(dp): " + ScreenUtils.getScreenHeightDP(context),
+//                "手机cpu_abi: " + DeviceUtils.getSupportedabis());
+
+        ScreenUtils.getEquipmentInformation(context);
+        ScreenUtils.getDisplayAreaInformation(context);
     }
 
     /**

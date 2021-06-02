@@ -8,9 +8,11 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+
 import com.example.baselibrary.constants.ConfigConstants;
 import com.example.baselibrary.utils.PermissionsChecker;
 import com.example.kotlinmvpdemo.R;
@@ -137,6 +139,7 @@ public class PermissionsActivity extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 setResult(ConfigConstants.PERMISSIONS_DENIED);
                 finish();
+                System.exit(0);
             }
         });
 
