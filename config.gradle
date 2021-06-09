@@ -60,6 +60,7 @@ ext {
             gestureviewbinder                 : "1.0.4",
             VerificationCodeInputView         : "1.0.2",
             calendarview                      : "3.7.1",
+            autosize                          : "1.2.1",
     ]
 
     /**
@@ -104,6 +105,7 @@ ext {
             gestureviewbinder                 : "com.github.xqgithub:GestureViewBinder:${dependenciesversion.gestureviewbinder}",
             VerificationCodeInputView         : "com.github.Wynsbin:VerificationCodeInputView:${dependenciesversion.VerificationCodeInputView}",
             calendarview                      : "com.haibin:calendarview:${dependenciesversion.calendarview}",
+            autosize                          : "me.jessyan:autosize:${dependenciesversion.autosize}",
     ]
 
     /**

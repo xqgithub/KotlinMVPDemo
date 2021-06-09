@@ -37,6 +37,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * 公共实用类(java方法2)
@@ -170,24 +173,86 @@ public class PublicPracticalMethodFromJAVA {
      * 00004
      * 屏幕适配最小宽度 生成
      */
-    int targetwidth[] = {360, 375, 384, 392,
-            400, 410, 411, 428, 432, 480,
-            533, 550, 592,
-            600, 617, 640, 662, 665, 670, 675, 680, 695,
-            720, 768,
-            800, 805, 811, 820, 855, 860, 865, 895,
-            930, 960, 970,
-            1024, 1230, 1280, 1365};
+//    int targetwidth[] = {360, 375, 384, 392,
+//            400, 410, 411, 428, 432, 480,
+//            533, 550, 592,
+//            600, 617, 640, 662, 665, 670, 675, 680, 695,
+//            720, 768,
+//            800, 805, 811, 820, 855, 860, 865, 895,
+//            930, 960, 970,
+//            1024, 1230, 1280, 1365};
+    int targetwidth[] = {360};
 
     public void smallWidth() {
-
         for (int i = 0; i < targetwidth.length; i++) {
-            int width_num = 768;
-            int width_num2 = 375;
+            int width_num = 360;
+            int width_num2 = 360;
             double original_width = width_num;
             double original_width2 = width_num2;
             double target_width = targetwidth[i];
             int fileparam = targetwidth[i];
+            String filedirPath = SDCardUtils.getExternalStorageDirectory() + File.separator + "values-sw" + fileparam + "dp";
+            if (FileUtils.createOrExistsDir(filedirPath)) {
+                DecimalFormat df = new DecimalFormat("#0.0");
+                String result = "";
+                StringBuilder sbstr = new StringBuilder();
+                sbstr.append("<resources>\r\n");
+                sbstr.append("<!--以" + width_num + "为基准-->\r\n");
+                for (int j = 1; j <= width_num; j++) {
+                    String aString = "<dimen name='dimen_" + j + "x'" + ">" + df.format(target_width
+                            * j / original_width) + "dp</dimen>\r\n";
+//                System.out.println(aString);
+                    sbstr.append(aString);
+                }
+
+                sbstr.append("<!--以" + width_num2 + "为基准-->\r\n");
+                for (int j = 1; j <= width_num2; j++) {
+                    String aString = "<dimen name='dimen_" + j + "xx'" + ">" + df.format(target_width
+                            * j / original_width2) + "dp</dimen>\r\n";
+//                System.out.println(aString);
+                    sbstr.append(aString);
+                }
+
+                sbstr.append("</resources>");
+                try {
+                    FileWriter fileWriter = new FileWriter(filedirPath + File.separator +
+                            "dimens.xml", true);
+                    fileWriter.write(sbstr.toString());
+                    fileWriter.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    /**
+     * 00004
+     * 屏幕适配最小宽度 生成
+     */
+    public void smallWidth2() {
+        //添加元数据
+        List<Integer> targetwidth = new ArrayList<>();
+        for (int i = 360; i < 1365; i = i + 5) {
+            targetwidth.add(i);
+        }
+        targetwidth.add(1024);
+
+        //开始去重
+        HashSet set = new HashSet(targetwidth);
+        targetwidth.clear();
+        targetwidth.addAll(set);
+
+
+        //开始操作
+        for (int i = 0; i < targetwidth.size(); i++) {
+            int width_num = 1024;
+            int width_num2 = 375;
+            double original_width = width_num;
+            double original_width2 = width_num2;
+            double target_width = targetwidth.get(i);
+            int fileparam = targetwidth.get(i);
             String filedirPath = SDCardUtils.getExternalStorageDirectory() + File.separator + "values-sw" + fileparam + "dp";
             if (FileUtils.createOrExistsDir(filedirPath)) {
                 DecimalFormat df = new DecimalFormat("#0.0");
@@ -228,17 +293,8 @@ public class PublicPracticalMethodFromJAVA {
      * 获得手机屏幕信息
      */
     public void getPhoneScreenInfo(Context context) {
-//        LogUtils.i(ConfigConstants.TAG_ALL,
-//                "手机屏幕宽度(像素): " + ScreenUtils.getScreenWidth(),
-//                "手机屏幕高度(像素): " + ScreenUtils.getScreenHeight(),
-//                "手机屏幕密度: " + ScreenUtils.getScreenDensity(context),
-//                "手机屏幕densityDpi: " + ScreenUtils.getScreendensityDpi(context),
-//                "手机屏幕宽度(dp): " + ScreenUtils.getScreenWidthDP(context),
-//                "手机屏幕高度(dp): " + ScreenUtils.getScreenHeightDP(context),
-//                "手机cpu_abi: " + DeviceUtils.getSupportedabis());
-
-        ScreenUtils.getEquipmentInformation(context);
-        ScreenUtils.getDisplayAreaInformation(context);
+        ScreenTools.getInstance().getEquipmentInformation(context);
+        ScreenTools.getInstance().getDisplayAreaInformation(context);
     }
 
     /**

@@ -127,6 +127,8 @@ dependencies {
     api _dependencies.VerificationCodeInputView
     /** 日历控件calendarview **/
     api _dependencies.calendarview
+    /** 屏幕适配 Autosize **/
+    api _dependencies.autosize
 
 }
 

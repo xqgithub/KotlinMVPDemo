@@ -116,4 +116,18 @@ object ConfigConstants {
     const val screenrecord_filename = "haha.mp4"
 
 
+    /** UI设计标准 **/
+    //pad的设计图宽
+    const val PAD_WIDTH = 1024
+
+    //pad的设计图高
+    const val PAD_HEIGHT = 768
+
+    //phone的设计图宽
+    const val PHONE_WIDTH = 360
+
+    //phone的设计图高
+    const val PHONE_HEIGHT = 640
+
+
 }

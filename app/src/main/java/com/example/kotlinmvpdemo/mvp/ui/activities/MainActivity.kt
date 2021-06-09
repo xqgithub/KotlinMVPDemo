@@ -159,10 +159,13 @@ class MainActivity : BaseActivity(), MainView {
                         LogUtils.i("SP_TEST_USER文件中haha字段 =-= $test_sp")
                     }
                     6 -> {
+                        PublicPracticalMethodFromJAVA.getInstance().smallWidth()
+//                        PublicPracticalMethodFromJAVA.getInstance().smallWidth2()
+
+
 //                        presenter.deleteDatas()
 //                        presenter.insertData()
 //                        presenter.insertData2()
-                        PublicPracticalMethodFromJAVA.getInstance().smallWidth()
 
 //                        val nativelib = nativelib()
 //                        val a = nativelib.sum(3, 4)
