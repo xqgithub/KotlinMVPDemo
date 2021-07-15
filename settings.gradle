@@ -1,1 +1,1 @@
-include ':app', ':baselibrary', ':testlibrary'
+include ':app', ':baselibrary', ':testlibrary','loopview'

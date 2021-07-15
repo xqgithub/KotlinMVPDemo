@@ -35,11 +35,17 @@ object RouterTag {
     //testlibary---TestCalendarViewActivity
     const val TestCalendarViewActivity = "/testlibary/TestCalendarViewActivity"
 
+    //testlibary---TestPictureSelectorActivity
+    const val TestPictureSelectorActivity = "/testlibary/TestPictureSelectorActivity"
+
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
 
     //app---TestProductFlavorsActivity
     const val TestProductFlavorsActivity = "/app/TestProductFlavorsActivity"
+
+    //app---TestLoopViewActivity
+    const val TestLoopViewActivity = "/app/TestLoopViewActivity"
 
 
     //全局降解

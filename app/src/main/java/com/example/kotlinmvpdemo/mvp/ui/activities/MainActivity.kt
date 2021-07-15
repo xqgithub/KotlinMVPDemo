@@ -278,6 +278,8 @@ class MainActivity : BaseActivity(), MainView {
                     36 -> ARouter.getInstance().build(RouterTag.TestPropertyAnimationActivity).navigation()
                     37 -> ARouter.getInstance().build(RouterTag.TestCustomInputBoxActivity).navigation()
                     38 -> ARouter.getInstance().build(RouterTag.TestCalendarViewActivity).navigation()
+                    39 -> ARouter.getInstance().build(RouterTag.TestPictureSelectorActivity).navigation()
+                    40 -> ARouter.getInstance().build(RouterTag.TestLoopViewActivity).navigation()
                 }
             }
         })
@@ -377,7 +379,9 @@ class MainActivity : BaseActivity(), MainView {
         "贝塞尔曲线",
         "属性动画和视图动画",
         "自定义验证码输入框样式",
-        "自定义日历控件"
+        "自定义日历控件",
+        "图片选择工具 PictureSelector",
+        "滑动单项选择框 LoopView"
     )
 
     /**

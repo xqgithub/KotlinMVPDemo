@@ -113,4 +113,6 @@ dependencies {
     implementation project(':baselibrary')
     //需要在不同模块使用ARouter 需要引入该模块
     implementation project(':testlibrary')
+    //引入单项滑动选择控件
+    implementation project(':loopview')
 }

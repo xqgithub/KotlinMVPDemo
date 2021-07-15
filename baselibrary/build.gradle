@@ -129,6 +129,5 @@ dependencies {
     api _dependencies.calendarview
     /** 屏幕适配 Autosize **/
     api _dependencies.autosize
-
 }
 
