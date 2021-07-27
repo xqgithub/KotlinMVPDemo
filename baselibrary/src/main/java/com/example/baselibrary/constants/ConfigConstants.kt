@@ -129,5 +129,12 @@ object ConfigConstants {
     //phone的设计图高
     const val PHONE_HEIGHT = 640
 
+    /** TestPictureSelectorActivity **/
+    //可以继续添加图片
+    const val TYPE_CAMERA = -10000
+
+    //不能继续添加图片
+    const val TYPE_PICTURE = -9999
+
 
 }

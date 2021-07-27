@@ -260,7 +260,8 @@ class MainActivity : BaseActivity(), MainView {
 
                                 override fun onArrival(postcard: Postcard?) {
                                     LogUtils.i(
-                                        ConfigConstants.TAG_ALL, "${postcard!!.extras.getString("interceptor_key1")
+                                        ConfigConstants.TAG_ALL, "${
+                                            postcard!!.extras.getString("interceptor_key1")
                                         }", "拦截离开了"
                                     )
                                 }
@@ -278,7 +279,7 @@ class MainActivity : BaseActivity(), MainView {
                     36 -> ARouter.getInstance().build(RouterTag.TestPropertyAnimationActivity).navigation()
                     37 -> ARouter.getInstance().build(RouterTag.TestCustomInputBoxActivity).navigation()
                     38 -> ARouter.getInstance().build(RouterTag.TestCalendarViewActivity).navigation()
-                    39 -> ARouter.getInstance().build(RouterTag.TestPictureSelectorActivity).navigation()
+                    39 -> ARouter.getInstance().build(RouterTag.TestPictureSelectorActivity).withTransition(R.anim.slide_in_right, 0).navigation(this@MainActivity)
                     40 -> ARouter.getInstance().build(RouterTag.TestLoopViewActivity).navigation()
                 }
             }

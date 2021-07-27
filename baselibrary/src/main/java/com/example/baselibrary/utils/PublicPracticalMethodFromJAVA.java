@@ -626,4 +626,16 @@ public class PublicPracticalMethodFromJAVA {
     }
 
 
+    /**
+     * 00013
+     * Acticity 页面关闭,可以传动动画文件
+     *
+     * @param mActivity
+     * @param exitAnimID
+     */
+    public void activityFinish(Activity mActivity, int exitAnimID) {
+        mActivity.finish();
+        mActivity.overridePendingTransition(0, exitAnimID);
+    }
+
 }
