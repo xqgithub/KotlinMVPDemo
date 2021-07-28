@@ -200,22 +200,23 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         // 判断SD卡是否存在，并且是否具有读写权限
         if (Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)) {
-            logdir = Environment.getExternalStorageDirectory() + File.separator
-                    + ConfigConstants.ERROR_JOURNAL;// 测试
+            //方法过时 android 10.0 API级别29中不推荐使用此方法
+//            logdir = Environment.getExternalStorageDirectory() + File.separator
+//                    + ConfigConstants.ERROR_JOURNAL;// 测试
+            logdir = SDCardUtils.getExternalFilesDir(mContext, ConfigConstants.ERROR_JOURNAL).getAbsolutePath();
         }
-        File file = new File(logdir);
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-        long logdate = dateToLong(DateUtil.getCurrentDateTime());// 生成日志时间，也是日志名称
-        try {
-            FileWriter fileWriter = new FileWriter(logdir + File.separator
-                    + logdate + ".txt", true);
-            fileWriter.write(errormessage);
-            fileWriter.close();
 
-        } catch (Exception e) {
-            Log.e(TAG, "日志写入文件失败----->" + e.getMessage());
+        if (FileUtils.createOrExistsDir(logdir)) {
+            long logdate = dateToLong(DateUtil.getCurrentDateTime());// 生成日志时间，也是日志名称
+            try {
+                FileWriter fileWriter = new FileWriter(logdir + File.separator
+                        + logdate + ".txt", true);
+                fileWriter.write(errormessage);
+                fileWriter.close();
+
+            } catch (Exception e) {
+                Log.e(TAG, "日志写入文件失败----->" + e.getMessage());
+            }
         }
     }
 
