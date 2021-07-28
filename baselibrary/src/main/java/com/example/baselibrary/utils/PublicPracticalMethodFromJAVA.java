@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Point;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
@@ -637,5 +638,59 @@ public class PublicPracticalMethodFromJAVA {
         mActivity.finish();
         mActivity.overridePendingTransition(0, exitAnimID);
     }
+
+
+    /**
+     * 00014
+     * <p>
+     * 动态设置Shape  RECTANGLE
+     */
+    public void setDynamicShapeRECTANGLE(Context mContext, View view, float CornerRadius, int strokewidth, String strokeColor, String bgcolor) {
+        GradientDrawable drawable = new GradientDrawable();
+        //设置shape的形状
+        drawable.setShape(GradientDrawable.RECTANGLE);
+
+        //设置shape的圆角度数
+        if (!StringUtils.isBlank(CornerRadius) && CornerRadius != -1) {
+            drawable.setCornerRadius(CornerRadius);
+        }
+
+        //设置shape的边的宽度和颜色
+        if (!StringUtils.isBlank(strokewidth) && strokewidth != -1
+                && !StringUtils.isBlank(strokeColor)) {
+//            drawable.setStroke(strokewidth, ContextCompat.getColor(mContext, R.color.appblack));
+            drawable.setStroke(strokewidth, Color.parseColor(strokeColor));
+        }
+
+        //设置shape的背景色
+        if (!StringUtils.isBlank(bgcolor)) {
+//            drawable.setColor(ContextCompat.getColor(mContext, bgcolor));
+            drawable.setColor(Color.parseColor(bgcolor));
+        }
+        view.setBackground(drawable);
+    }
+
+
+    /**
+     * 00014
+     * 动态设置Shape  OVAL
+     */
+    public void setDynamicShapeOVAL(Context mContext, View view, int width, String bgcolor) {
+        GradientDrawable drawable = new GradientDrawable();
+        //设置shape的形状
+        drawable.setShape(GradientDrawable.OVAL);
+
+        //设置shape的背景色
+        if (!StringUtils.isBlank(bgcolor)) {
+            drawable.setColor(Color.parseColor(bgcolor));
+        }
+
+        //设置圆的size大小
+        if (!StringUtils.isBlank(width) && width != -1) {
+            drawable.setSize(width, width);
+        }
+        view.setBackground(drawable);
+    }
+
 
 }

@@ -16,6 +16,7 @@ import com.example.baselibrary.utils.RxViewUtils
 import com.example.decoration.GridSpacingItemDecoration
 import com.example.utils.FullyGridLayoutManager
 import com.example.utils.GlideEngine
+import com.example.weiget.PictureLayoutNumView
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.PictureMimeType
@@ -31,7 +32,8 @@ import kotlinx.android.synthetic.main.activity_testpictureselector.*
  * 图片选择工具 PictureSelector  测试类
  */
 @Route(path = RouterTag.TestPictureSelectorActivity)
-class TestPictureSelectorActivity : BaseActivity(), RxViewUtils.Action1<View>, GridImageAdapter.onAddPicClickListener {
+class TestPictureSelectorActivity : BaseActivity(),
+    RxViewUtils.Action1<View>, GridImageAdapter.onAddPicClickListener, PictureLayoutNumView.onClickPictureLayoutNumListener {
 
     private var gridimageadapter: GridImageAdapter? = null
 
@@ -72,7 +74,7 @@ class TestPictureSelectorActivity : BaseActivity(), RxViewUtils.Action1<View>, G
         gridimageadapter = GridImageAdapter(this@TestPictureSelectorActivity)
         gridimageadapter?.let {
             it.setOnAddPicClickListener(this)
-            it.setSelectMax(9)
+            it.setSelectMax(pln_pics.maxSelectNum)
             //4.设置适配器
             rv_pics.adapter = it
             it.notifyDataSetChanged()
@@ -84,6 +86,7 @@ class TestPictureSelectorActivity : BaseActivity(), RxViewUtils.Action1<View>, G
      */
     private fun initListener() {
         RxViewUtils.getInstance().setOnClickListeners(this, 500, back)
+        pln_pics.setOnClickPictureLayoutNumListener(this)
     }
 
     /**
@@ -107,7 +110,7 @@ class TestPictureSelectorActivity : BaseActivity(), RxViewUtils.Action1<View>, G
         PictureSelector.create(this@TestPictureSelectorActivity)
             .openGallery(PictureMimeType.ofImage())
             .imageEngine(GlideEngine.createGlideEngine())
-            .maxSelectNum(9)
+            .maxSelectNum(pln_pics.maxSelectNum)
             .setCameraImageFormat(PictureMimeType.JPEG) // 相机图片格式后缀,默认.jpeg
             .selectionData(gridimageadapter!!.getData())// 是否传入已选图片
             .forResult(PictureConfig.CHOOSE_REQUEST)
@@ -161,6 +164,15 @@ class TestPictureSelectorActivity : BaseActivity(), RxViewUtils.Action1<View>, G
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * 增加或者减少 回调事件
+     */
+    override fun onMinusOrPlusClick() {
+        gridimageadapter?.let {
+            it.setSelectMax(pln_pics.maxSelectNum)
         }
     }
 }

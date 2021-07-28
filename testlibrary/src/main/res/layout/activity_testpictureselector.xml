@@ -48,5 +48,14 @@
         android:layout_marginTop="10dp"
         android:overScrollMode="never" />
 
+    <!-- 图片选择最大数 -->
+    <com.example.weiget.PictureLayoutNumView
+        android:id="@+id/pln_pics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/rv_pics"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
