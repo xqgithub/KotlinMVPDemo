@@ -47,7 +47,7 @@ import java.util.List;
  */
 public class PublicPracticalMethodFromJAVA {
 
-    private static volatile PublicPracticalMethodFromJAVA mInstance;
+    private volatile static PublicPracticalMethodFromJAVA mInstance;
 
     /**
      * 单例模式

@@ -57,5 +57,57 @@
         android:layout_marginTop="5dp"
         android:layout_marginStart="5dp" />
 
+    <!-- 主题选择 -->
+    <RadioGroup
+        android:id="@+id/rgb_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/pln_pics"
+        android:layout_marginTop="5dp">
+
+        <RadioButton
+            android:id="@+id/rb_default_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="主题默认样式"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_white_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主题样式一"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_num_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主题样式二"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_sina_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主题样式三"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_we_chat_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主题样式四 (仿微信-全新风格)"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+    </RadioGroup>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

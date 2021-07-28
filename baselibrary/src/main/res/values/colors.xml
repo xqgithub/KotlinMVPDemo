@@ -158,4 +158,8 @@
     <color name="nuts_f2aba2c6">#f2aba2c6</color>
     <color name="nuts_f70046">#f70046</color>
     <color name="app_color_f6">#f6f6f6</color>
+    <color name="app_color_53575e">#53575e</color>
+    <color name="app_color_white">#FFFFFF</color>
+    <color name="app_color_blue">#7D7DFF</color>
+    <color name="app_color_white_transparent">#E0DBDBDB</color>
 </resources>

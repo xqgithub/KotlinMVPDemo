@@ -1,26 +1,31 @@
 package com.example.testlibrary
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.RadioGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.adapter.GridImageAdapter
 import com.example.baselibrary.base.BaseActivity
-import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
-import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import com.example.baselibrary.utils.RxViewUtils
 import com.example.decoration.GridSpacingItemDecoration
 import com.example.utils.FullyGridLayoutManager
 import com.example.utils.GlideEngine
+import com.example.utils.PictureStyleUtils
 import com.example.weiget.PictureLayoutNumView
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.MediaExtraInfo
+import com.luck.picture.lib.style.PictureCropParameterStyle
+import com.luck.picture.lib.style.PictureParameterStyle
+import com.luck.picture.lib.style.PictureSelectorUIStyle
 import com.luck.picture.lib.tools.MediaUtils
 import kotlinx.android.synthetic.main.activity_testpictureselector.*
 
@@ -33,9 +38,15 @@ import kotlinx.android.synthetic.main.activity_testpictureselector.*
  */
 @Route(path = RouterTag.TestPictureSelectorActivity)
 class TestPictureSelectorActivity : BaseActivity(),
-    RxViewUtils.Action1<View>, GridImageAdapter.onAddPicClickListener, PictureLayoutNumView.onClickPictureLayoutNumListener {
+    RxViewUtils.Action1<View>, GridImageAdapter.onAddPicClickListener,
+    PictureLayoutNumView.onClickPictureLayoutNumListener, RadioGroup.OnCheckedChangeListener {
 
-    private var gridimageadapter: GridImageAdapter? = null
+    private lateinit var gridimageadapter: GridImageAdapter
+
+    private lateinit var mPictureParameterStyle: PictureParameterStyle
+
+    private lateinit var mCropParameterStyle: PictureCropParameterStyle
+
 
     override fun setupComponent(myAppComponet: MyAppComponet) {
     }
@@ -64,6 +75,9 @@ class TestPictureSelectorActivity : BaseActivity(),
      * 初始化数据
      */
     fun initData() {
+        mPictureParameterStyle = PictureStyleUtils.getInstance().getNumStyle(this@TestPictureSelectorActivity)
+        mCropParameterStyle = PictureStyleUtils.getInstance().mCropParameterStyle
+
         /** 初始化图片集合的RecyclerView **/
         //1.GridLayoutManager初始化
         val manager = FullyGridLayoutManager(this@TestPictureSelectorActivity, 4, GridLayoutManager.VERTICAL, false)
@@ -110,9 +124,10 @@ class TestPictureSelectorActivity : BaseActivity(),
         PictureSelector.create(this@TestPictureSelectorActivity)
             .openGallery(PictureMimeType.ofImage())
             .imageEngine(GlideEngine.createGlideEngine())
-            .maxSelectNum(pln_pics.maxSelectNum)
+            .maxSelectNum(pln_pics.maxSelectNum)//设置相册最大显示多少
             .setCameraImageFormat(PictureMimeType.JPEG) // 相机图片格式后缀,默认.jpeg
             .selectionData(gridimageadapter!!.getData())// 是否传入已选图片
+            .setPictureStyle(mPictureParameterStyle)//动态自定义相册主题
             .forResult(PictureConfig.CHOOSE_REQUEST)
     }
 
@@ -173,6 +188,24 @@ class TestPictureSelectorActivity : BaseActivity(),
     override fun onMinusOrPlusClick() {
         gridimageadapter?.let {
             it.setSelectMax(pln_pics.maxSelectNum)
+        }
+    }
+
+    /**
+     * 单项选择框接口回调
+     */
+    override fun onCheckedChanged(group: RadioGroup, checkedId: Int) {
+        when (checkedId) {
+            R.id.rb_default_style -> {
+            }
+            R.id.rb_white_style -> {
+            }
+            R.id.rb_num_style -> {
+            }
+            R.id.rb_sina_style -> {
+            }
+            R.id.rb_we_chat_style -> {
+            }
         }
     }
 }
