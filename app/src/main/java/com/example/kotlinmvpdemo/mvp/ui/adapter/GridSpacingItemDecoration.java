@@ -1,4 +1,4 @@
-package com.example.decoration;
+package com.example.kotlinmvpdemo.mvp.ui.adapter;
 
 import android.graphics.Rect;
 import android.view.View;

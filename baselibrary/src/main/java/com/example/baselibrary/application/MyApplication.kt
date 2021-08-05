@@ -14,7 +14,7 @@ import com.facebook.stetho.Stetho
 /**
  * 自定义Application
  */
-class MyApplication : MultiDexApplication() {
+open class MyApplication : MultiDexApplication() {
 
     private lateinit var myappcomponet: MyAppComponet
 

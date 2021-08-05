@@ -1,11 +1,11 @@
-package com.example.utils;
+package com.example.kotlinmvpdemo.utils;
 
 import android.content.Context;
 import android.graphics.Color;
 
 import androidx.core.content.ContextCompat;
 
-import com.example.testlibrary.R;
+import com.example.kotlinmvpdemo.R;
 import com.luck.picture.lib.style.PictureCropParameterStyle;
 import com.luck.picture.lib.style.PictureParameterStyle;
 

@@ -47,6 +47,9 @@ object RouterTag {
     //app---TestLoopViewActivity
     const val TestLoopViewActivity = "/app/TestLoopViewActivity"
 
+    //app---TestPictureSelectorMainActivity
+    const val TestPictureSelectorMainActivity = "/app/TestPictureSelectorMainActivity"
+
 
     //全局降解
     const val DegradeService = "/service/degradeservice"

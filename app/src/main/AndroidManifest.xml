@@ -4,7 +4,7 @@
     package="com.example.kotlinmvpdemo">
 
     <application
-        android:name="com.example.baselibrary.application.MyApplication"
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="${app_logo}"
@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity
             android:name=".mvp.ui.activities.CheckPermissionsActivity"
             android:launchMode="singleTask"
@@ -24,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".mvp.ui.activities.PermissionsActivity"
             android:screenOrientation="portrait"
@@ -36,7 +38,10 @@
             android:name=".mvp.ui.activities.TestProductFlavorsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.kotlinmvpdemo.mvp.ui.activities.TestLoopViewActivity"
+            android:name=".mvp.ui.activities.TestLoopViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activities.TestPictureSelectorMainActivity"
             android:screenOrientation="portrait" />
 
         <service

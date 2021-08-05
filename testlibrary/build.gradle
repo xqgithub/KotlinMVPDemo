@@ -64,10 +64,6 @@ dependencies {
 
     kapt _dependencies.arouter_compiler
 
-
-    /** 图片选择工具 PictureSelector **/
-    implementation 'io.github.lucksiege:pictureselector:v2.7.3-rc06'
-
     /**
      * 引入module
      */

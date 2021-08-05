@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+
+    <!-- 标题栏 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/nuts_515a90"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/picture_icon_back" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="18dp"
+            android:text="PictureSelector" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- 图片集合 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_pics"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:layout_marginTop="10dp"
+        android:overScrollMode="never" />
+
+    <!-- 图片选择最大数 -->
+    <com.example.kotlinmvpdemo.weiget.PictureLayoutNumView
+        android:id="@+id/pln_pics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/rv_pics"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp" />
+
+    <!-- 主题选择 -->
+    <RadioGroup
+        android:id="@+id/rgb_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/pln_pics"
+        android:layout_marginTop="5dp">
+
+        <RadioButton
+            android:id="@+id/rb_default_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="主题默认样式"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_white_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主题样式一"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_num_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主题样式二"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_sina_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主题样式三"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_we_chat_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主题样式四 (仿微信-全新风格)"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+    </RadioGroup>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

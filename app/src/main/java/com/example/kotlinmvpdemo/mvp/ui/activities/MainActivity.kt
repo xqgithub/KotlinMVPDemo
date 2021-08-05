@@ -279,7 +279,7 @@ class MainActivity : BaseActivity(), MainView {
                     36 -> ARouter.getInstance().build(RouterTag.TestPropertyAnimationActivity).navigation()
                     37 -> ARouter.getInstance().build(RouterTag.TestCustomInputBoxActivity).navigation()
                     38 -> ARouter.getInstance().build(RouterTag.TestCalendarViewActivity).navigation()
-                    39 -> ARouter.getInstance().build(RouterTag.TestPictureSelectorActivity).withTransition(R.anim.slide_in_right, 0).navigation(this@MainActivity)
+                    39 -> ARouter.getInstance().build(RouterTag.TestPictureSelectorMainActivity).withTransition(R.anim.slide_in_right, 0).navigation(this@MainActivity)
                     40 -> ARouter.getInstance().build(RouterTag.TestLoopViewActivity).navigation()
                 }
             }

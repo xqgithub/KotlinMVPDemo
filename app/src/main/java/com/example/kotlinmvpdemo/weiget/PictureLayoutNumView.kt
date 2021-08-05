@@ -1,4 +1,4 @@
-package com.example.weiget
+package com.example.kotlinmvpdemo.weiget
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,7 +6,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import com.example.baselibrary.utils.RxViewUtils
-import com.example.testlibrary.R
+import com.example.kotlinmvpdemo.R
 import kotlinx.android.synthetic.main.layout_number.view.*
 
 /**

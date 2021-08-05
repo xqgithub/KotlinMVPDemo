@@ -1,8 +1,6 @@
-package com.example.adapter
+package com.example.kotlinmvpdemo.mvp.ui.adapter
 
-import android.R.attr
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +10,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.target.Target
 import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.StringUtils
 import com.example.baselibrary.utils.findViewOfItem
-import com.example.testlibrary.R
+import com.example.kotlinmvpdemo.R
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 
@@ -50,7 +47,7 @@ class GridImageAdapter(var context: Context) : RecyclerView.Adapter<GridImageAda
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GridImageViewholder {
-        val view = LayoutInflater.from(context).inflate(R.layout.gv_filter_image, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.adapter_gridimage, parent, false)
         return GridImageViewholder(view)
     }
 

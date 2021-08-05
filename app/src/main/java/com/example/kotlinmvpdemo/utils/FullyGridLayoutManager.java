@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.example.kotlinmvpdemo.utils;
 
 import android.content.Context;
 import android.view.View;

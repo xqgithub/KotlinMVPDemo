@@ -107,6 +107,13 @@ dependencies {
 
     kapt _dependencies.arouter_compiler
 
+    // PictureSelector
+    implementation 'io.github.lucksiege:pictureselector:v2.7.3-rc06'
+
+    /** 为方法数超过 64K 的应用启用 MultiDex **/
+    implementation _dependencies.multidex_version
+
+
     /**
      * 引入module
      */
@@ -115,4 +122,7 @@ dependencies {
     implementation project(':testlibrary')
     //引入单项滑动选择控件
     implementation project(':loopview')
+
+
+
 }
