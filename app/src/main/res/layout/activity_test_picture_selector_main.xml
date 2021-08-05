@@ -78,34 +78,154 @@
             android:textSize="14sp" />
 
         <RadioButton
-            android:id="@+id/rb_white_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="主题样式一"
-            android:textColor="@color/app_color_53575e"
-            android:textSize="14sp" />
-
-        <RadioButton
-            android:id="@+id/rb_num_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="主题样式二"
-            android:textColor="@color/app_color_53575e"
-            android:textSize="14sp" />
-
-        <RadioButton
-            android:id="@+id/rb_sina_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="主题样式三"
-            android:textColor="@color/app_color_53575e"
-            android:textSize="14sp" />
-
-        <RadioButton
             android:id="@+id/rb_we_chat_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="主题样式四 (仿微信-全新风格)"
+            android:text="主题样式二 (仿微信-全新风格)"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/rgb_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/rgb_style"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_photo_default_animation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="默认启动动画"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_photo_up_animation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="相册上弹动画"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/cb_voice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/rgb_animation"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="是否开启点击声音"
+        android:textColor="@color/app_color_53575e"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/cb_original"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/cb_voice"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="是否开启原图功能"
+        android:textColor="@color/app_color_53575e"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_original_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="* 开启原图功能，用户就可以自由选择原图；但会跳过裁剪功能哦"
+        app:layout_constraintTop_toBottomOf="@+id/cb_original"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="10dp"
+        android:visibility="gone" />
+
+    <RadioGroup
+        android:id="@+id/rgb_list_anim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_original_tips"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="默认动画"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_alpha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="列表渐变动画"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_slide_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="列表底部滑入动画"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+    </RadioGroup>
+
+
+    <RadioGroup
+        android:id="@+id/rgb_language"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/rgb_list_anim"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_tw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="繁体"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_us"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="英语"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_ka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="韩语"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_spanish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="西班牙语"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_system"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="系统语言"
             android:textColor="@color/app_color_53575e"
             android:textSize="14sp" />
     </RadioGroup>

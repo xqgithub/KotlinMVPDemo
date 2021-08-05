@@ -1,6 +1,8 @@
 package com.example.kotlinmvpdemo
 
 import android.content.Context
+import androidx.camera.camera2.Camera2Config
+import androidx.camera.core.CameraXConfig
 import com.example.baselibrary.application.MyApplication
 import com.example.kotlinmvpdemo.utils.PictureSelectorEngineImp
 import com.luck.picture.lib.app.IApp
@@ -12,7 +14,7 @@ import com.luck.picture.lib.engine.PictureSelectorEngine
  * Time:15:07
  * author:joker
  */
-class MainApplication : MyApplication(), IApp {
+class MainApplication : MyApplication(), IApp, CameraXConfig.Provider {
 
 
     override fun onCreate() {
@@ -26,6 +28,10 @@ class MainApplication : MyApplication(), IApp {
 
     override fun getPictureSelectorEngine(): PictureSelectorEngine {
         return PictureSelectorEngineImp()
+    }
+
+    override fun getCameraXConfig(): CameraXConfig {
+        return Camera2Config.defaultConfig()
     }
 
 
