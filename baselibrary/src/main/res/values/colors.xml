@@ -164,4 +164,5 @@
     <color name="app_color_white_transparent">#E0DBDBDB</color>
     <color name="app_color_grey">#393a3e</color>
     <color name="app_color_black">#000000</color>
+    <color name="app_color_c51">#f94c51</color>
 </resources>

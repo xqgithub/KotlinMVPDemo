@@ -26,7 +26,7 @@ class PictureLayoutNumView @JvmOverloads constructor(
     private lateinit var clickListener: onClickPictureLayoutNumListener
 
     //最大照片数据初始值为9
-    var maxSelectNum: Int = 9
+    var maxSelectNum: Int = 3
 
     init {
         initView()

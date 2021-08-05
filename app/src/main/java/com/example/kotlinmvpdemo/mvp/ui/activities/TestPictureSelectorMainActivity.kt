@@ -56,6 +56,10 @@ class TestPictureSelectorMainActivity : BaseActivity(), TestPictureSelectorMainV
 
     private var language = -1
 
+    private var chooseMode = PictureMimeType.ofImage()
+
+    private var selectionMode = PictureConfig.MULTIPLE
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,6 +136,7 @@ class TestPictureSelectorMainActivity : BaseActivity(), TestPictureSelectorMainV
         rgb_animation.setOnCheckedChangeListener(this)
         rgb_list_anim.setOnCheckedChangeListener(this)
         rgb_language.setOnCheckedChangeListener(this)
+        rgb_photo_mode.setOnCheckedChangeListener(this)
 
         cb_original.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -140,6 +145,18 @@ class TestPictureSelectorMainActivity : BaseActivity(), TestPictureSelectorMainV
                 tv_original_tips.visibility = View.GONE
             }
         }
+
+        cb_choose_mode.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                cb_single_back.visibility = View.GONE
+                selectionMode = PictureConfig.MULTIPLE
+            } else {
+                cb_single_back.visibility = View.VISIBLE
+                selectionMode = PictureConfig.SINGLE
+            }
+        }
+
+
     }
 
 
@@ -147,21 +164,47 @@ class TestPictureSelectorMainActivity : BaseActivity(), TestPictureSelectorMainV
      * 添加图片框点击回调
      */
     override fun onAddPicClick() {
-        //进入相册
-        PictureSelector.create(this@TestPictureSelectorMainActivity)
-            .openGallery(PictureMimeType.ofImage())
-            .imageEngine(GlideEngine.createGlideEngine())
-            .maxSelectNum(pln_pics.maxSelectNum)//设置相册最大显示多少
-            .setCameraImageFormat(PictureMimeType.JPEG) // 相机图片格式后缀,默认.jpeg
-            .selectionData(gridimageadapter!!.getData())// 是否传入已选图片
-            .setPictureStyle(mPictureParameterStyle)//动态自定义相册主题
-            .isWeChatStyle(isWeChatStyle)// 是否开启微信图片选择风格
-            .setPictureWindowAnimationStyle(mWindowAnimationStyle)// 自定义相册启动退出动画
-            .isOpenClickSound(cb_voice.isChecked)// 是否开启点击声音
-            .isOriginalImageControl(cb_original.isChecked)// 是否显示原图控制按钮，如果设置为true则用户可以自由选择是否使用原图，裁剪功能将会失效
-            .setRecyclerAnimationMode(animationMode)// 列表动画效果
-            .setLanguage(language)// 设置语言，默认中文
-            .forResult(PictureConfig.CHOOSE_REQUEST)
+        if (cb_mode.isChecked) {
+            //进入相册
+            PictureSelector.create(this@TestPictureSelectorMainActivity)
+                .openGallery(chooseMode)
+                .imageEngine(GlideEngine.createGlideEngine())
+                .maxSelectNum(pln_pics.maxSelectNum)//设置相册最大显示多少
+                .setCameraImageFormat(PictureMimeType.JPEG) // 相机图片格式后缀,默认.jpeg
+                .selectionData(gridimageadapter!!.getData())// 是否传入已选图片
+                .setPictureStyle(mPictureParameterStyle)//动态自定义相册主题
+                .isWeChatStyle(isWeChatStyle)// 是否开启微信图片选择风格
+                .setPictureWindowAnimationStyle(mWindowAnimationStyle)// 自定义相册启动退出动画
+                .isOpenClickSound(cb_voice.isChecked)// 是否开启点击声音
+                .isOriginalImageControl(cb_original.isChecked)// 是否显示原图控制按钮，如果设置为true则用户可以自由选择是否使用原图，裁剪功能将会失效
+                .setRecyclerAnimationMode(animationMode)// 列表动画效果
+                .setLanguage(language)// 设置语言，默认中文
+                .isPageStrategy(cbPage.isChecked, true)// 是否开启分页策略 & 每页多少条；默认开启
+                .isMaxSelectEnabledMask(cbEnabledMask.isChecked)// 选择数到了最大阀值列表是否启用蒙层效果
+                .selectionMode(selectionMode)// 多选 or 单选
+                .isSingleDirectReturn(cb_single_back.isChecked)// 单选模式下是否直接返回，PictureConfig.SINGLE模式下有效
+                .forResult(PictureConfig.CHOOSE_REQUEST)
+        } else {
+            //拍照
+            PictureSelector.create(this@TestPictureSelectorMainActivity)
+                .openCamera(chooseMode)
+                .imageEngine(GlideEngine.createGlideEngine())
+                .maxSelectNum(pln_pics.maxSelectNum)//设置相册最大显示多少
+                .setCameraImageFormat(PictureMimeType.JPEG) // 相机图片格式后缀,默认.jpeg
+                .selectionData(gridimageadapter!!.getData())// 是否传入已选图片
+                .setPictureStyle(mPictureParameterStyle)//动态自定义相册主题
+                .isWeChatStyle(isWeChatStyle)// 是否开启微信图片选择风格
+                .setPictureWindowAnimationStyle(mWindowAnimationStyle)// 自定义相册启动退出动画
+                .isOpenClickSound(cb_voice.isChecked)// 是否开启点击声音
+                .isOriginalImageControl(cb_original.isChecked)// 是否显示原图控制按钮，如果设置为true则用户可以自由选择是否使用原图，裁剪功能将会失效
+                .setRecyclerAnimationMode(animationMode)// 列表动画效果
+                .setLanguage(language)// 设置语言，默认中文
+                .isPageStrategy(cbPage.isChecked, true)// 是否开启分页策略 & 每页多少条；默认开启
+                .isMaxSelectEnabledMask(cbEnabledMask.isChecked)// 选择数到了最大阀值列表是否启用蒙层效果
+                .forResult(PictureConfig.CHOOSE_REQUEST)
+        }
+
+
     }
 
 
@@ -270,6 +313,18 @@ class TestPictureSelectorMainActivity : BaseActivity(), TestPictureSelectorMainV
             }
             R.id.rb_system -> {
                 language = -1
+            }
+            R.id.rb_all -> {
+                chooseMode = PictureMimeType.ofAll()
+            }
+            R.id.rb_image -> {
+                chooseMode = PictureMimeType.ofImage()
+            }
+            R.id.rb_video -> {
+                chooseMode = PictureMimeType.ofVideo()
+            }
+            R.id.rb_audio -> {
+                chooseMode = PictureMimeType.ofAudio()
             }
         }
     }

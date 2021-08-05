@@ -230,5 +230,108 @@
             android:textSize="14sp" />
     </RadioGroup>
 
+    <RadioGroup
+        android:id="@+id/rgb_photo_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/rgb_language"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="全部"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="图片"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="视频"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="音频"
+            android:textColor="@color/app_color_53575e"
+            android:textSize="14sp" />
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/cbPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/rgb_photo_mode"
+        app:layout_constraintStart_toStartOf="parent"
+        android:checked="true"
+        android:text="分页模式"
+        android:textColor="@color/app_color_53575e"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/cbEnabledMask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        app:layout_constraintTop_toBottomOf="@+id/cbPage"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="是否显示蒙层(达到最大可选数量)"
+        android:textColor="@color/app_color_53575e"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/cb_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/cbEnabledMask"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="相册or单独拍照"
+        android:textColor="@color/app_color_53575e"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/cb_choose_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cb_mode"
+        app:layout_constraintStart_toStartOf="parent"
+        android:checked="true"
+        android:gravity="center_vertical"
+        android:text="多选or单选"
+        android:textColor="@color/app_color_53575e"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/cb_single_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/cb_choose_mode"
+        app:layout_constraintBottom_toBottomOf="@+id/cb_choose_mode"
+        app:layout_constraintStart_toEndOf="@+id/cb_choose_mode"
+        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
+        android:text="单选模式直接返回"
+        android:textColor="@color/app_color_c51"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
