@@ -56,7 +56,7 @@ class TestPictureSelectorMainActivity : BaseActivity(), TestPictureSelectorMainV
 
     private var language = -1
 
-    private var chooseMode = PictureMimeType.ofImage()
+    private var chooseMode = PictureMimeType.ofAll()
 
     private var selectionMode = PictureConfig.MULTIPLE
 
@@ -183,6 +183,11 @@ class TestPictureSelectorMainActivity : BaseActivity(), TestPictureSelectorMainV
                 .isMaxSelectEnabledMask(cbEnabledMask.isChecked)// 选择数到了最大阀值列表是否启用蒙层效果
                 .selectionMode(selectionMode)// 多选 or 单选
                 .isSingleDirectReturn(cb_single_back.isChecked)// 单选模式下是否直接返回，PictureConfig.SINGLE模式下有效
+                .isCamera(cb_isCamera.isChecked)// 是否显示拍照按钮
+                .isGif(cb_isGif.isChecked)// 是否显示gif图片
+                .isPreviewImage(cb_preview_img.isChecked)// 是否可预览图片
+                .isPreviewVideo(cb_preview_video.isChecked)// 是否可预览视频
+                .isEnablePreviewAudio(cb_preview_audio.isChecked) // 是否可播放音频
                 .forResult(PictureConfig.CHOOSE_REQUEST)
         } else {
             //拍照

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,6 +18,7 @@ import com.example.baselibrary.utils.findViewOfItem
 import com.example.kotlinmvpdemo.R
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
+import com.luck.picture.lib.tools.DateUtils
 
 
 /**
@@ -44,6 +46,7 @@ class GridImageAdapter(var context: Context) : RecyclerView.Adapter<GridImageAda
 
         val iv_fiv: ImageView = findViewItem(R.id.iv_fiv)
         val iv_del: ImageView = findViewItem(R.id.iv_del)
+        val tv_duration: TextView = findViewItem(R.id.tv_duration)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GridImageViewholder {
@@ -70,6 +73,7 @@ class GridImageAdapter(var context: Context) : RecyclerView.Adapter<GridImageAda
             }
 
             val media = list[position]
+            val chooseModel = media.chooseModel
             var path: String?
             if (media.isCut && !media.isCompressed) {// 裁剪过
                 path = media.cutPath
@@ -86,12 +90,30 @@ class GridImageAdapter(var context: Context) : RecyclerView.Adapter<GridImageAda
                 LogUtils.i(ConfigConstants.TAG_ALL, "开启原图功能后地址:${media.originalPath}")
             }
 
-            Glide.with(context)
-                .load(if (PictureMimeType.isContent(path) && !media.isCut && !media.isCompressed) Uri.parse(path) else path)
-                .centerCrop()
-                .placeholder(R.color.app_color_f6)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.iv_fiv)
+
+            val duration = media.duration
+            if (PictureMimeType.isHasVideo(media.mimeType) || PictureMimeType.isHasAudio(media.mimeType)) {
+                holder.tv_duration.visibility = View.VISIBLE
+                if (chooseModel == PictureMimeType.ofAudio()) {
+                    holder.tv_duration.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.picture_icon_audio, 0, 0, 0)
+                } else {
+                    holder.tv_duration.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.picture_icon_video, 0, 0, 0)
+                }
+                holder.tv_duration.text = DateUtils.formatDurationTime(duration)
+            } else {
+                holder.tv_duration.visibility = View.GONE
+            }
+
+            if (chooseModel == PictureMimeType.ofAudio()) {
+                holder.iv_fiv.setImageResource(R.drawable.picture_audio_placeholder)
+            } else {
+                Glide.with(context)
+                    .load(if (PictureMimeType.isContent(path) && !media.isCut && !media.isCompressed) Uri.parse(path) else path)
+                    .centerCrop()
+                    .placeholder(R.color.app_color_f6)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holder.iv_fiv)
+            }
         }
     }
 

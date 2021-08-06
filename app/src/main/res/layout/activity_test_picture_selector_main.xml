@@ -333,5 +333,65 @@
         android:textSize="14sp"
         android:visibility="gone" />
 
+    <CheckBox
+        android:id="@+id/cb_isCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/cb_choose_mode"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="显示or隐藏拍摄"
+        android:textColor="@color/app_color_53575e"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/cb_isGif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cb_isCamera"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_vertical"
+        android:text="是否显示Gif图片"
+        android:textColor="@color/app_color_53575e"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/cb_preview_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cb_isGif"
+        app:layout_constraintStart_toStartOf="parent"
+        android:checked="true"
+        android:gravity="center_vertical"
+        android:text="是否预览图片"
+        android:textColor="@color/app_color_53575e"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/cb_preview_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cb_preview_img"
+        app:layout_constraintStart_toStartOf="parent"
+        android:checked="true"
+        android:gravity="center_vertical"
+        android:text="是否预览视频"
+        android:textColor="@color/app_color_53575e"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/cb_preview_audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cb_preview_video"
+        app:layout_constraintStart_toStartOf="parent"
+        android:checked="true"
+        android:gravity="center_vertical"
+        android:text="是否预览音频"
+        android:textColor="@color/app_color_53575e"
+        android:textSize="14sp"
+        android:visibility="visible" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

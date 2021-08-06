@@ -25,4 +25,24 @@
         android:paddingBottom="8dp"
         android:src="@drawable/ic_delete_menu" />
 
+    <TextView
+        android:id="@+id/tv_duration"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_fiv"
+        app:layout_constraintStart_toStartOf="@+id/iv_fiv"
+        app:layout_constraintEnd_toEndOf="@+id/iv_fiv"
+        android:background="@drawable/picture_icon_shadow_bg"
+        android:drawableLeft="@drawable/picture_icon_video"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"
+        android:paddingTop="8dp"
+        android:text="00:00"
+        android:textColor="@color/app_color_white"
+        android:textSize="11sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
