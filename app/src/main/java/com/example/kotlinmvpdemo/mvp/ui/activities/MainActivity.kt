@@ -287,6 +287,9 @@ class MainActivity : BaseActivity(), MainView {
                 }
             }
         })
+
+        //8.RecyclerView 自动滑动到底部
+        rv_main.scrollToPosition(mainlistadapter.itemCount - 1)
     }
 
 
