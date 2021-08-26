@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10x"
+        android:text="开始运行"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen_20x"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_50x"
+        android:background="@null"
+        android:digits="1234567890"
+        android:hint="请输入你要选择序号"
+        android:inputType="textNoSuggestions"
+        android:maxLength="2"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorHint="@color/nuts_7a81b3"
+        android:textSize="@dimen/dimen_16x"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_one"
+        app:layout_constraintLeft_toRightOf="@+id/tv_one"
+        app:layout_constraintTop_toTopOf="@+id/tv_one" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,6 +50,9 @@ object RouterTag {
     //app---TestPictureSelectorMainActivity
     const val TestPictureSelectorMainActivity = "/app/TestPictureSelectorMainActivity"
 
+    //app---BasicGrammarActivity
+    const val BasicGrammarActivity = "/app/BasicGrammarActivity"
+
 
     //全局降解
     const val DegradeService = "/service/degradeservice"

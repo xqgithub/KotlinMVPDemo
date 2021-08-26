@@ -185,11 +185,13 @@ class MainActivity : BaseActivity(), MainView {
                             )
                         }
                     }
-                    8 -> intentToJump(
-                        this@MainActivity,
-                        TestProductFlavorsActivity::class.java,
-                        Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    )
+                    8 -> {
+//                        intentToJump(
+//                            this@MainActivity,
+//                            TestProductFlavorsActivity::class.java,
+//                            Intent.FLAG_ACTIVITY_CLEAR_TOP
+//                        )
+                    }
                     9 -> testEventBus()
                     10 -> presenter.testBuilder()
                     11 -> presenter.testFactory()
@@ -281,6 +283,7 @@ class MainActivity : BaseActivity(), MainView {
                     38 -> ARouter.getInstance().build(RouterTag.TestCalendarViewActivity).navigation()
                     39 -> ARouter.getInstance().build(RouterTag.TestPictureSelectorMainActivity).withTransition(R.anim.slide_in_right, 0).navigation(this@MainActivity)
                     40 -> ARouter.getInstance().build(RouterTag.TestLoopViewActivity).navigation()
+                    41 -> ARouter.getInstance().build(RouterTag.BasicGrammarActivity).navigation()
                 }
             }
         })
@@ -382,7 +385,8 @@ class MainActivity : BaseActivity(), MainView {
         "自定义验证码输入框样式",
         "自定义日历控件",
         "图片选择工具 PictureSelector",
-        "滑动单项选择框 LoopView"
+        "滑动单项选择框 LoopView",
+        "kotlin-基本语法 BasicGrammarActivity"
     )
 
     /**
