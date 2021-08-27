@@ -8,9 +8,12 @@ import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.mvp.entity.Children
+import com.example.baselibrary.mvp.entity.DelegateGamePlayer
+import com.example.baselibrary.mvp.entity.RealGamePlayer
 import com.example.baselibrary.mvp.entity.Student
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
+import com.example.baselibrary.utils.SPreferenceUtils
 import com.example.baselibrary.utils.clickWithTrigger
 import com.example.kotlinmvpdemo.R
 import com.example.kotlinmvpdemo.di.componets.DaggerBasicGrammarComponet
@@ -107,10 +110,28 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                 19 -> {
                     testDatatypeOne()
                 }
-                /*** 20-  kotlin的  泛型  ***/
+                /*** 20-22  kotlin的  泛型  ***/
                 20 -> {
                     testGeneric()
                 }
+                21 -> {
+                    myGeneric(Box(10).value)
+                    myGeneric(Box("lufei").value)
+                }
+                22 -> {
+                    testBox()
+                }
+                /*** 23  kotlin的  集合  ***/
+                23 -> {
+                    testList()
+                    testMutableList()
+                }
+                /*** 24  kotlin的  委托和委托属性  ***/
+                24 -> {
+                    testCommission()
+                }
+
+
                 else -> showShortToastSafe("序号错误，请检查")
             }
         }
@@ -500,7 +521,7 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
 
     /**
      * 20
-     * 泛型
+     * 泛型方法
      */
     fun <T> myGeneric(value: T) {
         when (value) {
@@ -524,4 +545,173 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
         myGeneric(person)
     }
 
+
+    /**
+     * 21
+     * 泛型类
+     * 既将泛型作为函数参数，又将泛型作为函数的输出，那就既不用 in 或 out
+     */
+    class Box<T>(t: T) {
+        var value = t
+    }
+
+    /**
+     * 22
+     * 声明处的类型变异
+     * 生产者 out(协变)
+     * 如果你的类是将泛型作为内部方法的返回，那么可以用 out
+     */
+    class Box1<out T>(val t: T) {
+        fun foo(): T {
+            return t
+        }
+    }
+
+    /**
+     * 消费者 in（逆变）
+     * 如果你的类是将泛型对象作为函数的参数，那么可以用 in
+     */
+    class Box2<in T>() {
+        fun foo(t: T): String {
+            if (t is String) {
+                return "这是一个String类型"
+            } else {
+                return "这不是一个String类型"
+            }
+        }
+    }
+
+    fun testBox() {
+        var box1: Double = Box1(1.00).foo()
+        var box2 = Box2<Any>().foo("haha")
+
+        LogUtils.i(
+            ConfigConstants.TAG_ALL, "box1 中的返回值 =-= $box1",
+            "box2 =-= $box2"
+        )
+    }
+
+    /**
+     * 23
+     * 集合归纳
+     */
+
+    //list在Kotlin中也就是一个只读的集合
+    fun testList() {
+        val list = listOf<String>(//新建list
+            "瓦洛兰",
+            "德玛西亚",
+            "班德尔城",
+            "诺克萨斯",
+            "祖安",
+            "皮尔特沃夫",
+            "艾欧尼亚",
+            "李青",
+            "阿利斯塔",
+            "希维尔",
+            "潘森",
+            "伊泽瑞尔",
+            "雷克顿",
+            "古拉加斯",
+            "奥利安娜",
+            "崔斯塔娜",
+            "泰达米尔",
+            "马尔扎哈",
+            "卡西奥佩娅",
+            "艾尼维亚"
+        )
+
+        val count = list.size     //集合中元素的数量  Int
+        val isNull = list.isEmpty()   //判断集合是否为空  Boolean
+        val isContains = list.contains("李青")  //判断集合中是否包含某种元素     Boolean
+        val list2 = listOf<String>(
+            "瓦洛兰",
+            "德玛西亚",
+            "班德尔城",
+            "诺克萨斯",
+            "祖安"
+        )
+        val isContainsAll = list.containsAll(list2)   //判断集合中是否包含另一个集合    Boolean
+        val indexStr = list.get(2)    //查询集合中某个位置的元素值 <E>
+        val index = list.indexOf("李青")    //返回集合中某个元素首次出现的索引，如果不存在则返回-1 Int
+        val lastIndex = list.lastIndexOf("李青")    //返回集合中某个元素最后出现的索引，如果不存在则返回-1   Int
+
+        val iterator = list.iterator()    //返回该只读集合的元素迭代器     Iterator
+        val listIterator = list.listIterator()    //返回一个集合的迭代器    ListIterator
+        val listIteratorIndex = list.listIterator(2)  //从指定位置开始，返回一个集合的迭代器    ListIterator
+        val subList = list.subList(1, 9)   //返回集合中从1到9之间的集合    List
+
+        LogUtils.i(
+            ConfigConstants.TAG_ALL,
+            "集合数量 count =-= $count",
+            "集合数量是否为空 isNull =-= $isNull",
+            "集合是否包含某种元素 isContains =-= $isContains",
+            "集合是否包含另一个集合 isContainsAll =-= $isContainsAll",
+            "集合中某个位置的元素值 indexStr =-= $indexStr",
+            "集合中某个元素首次出现的位置 index =-= $index",
+            "集合中某个元素最后出现的索引 lastIndex =-= $lastIndex"
+        )
+    }
+
+    //对集合进行修改，我们应该使用MutableList
+    fun testMutableList() {
+
+        val mutableList = mutableListOf<String>(
+            "伊泽瑞尔",
+            "雷克顿",
+            "古拉加斯",
+            "奥利安娜",
+            "崔斯塔娜",
+            "泰达米尔",
+            "马尔扎哈",
+            "卡西奥佩娅",
+            "艾尼维亚"
+        )
+        val list2 = listOf<String>(
+            "瓦洛兰",
+            "德玛西亚",
+            "班德尔城",
+            "诺克萨斯",
+            "祖安"
+        )
+
+        val isAddOk = mutableList.add("祖安")     //添加一个元素，返回true或false   Boolean
+        val isAddIndexOk = mutableList.add(2, "班德尔城")  //在指定位置添加一个元素   Unit
+        val isRemoveOk = mutableList.remove("李青")    //移除集合中的一个元素，返回true或false    Boolean
+        val isRemoveAtOk = mutableList.removeAt(3)    //移除指定为位置的元素    <E>
+        val isAddAllOk = mutableList.addAll(list2)   //添加另一个集合，返回true或false       Boolean
+        val isRemoveAllOk = mutableList.removeAll(list2)  //移除一个集合，返回true或false   Boolean
+        val isSetOk = mutableList.set(2, "诺克萨斯")   //替换指定位置的元素，返回原元素   <E>
+        val isClearOk = mutableList.clear()   //清空集合中得元素 Unit
+        val list4 = mutableList.toList()  //tolist是一个扩展函数，可以赋值list内的内容，返回一个只读的list
+
+    }
+
+    /**
+     * 24
+     * 委托和委托属性
+     * 1.有一种属性，在使用的时候每次都要手动实现它，但是可以做到只实现一次，并且放到库中，一直使用，这种属性称为委托属性
+     */
+
+    var test_sp: String by SPreferenceUtils(this, "xiaoqueque", "Company", "路飞")//默认存的值是路飞
+
+    fun testCommission() {
+        //委托类测试
+        val realGamePlayer = RealGamePlayer("路飞")
+        val delegateGamePlayer = DelegateGamePlayer(realGamePlayer)
+        delegateGamePlayer.rank()
+        delegateGamePlayer.upgrade()
+
+        //委托属性测试
+        realGamePlayer.delegated_properties_a = "the shy"
+        realGamePlayer.delegated_properties_b = 20
+
+        LogUtils.i(
+            ConfigConstants.TAG_ALL, "delegated_properties_a =-= ${realGamePlayer.delegated_properties_a}",
+            "delegated_properties_b =-= ${realGamePlayer.delegated_properties_b}"
+        )
+
+        test_sp = "小路飞"
+        LogUtils.i(ConfigConstants.TAG_ALL, "test_sp =-= ${test_sp}")
+    }
 }
