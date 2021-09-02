@@ -36,4 +36,17 @@
         app:layout_constraintTop_toTopOf="@+id/tv_one" />
 
 
+    <TextView
+        android:id="@+id/tv_testtwo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_one"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
