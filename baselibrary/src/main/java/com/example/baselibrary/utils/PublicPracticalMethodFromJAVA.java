@@ -30,6 +30,7 @@ import androidx.annotation.ColorRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.baselibrary.R;
+import com.example.baselibrary.application.MyApplication;
 import com.example.baselibrary.constants.ConfigConstants;
 
 import java.io.ByteArrayInputStream;
@@ -690,6 +691,37 @@ public class PublicPracticalMethodFromJAVA {
             drawable.setSize(width, width);
         }
         view.setBackground(drawable);
+    }
+
+
+    /**
+     * 关闭栈中的Activitys
+     *
+     * @param index 0 关闭所有的Activity
+     */
+    public void closeStackActivities(int index) {
+//        LogUtils.i(ConfigConstants.TAG_ALL, "currentActivity =-= " + MyApplication.myApplication.lifecycleCallbacks.getActivityName(MyApplication.myApplication.lifecycleCallbacks.current().toString()));
+        for (int i = index; i < MyApplication.myapplication.lifecycleCallbacks.count(); i++) {
+            List<Activity> activities = MyApplication.myapplication.lifecycleCallbacks.getActivitys();
+//            LogUtils.i(ConfigConstants.TAG_ALL, "activities =-= " + MyApplication.myApplication.lifecycleCallbacks.getActivityName(activities.get(i).toString()));
+            activities.get(i).finish();
+        }
+    }
+
+    /**
+     * 关闭栈中指定的Activity
+     */
+    public void closeStackActivity(String activityName) {
+        for (int i = 0; i < MyApplication.myapplication.lifecycleCallbacks.count(); i++) {
+            List<Activity> activities = MyApplication.myapplication.lifecycleCallbacks.getActivitys();
+//            LogUtils.i(ConfigConstants.TAG_ALL, "activities =-= " + TKBaseApplication.myApplication.lifecycleCallbacks.getActivityName(activities.get(i).toString()));
+            String __activityName = MyApplication.myapplication.lifecycleCallbacks.getActivityName(activities.get(i).toString()).substring(0,
+                    MyApplication.myapplication.lifecycleCallbacks.getActivityName(activities.get(i).toString()).indexOf("@"));
+            if (activityName.equals(__activityName)) {
+                activities.get(i).finish();
+                return;
+            }
+        }
     }
 
 

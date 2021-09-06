@@ -132,6 +132,7 @@ interface OnLazyClickListener : View.OnClickListener {
 fun <T> observableToMain(): ObservableTransformer<T, T> {
     return ObservableTransformer { ob ->
         ob.subscribeOn(Schedulers.io())
+            .unsubscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 }
@@ -143,6 +144,7 @@ fun <T> observableToMain(): ObservableTransformer<T, T> {
 fun <T> flowableToMain(): FlowableTransformer<T, T> {
     return FlowableTransformer { fb ->
         fb.subscribeOn(Schedulers.io())
+            .unsubscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 }

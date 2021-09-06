@@ -9,6 +9,8 @@ import com.example.baselibrary.di.modules.MyAppModule
 import com.example.baselibrary.utils.CrashHandler
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.ScreenTools
+import com.example.baselibrary.utils.lifecycle.ActivityState
+import com.example.baselibrary.utils.lifecycle.MyActivityLifecycleCallbacks
 import com.facebook.stetho.Stetho
 
 /**
@@ -16,7 +18,11 @@ import com.facebook.stetho.Stetho
  */
 open class MyApplication : MultiDexApplication() {
 
+
     private lateinit var myappcomponet: MyAppComponet
+
+    @JvmField
+    var lifecycleCallbacks: MyActivityLifecycleCallbacks = MyActivityLifecycleCallbacks()
 
     companion object {
         lateinit var myapplication: MyApplication
@@ -27,8 +33,8 @@ open class MyApplication : MultiDexApplication() {
         myapplication = this
         initConfig()
         setupGraph()
-
-
+        //注册Activity生命周期监听回调
+        initActivityLifecycle()
     }
 
     /**
@@ -74,6 +80,14 @@ open class MyApplication : MultiDexApplication() {
             ARouter.openLog()
         }
         ARouter.init(this)
+    }
+
+
+    /**
+     * 初始化ActivityLifecycle
+     */
+    fun initActivityLifecycle() {
+        registerActivityLifecycleCallbacks(lifecycleCallbacks)
     }
 
 }

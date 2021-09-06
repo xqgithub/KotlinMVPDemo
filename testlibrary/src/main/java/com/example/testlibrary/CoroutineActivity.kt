@@ -13,6 +13,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import java.io.File
 import kotlin.system.measureTimeMillis
 
 /**
@@ -99,9 +100,9 @@ class CoroutineActivity : BaseActivity() {
     private fun testCoroutines2() = runBlocking<Unit> { // 开始执行主协程
         GlobalScope.launch { // 在后台启动一个新的协程并继续
             delay(1000L)
-            println("World!")
+            LogUtils.i(ConfigConstants.TAG_ALL, "World!")
         }
-        println("Hello,") // 主协程在这里会立即执行
+        LogUtils.i(ConfigConstants.TAG_ALL, "Hello,")// 主协程在这里会立即执行
         delay(2000L)      // 延迟 2 秒来保证 JVM 存活
     }
 
@@ -110,10 +111,10 @@ class CoroutineActivity : BaseActivity() {
     private fun testCoroutines3() = runBlocking {
         val job = GlobalScope.launch { // 启动一个新协程并保持对这个作业的引用
             delay(1000L)
-            println("World!")
+            LogUtils.i(ConfigConstants.TAG_ALL, "World!")
         }
-        println("Hello,")
         job.join() // 等待直到子协程执行结束
+        LogUtils.i(ConfigConstants.TAG_ALL, "Hello,")
     }
 
 
@@ -121,9 +122,9 @@ class CoroutineActivity : BaseActivity() {
     private fun testCoroutines4() = runBlocking { // this: CoroutineScope
         launch { // 在 runBlocking 作用域中启动一个新协程
             delay(1000L)
-            println("World!")
+            LogUtils.i(ConfigConstants.TAG_ALL, "World!")
         }
-        println("Hello,")
+        LogUtils.i(ConfigConstants.TAG_ALL, "Hello,")
     }
 
     //1.可以使用 coroutineScope 构建器声明自己的作用域。它会创建一个协程作用域并且在所有已启动子协程执行完毕之前不会结束
@@ -134,19 +135,19 @@ class CoroutineActivity : BaseActivity() {
         runBlocking { // this: CoroutineScope
             launch {
                 delay(2000L)
-                println("这个是第二个执行的")
+                LogUtils.i(ConfigConstants.TAG_ALL, "这个是第二个执行的")
             }
             coroutineScope { // 创建一个协程作用域
                 launch {
                     delay(5000L)
-                    println("这个是第三个执行的")
+                    LogUtils.i(ConfigConstants.TAG_ALL, "这个是第三个执行的")
                 }
                 delay(1000L)
-                println("这是第一个执行的") // 这一行会在内嵌 launch 之前输出
+                LogUtils.i(ConfigConstants.TAG_ALL, "这是第一个执行的") // 这一行会在内嵌 launch 之前输出
             }
-            println("这个是第四个执行的") // 这一行在内嵌 launch 执行完毕后才输出
+            LogUtils.i(ConfigConstants.TAG_ALL, "这个是第四个执行的")  // 这一行在内嵌 launch 执行完毕后才输出
         }
-        println("这个会最后执行吗？")
+        LogUtils.i(ConfigConstants.TAG_ALL, "这个会最后执行吗？")
     }
 
     //提取函数重构
@@ -204,7 +205,7 @@ class CoroutineActivity : BaseActivity() {
             }
             delay(3000L)
             LogUtils.i(ConfigConstants.TAG_ALL, "主人很累了啊，准备结束工作")
-            job.cancel()// 取消该作业
+            job.cancel()// 协程取消该作业
             job.join()// 等待作业执行结束
             LogUtils.i(ConfigConstants.TAG_ALL, "现在主人可以休息了")
         }
@@ -325,7 +326,7 @@ class CoroutineActivity : BaseActivity() {
             // 启动一个协程来处理某种传入请求（request）
             val request = launch {
                 repeat(5) { i -> // 启动少量的子作业
-                    launch {
+                    val descendants = launch {
                         delay((i + 1) * 200L) // 延迟 200 毫秒、400 毫秒、600、800、1000 毫秒的时间
                         LogUtils.i(ConfigConstants.TAG_ALL, "Coroutine $i is done")
                     }
@@ -368,6 +369,11 @@ class CoroutineActivity : BaseActivity() {
                 yield()
                 LogUtils.i(ConfigConstants.TAG_ALL, "After yield, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
             }
+
+            val job_two = launch(Dispatchers.Default + threadLocal.asContextElement(value = "launch_two")) {
+                LogUtils.i(ConfigConstants.TAG_ALL, "launch_two start, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
+                LogUtils.i(ConfigConstants.TAG_ALL, "After yield, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
+            }
             job.join()
             LogUtils.i(ConfigConstants.TAG_ALL, "Post-main, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
         }
@@ -378,7 +384,8 @@ class CoroutineActivity : BaseActivity() {
     private fun testCoroutines16() {
         val time = measureTimeMillis {
             fileScope.launch {
-                val filedir = "${SDCardUtils.getExternalStorageDirectory()}/AAAAtestfile.txt"
+//                val filedir = "${SDCardUtils.getExternalStorageDirectory()}/AAAAtestfile.txt"
+                val filepath = SDCardUtils.getExternalFilesDir(this@CoroutineActivity, "coroutine").absolutePath + File.separator + "testfile.txt"
                 var stringBuffer = StringBuffer()
                 for (i in 1..500) {
 //                    stringBuffer.append("我是路飞_${i}\r\n")
@@ -386,12 +393,12 @@ class CoroutineActivity : BaseActivity() {
                 }
                 withContext(Dispatchers.IO) {
                     if (!StringUtils.isBlank(SDCardUtils.getExternalStorageDirectory())) {//判断SD是否有权限
-                        if (FileUtils.createOrExistsFile(filedir)) {
-                            FileUtils.writeFileFromString(filedir, stringBuffer.toString(), false)
+                        if (FileUtils.createOrExistsFile(filepath)) {
+                            FileUtils.writeFileFromString(filepath, stringBuffer.toString(), false)
                         }
                     }
                 }
-                tv_coroutines.text = FileUtils.readFile2String(filedir, "utf-8")
+                tv_coroutines.text = FileUtils.readFile2String(filepath, "utf-8")
             }
 
 //            fileScope.launch {
@@ -425,38 +432,38 @@ class CoroutineActivity : BaseActivity() {
     //并发的往文件里面写内容
     private fun testCoroutines17() {
         val time = measureTimeMillis {
-            val filedir = "${SDCardUtils.getExternalStorageDirectory()}/AAAAtestfile.txt"
+            val filepath = SDCardUtils.getExternalFilesDir(this@CoroutineActivity, "coroutine").absolutePath + File.separator + "testfile.txt"
 
             fileScope.launch {
-                val job = fileScope.launch {
-                    var test_a = ""
-                    for (i in 1..10) {
-                        test_a = "A\r\n"
-                        withContext(Dispatchers.IO) {
-                            if (!StringUtils.isBlank(SDCardUtils.getExternalStorageDirectory())) {//判断SD是否有权限
-                                if (FileUtils.createOrExistsFile(filedir)) {
-                                    FileUtils.writeFileFromString(filedir, test_a, true)
-                                }
+                SDCardUtils.getExternalStorageDirectory()?.let {
+                    if (FileUtils.isFileExists(filepath)) {
+                        FileUtils.deleteFile(filepath)
+                    }
+                    FileUtils.createOrExistsFile(filepath)
+
+                    val job = fileScope.launch {
+                        var test_a = ""
+                        for (i in 1..10) {
+                            test_a = "A\r\n"
+                            withContext(Dispatchers.IO) {
+                                FileUtils.writeFileFromString(filepath, test_a, true)
                             }
                         }
                     }
-                }
-                val job2 = fileScope.launch {
-                    var test_b = ""
-                    for (i in 1..10) {
-                        test_b = "B\r\n"
-                        withContext(Dispatchers.IO) {
-                            if (!StringUtils.isBlank(SDCardUtils.getExternalStorageDirectory())) {//判断SD是否有权限
-                                if (FileUtils.createOrExistsFile(filedir)) {
-                                    FileUtils.writeFileFromString(filedir, test_b, true)
-                                }
+                    val job2 = fileScope.launch {
+                        var test_b = ""
+                        for (i in 1..10) {
+                            test_b = "B\r\n"
+                            withContext(Dispatchers.IO) {
+                                FileUtils.writeFileFromString(filepath, test_b, true)
                             }
                         }
                     }
+
+                    job.join()
+                    job2.join()
+                    tv_coroutines.text = FileUtils.readFile2String(filepath, "utf-8")
                 }
-                job.join()
-                job2.join()
-                tv_coroutines.text = FileUtils.readFile2String(filedir, "utf-8")
             }
         }
         LogUtils.i(ConfigConstants.TAG_ALL, "写入文件耗时为：${time} ms")
@@ -475,24 +482,20 @@ class CoroutineActivity : BaseActivity() {
     private fun testCoroutines18() {
         val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7)
         val result = list.map {
-            LogUtils.i(ConfigConstants.TAG_ALL, "In Map")
             it * 2
         }.filter {
-            LogUtils.i(ConfigConstants.TAG_ALL, "In filter")
             it % 3 == 0
         }
-        LogUtils.i(ConfigConstants.TAG_ALL, "Before Average")
         LogUtils.i(ConfigConstants.TAG_ALL, "result.average的值： ${result.average()}")
 
 
-        val result2 = list.asSequence().map {
-            LogUtils.i(ConfigConstants.TAG_ALL, "In Map")
-            it * 2
-        }.filter {
-            LogUtils.i(ConfigConstants.TAG_ALL, "In filter")
-            it % 3 == 0
-        }
-        LogUtils.i(ConfigConstants.TAG_ALL, "Before Average")
+        //序列(Sequences) 的秘诀在于它们是共享同一个迭代器(iterator),减少循环次数，提升性能
+        val result2 = list.asSequence()
+            .map {
+                it * 2
+            }.filter {
+                it % 3 == 0
+            }
         LogUtils.i(ConfigConstants.TAG_ALL, "result.average的值： ${result2.average()}")
     }
 
@@ -505,7 +508,7 @@ class CoroutineActivity : BaseActivity() {
     private fun testCoroutines19() {
 
         fun foo(): Flow<Int> = flow { // 流生成器
-            for (i in 1..3) {
+            for (i in 1..5) {
                 delay(100) // 假装我们在这里做一些有用的事情
                 emit(i) // 发出下一个值
             }
@@ -514,16 +517,16 @@ class CoroutineActivity : BaseActivity() {
         runBlocking {
             //启动并发协程以检查主线程是否被阻塞
             launch {
-                for (k in 1..3) {
-                    println("I'm not blocked $k")
+                for (k in 1..5) {
+                    LogUtils.i(ConfigConstants.TAG_ALL, "I'm not blocked $k")
                     delay(100)
                 }
             }
 
             // Collect the flow
-            foo().collect { value -> println(value) }
+            foo().collect { value ->
+                LogUtils.i(ConfigConstants.TAG_ALL, "value =-= $value")
+            }
         }
     }
-
-
 }

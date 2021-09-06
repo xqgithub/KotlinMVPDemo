@@ -1,15 +1,13 @@
 package com.example.testlibrary
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
-import com.example.baselibrary.utils.LogUtils
-import com.example.baselibrary.utils.clickWithTrigger
-import com.example.baselibrary.utils.flowableToMain
-import com.example.baselibrary.utils.observableToMain
+import com.example.baselibrary.utils.*
 import com.trello.rxlifecycle3.android.ActivityEvent
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import io.reactivex.*
@@ -28,6 +26,7 @@ import kotlin.random.Random
  * Rxjava2使用方法
  */
 @Route(path = RouterTag.Rxjava2UseActivity)
+@SuppressLint("CheckResult")
 class Rxjava2UseActivity : BaseActivity() {
 
     override fun setupComponent(myAppComponet: MyAppComponet) {
@@ -148,13 +147,13 @@ class Rxjava2UseActivity : BaseActivity() {
      */
     fun testrxjava2_2() {
         Observable.create(ObservableOnSubscribe<Int> { e ->
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
             e.onNext(1)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
             e.onNext(2)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 3")
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 3")
             e.onNext(3)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 4")
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 4")
             e.onNext(4)
         }).map {
             "This is result $it"
@@ -217,17 +216,17 @@ class Rxjava2UseActivity : BaseActivity() {
      */
     fun testrxjava2_5() {
         Observable.create(ObservableOnSubscribe<Int> { e ->
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
             e.onNext(1)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
             e.onNext(2)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 3")
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 3")
             e.onNext(3)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 4")
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 4")
             e.onNext(4)
         }).flatMap(Function<Int, ObservableSource<String>> {
             val list = ArrayList<String>()
-            for (i in 0 until 2) {
+            for (i in 0 until 1) {
                 list.add("I am value $it")
             }
             Observable.fromIterable(list).delay((1..5).random() * 100L, TimeUnit.MILLISECONDS)
@@ -244,24 +243,24 @@ class Rxjava2UseActivity : BaseActivity() {
      */
     fun testrxjava2_6() {
         Observable.create(ObservableOnSubscribe<Int> { e ->
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
             e.onNext(1)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
             e.onNext(2)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 3")
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 3")
             e.onNext(3)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 4")
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 4")
             e.onNext(4)
         }).concatMap {
             val list = ArrayList<String>()
-            for (i in 0 until 2) {
+            for (i in 0 until 1) {
                 list.add("I am value $it")
             }
             Observable.fromIterable(list).delay((1..5).random() * 100L, TimeUnit.MILLISECONDS)
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                LogUtils.i(ConfigConstants.TAG_ALL, "flatMap subscribe: $it")
+                LogUtils.i(ConfigConstants.TAG_ALL, "concatMap subscribe: $it")
             }
     }
 
@@ -270,18 +269,28 @@ class Rxjava2UseActivity : BaseActivity() {
      * 1.去重
      */
     fun testrxjava2_7() {
-        Observable.create(ObservableOnSubscribe<Int> { e ->
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
-            e.onNext(1)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
-            e.onNext(2)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
-            e.onNext(1)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
-            e.onNext(2)
+//        Observable.create(ObservableOnSubscribe<Int> { e ->
+////            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
+//            e.onNext(1)
+////            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
+//            e.onNext(2)
+////            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
+//            e.onNext(1)
+////            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
+//            e.onNext(2)
+//        }).distinct()
+//            .subscribe {
+//                LogUtils.i(ConfigConstants.TAG_ALL, "distinct subscribe: $it")
+//            }
+
+        Observable.create(ObservableOnSubscribe<Int> { obe ->
+            val intArray = arrayOf(1, 2, 1, 2)
+            intArray.forEach {
+                obe.onNext(it)
+            }
         }).distinct()
             .subscribe {
-                LogUtils.i(ConfigConstants.TAG_ALL, "distinct subscribe: $it")
+                LogUtils.i(ConfigConstants.TAG_ALL, "array =-= $it")
             }
     }
 
@@ -290,15 +299,11 @@ class Rxjava2UseActivity : BaseActivity() {
      * 1.过滤
      */
     fun testrxjava2_8() {
-        Observable.create(ObservableOnSubscribe<Int> { e ->
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 1")
-            e.onNext(1)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 2")
-            e.onNext(2)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 3")
-            e.onNext(3)
-            LogUtils.i(ConfigConstants.TAG_ALL, "Observable emit 4")
-            e.onNext(4)
+        Observable.create(ObservableOnSubscribe<Int> { obe ->
+            val intArray = arrayOf(1, 2, 3, 4)
+            intArray.forEach {
+                obe.onNext(it)
+            }
         }).filter {
             it < 2
         }.subscribe {
@@ -311,13 +316,11 @@ class Rxjava2UseActivity : BaseActivity() {
      * 1.buffer 操作符接受两个参数，buffer(count,skip)，作用是将 Observable 中的数据按 skip (步长) 分成最大不超过 count 的 buffer ，然后生成一个 Observable
      */
     fun testrxjava2_9() {
-        Observable.create(ObservableOnSubscribe<Int> { e ->
-            e.onNext(1)
-            e.onNext(2)
-            e.onNext(3)
-            e.onNext(4)
-            e.onNext(5)
-            e.onNext(6)
+        Observable.create(ObservableOnSubscribe<Int> { obe ->
+            val intArray = arrayOf(1, 2, 3, 4, 5, 6)
+            intArray.forEach {
+                obe.onNext(it)
+            }
         }).buffer(2, 3)
             .subscribe {
                 LogUtils.i(ConfigConstants.TAG_ALL, "buffer subscribe->size:${it.size}")
@@ -374,6 +377,9 @@ class Rxjava2UseActivity : BaseActivity() {
             .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
             .compose(observableToMain())
             .subscribe {
+                if (it == 5L) {
+                    PublicPracticalMethodFromJAVA.getInstance().closeStackActivity("Rxjava2UseActivity")
+                }
                 LogUtils.i(ConfigConstants.TAG_ALL, "interval subscribe->:$it")
             }
 
@@ -386,12 +392,11 @@ class Rxjava2UseActivity : BaseActivity() {
      * 2.让订阅者在接收到数据之前干点有意思的事情
      */
     fun testrxjava2_12() {
-        Observable.create(ObservableOnSubscribe<Int> { e ->
-            e.onNext(1)
-            e.onNext(2)
-            e.onNext(3)
-            e.onNext(4)
-            e.onNext(5)
+        Observable.create(ObservableOnSubscribe<Int> { obe ->
+            val intArray = arrayOf(1, 2, 3, 4, 5)
+            intArray.forEach {
+                obe.onNext(it)
+            }
         }).doOnNext {
             LogUtils.i(ConfigConstants.TAG_ALL, "doOnNext 保存->:$it")
         }.subscribe {
@@ -404,12 +409,11 @@ class Rxjava2UseActivity : BaseActivity() {
      * 1.接受一个 long 型参数 count ，代表跳过 count 个数目开始接收
      */
     fun testrxjava2_13() {
-        Observable.create(ObservableOnSubscribe<Int> { e ->
-            e.onNext(1)
-            e.onNext(2)
-            e.onNext(3)
-            e.onNext(4)
-            e.onNext(5)
+        Observable.create(ObservableOnSubscribe<Int> { obe ->
+            val intArray = arrayOf(1, 2, 3, 4, 5)
+            intArray.forEach {
+                obe.onNext(it)
+            }
         }).skip(2)
             .subscribe {
                 LogUtils.i(ConfigConstants.TAG_ALL, "skip subscribe->:$it")
@@ -422,12 +426,11 @@ class Rxjava2UseActivity : BaseActivity() {
      * 1.接受一个 long 型参数 count ，代表至多接收 count 个数据
      */
     fun testrxjava2_14() {
-        Observable.create(ObservableOnSubscribe<Int> { e ->
-            e.onNext(1)
-            e.onNext(2)
-            e.onNext(3)
-            e.onNext(4)
-            e.onNext(5)
+        Observable.create(ObservableOnSubscribe<Int> { obe ->
+            val intArray = arrayOf(1, 2, 3, 4, 5)
+            intArray.forEach {
+                obe.onNext(it)
+            }
         }).take(2)
             .subscribe {
                 LogUtils.i(ConfigConstants.TAG_ALL, "take subscribe->:$it")
@@ -530,7 +533,7 @@ class Rxjava2UseActivity : BaseActivity() {
      * 2.和 concat 的区别在于，不用等到 发射器 A 发送完所有的事件再进行发射器 B 的发送
      */
     fun testrxjava2_19() {
-        Observable.merge(Observable.just(1, 3), Observable.just(2, 4, 5))
+        Observable.merge(Observable.just(1, 3), Observable.just(2, 4, 5), Observable.just("7_哈哈", "8_嘻嘻", "9_呼呼"))
             .subscribe {
                 LogUtils.i(ConfigConstants.TAG_ALL, "merge subscribe->:${it}")
             }
@@ -570,8 +573,8 @@ class Rxjava2UseActivity : BaseActivity() {
      */
     fun testrxjava2_22() {
         val disposable22 = Observable.interval(1, TimeUnit.SECONDS)//间隔一秒发一次
-            .take(15)//最多接受15个
-            .window(3, TimeUnit.SECONDS)
+            .take(10)//最多接受15个
+            .window(2, TimeUnit.SECONDS)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {

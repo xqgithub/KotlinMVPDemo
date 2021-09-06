@@ -77,7 +77,7 @@ class MainActivity : BaseActivity(), MainView {
     override fun init() {
         LogUtils.i("=-= 我要开始初始化了")
         //获得手机屏幕信息
-        PublicPracticalMethodFromJAVA.getInstance().getPhoneScreenInfo(this@MainActivity)
+//        PublicPracticalMethodFromJAVA.getInstance().getPhoneScreenInfo(this@MainActivity)
 
         //初始化recyclerview
         initRecyclerview(false)
@@ -289,7 +289,8 @@ class MainActivity : BaseActivity(), MainView {
         })
 
         //8.RecyclerView 自动滑动到底部
-        rv_main.scrollToPosition(mainlistadapter.itemCount - 1)
+//        rv_main.scrollToPosition(mainlistadapter.itemCount - 1)
+        rv_main.scrollToPosition(33)
     }
 
 
