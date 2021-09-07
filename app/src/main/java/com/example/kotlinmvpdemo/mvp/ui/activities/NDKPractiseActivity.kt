@@ -18,6 +18,9 @@ import com.example.kotlinmvpdemo.ndk.nativelib
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import kotlinx.android.synthetic.main.activity_ndk_practise.*
 
+/**
+ * NDK 测试
+ */
 @Route(path = RouterTag.NDKPractiseActivity)
 class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
 
