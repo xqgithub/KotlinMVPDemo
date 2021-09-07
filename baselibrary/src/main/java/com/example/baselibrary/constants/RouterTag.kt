@@ -53,6 +53,9 @@ object RouterTag {
     //app---BasicGrammarActivity
     const val BasicGrammarActivity = "/app/BasicGrammarActivity"
 
+    //app---NDKPractiseActivity
+    const val NDKPractiseActivity = "/app/NDKPractiseActivity"
+
 
     //全局降解
     const val DegradeService = "/service/degradeservice"

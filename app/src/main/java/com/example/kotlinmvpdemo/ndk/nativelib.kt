@@ -18,4 +18,6 @@ class nativelib {
 
     external fun sum(x: Int, y: Int): Int
 
+    external fun testbasictype()
+
 }

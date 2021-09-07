@@ -284,13 +284,14 @@ class MainActivity : BaseActivity(), MainView {
                     39 -> ARouter.getInstance().build(RouterTag.TestPictureSelectorMainActivity).withTransition(R.anim.slide_in_right, 0).navigation(this@MainActivity)
                     40 -> ARouter.getInstance().build(RouterTag.TestLoopViewActivity).navigation()
                     41 -> ARouter.getInstance().build(RouterTag.BasicGrammarActivity).navigation()
+                    42 -> ARouter.getInstance().build(RouterTag.NDKPractiseActivity).navigation()
                 }
             }
         })
 
         //8.RecyclerView 自动滑动到底部
 //        rv_main.scrollToPosition(mainlistadapter.itemCount - 1)
-        rv_main.scrollToPosition(33)
+        rv_main.scrollToPosition(mainlistadapter.itemCount - 1)
     }
 
 
@@ -390,7 +391,8 @@ class MainActivity : BaseActivity(), MainView {
         "自定义日历控件",
         "图片选择工具 PictureSelector",
         "滑动单项选择框 LoopView",
-        "kotlin-基本语法 BasicGrammarActivity"
+        "kotlin-基本语法 BasicGrammarActivity",
+        "NDK 测试练习"
     )
 
     /**

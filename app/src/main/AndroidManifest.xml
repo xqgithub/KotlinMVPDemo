@@ -44,30 +44,25 @@
         <activity
             android:name=".mvp.ui.activities.BasicGrammarActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activities.NDKPractiseActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.example.baselibrary.mvp.service.TaskRemovedService"
             android:exported="false"
-            android:stopWithTask="false" />
-
-        <!-- package的ID配置 -->
+            android:stopWithTask="false" /> <!-- package的ID配置 -->
         <meta-data
             android:name="package_id"
-            android:value="${package_id}" />
-
-        <!-- app_version配置 -->
+            android:value="${package_id}" /> <!-- app_version配置 -->
         <meta-data
             android:name="app_version"
-            android:value="${app_version}" />
-
-        <!-- 注册自定义静态广播接收器 -->
+            android:value="${app_version}" /> <!-- 注册自定义静态广播接收器 -->
         <receiver android:name="com.example.baselibrary.mvp.boradcastreceiver.NotificationBrodcaseReceiver">
             <intent-filter>
                 <action android:name="notifacatio_close" />
             </intent-filter>
-        </receiver>
-
-        <!-- FileProvider配置使用 -->
+        </receiver> <!-- FileProvider配置使用 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.kotlinmvpdemo.fileprovider"
