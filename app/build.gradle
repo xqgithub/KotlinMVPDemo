@@ -56,6 +56,7 @@ android {
         debug {
             // 是否进行混淆
             minifyEnabled false
+            jniDebuggable true
         }
         release {
             // 是否进行混淆

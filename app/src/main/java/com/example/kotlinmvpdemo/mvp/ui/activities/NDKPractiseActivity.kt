@@ -58,6 +58,25 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                 2 -> {
                     testTwo()
                 }
+                /** 3-8 指针的定义和使用  **/
+                3 -> {
+                    testThree()
+                }
+                4 -> {
+                    testFour()
+                }
+                5 -> {
+                    testFive()
+                }
+                6 -> {
+                    testSix()
+                }
+                7 -> {
+                    testSeven()
+                }
+                8 -> {
+                    testEight(3, 4)
+                }
                 else -> showShortToastSafe("序号错误，请检查")
             }
 
@@ -69,7 +88,7 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
     }
 
     /**
-     * 测试 NDK 是否能实现
+     * 1. 测试 NDK 是否能实现
      */
     fun testOne() {
         val a = nativelib.sum(3, 4)
@@ -84,9 +103,53 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
 
 
     /**
-     * 测试 C语言中的 基本数据类型
+     * 2. 测试 C语言中的 基本数据类型
      */
     fun testTwo() {
         nativelib.testbasictype()
     }
+
+    /**
+     * 3. 变量地址和指针
+     */
+    fun testThree() {
+        nativelib.testVariableAddress()
+    }
+
+    /**
+     * 4. 利用指针做简单的游戏外挂(DLL注入方式)
+     */
+    fun testFour() {
+        nativelib.testPointerType()
+    }
+
+    /**
+     * 5. 多级指针
+     */
+    fun testFive() {
+        nativelib.testMultistagePointer()
+    }
+
+    /**
+     * 6. 指针运算
+     */
+    fun testSix() {
+        nativelib.testPointerOperation()
+    }
+
+    /**
+     * 7. 通过使用指针给数组赋值
+     */
+    fun testSeven() {
+        nativelib.testassignapointertoanarray()
+    }
+
+    /**
+     * 8. 函数指针
+     */
+    fun testEight(a: Int, b: Int) {
+        nativelib.testFunctionPointer(a, b)
+    }
+
+
 }

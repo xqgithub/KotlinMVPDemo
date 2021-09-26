@@ -20,4 +20,16 @@ class nativelib {
 
     external fun testbasictype()
 
+    external fun testVariableAddress()
+
+    external fun testPointerType()
+
+    external fun testMultistagePointer()
+
+    external fun testPointerOperation()
+
+    external fun testassignapointertoanarray()
+
+    external fun testFunctionPointer(a: Int, b: Int)
+
 }
