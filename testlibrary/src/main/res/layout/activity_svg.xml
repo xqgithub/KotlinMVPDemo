@@ -103,11 +103,11 @@
 
     <com.example.baselibrary.mvp.view.TestCustomView
         android:id="@+id/tcv"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#242530"
         android:visibility="visible"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="#7dd7d0"
+        app:layout_constraintTop_toBottomOf="@+id/tv_clearscreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

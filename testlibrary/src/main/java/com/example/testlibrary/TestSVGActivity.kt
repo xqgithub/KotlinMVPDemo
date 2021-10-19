@@ -63,8 +63,9 @@ class TestSVGActivity : BaseActivity() {
                 0 -> showShortToastSafe("请从序号1开始，哈哈")
                 else -> {
                     tcv.methodNums = branch
-                    et_testcustom!!.clearFocus()
-//                    LogUtils.i(ConfigConstants.TAG_ALL, "tcv.methodNums =-=${tcv.methodNums}")
+//                    et_testcustom!!.clearFocus()
+                    tcv.refreshInvalidate()
+                    LogUtils.i(ConfigConstants.TAG_ALL, "tcv.methodNums =-=${tcv.methodNums}")
                 }
             }
         }
@@ -91,34 +92,20 @@ class TestSVGActivity : BaseActivity() {
 //        LogUtils.i(ConfigConstants.TAG_ALL, "ev.getAction() =-=" + ev.action)
 
         if (ev.action == MotionEvent.ACTION_DOWN) {
-//            var v = currentFocus
 //            //清除EditText的焦点
 //            et_testcustom!!.clearFocus()
+            val x = ev.rawX.toInt()
+            val y = ev.rawY.toInt()
+            var views: Array<View?> = arrayOfNulls<View>(1)
+            views[0] = et_testcustom
+            if (PublicPracticalMethodFromJAVA.getInstance().isTouchPointInView(views, x, y)) {
+                KeyBoardUtil.getInstance().showKeyBoard(this, views[0])
+            } else {
+                KeyBoardUtil.getInstance().hideKeyBoard(this, views[0])
+            }
         }
         return super.dispatchTouchEvent(ev)
     }
-
-    private var editText: EditText? = null
-
-    /**
-     *  判断是否点击在EditText内部
-     */
-    private fun isShouldEditTextInternal(v: View, event: MotionEvent): Boolean {
-        if (v != null && (v is EditText)) {
-            editText = v
-            val leftTop = intArrayOf(0, 0)
-            //获取输入框当前的location位置
-            v.getLocationInWindow(leftTop)
-            val left = leftTop[0]
-            val top = leftTop[1]
-            val bottom = top + v.getHeight()
-            val right = left + v.getWidth()
-            return !(event.x > left && event.x < right
-                    && event.y > top && event.y < bottom)
-        }
-        return false
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()

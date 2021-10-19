@@ -30,6 +30,7 @@ import com.example.baselibrary.utils.StringUtils;
 
 /**
  * Created by  on 2021/2/2.
+ * 自定义画笔 测试 Canvas，Paint的使用
  */
 
 public class TestCustomView extends View {
@@ -61,7 +62,7 @@ public class TestCustomView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 //        super.onDraw(canvas);
-//        LogUtils.i(ConfigConstants.TAG_ALL, "onDraw =-=");
+        LogUtils.i(ConfigConstants.TAG_ALL, "onDraw =-=");
 
         this.mCanvas = canvas;
 

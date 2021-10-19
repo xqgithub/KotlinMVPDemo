@@ -20,6 +20,7 @@ import android.provider.Settings;
 import android.view.Display;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.Window;
@@ -32,6 +33,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.baselibrary.R;
 import com.example.baselibrary.application.MyApplication;
 import com.example.baselibrary.constants.ConfigConstants;
+import com.example.baselibrary.mvp.view.EditTextCustomize;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -695,6 +697,7 @@ public class PublicPracticalMethodFromJAVA {
 
 
     /**
+     * 00015
      * 关闭栈中的Activitys
      *
      * @param index 0 关闭所有的Activity
@@ -709,6 +712,7 @@ public class PublicPracticalMethodFromJAVA {
     }
 
     /**
+     * 00015
      * 关闭栈中指定的Activity
      */
     public void closeStackActivity(String activityName) {
@@ -722,6 +726,65 @@ public class PublicPracticalMethodFromJAVA {
                 return;
             }
         }
+    }
+
+
+    /**
+     * 00016
+     * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，因为当用户点击EditText时则不能隐藏
+     */
+    public boolean isShouldHideKeyboard(View v, MotionEvent event) {
+        if (v != null && (v instanceof EditTextCustomize)) {
+            int[] l = {0, 0};
+            v.getLocationInWindow(l);
+            int left = l[0],
+                    top = l[1],
+                    bottom = top + v.getHeight(),
+                    right = left + v.getWidth();
+            if (event.getX() > left && event.getX() < right
+                    && event.getY() > top && event.getY() < bottom) {
+                // 点击EditText的事件，忽略它。
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * 00017
+     * 判断点击是否在指定的控件内
+     *
+     * @param views
+     * @param x
+     * @param y
+     * @return
+     */
+    public boolean isTouchPointInView(View[] views, int x, int y) {
+        boolean isInView = false;
+        int[] location = new int[2];
+        for (View view : views) {
+            view.getLocationOnScreen(location);
+            int left = location[0];
+            int top = location[1];
+            int right = left + view.getMeasuredWidth();
+            int bottom = top + view.getMeasuredHeight();
+//            LogUtils.i(ConfigConstants.TAG_ALL, "x =-= " + x, "y =-= " + y,
+//                    "left =-= " + left,
+//                    "right =-= " + right,
+//                    "top =-= " + top,
+//                    "bottom =-= " + bottom
+//            );
+            if (x >= left && x <= right
+                    && y >= top && y <= bottom) {//点击在指定的控件内
+                isInView = true;
+                break;
+            }
+        }
+//        LogUtils.i(ConfigConstants.TAG_ALL, "isInView =-= " + isInView);
+        return isInView;
     }
 
 
