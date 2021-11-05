@@ -286,6 +286,7 @@ class MainActivity : BaseActivity(), MainView {
                     41 -> ARouter.getInstance().build(RouterTag.BasicGrammarActivity).navigation()
                     42 -> ARouter.getInstance().build(RouterTag.NDKPractiseActivity).navigation()
                     43 -> ARouter.getInstance().build(RouterTag.TestTabLayoutActivity).navigation()
+                    44 -> ARouter.getInstance().build(RouterTag.TestCoordinatorTabLayout).navigation()
                 }
             }
         })
@@ -394,7 +395,8 @@ class MainActivity : BaseActivity(), MainView {
         "滑动单项选择框 LoopView",
         "kotlin-基本语法 BasicGrammarActivity",
         "NDK 测试练习",
-        "TabLayout测试练习"
+        "TabLayout测试练习",
+        "CoordinatorTabLayout测试练习"
     )
 
     /**

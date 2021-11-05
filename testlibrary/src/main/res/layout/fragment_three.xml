@@ -4,19 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/crowded_yellow">
-
-    <TextView
-        android:id="@+id/tv_fragment_name"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dimen_50x"
-        android:gravity="center"
-        android:text="这是FragmentTwo"
-        android:textColor="@color/black"
-        android:textSize="@dimen/dimen_20x"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_threefragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:overScrollMode="never" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

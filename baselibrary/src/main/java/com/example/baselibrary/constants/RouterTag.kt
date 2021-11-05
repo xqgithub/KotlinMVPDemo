@@ -41,6 +41,9 @@ object RouterTag {
     //testlibary---TestTabLayoutActivity
     const val TestTabLayoutActivity = "/testlibary/TestTabLayoutActivity"
 
+    //testlibary---TestCoordinatorTabLayout
+    const val TestCoordinatorTabLayout = "/testlibary/TestCoordinatorTabLayout"
+
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
 
