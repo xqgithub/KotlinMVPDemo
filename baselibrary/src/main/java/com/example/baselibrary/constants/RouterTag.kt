@@ -38,6 +38,9 @@ object RouterTag {
     //testlibary---TestPictureSelectorActivity
     const val TestPictureSelectorActivity = "/testlibary/TestPictureSelectorActivity"
 
+    //testlibary---TestTabLayoutActivity
+    const val TestTabLayoutActivity = "/testlibary/TestTabLayoutActivity"
+
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
 

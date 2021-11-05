@@ -131,4 +131,8 @@ dependencies {
     api _dependencies.calendarview
     /** 屏幕适配 Autosize **/
     api _dependencies.autosize
+    /** Android的TabLayout库 **/
+    api _dependencies.flycoTabLayout
+    /** 导入 material **/
+    api _dependencies.material
 }

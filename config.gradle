@@ -7,7 +7,7 @@
 ext {
     android = [
             compileSdkVersion: 30,
-            buildToolsVersion: "29.0.3",
+            buildToolsVersion: "30.0.2",
             minSdkVersion    : 21,
             targetSdkVersion : 30,
             versionCode      : 1,
@@ -61,6 +61,8 @@ ext {
             VerificationCodeInputView         : "1.0.2",
             calendarview                      : "3.7.1",
             autosize                          : "1.2.1",
+            flycoTabLayout                    : "3.0.0",
+            material                          : "1.1.0",
     ]
 
     /**
@@ -106,6 +108,8 @@ ext {
             VerificationCodeInputView         : "com.github.Wynsbin:VerificationCodeInputView:${dependenciesversion.VerificationCodeInputView}",
             calendarview                      : "com.haibin:calendarview:${dependenciesversion.calendarview}",
             autosize                          : "me.jessyan:autosize:${dependenciesversion.autosize}",
+            flycoTabLayout                    : "io.github.h07000223:flycoTabLayout:${dependenciesversion.flycoTabLayout}",
+            material                          : "com.google.android.material:material:${dependenciesversion.material}",
     ]
 
     /**
