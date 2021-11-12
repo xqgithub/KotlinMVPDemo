@@ -34,7 +34,7 @@ class TestSVGActivity : BaseActivity() {
         //设置状态栏
         PublicPracticalMethodFromJAVA.getInstance().transparentStatusBar(
             this@TestSVGActivity,
-            false, false, R.color.full_red
+            true, false, R.color.full_red
         )
     }
 

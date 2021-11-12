@@ -77,7 +77,7 @@ class MainActivity : BaseActivity(), MainView {
     override fun init() {
         LogUtils.i("=-= 我要开始初始化了")
         //获得手机屏幕信息
-//        PublicPracticalMethodFromJAVA.getInstance().getPhoneScreenInfo(this@MainActivity)
+        PublicPracticalMethodFromJAVA.getInstance().getPhoneScreenInfo(this@MainActivity)
 
         //初始化recyclerview
         initRecyclerview(false)

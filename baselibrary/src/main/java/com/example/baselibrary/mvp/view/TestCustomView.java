@@ -541,7 +541,7 @@ public class TestCustomView extends View {
 
 
 //        // 将画布放大到1.5倍,并将缩放中心移动到(100,0)
-        canvas.scale(1.5f, 1.5f, -200, 0);
+        canvas.scale(1.5f, 1.5f, 200, 150);
 //        // 绘制放大1.5倍后的蓝色矩形(红色)
         canvas.drawRect(rect, paint);
     }

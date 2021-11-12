@@ -63,6 +63,8 @@ ext {
             autosize                          : "1.2.1",
             flycoTabLayout                    : "3.0.0",
             material                          : "1.1.0",
+            coordinatortablayout              : "1.2.2",
+
     ]
 
     /**
@@ -110,6 +112,7 @@ ext {
             autosize                          : "me.jessyan:autosize:${dependenciesversion.autosize}",
             flycoTabLayout                    : "io.github.h07000223:flycoTabLayout:${dependenciesversion.flycoTabLayout}",
             material                          : "com.google.android.material:material:${dependenciesversion.material}",
+            coordinatortablayout              : "cn.hugeterry.coordinatortablayout:coordinatortablayout:${dependenciesversion.coordinatortablayout}",
     ]
 
     /**
