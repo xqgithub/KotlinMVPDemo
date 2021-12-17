@@ -64,7 +64,7 @@ ext {
             flycoTabLayout                    : "3.0.0",
             material                          : "1.1.0",
             coordinatortablayout              : "1.2.2",
-
+            androidutilcode                   : "1.30.6",
     ]
 
     /**
@@ -113,6 +113,7 @@ ext {
             flycoTabLayout                    : "io.github.h07000223:flycoTabLayout:${dependenciesversion.flycoTabLayout}",
             material                          : "com.google.android.material:material:${dependenciesversion.material}",
             coordinatortablayout              : "cn.hugeterry.coordinatortablayout:coordinatortablayout:${dependenciesversion.coordinatortablayout}",
+            androidutilcode                   : "com.blankj:utilcode:${dependenciesversion.androidutilcode}",
     ]
 
     /**

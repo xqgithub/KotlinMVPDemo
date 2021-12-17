@@ -84,6 +84,9 @@ class MainActivity : BaseActivity(), MainView {
 
         //启动服务当应用被移除的时候，做操作
         startTaskRemovedService()
+
+        //测试
+//        presenter.testDataConvert()
     }
 
 

@@ -81,7 +81,7 @@ class TestPictureSelectorMainActivity : BaseActivity(), TestPictureSelectorMainV
         PublicPracticalMethodFromJAVA.getInstance().transparentStatusBar(
             this,
             false, true,
-            com.example.testlibrary.R.color.full_red
+            R.color.full_red
         )
     }
 

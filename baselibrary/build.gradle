@@ -135,4 +135,8 @@ dependencies {
     api _dependencies.flycoTabLayout
     /** 导入 material **/
     api _dependencies.material
+    /** 导入 Blankj android utils 包 **/
+    api _dependencies.androidutilcode
+
+
 }
