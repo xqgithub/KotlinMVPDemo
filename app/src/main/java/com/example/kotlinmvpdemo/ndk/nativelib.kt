@@ -32,4 +32,21 @@ class nativelib {
 
     external fun testFunctionPointer(a: Int, b: Int)
 
+    external fun testFindSmallestValue()
+
+    external fun testDynamicArray()
+
+    external fun testReallocateMemory()
+
+    external fun testString()
+
+    external fun testStructure()
+
+    external fun testConsortium()
+
+    external fun testEnumerate()
+
+    external fun testOperatingFile(path: String)
+
+
 }
