@@ -1,7 +1,9 @@
 package com.example.kotlinmvpdemo.ndk
 
-class nativelib {
+class Nativelib {
 
+
+    var testAccessFieldName = "testAccessFieldName"
 
     companion object {
         // Used to load the 'native-lib' library on application startup.
@@ -48,5 +50,8 @@ class nativelib {
 
     external fun testOperatingFile(path: String)
 
+    external fun testPrecompiled()
+
+    external fun testAccessField()
 
 }

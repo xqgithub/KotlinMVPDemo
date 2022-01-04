@@ -1,6 +1,5 @@
 package com.example.kotlinmvpdemo.mvp.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.FileUtils
@@ -13,7 +12,7 @@ import com.example.kotlinmvpdemo.R
 import com.example.kotlinmvpdemo.di.componets.DaggerNDKPractiseComponet
 import com.example.kotlinmvpdemo.di.modules.NDKPractiseModule
 import com.example.kotlinmvpdemo.mvp.views.NDKPractiseView
-import com.example.kotlinmvpdemo.ndk.nativelib
+import com.example.kotlinmvpdemo.ndk.Nativelib
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import kotlinx.android.synthetic.main.activity_ndk_practise.*
 
@@ -23,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_ndk_practise.*
 @Route(path = RouterTag.NDKPractiseActivity)
 class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
 
-    private lateinit var nativelib: nativelib
+    private lateinit var nativelib: Nativelib
 
     override fun onBeforeSetContentLayout() {
         PublicPracticalMethodFromJAVA.getInstance()
@@ -45,7 +44,7 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ndk_practise)
-        nativelib = nativelib()
+        nativelib = Nativelib()
 
         tv_one.clickWithTrigger(500) {
             val branch = et_one.text.toString().toInt()
@@ -105,6 +104,14 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                 /** 16 文件读写 **/
                 16 -> {
                     testOperatingFile()
+                }
+                /** 17 预编译 **/
+                17 -> {
+                    testPrecompiled()
+                }
+                /** 18 C/C++访问Java的属性、方法 **/
+                18 -> {
+                    testAccessField()
                 }
                 else -> showShortToastSafe("序号错误，请检查")
             }
@@ -239,4 +246,20 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
             nativelib.testOperatingFile(path)
         }
     }
+
+    /**
+     * 17.预编译
+     */
+    fun testPrecompiled() {
+        nativelib.testPrecompiled()
+    }
+
+    /**
+     * 18.访问Java的非静态属性
+     */
+    fun testAccessField() {
+        nativelib.testAccessField()
+    }
+
+
 }

@@ -31,7 +31,7 @@
  * 3. JNICALL 用来表示函数的调用规范（如：__stdcall）
  */
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_example_kotlinmvpdemo_ndk_nativelib_stringFromJNI(
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_stringFromJNI(
         JNIEnv *env,
         jobject /* this */) {
     std::string hello = "Hello from C++";
@@ -79,7 +79,7 @@ char *jstringToChar(JNIEnv *env, jstring jstr) {
  * 基本类型
  */
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testbasictype(JNIEnv *env, jobject jobj) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testbasictype(JNIEnv *env, jobject jobj) {
     float f = 10.01;
     LOGI("f =-= %f\n", f);
 
@@ -105,7 +105,7 @@ Java_com_example_kotlinmvpdemo_ndk_nativelib_testbasictype(JNIEnv *env, jobject 
  *  变量地址和指针
  */
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testVariableAddress(JNIEnv *env, jobject jobj) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testVariableAddress(JNIEnv *env, jobject jobj) {
 
     /**  输出定义的变量地址 **/
     int var1;
@@ -148,7 +148,7 @@ Java_com_example_kotlinmvpdemo_ndk_nativelib_testVariableAddress(JNIEnv *env, jo
  * 指针有类型，地址没有类型，地址只是开始的位置，类型大小决定读取到什么位置结束
  */
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testPointerType(JNIEnv *env, jobject jobj) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testPointerType(JNIEnv *env, jobject jobj) {
     int i = 89;
     int *p = &i; //声明int 类型的指针
 
@@ -167,7 +167,7 @@ Java_com_example_kotlinmvpdemo_ndk_nativelib_testPointerType(JNIEnv *env, jobjec
  * 多级指针
  */
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testMultistagePointer(JNIEnv *env, jobject jobj) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testMultistagePointer(JNIEnv *env, jobject jobj) {
     int a = -50;
     //p1上保存的是a的地址
     int *p1 = &a;
@@ -189,7 +189,7 @@ Java_com_example_kotlinmvpdemo_ndk_nativelib_testMultistagePointer(JNIEnv *env, 
  * 指针运算（加减法）（与数组的操作相结合）
  */
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testPointerOperation(JNIEnv *env, jobject jobj) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testPointerOperation(JNIEnv *env, jobject jobj) {
     int ids[] = {78, 90, 23, 65, 19};
     //数组的变量名：ids就是数组首地址 3种方式意义一样
     LOGI("数组的地址 =-= %#x", ids);
@@ -213,7 +213,7 @@ Java_com_example_kotlinmvpdemo_ndk_nativelib_testPointerOperation(JNIEnv *env, j
  * 通过使用指针给数组赋值
  */
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testassignapointertoanarray(JNIEnv *env, jobject jobj) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testassignapointertoanarray(JNIEnv *env, jobject jobj) {
     int uids[5];
     //高级写法
 //    int i = 0;
@@ -271,7 +271,7 @@ int getNextRandomValue(void) {
 
 
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testFunctionPointer(JNIEnv *env, jobject jobj, jint a, jint b) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testFunctionPointer(JNIEnv *env, jobject jobj, jint a, jint b) {
     //p 是函数指针
     int (*p)(int, int) =add;
     int (*p2)(int, int) =minus;
@@ -308,7 +308,7 @@ int *getMinPointer(int ids[], int len) {
 }
 
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testFindSmallestValue(JNIEnv *env, jobject jobj) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testFindSmallestValue(JNIEnv *env, jobject jobj) {
     int ids[10];
     int i = 0;
     //初始化随机数发生器，设置种子，种子不一样，随机数才不一样
@@ -328,7 +328,7 @@ Java_com_example_kotlinmvpdemo_ndk_nativelib_testFindSmallestValue(JNIEnv *env, 
  * 创建一个数组，动态指定数组的大小
  */
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testDynamicArray(JNIEnv *env, jobject jobj) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testDynamicArray(JNIEnv *env, jobject jobj) {
     //静态内存分配创建数组，数组的大小是固定的
     //int i = 10;
     //int a[i];
@@ -350,7 +350,7 @@ Java_com_example_kotlinmvpdemo_ndk_nativelib_testDynamicArray(JNIEnv *env, jobje
  * 重新分配内存
  */
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testReallocateMemory(JNIEnv *env, jobject jobj) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testReallocateMemory(JNIEnv *env, jobject jobj) {
     int len = 5;
     LOGI("第一次数组长度 =-= %d", len);
     //开辟内存，大小内存len*4字节
@@ -387,7 +387,7 @@ Java_com_example_kotlinmvpdemo_ndk_nativelib_testReallocateMemory(JNIEnv *env, j
  * 字符串
  */
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testString(JNIEnv *env, jobject jobj) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testString(JNIEnv *env, jobject jobj) {
     char *str = "how are you？";
     LOGI("字符串指针 str =-= %s", str);
 //    str[1] = "w" ; //字符指针不可以修改其中某一个值
@@ -434,7 +434,7 @@ struct Man {
 };
 
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testStructure(JNIEnv *env, jobject jobj) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testStructure(JNIEnv *env, jobject jobj) {
     //初始化结构体的变量
     //第一种方式
     struct Man m1 = {"路飞", 21};
@@ -493,7 +493,7 @@ union Data {
 };
 
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testConsortium(JNIEnv *env, jobject jobj) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testConsortium(JNIEnv *env, jobject jobj) {
     union Data data;
     //共用体占用的内存应足够存储共用体中最大的成员
     LOGI("Data 的内存大小为： %d", sizeof(data));
@@ -523,7 +523,7 @@ enum Day {
 } Weekday;
 
 extern "C" JNIEXPORT void
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testEnumerate(JNIEnv *env, jobject jobj) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testEnumerate(JNIEnv *env, jobject jobj) {
     //枚举的值，必须是括号中的值
     enum Day d = Monday;
     LOGI("day 的物理地址 =-= %#x, 实际的值 =-=  %d", &d, d);
@@ -586,26 +586,26 @@ void decrypt(char crypt_path[], char decrypt_path[]) {
 
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_example_kotlinmvpdemo_ndk_nativelib_testOperatingFile(JNIEnv *env, jobject jobj, jstring path) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testOperatingFile(JNIEnv *env, jobject jobj, jstring path) {
     //打开文件
-//    char *_path = jstringToChar(env, path);
-//    FILE *fp = fopen(_path, "r+");
-//    if (fp == NULL) {
-//        LOGI("文件打开失败");
-//        return;
-//    }
-//    //读取文件
-//    char buff[50];//缓冲
-//    while (fgets(buff, 50, fp)) {
-//        LOGI("文件内容：=-= %s", buff);
-//    }
-//
-//    //写入文本文件
-//    char *text = "\n我是路飞\n要成为海贼王的男人!";
-//    fputs(text, fp);
-//
-//    //关闭
-//    fclose(fp);
+    char *_path = jstringToChar(env, path);
+    FILE *fp = fopen(_path, "r+");
+    if (fp == NULL) {
+        LOGI("文件打开失败");
+        return;
+    }
+    //读取文件
+    char buff[50];//缓冲
+    while (fgets(buff, 50, fp)) {
+        LOGI("文件内容：=-= %s", buff);
+    }
+
+    //写入文本文件
+    char *text = "\n我是路飞\n要成为海贼王的男人!";
+    fputs(text, fp);
+
+    //关闭
+    fclose(fp);
 
 
     /** 读写二进制I/O文件 **/
@@ -635,15 +635,100 @@ Java_com_example_kotlinmvpdemo_ndk_nativelib_testOperatingFile(JNIEnv *env, jobj
     LOGI("filesize ：=-= %d", filesize);
 
     /** 文件简单加密、解密 **/
-    char *normal_path = jstringToChar(env, path);
-    char *crypt_path = "/storage/emulated/0/Android/data/com.example.kotlinmvpdemo.ceshi/files/helloworld_crypt.text";
-    char *decrypt_path = "/storage/emulated/0/Android/data/com.example.kotlinmvpdemo.ceshi/files/helloworld_decrypt.text";
-
-    //加密文件
-    crypt(normal_path, crypt_path);
-    //解密文件
-    decrypt(crypt_path, decrypt_path);
+//    char *normal_path = jstringToChar(env, path);
+//    char *crypt_path = "/storage/emulated/0/Android/data/com.example.kotlinmvpdemo.ceshi/files/helloworld_crypt.text";
+//    char *decrypt_path = "/storage/emulated/0/Android/data/com.example.kotlinmvpdemo.ceshi/files/helloworld_decrypt.text";
+//
+//    //加密文件
+//    crypt(normal_path, crypt_path);
+//    //解密文件
+//    decrypt(crypt_path, decrypt_path);
 }
+
+
+/**
+ * 预编译
+ */
+
+#define  message_for(a, b)  \
+    LOGI(#a " and " #b ": We love you!\n")
+
+#define tokenpaster(n) LOGI ("token" #n " = %d", token##n)
+
+
+//方法名很长(方法名称有规律)
+int com_haocai_ndk_get_min(int a, int b) {
+    return a < b ? a : b;
+}
+
+int com_haocai_ndk_get_max(int a, int b) {
+    return a > b ? a : b;
+}
+//语法规范
+// #define 标示名(方法名,A,B) com_tz_ndk_get_##NAME(A,B)
+#define call(NAME, A, B) com_haocai_ndk_get_##NAME(A,B)
+
+#if !defined (MESSAGE)
+#define MESSAGE "You wish!"
+#endif
+
+#define square(x) ((x) * (x))
+#define MAX(x, y) ((x) > (y) ? (x) : (y))
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testPrecompiled(JNIEnv *env, jobject jobj) {
+    /** 预定义宏 **/
+    LOGI("File =-= %s", __FILE__);
+    LOGI("Date =-= %s", __DATE__);
+    LOGI("Time =-= %s", __TIME__);
+    LOGI("Line =-= %d", __LINE__);
+    LOGI("ANSI =-= %d", __STDC__);
+
+    /**
+     * 预处理运算符
+     * 1. \  宏延续运算符
+     * 2. #  字符串常量化运算符
+     * 3. ## 标记粘贴运算符
+     * **/
+    message_for("路飞", "索隆");
+
+    int token34 = 40;
+    tokenpaster(34);
+
+    int c = call(min, 100, 200);
+    LOGI("最小值 =-= %d", c);
+    int d = call(max, 100, 200);
+    LOGI("最大值 =-= %d", d);
+
+    /** defined() 运算符 **/
+    LOGI("Here is the message: %s", MESSAGE);
+
+    /** 参数化的宏 **/
+    LOGI("Here is the message: %s", MESSAGE);
+
+
+}
+
+/**
+ * 访问Java的非静态属性
+ */
+extern "C" JNIEXPORT void JNICALL
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testAccessField(JNIEnv *env, jobject jobject) {
+    //1.找类
+    jclass cls = (*env).FindClass("com/example/kotlinmvpdemo/ndk/Nativelib");
+    //2.找属性ID
+    jfieldID name = (*env).GetFieldID(cls, "testAccessFieldName", "Ljava/lang/String;");
+    jstring jstr = (jstring) (*env).GetObjectField(jobject, name);
+//    LOGI("jstr =-= %s", jstr);
+    char *_jstr = jstringToChar(env, jstr);
+    LOGI("_jstr =-= %s", _jstr);
+}
+
+
+
+
+
+
 
 
 
