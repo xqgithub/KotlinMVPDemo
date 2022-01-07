@@ -710,19 +710,60 @@ Java_com_example_kotlinmvpdemo_ndk_Nativelib_testPrecompiled(JNIEnv *env, jobjec
 }
 
 /**
- * 访问Java的非静态属性
+ * 1.访问Java的非静态属性
+ * 2.访问Java的非静态方法
  */
 extern "C" JNIEXPORT void JNICALL
-Java_com_example_kotlinmvpdemo_ndk_Nativelib_testAccessField(JNIEnv *env, jobject jobject) {
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testAccessFieldAndMethod(JNIEnv *env, jobject job) {
+
+    /** 访问非静态属性 **/
     //1.找类
     jclass cls = (*env).FindClass("com/example/kotlinmvpdemo/ndk/Nativelib");
     //2.找属性ID
     jfieldID name = (*env).GetFieldID(cls, "testAccessFieldName", "Ljava/lang/String;");
-    jstring jstr = (jstring) (*env).GetObjectField(jobject, name);
-//    LOGI("jstr =-= %s", jstr);
+    jstring jstr = (jstring) (*env).GetObjectField(job, name);
     char *_jstr = jstringToChar(env, jstr);
     LOGI("_jstr =-= %s", _jstr);
+    //修改它的值
+    char *_a = "testAccessFieldName 我被修改了，哈哈";
+    (*env).SetObjectField(job, name, charToJstring(env, _a));
+
+    /** 访问非静态方法 **/
+    //1.找类
+    jclass cls2 = (*env).FindClass("com/example/kotlinmvpdemo/ndk/Nativelib");
+    //2.找方法ID
+    jmethodID methodID = (*env).GetMethodID(cls2, "testAccessMethod", "()V");
+    //3.调用
+    (*env).CallVoidMethod(job, methodID);
 }
+
+/**
+ * 访问Java的静态属性
+ */
+extern "C" JNIEXPORT void JNICALL
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_testAccessStaticFieldAndMethod(JNIEnv *env, jobject jobject) {
+    /** 访问静态属性 **/
+    //1.找类
+    jclass cls = (*env).FindClass("com/example/kotlinmvpdemo/ndk/Nativelib");
+    //2.找属性ID
+    jfieldID name = (*env).GetStaticFieldID(cls, "testAccessStaticFieldName", "Ljava/lang/String;");
+    jstring jstr = (jstring) (*env).GetStaticObjectField(cls, name);
+    char *_jstr = jstringToChar(env, jstr);
+    LOGI("_jstr =-= %s", _jstr);
+
+    /** 访问静态方法 **/
+    //1.找类
+    jclass cls2 = (*env).FindClass("com/example/baselibrary/utils/LogUtils");
+    //2.找到方法ID
+    jmethodID methodID = (*env).GetStaticMethodID(cls2, "i", "(Ljava/lang/Object;)V");
+    //3.调用方法
+    char *_a = " =-= 我被jni调用了,我是静态方法";
+    (*env).CallStaticVoidMethod(cls2, methodID, charToJstring(env, _a));
+}
+
+
+
+
 
 
 

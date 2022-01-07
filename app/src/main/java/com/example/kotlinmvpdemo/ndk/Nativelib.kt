@@ -1,5 +1,8 @@
 package com.example.kotlinmvpdemo.ndk
 
+import com.example.baselibrary.constants.ConfigConstants
+import com.example.baselibrary.utils.LogUtils
+
 class Nativelib {
 
 
@@ -10,6 +13,20 @@ class Nativelib {
         init {
             System.loadLibrary("nativehaha")
         }
+
+        const val testAccessStaticFieldName = "testAccessStaticFieldName"
+
+        fun testAccessStaticMethod() {
+            LogUtils.i(ConfigConstants.TAG_ALL, " =-= 我被jni调用了,我是静态方法")
+        }
+    }
+
+
+    /**
+     * 测试jni调用kotlin中的方法
+     */
+    private fun testAccessMethod() {
+        LogUtils.i(ConfigConstants.TAG_ALL, " =-= 我被jni调用了,我是非静态方法")
     }
 
     /**
@@ -52,6 +69,7 @@ class Nativelib {
 
     external fun testPrecompiled()
 
-    external fun testAccessField()
+    external fun testAccessFieldAndMethod()
 
+    external fun testAccessStaticFieldAndMethod()
 }

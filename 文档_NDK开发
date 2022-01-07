@@ -522,6 +522,30 @@ float[]	    jfloatArray	   float数组
 double[]	jdoubleArray   double数组
 Throwable	jthrowable	   Throwable
 
+
+二.关于属性与方法的签名
+数据类型	签名
+boolean	     Z
+byte	     B
+char	     C
+short	     S
+int	         I
+long	     J
+float	     F
+double	     D
+ully-qualified-class	Lfully-qualified-class;
+type[]	     [type
+method type	 (arg-types)ret-type
+
+1.类描述符开头的 'L' 与结尾的 ';' 必须要有
+
+2.数组描述符,开头的 '[' 必须要有
+
+3.方法描述符规则: "(各参数描述符)返回值描述符",其中参数描述符间没有任何分隔符号
+
+
+
+
 二.native函数参数说明
 1.每个native函数，都至少有两个参数（JNIEnv*,jclass或者jobject)
 
@@ -534,8 +558,18 @@ Throwable	jthrowable	   Throwable
 三.C/C++访问Java的属性、方法
 1.访问Java的非静态属性
 
+2.访问Java的静态属性
 
+3.访问Java的非静态方法
 
+4.访问Java类的构造方法
+
+5.间接访问Java类的父类的方法
+
+ 四.总结
+ 1. C/C++完成的功能并不是所有代码一定要C/C++语句写，有时候C/C++可以调用现成的Java方法或属性解决问题，能起到事半功倍的作用
+
+ 2.属性、方法的访问的使用是和Java的反射相类似
 
 
 

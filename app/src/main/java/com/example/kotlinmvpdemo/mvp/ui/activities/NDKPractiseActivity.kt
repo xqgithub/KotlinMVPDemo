@@ -24,6 +24,10 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
 
     private lateinit var nativelib: Nativelib
 
+    companion object {
+
+    }
+
     override fun onBeforeSetContentLayout() {
         PublicPracticalMethodFromJAVA.getInstance()
             .transparentStatusBar(
@@ -109,9 +113,12 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                 17 -> {
                     testPrecompiled()
                 }
-                /** 18 C/C++访问Java的属性、方法 **/
+                /** 18-19 C/C++访问Java的属性、方法 **/
                 18 -> {
-                    testAccessField()
+                    testAccessFieldAndMethod()
+                }
+                19 -> {
+                    testAccessStaticFieldAndMethod()
                 }
                 else -> showShortToastSafe("序号错误，请检查")
             }
@@ -257,8 +264,16 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
     /**
      * 18.访问Java的非静态属性
      */
-    fun testAccessField() {
-        nativelib.testAccessField()
+    fun testAccessFieldAndMethod() {
+        nativelib.testAccessFieldAndMethod()
+        LogUtils.i(ConfigConstants.TAG_ALL, "testAccessFieldName =-= ${nativelib.testAccessFieldName}")
+    }
+
+    /**
+     * 19.访问Java的静态属性
+     */
+    fun testAccessStaticFieldAndMethod() {
+        nativelib.testAccessStaticFieldAndMethod()
     }
 
 
