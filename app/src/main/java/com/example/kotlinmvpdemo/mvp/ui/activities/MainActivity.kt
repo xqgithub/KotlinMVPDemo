@@ -290,6 +290,7 @@ class MainActivity : BaseActivity(), MainView {
                     42 -> ARouter.getInstance().build(RouterTag.NDKPractiseActivity).navigation()
                     43 -> ARouter.getInstance().build(RouterTag.TestTabLayoutActivity).navigation()
                     44 -> ARouter.getInstance().build(RouterTag.TestCoordinatorTabLayout).navigation()
+                    45 -> ARouter.getInstance().build(RouterTag.TestsAvatarsOverlapActivity).navigation()
                 }
             }
         })
@@ -399,7 +400,8 @@ class MainActivity : BaseActivity(), MainView {
         "kotlin-基本语法 BasicGrammarActivity",
         "NDK 测试练习",
         "TabLayout测试练习",
-        "CoordinatorTabLayout测试练习"
+        "CoordinatorTabLayout测试练习",
+        "测试头像重叠"
     )
 
     /**
