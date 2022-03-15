@@ -528,7 +528,8 @@ class MainPresenter @Inject constructor(
         aggregate.add("3333")
         aggregate.add("9527")
 
-        val iteratorme: IteratorMe = ConcreteIteratorMe(aggregate)
+//        val iteratorme: IteratorMe = ConcreteIteratorMe(aggregate)
+        val iteratorme: IteratorMe = aggregate.getIterator()
         while (iteratorme.hasnext()) {
             var tel = iteratorme.next().toString()
             LogUtils.i("当前号码为：${tel}")
