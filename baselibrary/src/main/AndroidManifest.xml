@@ -12,4 +12,6 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- 允许程序访问摄像头进行拍照 -->
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 该应用程序使用设备的朝后摄像头。只有一个前置摄像头的设备没有列出此功能，所以使用 android.hardware.camera.any，应用程序可以使用任何摄像头，无论哪个方向的相机面临通信 -->
     <uses-feature android:name="android.hardware.camera.any" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
 </manifest>

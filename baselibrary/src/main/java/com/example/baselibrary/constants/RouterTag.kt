@@ -47,6 +47,9 @@ object RouterTag {
     //testlibary---TestsAvatarsOverlapActivity
     const val TestsAvatarsOverlapActivity = "/testlibary/TestsAvatarsOverlapActivity"
 
+    //testlibary---TestCalendarEventManagerActivity
+    const val TestCalendarEventManagerActivity = "/testlibary/TestCalendarEventManagerActivity"
+
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
 

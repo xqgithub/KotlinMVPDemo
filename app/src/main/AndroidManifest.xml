@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".mvp.ui.activities.PermissionsActivity"
+            android:name="com.example.baselibrary.mvp.ui.activities.PermissionsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/myTransparent2" />
         <activity
