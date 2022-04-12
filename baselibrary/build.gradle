@@ -137,6 +137,7 @@ dependencies {
     api _dependencies.material
     /** 导入 Blankj android utils 包 **/
     api _dependencies.androidutilcode
-
+    /** 一款仿iOS的PickerView控件，有时间选择器和选项选择器 **/
+    api _dependencies.androidpickerview
 
 }

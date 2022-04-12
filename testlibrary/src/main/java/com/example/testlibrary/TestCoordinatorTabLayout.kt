@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.*
 import androidx.viewpager.widget.ViewPager
@@ -21,8 +22,10 @@ import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import com.example.testlibrary.fragments.ThreeFragment
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_testcoordinatortablayout.*
+import kotlin.math.abs
 
 /**
  * Date:2021/11/5
@@ -137,6 +140,16 @@ class TestCoordinatorTabLayout : BaseActivity() {
             tp_tabLayout.getTabAt(1)!!.select()
         }, 20)
 
+
+        appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val offset = abs(verticalOffset)
+            LogUtils.i(ConfigConstants.TAG_ALL, "offset =-= $offset")
+            if (offset < appBarLayout.totalScrollRange.div(2)) {
+                cl_test.visibility = View.GONE
+            } else if (offset > appBarLayout.totalScrollRange / 2) {
+                cl_test.visibility = View.VISIBLE
+            }
+        })
 
     }
 
