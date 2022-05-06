@@ -50,6 +50,9 @@ object RouterTag {
     //testlibary---TestCalendarEventManagerActivity
     const val TestCalendarEventManagerActivity = "/testlibary/TestCalendarEventManagerActivity"
 
+    //testlibary---TestShadowBgActivity
+    const val TestShadowBgActivity = "/testlibary/TestShadowBgActivity"
+
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
 

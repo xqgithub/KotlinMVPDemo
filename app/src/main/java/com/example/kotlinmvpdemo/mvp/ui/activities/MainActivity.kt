@@ -292,6 +292,7 @@ class MainActivity : BaseActivity(), MainView {
                     44 -> ARouter.getInstance().build(RouterTag.TestCoordinatorTabLayout).navigation()
                     45 -> ARouter.getInstance().build(RouterTag.TestsAvatarsOverlapActivity).navigation()
                     46 -> ARouter.getInstance().build(RouterTag.TestCalendarEventManagerActivity).navigation()
+                    47 -> ARouter.getInstance().build(RouterTag.TestShadowBgActivity).navigation()
                 }
             }
         })
@@ -403,7 +404,8 @@ class MainActivity : BaseActivity(), MainView {
         "TabLayout测试练习",
         "CoordinatorTabLayout测试练习",
         "测试头像重叠/时间选择器",
-        "日历事件管理器，增加一个事件提醒功能啦"
+        "日历事件管理器，增加一个事件提醒功能啦",
+        "测试背景阴影效果"
     )
 
     /**
