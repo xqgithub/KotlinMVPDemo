@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+
+    <TextView
+        android:id="@+id/tv_inactivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="inActivity"
+        android:textSize="@dimen/dimen_20x"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/dimen_15x"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_infragmentnormalctivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="inFragmentNormalActivity"
+        android:textSize="@dimen/dimen_20x"
+        app:layout_constraintTop_toBottomOf="@+id/tv_inactivity"
+        android:layout_marginTop="@dimen/dimen_15x"
+        android:gravity="center" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

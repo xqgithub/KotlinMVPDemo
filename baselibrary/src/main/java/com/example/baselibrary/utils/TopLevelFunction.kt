@@ -4,6 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.util.SparseArray
 import android.view.View
+import android.widget.TextView
+import com.example.baselibrary.R
+import com.example.baselibrary.mvp.view.loadsir.EmptyCallback
+import com.example.baselibrary.mvp.view.loadsir.ErrorCallback
+import com.example.baselibrary.mvp.view.loadsir.LoadingCallback
+import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
 import io.reactivex.FlowableTransformer
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
@@ -148,6 +155,52 @@ fun <T> flowableToMain(): FlowableTransformer<T, T> {
             .observeOn(AndroidSchedulers.mainThread())
     }
 }
+
+/**
+ * 00007
+ *
+ */
+fun loadServiceInit(view: View, callback: () -> Unit): LoadService<Any> {
+    val loadsir = LoadSir.getDefault().register(view) {
+        //点击重试时触发的操作
+        callback.invoke()
+    }
+    loadsir.showSuccess()
+    return loadsir
+}
+
+fun loadServiceInit(view: Any, callback: () -> Unit): LoadService<Any> {
+    val loadsir = LoadSir.getDefault().register(view) {
+        //点击重试时触发的操作
+        callback.invoke()
+    }
+    loadsir.showSuccess()
+    return loadsir
+}
+
+
+/**
+ * 设置加载中
+ */
+fun LoadService<*>.showLoading() {
+    this.showCallback(LoadingCallback::class.java)
+}
+
+/**
+ * 设置空布局
+ */
+fun LoadService<*>.showEmpty() {
+    this.showCallback(EmptyCallback::class.java)
+}
+
+/**
+ * 设置错误布局
+ * @param message 错误布局显示的提示内容
+ */
+fun LoadService<*>.showError(message: String = "") {
+    this.showCallback(ErrorCallback::class.java)
+}
+
 
 
 
