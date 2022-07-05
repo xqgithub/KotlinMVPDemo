@@ -34,7 +34,7 @@ class NormalFragment : BaseLoadSirFragment() {
         tv_result_a.text = "Oh, Yes."
         Toast.makeText(context, "reload in Fragment A", Toast.LENGTH_SHORT).show()
         mBaseLoadService.showCallback(LoadingCallback::class.java)
-        PostUtil.postSuccessDelayed(mBaseLoadService)
+        PostUtil.postSuccessDelayed(mBaseLoadService, 3000)
     }
 
     override fun loadNet() {
