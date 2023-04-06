@@ -249,6 +249,28 @@ Java_com_example_kotlinmvpdemo_ndk_nativelib_testFunctionPointer(JNIEnv *env, jo
     }
 }
 
+/**
+ * 创建一个数组，动态指定数组的大小
+ */
+extern "C" JNIEXPORT void
+Java_com_example_kotlinmvpdemo_ndk_nativelib_testDynamicArray(JNIEnv *env, jobject jobj) {
+    //静态内存分配创建数组，数组的大小是固定的
+    //int i = 10;
+    //int a[i];
+
+    int len = 5;
+    //开辟内存，大小内存len * 4 字节
+    int *p = (int *) malloc(len * sizeof(int));//p:数组的首地址
+    int i = 0;
+    for (; i < len; i++) {
+        p[i] = rand() % 100;
+        LOGI("数组 =-= %d，其值 =-= %d, 内存地址 =-= %#x", i, p[i], &p[i]);
+    }
+
+    //手动释放内存
+    free(p);
+}
+
 
 
 
