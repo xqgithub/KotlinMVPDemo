@@ -1,0 +1,3 @@
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/.cxx/cmake/shengchanDebug/x86/CMakeFiles/nativehaha.dir
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/.cxx/cmake/shengchanDebug/x86/CMakeFiles/edit_cache.dir
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/.cxx/cmake/shengchanDebug/x86/CMakeFiles/rebuild_cache.dir

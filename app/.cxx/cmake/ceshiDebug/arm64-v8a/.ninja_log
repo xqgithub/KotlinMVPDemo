@@ -1,0 +1,14 @@
+# ninja log v5
+4	489	654168679	CMakeFiles/nativehaha.dir/native-lib.cpp.o	80283b103c1364c8
+15	568	652683015	CMakeFiles/nativehaha.dir/native-lib2.cpp.o	9c034b3409c91fd
+489	679	654168679	D:/xiaoqi/work/workspace/KotlinMVPDemo/app/build/intermediates/cmake/ceshiDebug/obj/arm64-v8a/libnativehaha.so	1d94c400e9b68206
+4	609	654170255	CMakeFiles/nativehaha.dir/native-lib.cpp.o	80283b103c1364c8
+609	859	654170255	D:/xiaoqi/work/workspace/KotlinMVPDemo/app/build/intermediates/cmake/ceshiDebug/obj/arm64-v8a/libnativehaha.so	1d94c400e9b68206
+4	425	654170535	CMakeFiles/nativehaha.dir/native-lib.cpp.o	80283b103c1364c8
+425	584	654170535	D:/xiaoqi/work/workspace/KotlinMVPDemo/app/build/intermediates/cmake/ceshiDebug/obj/arm64-v8a/libnativehaha.so	1d94c400e9b68206
+4	414	654171411	CMakeFiles/nativehaha.dir/native-lib.cpp.o	80283b103c1364c8
+414	570	654171411	D:/xiaoqi/work/workspace/KotlinMVPDemo/app/build/intermediates/cmake/ceshiDebug/obj/arm64-v8a/libnativehaha.so	1d94c400e9b68206
+3	422	654175847	CMakeFiles/nativehaha.dir/native-lib.cpp.o	80283b103c1364c8
+422	587	654175847	D:/xiaoqi/work/workspace/KotlinMVPDemo/app/build/intermediates/cmake/ceshiDebug/obj/arm64-v8a/libnativehaha.so	1d94c400e9b68206
+4	439	655897071	CMakeFiles/nativehaha.dir/native-lib.cpp.o	80283b103c1364c8
+439	827	655897071	D:/xiaoqi/work/workspace/KotlinMVPDemo/app/build/intermediates/cmake/ceshiDebug/obj/arm64-v8a/libnativehaha.so	1d94c400e9b68206

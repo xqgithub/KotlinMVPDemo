@@ -1,0 +1,3 @@
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/.cxx/cmake/ceshiRelease/x86_64/CMakeFiles/nativehaha.dir
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/.cxx/cmake/ceshiRelease/x86_64/CMakeFiles/edit_cache.dir
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/.cxx/cmake/ceshiRelease/x86_64/CMakeFiles/rebuild_cache.dir

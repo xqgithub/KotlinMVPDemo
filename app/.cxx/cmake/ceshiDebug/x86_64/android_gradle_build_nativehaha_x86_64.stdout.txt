@@ -1,0 +1,20 @@
+ninja: Entering directory `D:\xiaoqi\work\workspace\KotlinMVPDemo\app\.cxx\cmake\ceshiDebug\x86_64'
+[1/3] Building CXX object CMakeFiles/nativehaha.dir/native-lib2.cpp.o
+[2/3] Building CXX object CMakeFiles/nativehaha.dir/native-lib.cpp.o
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:39:47: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
+    printf("int类型所占的字节数%d\n", sizeof(int));
+                               ~~     ^~~~~~~~~~~
+                               %lu
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:40:49: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
+    printf("float类型所占的字节数%d\n", sizeof(float));
+                                 ~~     ^~~~~~~~~~~~~
+                                 %lu
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:41:50: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
+    printf("double类型所占的字节数%d\n", sizeof(double));
+                                  ~~     ^~~~~~~~~~~~~~
+                                  %lu
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:53:1: warning: control reaches end of non-void function [-Wreturn-type]
+}
+^
+4 warnings generated.
+[3/3] Linking CXX shared library D:\xiaoqi\work\workspace\KotlinMVPDemo\app\build\intermediates\cmake\ceshiDebug\obj\x86_64\libnativehaha.so

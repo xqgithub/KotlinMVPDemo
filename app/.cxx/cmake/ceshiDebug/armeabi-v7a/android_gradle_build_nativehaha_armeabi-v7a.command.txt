@@ -1,0 +1,7 @@
+Executable : D:\xiaoqi\work\androidsdk\cmake\3.10.2.4988404\bin\ninja.exe
+arguments : 
+-C
+D:\xiaoqi\work\workspace\KotlinMVPDemo\app\.cxx\cmake\ceshiDebug\armeabi-v7a
+nativehaha
+jvmArgs : 
+

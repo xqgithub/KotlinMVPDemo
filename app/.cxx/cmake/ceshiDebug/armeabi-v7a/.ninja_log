@@ -1,0 +1,7 @@
+# ninja log v5
+9	504	652622558	CMakeFiles/nativehaha.dir/native-lib2.cpp.o	76fc24d3870a6923
+1	554	652622558	CMakeFiles/nativehaha.dir/native-lib.cpp.o	bead0d0566063757
+554	701	652622558	D:/xiaoqi/work/workspace/KotlinMVPDemo/app/build/intermediates/cmake/ceshiDebug/obj/armeabi-v7a/libnativehaha.so	61fc6c5ba44fbf90
+13	425	652683887	CMakeFiles/nativehaha.dir/native-lib2.cpp.o	76fc24d3870a6923
+4	453	652683887	CMakeFiles/nativehaha.dir/native-lib.cpp.o	bead0d0566063757
+453	582	652683887	D:/xiaoqi/work/workspace/KotlinMVPDemo/app/build/intermediates/cmake/ceshiDebug/obj/armeabi-v7a/libnativehaha.so	61fc6c5ba44fbf90

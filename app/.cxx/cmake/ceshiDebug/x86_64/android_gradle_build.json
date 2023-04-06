@@ -1,0 +1,48 @@
+{
+  "stringTable": {
+    "0": "D:/xiaoqi/work/workspace/KotlinMVPDemo/app/.cxx/cmake/ceshiDebug/x86_64",
+    "1": "--target=x86_64-none-linux-android21 --gcc-toolchain=D:/xiaoqi/work/android-ndk-r20/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/xiaoqi/work/android-ndk-r20/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dnativehaha_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "D:\\xiaoqi\\work\\android-ndk-r20\\build\\cmake\\android.toolchain.cmake",
+    "D:\\xiaoqi\\work\\android-ndk-r20\\build\\cmake\\platforms.cmake",
+    "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "D:\\xiaoqi\\work\\androidsdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\.cxx\\cmake\\ceshiDebug\\x86_64\" clean"
+  ],
+  "buildTargetsCommand": "D:\\xiaoqi\\work\\androidsdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\.cxx\\cmake\\ceshiDebug\\x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "nativehaha-Debug-x86_64": {
+      "buildCommand": "D:\\xiaoqi\\work\\androidsdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\.cxx\\cmake\\ceshiDebug\\x86_64\" nativehaha",
+      "buildType": "debug",
+      "toolchain": "4237495019",
+      "abi": "x86_64",
+      "artifactName": "nativehaha",
+      "files": [
+        {
+          "src": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\native-lib.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\native-lib2.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\build\\intermediates\\cmake\\ceshiDebug\\obj\\x86_64\\libnativehaha.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "4237495019": {
+      "cppCompilerExecutable": "D:\\xiaoqi\\work\\android-ndk-r20\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

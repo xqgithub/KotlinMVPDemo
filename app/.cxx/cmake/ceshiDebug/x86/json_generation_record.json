@@ -1,0 +1,284 @@
+[
+  {
+    "level": "INFO",
+    "message": "Start JSON generation. Platform version: 21 min SDK version: x86",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Trying to locate CMake in local SDK repository.",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\21.1.2\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\23.0.1\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\25.0.0\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\25.0.1\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\25.0.2\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\26.0.0\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\26.0.2\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\26.0.3\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\27.0.3\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\28.0.2\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\28.0.3\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\29.0.1\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\29.0.2\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\29.0.3\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\build-tools\\30.0.3\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\cmake\\3.10.2.4988404\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\cmake\\3.18.1\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\emulator\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\extras\\intel\\Hardware_Accelerated_Execution_Manager\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\ndk\\21.0.6113669\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\ndk\\23.0.7599858\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\patcher\\v4\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\platform-tools\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\platforms\\android-19\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\platforms\\android-20\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\platforms\\android-21\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\platforms\\android-22\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\platforms\\android-23\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\platforms\\android-24\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\platforms\\android-25\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\platforms\\android-26\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\platforms\\android-27\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\platforms\\android-28\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\platforms\\android-29\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\platforms\\android-30\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\sources\\android-26\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\sources\\android-29\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\sources\\android-30\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\system-images\\android-26\\google_apis_playstore\\x86\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\system-images\\android-30\\google_apis\\x86\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing D:\\xiaoqi\\work\\androidsdk\\tools\\package.xml",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "- CMake found in SDK at \u0027D:\\xiaoqi\\work\\androidsdk\\cmake\\3.10.2.4988404\u0027 had version \u00273.10.2\u0027",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "CMake \u00273.18.1\u0027 found in SDK did not match requested version \u00273.10.2\u0027.",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "JSON \u0027D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\.cxx\\cmake\\ceshiDebug\\x86\\android_gradle_build.json\u0027 was up-to-date",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "JSON generation completed without problems",
+    "file": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "ceshiDebug|x86"
+  }
+]

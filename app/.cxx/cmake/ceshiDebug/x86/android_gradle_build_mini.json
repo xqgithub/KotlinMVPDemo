@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "D:\\xiaoqi\\work\\android-ndk-r20\\build\\cmake\\android.toolchain.cmake",
+    "D:\\xiaoqi\\work\\android-ndk-r20\\build\\cmake\\platforms.cmake",
+    "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "D:\\xiaoqi\\work\\androidsdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\.cxx\\cmake\\ceshiDebug\\x86\" clean"
+  ],
+  "buildTargetsCommand": "D:\\xiaoqi\\work\\androidsdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\.cxx\\cmake\\ceshiDebug\\x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "nativehaha-Debug-x86": {
+      "artifactName": "nativehaha",
+      "buildCommand": "D:\\xiaoqi\\work\\androidsdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\.cxx\\cmake\\ceshiDebug\\x86\" nativehaha",
+      "abi": "x86",
+      "output": "D:\\xiaoqi\\work\\workspace\\KotlinMVPDemo\\app\\build\\intermediates\\cmake\\ceshiDebug\\obj\\x86\\libnativehaha.so",
+      "runtimeFiles": []
+    }
+  }
+}
