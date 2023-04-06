@@ -1,17 +1,23 @@
 package com.example.baselibrary.application
 
+import android.hardware.Camera
 import androidx.multidex.MultiDexApplication
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.baselibrary.BuildConfig
 import com.example.baselibrary.di.componets.DaggerMyAppComponet
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.di.modules.MyAppModule
+import com.example.baselibrary.mvp.view.loadsir.EmptyCallback
+import com.example.baselibrary.mvp.view.loadsir.ErrorCallback
+import com.example.baselibrary.mvp.view.loadsir.LoadingCallback
 import com.example.baselibrary.utils.CrashHandler
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.ScreenTools
 import com.example.baselibrary.utils.lifecycle.ActivityState
 import com.example.baselibrary.utils.lifecycle.MyActivityLifecycleCallbacks
 import com.facebook.stetho.Stetho
+import com.kingja.loadsir.callback.SuccessCallback
+import com.kingja.loadsir.core.LoadSir
 
 /**
  * 自定义Application
@@ -74,12 +80,19 @@ open class MyApplication : MultiDexApplication() {
         crashhandler.init(this)
         //4.初始化Stetho出正式包的时候，建议屏蔽掉
         Stetho.initializeWithDefaults(this)
-        //4.ARouter初始化
+        //5.ARouter初始化
         if (BuildConfig.DEBUG) {
             ARouter.openDebug()
             ARouter.openLog()
         }
         ARouter.init(this)
+        //6.LoadSir框架
+        LoadSir.beginBuilder()
+            .addCallback(ErrorCallback())
+            .addCallback(EmptyCallback())
+            .addCallback(LoadingCallback())
+            .setDefaultCallback(SuccessCallback::class.java)
+            .commit()
     }
 
 

@@ -65,7 +65,6 @@ class TestMainActivity : BaseActivity() {
      *  动态添加UI控件
      */
     private fun addUiDynamic() {
-        PublicPracticalMethodFromJAVA.getInstance().tenHexToHexadecimal(99999)
         //1.自定义一个TextView1
         val textView = TextView(this@TestMainActivity)
         textView.apply {

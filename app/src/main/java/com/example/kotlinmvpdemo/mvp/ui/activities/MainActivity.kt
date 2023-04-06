@@ -77,13 +77,16 @@ class MainActivity : BaseActivity(), MainView {
     override fun init() {
         LogUtils.i("=-= 我要开始初始化了")
         //获得手机屏幕信息
-//        PublicPracticalMethodFromJAVA.getInstance().getPhoneScreenInfo(this@MainActivity)
+        PublicPracticalMethodFromJAVA.getInstance().getPhoneScreenInfo(this@MainActivity)
 
         //初始化recyclerview
         initRecyclerview(false)
 
         //启动服务当应用被移除的时候，做操作
         startTaskRemovedService()
+
+        //测试
+//        presenter.testDataConvert()
     }
 
 
@@ -285,6 +288,12 @@ class MainActivity : BaseActivity(), MainView {
                     40 -> ARouter.getInstance().build(RouterTag.TestLoopViewActivity).navigation()
                     41 -> ARouter.getInstance().build(RouterTag.BasicGrammarActivity).navigation()
                     42 -> ARouter.getInstance().build(RouterTag.NDKPractiseActivity).navigation()
+                    43 -> ARouter.getInstance().build(RouterTag.TestTabLayoutActivity).navigation()
+                    44 -> ARouter.getInstance().build(RouterTag.TestCoordinatorTabLayout).navigation()
+                    45 -> ARouter.getInstance().build(RouterTag.TestsAvatarsOverlapActivity).navigation()
+                    46 -> ARouter.getInstance().build(RouterTag.TestCalendarEventManagerActivity).navigation()
+                    47 -> ARouter.getInstance().build(RouterTag.TestShadowBgActivity).navigation()
+                    48 -> ARouter.getInstance().build(RouterTag.TestLoadSirActivity).navigation()
                 }
             }
         })
@@ -392,7 +401,13 @@ class MainActivity : BaseActivity(), MainView {
         "图片选择工具 PictureSelector",
         "滑动单项选择框 LoopView",
         "kotlin-基本语法 BasicGrammarActivity",
-        "NDK 测试练习"
+        "NDK 测试练习",
+        "TabLayout测试练习",
+        "CoordinatorTabLayout测试练习",
+        "测试头像重叠/时间选择器",
+        "日历事件管理器，增加一个事件提醒功能啦",
+        "测试背景阴影效果",
+        "测试 LoadSir 框架"
     )
 
     /**

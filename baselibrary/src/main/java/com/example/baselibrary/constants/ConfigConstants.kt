@@ -137,4 +137,12 @@ object ConfigConstants {
     const val TYPE_PICTURE = -9999
 
 
+    /** PermissionsActivity 权限判断后，执行方法 **/
+    //启动页需要申请的权限
+    const val PERMISSIONS_GRANTED_STARTUPACTIVITY = -99999
+
+    //日历管理权限
+    const val PERMISSIONS_GRANTED_CALENDAR_MANAGEMENT = -99998
+
+
 }

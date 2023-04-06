@@ -1,20 +1,18 @@
 package com.example.kotlinmvpdemo.mvp.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.blankj.utilcode.util.FileUtils
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
-import com.example.baselibrary.utils.LogUtils
-import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
-import com.example.baselibrary.utils.clickWithTrigger
+import com.example.baselibrary.utils.*
 import com.example.kotlinmvpdemo.R
 import com.example.kotlinmvpdemo.di.componets.DaggerNDKPractiseComponet
 import com.example.kotlinmvpdemo.di.modules.NDKPractiseModule
 import com.example.kotlinmvpdemo.mvp.views.NDKPractiseView
-import com.example.kotlinmvpdemo.ndk.nativelib
+import com.example.kotlinmvpdemo.ndk.Nativelib
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import kotlinx.android.synthetic.main.activity_ndk_practise.*
 
@@ -24,7 +22,11 @@ import kotlinx.android.synthetic.main.activity_ndk_practise.*
 @Route(path = RouterTag.NDKPractiseActivity)
 class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
 
-    private lateinit var nativelib: nativelib
+    private lateinit var nativelib: Nativelib
+
+    companion object {
+
+    }
 
     override fun onBeforeSetContentLayout() {
         PublicPracticalMethodFromJAVA.getInstance()
@@ -46,7 +48,7 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ndk_practise)
-        nativelib = nativelib()
+        nativelib = Nativelib()
 
         tv_one.clickWithTrigger(500) {
             val branch = et_one.text.toString().toInt()
@@ -58,7 +60,7 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                 2 -> {
                     testTwo()
                 }
-                /** 3-8 指针的定义和使用  **/
+                /** 3-9 指针的定义和使用  **/
                 3 -> {
                     testThree()
                 }
@@ -76,6 +78,47 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                 }
                 8 -> {
                     testEight(3, 4)
+                }
+                9 -> {
+                    testNine()
+                }
+                /** 10-11 动态内存分配  **/
+                10 -> {
+                    testTen()
+                }
+                11 -> {
+                    testEleven()
+                }
+                /** 12 字符串  **/
+                12 -> {
+                    testtwelve()
+                }
+                /** 13 结构体  **/
+                13 -> {
+                    testStructure()
+                }
+                /** 14 共同体  **/
+                14 -> {
+                    testConsortium()
+                }
+                /** 15 枚举  **/
+                15 -> {
+                    testEnumerate()
+                }
+                /** 16 文件读写 **/
+                16 -> {
+                    testOperatingFile()
+                }
+                /** 17 预编译 **/
+                17 -> {
+                    testPrecompiled()
+                }
+                /** 18-19 C/C++访问Java的属性、方法 **/
+                18 -> {
+                    testAccessFieldAndMethod()
+                }
+                19 -> {
+                    testAccessStaticFieldAndMethod()
                 }
                 else -> showShortToastSafe("序号错误，请检查")
             }
@@ -149,6 +192,88 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
      */
     fun testEight(a: Int, b: Int) {
         nativelib.testFunctionPointer(a, b)
+    }
+
+    /**
+     * 9.写一个函数查找最小的值
+     */
+    fun testNine() {
+        nativelib.testFindSmallestValue()
+    }
+
+    /**
+     * 10.动态指定数组的大小
+     */
+    fun testTen() {
+        nativelib.testDynamicArray()
+    }
+
+
+    /**
+     * 11.重新分配内存
+     */
+    fun testEleven() {
+        nativelib.testReallocateMemory()
+    }
+
+    /**
+     * 12.字符串
+     */
+    fun testtwelve() {
+        nativelib.testString()
+    }
+
+    /**
+     * 13.结构体
+     */
+    fun testStructure() {
+        nativelib.testStructure()
+    }
+
+    /**
+     * 14.共同体
+     */
+    fun testConsortium() {
+        nativelib.testConsortium()
+    }
+
+    /**
+     * 15.枚举
+     */
+    fun testEnumerate() {
+        nativelib.testEnumerate()
+    }
+
+    /**
+     * 16.文件读写
+     */
+    fun testOperatingFile() {
+        val path = SDCardUtils.getExternalFilesDir(this@NDKPractiseActivity, "").absolutePath + "/helloworld.txt"
+        if (FileUtils.isFileExists(path)) {
+            nativelib.testOperatingFile(path)
+        }
+    }
+
+    /**
+     * 17.预编译
+     */
+    fun testPrecompiled() {
+        nativelib.testPrecompiled()
+    }
+
+    /**
+     * 18.访问Java的非静态属性
+     */
+    fun testAccessFieldAndMethod() {
+        nativelib.testAccessFieldAndMethod()
+        LogUtils.i(ConfigConstants.TAG_ALL, "testAccessFieldName =-= ${nativelib.testAccessFieldName}")
+    }
+
+    /**
+     * 19.访问Java的静态属性
+     */
+    fun testAccessStaticFieldAndMethod() {
+        nativelib.testAccessStaticFieldAndMethod()
     }
 
 

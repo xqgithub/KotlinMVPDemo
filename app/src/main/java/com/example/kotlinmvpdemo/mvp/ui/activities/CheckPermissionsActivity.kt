@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.example.baselibrary.constants.ConfigConstants
+import com.example.baselibrary.mvp.ui.activities.PermissionsActivity
 import com.example.baselibrary.utils.PermissionsChecker
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import com.example.kotlinmvpdemo.R
@@ -13,7 +14,7 @@ import com.example.kotlinmvpdemo.R
 /**
  * 检查用户是否具有相应的权限页面
  */
-class CheckPermissionsActivity : Activity() {
+class CheckPermissionsActivity : Activity(), PermissionsActivity.PermissionsListener {
 
     //权限检测器
     lateinit var mPermissionsChecker: PermissionsChecker
@@ -69,8 +70,14 @@ class CheckPermissionsActivity : Activity() {
         )
         PermissionsActivity.startActivityForResult(
             this@CheckPermissionsActivity,
-            ConfigConstants.PERMISSIONS_INIT_REQUEST_CODE, dailogcontent, PERMISSIONS
+            ConfigConstants.PERMISSIONS_INIT_REQUEST_CODE, dailogcontent, PERMISSIONS,this,ConfigConstants.PERMISSIONS_GRANTED_STARTUPACTIVITY
         )
+    }
+
+    override fun allPermissionsGranted(mark: Int) {
+    }
+
+    override fun permissionsDenied(mark: Int) {
     }
 
 

@@ -7,7 +7,7 @@
 ext {
     android = [
             compileSdkVersion: 30,
-            buildToolsVersion: "29.0.3",
+            buildToolsVersion: "30.0.2",
             minSdkVersion    : 21,
             targetSdkVersion : 30,
             versionCode      : 1,
@@ -61,6 +61,12 @@ ext {
             VerificationCodeInputView         : "1.0.2",
             calendarview                      : "3.7.1",
             autosize                          : "1.2.1",
+            flycoTabLayout                    : "3.0.0",
+            material                          : "1.1.0",
+            coordinatortablayout              : "1.2.2",
+            androidutilcode                   : "1.30.6",
+            androidpickerview                 : "4.1.9",
+            loadsir                           : "1.3.8",
     ]
 
     /**
@@ -106,6 +112,12 @@ ext {
             VerificationCodeInputView         : "com.github.Wynsbin:VerificationCodeInputView:${dependenciesversion.VerificationCodeInputView}",
             calendarview                      : "com.haibin:calendarview:${dependenciesversion.calendarview}",
             autosize                          : "me.jessyan:autosize:${dependenciesversion.autosize}",
+            flycoTabLayout                    : "io.github.h07000223:flycoTabLayout:${dependenciesversion.flycoTabLayout}",
+            material                          : "com.google.android.material:material:${dependenciesversion.material}",
+            coordinatortablayout              : "cn.hugeterry.coordinatortablayout:coordinatortablayout:${dependenciesversion.coordinatortablayout}",
+            androidutilcode                   : "com.blankj:utilcode:${dependenciesversion.androidutilcode}",
+            androidpickerview                 : "com.contrarywind:Android-PickerView:${dependenciesversion.androidpickerview}",
+            loadsir                           : "com.kingja.loadsir:loadsir:${dependenciesversion.loadsir}",
     ]
 
     /**

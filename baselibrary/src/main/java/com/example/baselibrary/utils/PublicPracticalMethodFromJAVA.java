@@ -33,6 +33,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.baselibrary.R;
 import com.example.baselibrary.application.MyApplication;
 import com.example.baselibrary.constants.ConfigConstants;
+import com.example.baselibrary.mvp.ui.activities.PermissionsActivity;
 import com.example.baselibrary.mvp.view.EditTextCustomize;
 
 import java.io.ByteArrayInputStream;
@@ -785,6 +786,18 @@ public class PublicPracticalMethodFromJAVA {
         }
 //        LogUtils.i(ConfigConstants.TAG_ALL, "isInView =-= " + isInView);
         return isInView;
+    }
+
+
+    /**
+     * 启动权限管理类
+     */
+    public void startPermissionsActivity(Activity mActivity, String[] permissions, PermissionsActivity.PermissionsListener permissionsListener, int mark) {
+        int[] dailogcontent = new int[]{R.string.quit,
+                R.string.settings,
+                R.string.help,
+                R.string.string_help_text};
+        PermissionsActivity.startActivityForResult(mActivity, ConfigConstants.PERMISSIONS_INIT_REQUEST_CODE, dailogcontent, permissions, permissionsListener, mark);
     }
 
 

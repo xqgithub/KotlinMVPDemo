@@ -38,6 +38,24 @@ object RouterTag {
     //testlibary---TestPictureSelectorActivity
     const val TestPictureSelectorActivity = "/testlibary/TestPictureSelectorActivity"
 
+    //testlibary---TestTabLayoutActivity
+    const val TestTabLayoutActivity = "/testlibary/TestTabLayoutActivity"
+
+    //testlibary---TestCoordinatorTabLayout
+    const val TestCoordinatorTabLayout = "/testlibary/TestCoordinatorTabLayout"
+
+    //testlibary---TestsAvatarsOverlapActivity
+    const val TestsAvatarsOverlapActivity = "/testlibary/TestsAvatarsOverlapActivity"
+
+    //testlibary---TestCalendarEventManagerActivity
+    const val TestCalendarEventManagerActivity = "/testlibary/TestCalendarEventManagerActivity"
+
+    //testlibary---TestShadowBgActivity
+    const val TestShadowBgActivity = "/testlibary/TestShadowBgActivity"
+
+    //testlibary---TestShadowBgActivity
+    const val TestLoadSirActivity = "/testlibary/TestLoadSirActivity"
+
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
 

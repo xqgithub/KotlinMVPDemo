@@ -1,4 +1,4 @@
-package com.example.kotlinmvpdemo.mvp.ui.activities;
+package com.example.baselibrary.mvp.ui.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,9 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
+import com.example.baselibrary.R;
 import com.example.baselibrary.constants.ConfigConstants;
+import com.example.baselibrary.constants.VariableConfig;
 import com.example.baselibrary.utils.PermissionsChecker;
-import com.example.kotlinmvpdemo.R;
+import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA;
+import com.example.baselibrary.utils.ScreenTools;
 
 /**
  * Created by XQ on 2017/4/15.
@@ -25,6 +28,10 @@ public class PermissionsActivity extends Activity {
 
     private PermissionsChecker mChecker; // 权限检测器
     private boolean isRequireCheck; // 是否需要系统权限检测, 防止和系统提示框重叠
+
+    private static PermissionsListener mPermissionsListener;
+    //允许权限后，执行方法标记
+    private static int MARK = 0;
 
 
     //弹框退出显示
@@ -41,13 +48,17 @@ public class PermissionsActivity extends Activity {
     public static void startActivityForResult(Activity activity,
                                               int requestCode,
                                               int[] dailogcontent,
-                                              String[] permissions) {
+                                              String[] permissions, PermissionsListener permissionsListener, int mark) {
         if (dailogcontent.length > 0) {
             negative = dailogcontent[0];
             positive = dailogcontent[1];
             title = dailogcontent[2];
             message = dailogcontent[3];
         }
+
+        mPermissionsListener = permissionsListener;
+        MARK = mark;
+
         Intent intent = new Intent(activity, PermissionsActivity.class);
         intent.putExtra(ConfigConstants.EXTRA_PERMISSIONS, permissions);
         ActivityCompat.startActivityForResult(activity, intent, requestCode, null);
@@ -56,9 +67,21 @@ public class PermissionsActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getIntent() == null || !getIntent().hasExtra(ConfigConstants.EXTRA_PERMISSIONS)) {
-            throw new RuntimeException("----->PermissionsActivity需要使用静态startActivityForResult方法启动!");
+
+        //1.判断是pad还是phone，设置横屏或者竖屏
+        if (ScreenTools.getInstance().isPad(this)) {
+            //设置横屏
+            ScreenTools.getInstance().setLandscape(this);
+        } else {
+            //设置竖屏
+            ScreenTools.getInstance().setPortrait(this);
         }
+
+
+//        if (getIntent() == null || !getIntent().hasExtra(ConfigConstants.EXTRA_PERMISSIONS)) {
+//            throw new RuntimeException("----->PermissionsActivity需要使用静态startActivityForResult方法启动!");
+//        }
+
         setContentView(R.layout.activity_permissions);
 
         mChecker = new PermissionsChecker(this);
@@ -93,6 +116,11 @@ public class PermissionsActivity extends Activity {
 
     // 全部权限均已获取
     private void allPermissionsGranted() {
+
+        if (mPermissionsListener != null) {
+            mPermissionsListener.allPermissionsGranted(MARK);
+        }
+
         setResult(ConfigConstants.PERMISSIONS_GRANTED);
         finish();
     }
@@ -113,7 +141,21 @@ public class PermissionsActivity extends Activity {
             allPermissionsGranted();
         } else {
             isRequireCheck = false;
-            showMissingPermissionDialog();
+            setResult(ConfigConstants.PERMISSIONS_DENIED);
+            VariableConfig.IsRefuseAccessRequest = true;
+
+            //判断用户是否点击了，禁止不再提示按钮
+            for (int i = 0; i < permissions.length; i++) {
+                boolean notprompt = ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[i]);
+                if (!notprompt) {
+                    showMissingPermissionDialog();
+                    return;
+                }
+            }
+            if (mPermissionsListener != null) {
+                mPermissionsListener.permissionsDenied(MARK);
+            }
+            PublicPracticalMethodFromJAVA.getInstance().activityFinish(this, R.anim.activity_xhold);
         }
     }
 
@@ -139,7 +181,8 @@ public class PermissionsActivity extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 setResult(ConfigConstants.PERMISSIONS_DENIED);
                 finish();
-                System.exit(0);
+//                System.exit(0);
+                VariableConfig.IsRefuseAccessRequest = true;
             }
         });
 
@@ -162,5 +205,9 @@ public class PermissionsActivity extends Activity {
         startActivity(intent);
     }
 
+    public interface PermissionsListener {
+        void allPermissionsGranted(int mark);
 
+        void permissionsDenied(int mark);
+    }
 }

@@ -3,6 +3,8 @@ package com.example.kotlinmvpdemo.mvp.presenters
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import com.blankj.utilcode.util.ConvertUtils
+import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.data.api.ApiResponse2
 import com.example.baselibrary.data.api.ApiService
 import com.example.baselibrary.data.api.BaseSubscriber
@@ -526,7 +528,8 @@ class MainPresenter @Inject constructor(
         aggregate.add("3333")
         aggregate.add("9527")
 
-        val iteratorme: IteratorMe = ConcreteIteratorMe(aggregate)
+//        val iteratorme: IteratorMe = ConcreteIteratorMe(aggregate)
+        val iteratorme: IteratorMe = aggregate.getIterator()
         while (iteratorme.hasnext()) {
             var tel = iteratorme.next().toString()
             LogUtils.i("当前号码为：${tel}")
@@ -670,6 +673,25 @@ class MainPresenter @Inject constructor(
         //发起命令请求
         invoker.action()
     }
+
+    /**
+     * 数据转换
+     */
+    fun testDataConvert() {
+        //十进制转十六进制
+        LogUtils.i(ConfigConstants.TAG_ALL, "十进制数：5000 =-= 十六进制数 0x${ConvertUtils.int2HexString(5000).toUpperCase()}")
+        //十六进制转十进制
+        LogUtils.i(ConfigConstants.TAG_ALL, "十六进制数：0xfffcfb8 =-= 十进制数 ${ConvertUtils.hexString2Int("fffcfb8")}")
+
+        var a = 10
+        //转化成二进制
+        LogUtils.i(ConfigConstants.TAG_ALL, "十进制数 a ：$a =-= 二进制数 ${Integer.toBinaryString(a)}")
+        //再左移3位
+        var b = a shl 3
+        LogUtils.i(ConfigConstants.TAG_ALL, "a 左移后的结果 b ：$b =-= 二进制数 ${Integer.toBinaryString(b)}")
+    }
+
+
 }
 
 
