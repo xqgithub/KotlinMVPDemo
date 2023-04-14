@@ -61,7 +61,14 @@
             android:name="com.example.testlibrary.loadsir.FragmentNormalActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.example.testlibrary.TestServiceStartupModeActivity"
+            android:screenOrientation="portrait" />
+
         <service android:name="com.example.baselibrary.utils.screenrecord.RecordService" />
+
+        <service android:name="com.example.testlibrary.service.MyServiceUnBind" />
+        <service android:name="com.example.testlibrary.service.MyServiceBind" />
     </application>
 
 </manifest>

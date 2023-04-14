@@ -56,6 +56,9 @@ object RouterTag {
     //testlibary---TestShadowBgActivity
     const val TestLoadSirActivity = "/testlibary/TestLoadSirActivity"
 
+    //testlibary---TestServiceStartupModeActivity
+    const val TestServiceStartupModeActivity = "/testlibary/TestServiceStartupModeActivity"
+
     //app---MainActivity
     const val MainActivity = "/app/MainActivity"
 

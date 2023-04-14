@@ -14,6 +14,9 @@ object ConfigConstants {
     //错误日志名称
     const val ERROR_JOURNAL = "AKotlinMvpDemo"
 
+    //全局的TAG
+    const val GLOBAL_TAG = "=-="
+
     /** 应用启动，权限判断返回码 **/
     const val PERMISSIONS_INIT_REQUEST_CODE = 1000
 

@@ -294,6 +294,7 @@ class MainActivity : BaseActivity(), MainView {
                     46 -> ARouter.getInstance().build(RouterTag.TestCalendarEventManagerActivity).navigation()
                     47 -> ARouter.getInstance().build(RouterTag.TestShadowBgActivity).navigation()
                     48 -> ARouter.getInstance().build(RouterTag.TestLoadSirActivity).navigation()
+                    49 -> ARouter.getInstance().build(RouterTag.TestServiceStartupModeActivity).navigation()
                 }
             }
         })
@@ -407,7 +408,8 @@ class MainActivity : BaseActivity(), MainView {
         "测试头像重叠/时间选择器",
         "日历事件管理器，增加一个事件提醒功能啦",
         "测试背景阴影效果",
-        "测试 LoadSir 框架"
+        "测试 LoadSir 框架",
+        "测试 Service启动模式和生命周期",
     )
 
     /**
