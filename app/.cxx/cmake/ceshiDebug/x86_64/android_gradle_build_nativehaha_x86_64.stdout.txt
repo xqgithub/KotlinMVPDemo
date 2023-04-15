@@ -1,20 +1,206 @@
 ninja: Entering directory `D:\xiaoqi\work\workspace\KotlinMVPDemo\app\.cxx\cmake\ceshiDebug\x86_64'
 [1/3] Building CXX object CMakeFiles/nativehaha.dir/native-lib2.cpp.o
 [2/3] Building CXX object CMakeFiles/nativehaha.dir/native-lib.cpp.o
-D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:39:47: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
-    printf("int类型所占的字节数%d\n", sizeof(int));
-                               ~~     ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:87:45: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
+    LOGI("int类型所占的字节数%d\n", sizeof(int));
+                             ~~     ^~~~~~~~~~~
+                             %lu
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:88:47: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
+    LOGI("float类型所占的字节数%d\n", sizeof(float));
+                               ~~     ^~~~~~~~~~~~~
                                %lu
-D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:40:49: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
-    printf("float类型所占的字节数%d\n", sizeof(float));
-                                 ~~     ^~~~~~~~~~~~~
-                                 %lu
-D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:41:50: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
-    printf("double类型所占的字节数%d\n", sizeof(double));
-                                  ~~     ^~~~~~~~~~~~~~
-                                  %lu
-D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:53:1: warning: control reaches end of non-void function [-Wreturn-type]
-}
-^
-4 warnings generated.
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:89:48: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
+    LOGI("double类型所占的字节数%d\n", sizeof(double));
+                                ~~     ^~~~~~~~~~~~~~
+                                %lu
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:143:47: warning: format specifies type 'int' but the argument has type 'char *' [-Wformat]
+        LOGI("xiaoc 不是null指针 =-= %c", xiaoc);
+                                     ~~   ^~~~~
+                                     %s
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:157:43: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
+    LOGI("int类型所占的字节数%d", sizeof(int));
+                             ~~   ^~~~~~~~~~~
+                             %lu
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:158:48: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
+    LOGI("double类型所占的字节数%d\n", sizeof(double));
+                                ~~     ^~~~~~~~~~~~~~
+                                %lu
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:161:53: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+    LOGI("指针p指向地址    =-=  %#x, =-= %d", p, *p);
+                                ~~~           ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:177:74: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+    LOGI("指针p1 指向地址 =-= %#x, 指针p2 指向地址 =-= %#x", p1, p2);
+                              ~~~                            ^~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:177:78: warning: format specifies type 'unsigned int' but the argument has type 'int **' [-Wformat]
+    LOGI("指针p1 指向地址 =-= %#x, 指针p2 指向地址 =-= %#x", p1, p2);
+                                                       ~~~       ^~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:195:37: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+    LOGI("数组的地址 =-= %#x", ids);
+                         ~~~   ^~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:196:37: warning: format specifies type 'unsigned int' but the argument has type 'int (*)[5]' [-Wformat]
+    LOGI("数组的地址 =-= %#x", &ids);
+                         ~~~   ^~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:197:37: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+    LOGI("数组的地址 =-= %#x", &ids[0]);
+                         ~~~   ^~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:201:42: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+    LOGI("指针p 指向地址 =-= %#x", p);
+                             ~~~   ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:206:42: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+    LOGI("指针p 指向地址 =-= %#x", p);
+                             ~~~   ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:226:42: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+    LOGI("指针p 指向地址 =-= %#x", p);
+                             ~~~   ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:229:43: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+    LOGI("uids + 5 指向地址 =-= %#x", uids + 5);
+                                ~~~   ^~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:309:78: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+        LOGI("数组 =-= %d，其值 =-= %d, 内存地址 =-= %#x", i, p[i], &p[i]);
+                                                     ~~~            ^~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:342:93: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+        LOGI("数组 序号 =-= %d, 数组的值 =-= %d,内存地址 =-= %#x\n", i, ids[i], &ids[i]);
+                                                             ~~~                ^~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:346:51: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+    LOGI("p的地址 =-=  %#x,*p的值 =-= %d\n", p, *p);
+                       ~~~                   ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:364:78: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+        LOGI("数组 =-= %d，其值 =-= %d, 内存地址 =-= %#x", i, p[i], &p[i]);
+                                                     ~~~            ^~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:383:80: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+        LOGI("数组 1 =-= %d，其值 =-= %d, 内存地址 =-= %#x", i, p[i], &p[i]);
+                                                       ~~~            ^~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:398:81: warning: format specifies type 'unsigned int' but the argument has type 'int *' [-Wformat]
+        LOGI("数组 2 =-= %d，其值 =-= %d, 内存地址 =-= %#x", i, p2[i], &p2[i]);
+                                                       ~~~             ^~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:413:17: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+    char *str = "how are you？";
+                ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:417:11: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+    str = "hello world";
+          ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:430:15: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+    char *a = "chian";
+              ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:431:15: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+    char *b = " is powerful!";
+              ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:437:15: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+    char *c = "I want go to China!";
+              ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:438:25: warning: multi-character character constant [-Wmultichar]
+    char *p = strchr(c, 'go');
+                        ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:440:41: warning: format specifies type 'int' but the argument has type 'long' [-Wformat]
+        LOGI("索引的位置  =-= %d", p - c);
+                              ~~   ^~~~~
+                              %ld
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:521:43: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
+    LOGI("Data 的内存大小为： %d", sizeof(data));
+                              ~~   ^~~~~~~~~~~~
+                              %lu
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:551:63: warning: format specifies type 'unsigned int' but the argument has type 'enum Day *' [-Wformat]
+    LOGI("day 的物理地址 =-= %#x, 实际的值 =-=  %d", &d, d);
+                             ~~~                     ^~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:553:63: warning: format specifies type 'unsigned int' but the argument has type 'enum Day *' [-Wformat]
+    LOGI("day 的物理地址 =-= %#x, 实际的值 =-=  %d", &d, d);
+                             ~~~                     ^~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:626:18: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+    char *text = "\n我是路飞\n要成为海贼王的男人!";
+                 ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:634:23: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+    char *read_path = "/storage/emulated/0/Android/data/com.example.kotlinmvpdemo.ceshi/files/xisuo.png";
+                      ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:657:32: warning: format specifies type 'int' but the argument has type 'long' [-Wformat]
+    LOGI("filesize ：=-= %d", filesize);
+                         ~~   ^~~~~~~~
+                         %ld
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:13:61: note: expanded from macro 'LOGI'
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
+                                                            ^~~~~~~~~~~
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:750:16: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+    char *_a = "testAccessFieldName 我被修改了，哈哈";
+               ^
+D:/xiaoqi/work/workspace/KotlinMVPDemo/app/src/main/cpp/native-lib.cpp:782:16: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+    char *_a = " =-= 我被jni调用了,我是静态方法";
+               ^
+37 warnings generated.
 [3/3] Linking CXX shared library D:\xiaoqi\work\workspace\KotlinMVPDemo\app\build\intermediates\cmake\ceshiDebug\obj\x86_64\libnativehaha.so

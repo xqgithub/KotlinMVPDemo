@@ -409,7 +409,7 @@ class MainActivity : BaseActivity(), MainView {
         "日历事件管理器，增加一个事件提醒功能啦",
         "测试背景阴影效果",
         "测试 LoadSir 框架",
-        "测试 Service启动模式和生命周期",
+        "测试 Service启动模式和生命周期\n测试AIDL"
     )
 
     /**

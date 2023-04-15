@@ -55,5 +55,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBindService" />
 
+    <TextView
+        android:id="@+id/tvADIL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20x"
+        android:text="开启ADIL服务"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen_20x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUnBindService" />
+
+    <TextView
+        android:id="@+id/tvADIL2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20x"
+        android:text="测试AIDL功能"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen_20x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvADIL" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

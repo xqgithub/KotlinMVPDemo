@@ -10,6 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.LogUtils
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
+import com.example.baselibrary.constants.ConfigConstants.GLOBAL_TAG
 import com.example.baselibrary.constants.RouterTag
 import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
@@ -17,6 +18,7 @@ import com.example.baselibrary.utils.StringUtils
 import com.example.baselibrary.utils.clickWithTrigger
 import com.example.testlibrary.service.MyServiceBind
 import com.example.testlibrary.service.MyServiceUnBind
+import com.example.testlibrary.service.TestAIDLService
 import kotlinx.android.synthetic.main.activity_testservice_startupmode.*
 
 /**
@@ -24,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_testservice_startupmode.*
  * Time:15:40
  * author:joker
  * 测试 Service 启动模式和生命周期
+ * 测试AIDL功能
  */
 @Route(path = RouterTag.TestServiceStartupModeActivity)
 class TestServiceStartupModeActivity : BaseActivity() {
@@ -68,8 +71,26 @@ class TestServiceStartupModeActivity : BaseActivity() {
                 unbindService(serviceConnection)
             }
         }
+
+        tvADIL.clickWithTrigger(500) {
+            Intent(this@TestServiceStartupModeActivity, TestAIDLService::class.java).apply {
+                bindService(this, aidlServiceConnection, Context.BIND_AUTO_CREATE)
+            }
+        }
+
+        tvADIL2.clickWithTrigger(500) {
+            if (!StringUtils.isBlank(iMyAidlInterface)) {
+                try {
+                    var nicname = iMyAidlInterface.getName("海贼王路飞")
+                    LogUtils.iTag(GLOBAL_TAG, nicname)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
     }
 
+    /**  绑定Service  **/
     private lateinit var myServiceBind: MyServiceBind
     private var bingflag: Boolean = false
     private var serviceConnection = object : ServiceConnection {
@@ -87,4 +108,30 @@ class TestServiceStartupModeActivity : BaseActivity() {
             bingflag = false
         }
     }
+    /**  绑定Service  **/
+
+    /**  测试AIDL  **/
+    private lateinit var iMyAidlInterface: IMyAidlInterface
+    private var bingflag2: Boolean = false
+    private var aidlServiceConnection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+            bingflag2 = true
+            iMyAidlInterface = IMyAidlInterface.Stub.asInterface(service)
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+            iMyAidlInterface == null
+            bingflag2 = false
+        }
+    }
+
+    /**  测试AIDL  **/
+    override fun onDestroy() {
+        super.onDestroy()
+        if (bingflag2) {
+            unbindService(aidlServiceConnection)
+        }
+    }
+
+
 }
