@@ -72,6 +72,11 @@
         <service
             android:name="com.example.testlibrary.service.TestAIDLService"
             android:process=":haha"></service>
+
+        <provider
+            android:name="com.example.testlibrary.contentprovider.PeopleProvider"
+            android:authorities="com.example.peopleprovider"
+            android:exported="true" />
     </application>
 
 </manifest>

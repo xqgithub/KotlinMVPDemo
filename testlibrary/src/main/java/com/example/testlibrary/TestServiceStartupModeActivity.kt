@@ -1,9 +1,8 @@
 package com.example.testlibrary
 
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.ServiceConnection
+import android.content.*
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -16,6 +15,7 @@ import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import com.example.baselibrary.utils.StringUtils
 import com.example.baselibrary.utils.clickWithTrigger
+import com.example.testlibrary.contentprovider.People
 import com.example.testlibrary.service.MyServiceBind
 import com.example.testlibrary.service.MyServiceUnBind
 import com.example.testlibrary.service.TestAIDLService
@@ -26,7 +26,8 @@ import kotlinx.android.synthetic.main.activity_testservice_startupmode.*
  * Time:15:40
  * author:joker
  * 测试 Service 启动模式和生命周期
- * 测试AIDL功能
+ * 测试 AIDL功能
+ * 测试 ContentProvider
  */
 @Route(path = RouterTag.TestServiceStartupModeActivity)
 class TestServiceStartupModeActivity : BaseActivity() {
@@ -88,6 +89,56 @@ class TestServiceStartupModeActivity : BaseActivity() {
                 }
             }
         }
+
+        tvProviderAdd.clickWithTrigger(500) {
+            ContentValues().apply {
+                put(People.KEY_NAME, "路飞")
+                put(People.KEY_AGE, 18)
+                put(People.KEY_HEIGHT, 180.7f)
+                val _uri = contentResolver.insert(People.CONTENT_URI, this)
+                LogUtils.iTag(GLOBAL_TAG, "添加成功 uri = $_uri")
+            }
+        }
+
+        tvProviderQuery.clickWithTrigger(500) {
+            val cursor = contentResolver.query(
+                People.CONTENT_URI, arrayOf(People.KEY_ID, People.KEY_NAME, People.KEY_AGE, People.KEY_HEIGHT),
+                null, null, null
+            )
+            if (StringUtils.isBlank(cursor)) {
+                LogUtils.iTag(GLOBAL_TAG, "数据库中没有数据")
+                return@clickWithTrigger
+            }
+            LogUtils.iTag(GLOBAL_TAG, "数据库中有${cursor?.count}条记录")
+            cursor?.let {
+                if (it.moveToFirst()) {
+                    do {
+                        LogUtils.iTag(
+                            GLOBAL_TAG, "ID = ${it.getString(cursor.getColumnIndex(People.KEY_ID))}",
+                            "姓名 = ${it.getString(cursor.getColumnIndex(People.KEY_NAME))}",
+                            "年龄 = ${it.getInt(cursor.getColumnIndex(People.KEY_AGE))}",
+                            "身高 = ${it.getFloat(cursor.getColumnIndex(People.KEY_HEIGHT))}"
+                        )
+                    } while (it.moveToNext())
+                }
+            }
+        }
+
+        tvProviderUpdate.clickWithTrigger(500) {
+            ContentValues().apply {
+                put(People.KEY_NAME, "索隆")
+                put(People.KEY_AGE, 19)
+                put(People.KEY_HEIGHT, 190.1f)
+                val uri = Uri.parse(People.CONTENT_URI_STRING + "/" + "1")
+                val result = contentResolver.update(uri, this, null, null)
+                if (result > 0) {
+                    LogUtils.iTag(GLOBAL_TAG, "更新成功")
+                } else {
+                    LogUtils.iTag(GLOBAL_TAG, "更新失败")
+                }
+            }
+        }
+
     }
 
     /**  绑定Service  **/
