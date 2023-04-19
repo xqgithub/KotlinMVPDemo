@@ -71,7 +71,10 @@
         <service android:name="com.example.testlibrary.service.MyServiceBind" />
         <service
             android:name="com.example.testlibrary.service.TestAIDLService"
-            android:process=":haha"></service>
+            android:process=":haha" />
+        <service
+            android:name="com.example.testlibrary.service.MessengerService"
+            android:process=":haha2" />
 
         <provider
             android:name="com.example.testlibrary.contentprovider.PeopleProvider"

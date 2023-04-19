@@ -5,6 +5,8 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
+import android.os.Message
+import android.os.Messenger
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.LogUtils
 import com.example.baselibrary.base.BaseActivity
@@ -16,6 +18,7 @@ import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import com.example.baselibrary.utils.StringUtils
 import com.example.baselibrary.utils.clickWithTrigger
 import com.example.testlibrary.contentprovider.People
+import com.example.testlibrary.service.MessengerService
 import com.example.testlibrary.service.MyServiceBind
 import com.example.testlibrary.service.MyServiceUnBind
 import com.example.testlibrary.service.TestAIDLService
@@ -139,6 +142,23 @@ class TestServiceStartupModeActivity : BaseActivity() {
             }
         }
 
+        tvMessenger.clickWithTrigger(500) {
+            Intent(this@TestServiceStartupModeActivity, MessengerService::class.java).apply {
+                bindService(this, messengerServiceConnection, Context.BIND_AUTO_CREATE)
+            }
+        }
+        tvMessenger2.clickWithTrigger(500) {
+            val message = Message.obtain(null, MessengerService.MSG_SAY_HELLO)
+            Bundle().apply {
+                putString("name", "嘻嘻哈哈")
+                message.data = this
+                try {
+                    messenger?.send(message)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
     }
 
     /**  绑定Service  **/
@@ -175,14 +195,35 @@ class TestServiceStartupModeActivity : BaseActivity() {
             bingflag2 = false
         }
     }
-
     /**  测试AIDL  **/
+
+    /**  测试 Messenger  **/
+    private var messenger: Messenger? = null
+
+    private var bingflag3: Boolean = false
+    private var messengerServiceConnection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, service: IBinder) {
+            messenger = Messenger(service)
+            bingflag3 = true
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+            bingflag3 = false
+        }
+
+    }
+
+
+    /**  测试 Messenger  **/
+
+
     override fun onDestroy() {
         super.onDestroy()
         if (bingflag2) {
             unbindService(aidlServiceConnection)
         }
+        if (bingflag3) {
+            unbindService(messengerServiceConnection)
+        }
     }
-
-
 }
