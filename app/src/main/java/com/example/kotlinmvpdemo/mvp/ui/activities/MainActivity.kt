@@ -295,6 +295,8 @@ class MainActivity : BaseActivity(), MainView {
                     47 -> ARouter.getInstance().build(RouterTag.TestShadowBgActivity).navigation()
                     48 -> ARouter.getInstance().build(RouterTag.TestLoadSirActivity).navigation()
                     49 -> ARouter.getInstance().build(RouterTag.TestServiceStartupModeActivity).navigation()
+                    50 -> presenter.testProxy()
+                    51 -> presenter.testComposite()
                 }
             }
         })
@@ -409,7 +411,9 @@ class MainActivity : BaseActivity(), MainView {
         "日历事件管理器，增加一个事件提醒功能啦",
         "测试背景阴影效果",
         "测试 LoadSir 框架",
-        "测试 Service启动模式和生命周期\n测试AIDL"
+        "测试 Service启动模式和生命周期\n测试AIDL",
+        "设计模式---代理模式",
+        "设计模式---组合模式",
     )
 
     /**

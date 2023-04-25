@@ -56,7 +56,7 @@ class MainListAdapter(
             holder.iv_test.visibility = View.INVISIBLE
         }
         holder.tv_test.apply {
-            text = items[position]
+            text = "$position. ${items[position]}"
         }.setOnClickListener {
             onItemClickListener.setItemOnClick(position, holder.iv_test, picPath)
         }

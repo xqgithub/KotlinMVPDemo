@@ -20,6 +20,8 @@ import com.example.baselibrary.designpatterns.clonemode.Card
 import com.example.baselibrary.designpatterns.command.Invoker
 import com.example.baselibrary.designpatterns.command.Receiver
 import com.example.baselibrary.designpatterns.command.ShutdownCommand
+import com.example.baselibrary.designpatterns.composite.Branch
+import com.example.baselibrary.designpatterns.composite.Leaf
 import com.example.baselibrary.designpatterns.factory.ConcreteFactory
 import com.example.baselibrary.designpatterns.factory.Factory
 import com.example.baselibrary.designpatterns.factory.Product
@@ -36,6 +38,8 @@ import com.example.baselibrary.designpatterns.memo.Originator
 import com.example.baselibrary.designpatterns.observer.ConcreteObservable
 import com.example.baselibrary.designpatterns.observer.ConcreteObserver
 import com.example.baselibrary.designpatterns.observer.Observerdesign
+import com.example.baselibrary.designpatterns.proxy.Domestic
+import com.example.baselibrary.designpatterns.proxy.Oversea
 import com.example.baselibrary.designpatterns.simplefactory.ConcreteProductSimple
 import com.example.baselibrary.designpatterns.simplefactory.FactorySimple
 import com.example.baselibrary.designpatterns.state.ChangeState
@@ -673,6 +677,48 @@ class MainPresenter @Inject constructor(
         //发起命令请求
         invoker.action()
     }
+
+    /**
+     * 设计模式---代理模式
+     */
+    fun testProxy() {
+        //创建国内购买人
+        val domestic = Domestic()
+        //创建海外代购类并将domestic作为构造函数传递
+        val oversea = Oversea(domestic)
+        //用海外代购购买
+        oversea.buy()
+    }
+
+    /**
+     * 设计模式---组合模式
+     */
+    fun testComposite() {
+        val root = Branch("网站页面")
+        //网站页面添加两个栏目：音乐,视屏;以及一个广告内容。
+        val music = Branch("音乐")
+        val video = Branch("视频")
+        val ad = Leaf("广告")
+        root.addPageElement(music)
+        root.addPageElement(video)
+        root.addPageElement(ad)
+
+        //音乐栏目添加两个子栏目：国语,粤语
+        val chineseMusic = Branch("国语")
+        val cantoneseMusic = Branch("粤语")
+        music.addPageElement(chineseMusic)
+        music.addPageElement(cantoneseMusic)
+
+        //国语,粤语栏目添加具体内容
+        chineseMusic.addPageElement(Leaf("十年.MP3"))
+        cantoneseMusic.addPageElement(Leaf("明年今日.MP3"))
+
+        //视频栏目添加具体内容
+        video.addPageElement(Leaf("唐伯虎点秋香.avi"))
+
+        root.print("")
+    }
+
 
     /**
      * 数据转换
