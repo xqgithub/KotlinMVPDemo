@@ -846,6 +846,9 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
 
     var test_sp: String by SPreferenceUtils(this, "xiaoqueque", "Company", "路飞")//默认存的值是路飞
 
+    /** 非空属性委托 **/
+    var address: String by Delegates.notNull()
+
     fun testCommission() {
         //委托类测试
         val realGamePlayer = RealGamePlayer("路飞")
@@ -864,6 +867,9 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
 
         test_sp = "小路飞"
         LogUtils.i(ConfigConstants.TAG_ALL, "test_sp =-= ${test_sp}")
+
+        address = "美国爸爸"
+        LogUtils.i(ConfigConstants.TAG_ALL, "address =-=  $address")
     }
 
     /**

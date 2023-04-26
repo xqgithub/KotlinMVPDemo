@@ -1,6 +1,7 @@
 package com.example.testlibrary
 
 import android.os.Bundle
+import android.util.Log
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
@@ -368,23 +369,51 @@ class CoroutineActivity : BaseActivity() {
     //1.yield在协程中就可以简单的理解为，挂起当前任务（注意是任务），释放此线程的monitor让其他正在等待的任务公平的竞争，去获得执行权
     val threadLocal = ThreadLocal<String?>() // 声明线程局部变量
     private fun testCoroutines15() {
+//        runBlocking<Unit> {
+//            threadLocal.set("main")
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Pre-main, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
+//            val job = launch(Dispatchers.Default + threadLocal.asContextElement(value = "launch")) {
+//                LogUtils.i(ConfigConstants.TAG_ALL, "Launch start, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
+//                yield()
+//                LogUtils.i(ConfigConstants.TAG_ALL, "After yield, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
+//            }
+//
+//            val job_two = launch(Dispatchers.Default + threadLocal.asContextElement(value = "launch_two")) {
+//                LogUtils.i(ConfigConstants.TAG_ALL, "launch_two start, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
+//                LogUtils.i(ConfigConstants.TAG_ALL, "After yield, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
+//            }
+//            job.join()
+//            LogUtils.i(ConfigConstants.TAG_ALL, "Post-main, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
+//        }
         runBlocking<Unit> {
-            threadLocal.set("main")
-            LogUtils.i(ConfigConstants.TAG_ALL, "Pre-main, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
-            val job = launch(Dispatchers.Default + threadLocal.asContextElement(value = "launch")) {
-                LogUtils.i(ConfigConstants.TAG_ALL, "Launch start, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
-                yield()
-                LogUtils.i(ConfigConstants.TAG_ALL, "After yield, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
-            }
-
-            val job_two = launch(Dispatchers.Default + threadLocal.asContextElement(value = "launch_two")) {
-                LogUtils.i(ConfigConstants.TAG_ALL, "launch_two start, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
-                LogUtils.i(ConfigConstants.TAG_ALL, "After yield, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
+            val singleDispatcher = newSingleThreadContext("Single")
+            val job = GlobalScope.launch {
+                launch {
+                    withContext(singleDispatcher) {
+                        repeat(3) {
+                            printSomeThingBlock("Task1")
+                            yield()
+                        }
+                    }
+                }
+                launch {
+                    withContext(singleDispatcher) {
+                        repeat(3) {
+                            printSomeThingBlock("Task2")
+                            yield()
+                        }
+                    }
+                }
             }
             job.join()
-            LogUtils.i(ConfigConstants.TAG_ALL, "Post-main, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
         }
     }
+
+    suspend fun printSomeThingBlock(text: String) {
+        println(text)
+//        Thread.sleep(1000)
+    }
+
 
     //往文件中写入数据，然后读取数据，看看用时多少
     private val fileScope = CoroutineScope(Dispatchers.Main)
