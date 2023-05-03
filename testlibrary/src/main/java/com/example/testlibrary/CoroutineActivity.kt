@@ -78,6 +78,7 @@ class CoroutineActivity : BaseActivity() {
                 17 -> testCoroutines17()
                 18 -> testCoroutines18()
                 19 -> testCoroutines19()
+                20 -> testCoroutines20()
                 else -> showShortToastSafe("序号错误，请检查")
             }
         }
@@ -304,6 +305,7 @@ class CoroutineActivity : BaseActivity() {
      * 2.Dispatchers.IO - 此调度程序经过了专门优化，适合在主线程之外执行磁盘或网络 I/O。
      * 示例包括使用 Room 组件、从文件中读取数据或向文件中写入数据，以及运行任何网络操作。
      * 3.Dispatchers.Default - 此调度程序经过了专门优化，适合在主线程之外执行占用大量 CPU 资源的工作。用例示例包括对列表排序和解析 JSON。
+     * 4.Dispatchers.Unconfined - 无指定派发线程，会根据运行时的上下文环境决定。
      */
     private fun testCoroutines12() {
         runBlocking {
@@ -563,6 +565,35 @@ class CoroutineActivity : BaseActivity() {
             foo().collect { value ->
                 LogUtils.i(ConfigConstants.TAG_ALL, "value =-= $value")
             }
+        }
+    }
+
+    /**
+     * 测试协程异常的用法
+     */
+    private fun testCoroutines20() {
+        val handler = CoroutineExceptionHandler { _, e ->
+            LogUtils.e(ConfigConstants.TAG_ALL, "Caught $e,=-= ${e.suppressed.contentToString()}")
+        }
+        val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+        scope.launch {
+            //A协程
+            val job1 = scope.launch(handler) {
+                delay(1500)
+                throw Exception("hahahaha")
+            }
+            //B协程
+            val job2 = scope.launch(handler) {
+                withContext(Dispatchers.IO) {
+                    repeat(20) {
+                        LogUtils.i(ConfigConstants.TAG_ALL, "aaaaaa =-= $it")
+                        delay(200)
+                    }
+                }
+            }
+            job1.join()
+            job2.join()
+            LogUtils.i(ConfigConstants.TAG_ALL, "thread =-= ${Thread.currentThread().name}")
         }
     }
 }

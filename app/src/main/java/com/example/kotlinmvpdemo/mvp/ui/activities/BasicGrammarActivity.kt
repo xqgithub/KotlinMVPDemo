@@ -564,9 +564,9 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
      * return。默认从最直接包围它的函数或者匿名函数返回。
      */
     fun testReturn(a: Int, b: Int) {
-        (a..b).forEach continuing@{
+        (a..b).forEach jjjj@{
             if (it <= 10) {
-                return@continuing
+                return@jjjj
             }
             LogUtils.i(ConfigConstants.TAG_ALL, "大于10的数字有  =-= $it ")
         }
