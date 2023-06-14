@@ -202,6 +202,12 @@ fun LoadService<*>.showError(message: String = "") {
 }
 
 
+/**
+ * 自定义TAG 标签名
+ */
+inline fun mTAG(tagName: String = ""): String {
+    return "=-= $tagName =-="
+}
 
 
 
