@@ -105,7 +105,7 @@ object ConfigConstants {
     const val notifacatio_close = "notifacatio_close"
 
     /** TAG名称 **/
-    const val TAG_ALL = "KotlinMVPDemo"
+    const val TAG_ALL = "=-= KotlinMVPDemo =-="
 
 
     /** 录屏功能 **/

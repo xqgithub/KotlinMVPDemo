@@ -138,4 +138,13 @@ ext {
     ]
 
 
+// 这是需要集成 android:sharedUserId="android.ui.system" 系统签名
+//    debugSignCfg {
+//        storeFile file("kx11g.jks")
+//        storePassword "EcarxDebug"
+//        keyAlias "EcarxDebug"
+//        keyPassword "EcarxDebug"
+//    }
+
+
 }
