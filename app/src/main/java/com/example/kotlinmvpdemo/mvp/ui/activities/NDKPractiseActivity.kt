@@ -57,6 +57,7 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                 1 -> {
                     testOne()
                 }
+
                 2 -> {
                     testTwo()
                 }
@@ -64,21 +65,27 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                 3 -> {
                     testThree()
                 }
+
                 4 -> {
                     testFour()
                 }
+
                 5 -> {
                     testFive()
                 }
+
                 6 -> {
                     testSix()
                 }
+
                 7 -> {
                     testSeven()
                 }
+
                 8 -> {
                     testEight(3, 4)
                 }
+
                 9 -> {
                     testNine()
                 }
@@ -86,6 +93,7 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                 10 -> {
                     testTen()
                 }
+
                 11 -> {
                     testEleven()
                 }
@@ -117,9 +125,24 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                 18 -> {
                     testAccessFieldAndMethod()
                 }
+
                 19 -> {
                     testAccessStaticFieldAndMethod()
                 }
+
+                /** HelloWorld C语言编写 实战 **/
+                20 -> {
+                    testHelloWorld()
+                }
+                /** HelloWorld C语言编写 实战 **/
+                20 -> {
+                    testHelloWorld()
+                }
+                /**  JNI 动态注册 **/
+                21 -> {
+                    testJniDynamicRegistration()
+                }
+
                 else -> showShortToastSafe("序号错误，请检查")
             }
 
@@ -276,5 +299,16 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
         nativelib.testAccessStaticFieldAndMethod()
     }
 
+
+    private fun testHelloWorld() {
+        LogUtils.i(ConfigConstants.TAG_ALL, "testHelloWorld =-= ${nativelib.sayHello()}")
+    }
+
+    private fun testJniDynamicRegistration() {
+        nativelib.init()
+        nativelib.init(17)
+        nativelib.init("xixihaha")
+        nativelib.update()
+    }
 
 }

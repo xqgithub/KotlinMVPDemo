@@ -38,7 +38,6 @@ Java_com_example_kotlinmvpdemo_ndk_Nativelib_stringFromJNI(
     return env->NewStringUTF(hello.c_str());
 }
 
-
 /**
  *  char 转 jstring
  */

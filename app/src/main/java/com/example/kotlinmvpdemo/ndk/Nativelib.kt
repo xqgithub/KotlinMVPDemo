@@ -72,4 +72,15 @@ class Nativelib {
     external fun testAccessFieldAndMethod()
 
     external fun testAccessStaticFieldAndMethod()
+
+    external fun sayHello(): String
+
+    /**  JNI动态注册 **/
+    external fun init()
+    external fun init(age: Int)
+    external fun init(name: String?): Boolean
+    external fun update()
+    /**  JNI动态注册 **/
+
+
 }

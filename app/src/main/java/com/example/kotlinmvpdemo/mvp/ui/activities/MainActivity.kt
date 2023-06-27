@@ -161,6 +161,7 @@ class MainActivity : BaseActivity(), MainView {
                         test_sp = "其实我是索隆"
                         LogUtils.i("SP_TEST_USER文件中haha字段 =-= $test_sp")
                     }
+
                     6 -> {
                         PublicPracticalMethodFromJAVA.getInstance().smallWidth()
 //                        PublicPracticalMethodFromJAVA.getInstance().smallWidth2()
@@ -175,6 +176,7 @@ class MainActivity : BaseActivity(), MainView {
 //                        val b = nativelib.stringFromJNI()
 //                        LogUtils.i(ConfigConstants.TAG_ALL, "返回的值为：${b + a}")
                     }
+
                     7 -> {
                         if (StringUtils.compared(picPath, imageView.tag)) {
                             GlideUtils.getInstance().loadUrlToImagaViewActivity(
@@ -188,6 +190,7 @@ class MainActivity : BaseActivity(), MainView {
                             )
                         }
                     }
+
                     8 -> {
 //                        intentToJump(
 //                            this@MainActivity,
@@ -195,6 +198,7 @@ class MainActivity : BaseActivity(), MainView {
 //                            Intent.FLAG_ACTIVITY_CLEAR_TOP
 //                        )
                     }
+
                     9 -> testEventBus()
                     10 -> presenter.testBuilder()
                     11 -> presenter.testFactory()
@@ -272,6 +276,7 @@ class MainActivity : BaseActivity(), MainView {
                                 }
                             })
                     }
+
                     27 -> ARouter.getInstance().build(RouterTag.TestMainActivity).navigation()
                     28 -> ARouter.getInstance().build(RouterTag.CoroutineActivity).navigation()
                     29 -> ARouter.getInstance().build(RouterTag.LambdaActivity).navigation()
@@ -303,7 +308,7 @@ class MainActivity : BaseActivity(), MainView {
 
         //8.RecyclerView 自动滑动到底部
 //        rv_main.scrollToPosition(mainlistadapter.itemCount - 1)
-        rv_main.scrollToPosition(mainlistadapter.itemCount - 1)
+        rv_main.scrollToPosition(42)
     }
 
 
@@ -362,58 +367,58 @@ class MainActivity : BaseActivity(), MainView {
      *测试数据
      */
     val items = listOf<String>(
-        "接口请求测试",
-        "接口请求,无条件轮询，间隔一段时间就请求一次",
-        "接口请求,有条件轮询",
-        "网络请求嵌套回调",
-        "网络请求出错重连",
-        "测试SP文件数据",
-        "User表插入数据",
-        "加载网络图片",
-        "跳转到TestProductFlavorsActivity页面",
-        "EventBus",
-        "设计模式---建造者模式",
-        "设计模式---工厂方法模式",
-        "设计模式---简单工厂模式",
-        "设计模式---抽象工厂模式",
-        "设计模式---原型模式",
-        "设计模式---策略模式",
-        "设计模式---状态模式",
-        "设计模式---责任链模式",
-        "设计模式---观察者模式",
-        "设计模式---模板方法模式",
-        "设计模式---迭代器模式",
-        "设计模式---备忘录模式",
-        "弹出通知栏",
-        "设计模式---访问者模式",
-        "设计模式---中介者模式",
-        "设计模式---解释器模式",
-        "ARouter跳转测试---同一个module",
-        "ARouter跳转测试---不同的module",
-        "协程Coroutine测试",
-        "lambda方法使用和高级函数的使用",
-        "SVG动画测试,自定义View---Canvas的使用",
-        "设计模式---命令模式",
-        "Rxjava2使用方法",
-        "反射的使用方法",
-        "录屏测试",
-        "贝塞尔曲线",
-        "属性动画和视图动画",
-        "自定义验证码输入框样式",
-        "自定义日历控件",
-        "图片选择工具 PictureSelector",
-        "滑动单项选择框 LoopView",
-        "kotlin-基本语法 BasicGrammarActivity",
-        "NDK 测试练习",
-        "TabLayout测试练习",
-        "CoordinatorTabLayout测试练习",
-        "测试头像重叠/时间选择器",
-        "日历事件管理器，增加一个事件提醒功能啦",
-        "测试背景阴影效果",
-        "测试 LoadSir 框架",
-        "测试 Service启动模式和生命周期\n测试AIDL",
-        "设计模式---代理模式",
-        "设计模式---组合模式",
+        "0.接口请求测试",
+        "1.接口请求,无条件轮询，间隔一段时间就请求一次",
+        "2.接口请求,有条件轮询",
+        "3.网络请求嵌套回调",
+        "4.网络请求出错重连",
+        "5.测试SP文件数据",
+        "6.User表插入数据",
+        "7.加载网络图片",
+        "8.跳转到TestProductFlavorsActivity页面",
+        "9.EventBus",
+        "10.设计模式---建造者模式",
+        "11.设计模式---工厂方法模式",
+        "12.设计模式---简单工厂模式",
+        "13.设计模式---抽象工厂模式",
+        "14.设计模式---原型模式",
+        "15.设计模式---策略模式",
+        "16.设计模式---状态模式",
+        "17.设计模式---责任链模式",
+        "18.设计模式---观察者模式",
+        "19.设计模式---模板方法模式",
+        "20.设计模式---迭代器模式",
+        "21.设计模式---备忘录模式",
+        "22.弹出通知栏",
+        "23.设计模式---访问者模式",
+        "24.设计模式---中介者模式",
+        "25.设计模式---解释器模式",
+        "26.ARouter跳转测试---同一个module",
+        "27.ARouter跳转测试---不同的module",
+        "28.协程Coroutine测试",
+        "29.lambda方法使用和高级函数的使用",
+        "30.SVG动画测试,自定义View---Canvas的使用",
+        "31.设计模式---命令模式",
+        "32.Rxjava2使用方法",
+        "33.反射的使用方法",
+        "34.录屏测试",
+        "35.贝塞尔曲线",
+        "36.属性动画和视图动画",
+        "37.自定义验证码输入框样式",
+        "38.自定义日历控件",
+        "39.图片选择工具 PictureSelector",
+        "40.滑动单项选择框 LoopView",
+        "41.kotlin-基本语法 BasicGrammarActivity",
+        "42.NDK 测试练习",
+        "43.TabLayout测试练习",
+        "44.CoordinatorTabLayout测试练习",
+        "45.测试头像重叠/时间选择器",
+        "46.日历事件管理器，增加一个事件提醒功能啦",
+        "47.测试背景阴影效果",
+        "48.测试 LoadSir 框架",
+        "49.测试 Service启动模式和生命周期\n测试AIDL",
+        "50.设计模式---代理模式",
+        "51.设计模式---组合模式",
     )
 
     /**
