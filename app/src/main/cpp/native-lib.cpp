@@ -1,18 +1,4 @@
-
-#include <jni.h>
-#include <string>
-#include <android/log.h>
-#include <unistd.h>
-#include <random>
-#include <stdio.h>
-#include <stdlib.h>
-
-
-#define  LOG    "Nativelib"
-#define LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG,__VA_ARGS__) // 定义LOGD类型
-#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
-#define LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG,__VA_ARGS__) // 定义LOGW类型
-#define LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG,__VA_ARGS__) // 定义LOGE类型
+#include "tools.h"
 
 /**
  * 1. extern "C" :避免编绎器按照C++的方式去编绎C函数
@@ -37,42 +23,6 @@ Java_com_example_kotlinmvpdemo_ndk_Nativelib_stringFromJNI(
     std::string hello = "Hello from C++";
     return env->NewStringUTF(hello.c_str());
 }
-
-/**
- *  char 转 jstring
- */
-jstring charToJstring(JNIEnv *env, const char *pat) {
-    jclass strClass = (*env).FindClass("java/lang/String");
-    jmethodID ctorID = (*env).GetMethodID(strClass, "<init>", "([BLjava/lang/String;)V");
-    jbyteArray bytes = (*env).NewByteArray(strlen(pat));
-    (*env).SetByteArrayRegion(bytes, 0, strlen(pat), (jbyte *) pat);
-    jstring encoding = (*env).NewStringUTF("utf-8");
-    return (jstring) (*env).NewObject(strClass, ctorID, bytes, encoding);
-}
-
-/**
- * jstring 转 char*
- */
-char *jstringToChar(JNIEnv *env, jstring jstr) {
-    char *rtn = NULL;
-    jclass clsstring = (*env).FindClass("java/lang/String");
-    jstring strencode = (*env).NewStringUTF("utf-8");
-    jmethodID mid = (*env).GetMethodID(clsstring, "getBytes", "(Ljava/lang/String;)[B");
-    jbyteArray barr = (jbyteArray) (*env).CallObjectMethod(jstr, mid, strencode);
-    jsize alen = (*env).GetArrayLength(barr);
-    jbyte *ba = (*env).GetByteArrayElements(barr, JNI_FALSE);
-    if (alen > 0) {
-        rtn = (char *) malloc(alen + 1);
-        memcpy(rtn, ba, alen);
-        rtn[alen] = 0;
-    }
-    (*env).ReleaseByteArrayElements(barr, ba, 0);
-    return rtn;
-}
-
-
-
-
 
 /**
  * 基本类型

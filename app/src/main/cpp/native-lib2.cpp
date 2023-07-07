@@ -1,39 +1,10 @@
-#include <jni.h>
-#include <string>
-#include <android/log.h>
-#include <exception>
-
-#define  LOG    "Nativelib2"
-#define LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG,__VA_ARGS__) // 定义LOGD类型
-#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
-#define LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG,__VA_ARGS__) // 定义LOGW类型
-#define LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG,__VA_ARGS__) // 定义LOGE类型
+#include "tools.h"
 
 extern "C" JNIEXPORT jint JNICALL
 Java_com_example_kotlinmvpdemo_ndk_Nativelib_sum(
         JNIEnv *env, jobject instance, jint x, jint y) {
     return x + y;
 }
-
-//jstring 转 char*
-char *jstringToChar222(JNIEnv *env, jstring jstr) {
-    char *rtn = NULL;
-    jclass clsstring = (*env).FindClass("java/lang/String");
-    jstring strencode = (*env).NewStringUTF("utf-8");
-    jmethodID mid = (*env).GetMethodID(clsstring, "getBytes", "(Ljava/lang/String;)[B");
-    jbyteArray barr = (jbyteArray) (*env).CallObjectMethod(jstr, mid, strencode);
-    jsize alen = (*env).GetArrayLength(barr);
-    jbyte *ba = (*env).GetByteArrayElements(barr, JNI_FALSE);
-    if (alen > 0) {
-        rtn = (char *) malloc(alen + 1);
-        memcpy(rtn, ba, alen);
-        rtn[alen] = 0;
-    }
-    (*env).ReleaseByteArrayElements(barr, ba, 0);
-    return rtn;
-}
-
-
 
 /**
  *  #ifdef __cplusplus
@@ -56,7 +27,7 @@ c_init2(JNIEnv *env, jobject thiz, jint age) {
 
 JNIEXPORT jboolean JNICALL
 c_init3(JNIEnv *env, jobject thiz, jstring name) {
-    char *_jstr = jstringToChar222(env, name);
+    char *_jstr = jstringToChar(env, name);
     LOGI("c_init3 我的名字 =-= %s", _jstr);
     return true;
 }
@@ -112,4 +83,48 @@ JNI_OnLoad(JavaVM *vm, void *reserved) {
     result = JNI_VERSION_1_6;
     return result;
 }
+
+
+/**
+ * 基本数据类型不需要转换直接使用
+ */
+extern "C" JNIEXPORT jdouble JNICALL
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_average(JNIEnv *env, jobject jobj, jint n1, jint n2) {
+    //基本类型不用做转换，直接使用
+    return jdouble(n1 + n2) / 2.0;
+}
+
+/**
+ * 字符串的使用
+ * @param env
+ * @param jobj
+ * @param str
+ * @return
+ */
+extern "C" JNIEXPORT jstring JNICALL
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_stringUse(JNIEnv *env, jobject jobj, jstring str) {
+    //jstring -> char*
+    jboolean isCopy;
+    //GetStringChars 用于 unicode 编码
+    //GetStringUTFChars 用于 utf-8 编码
+    const char *cStr = env->GetStringUTFChars(str, &isCopy);
+    if (nullptr == cStr) {
+        return nullptr;
+    }
+    if (JNI_TRUE == isCopy) {
+        LOGI("C 字符串是 java 字符串的一份拷贝");
+    } else {
+        LOGI("字符串指向 java 层的字符串");
+    }
+    //通过JNI GetStringChars 函数和 GetStringUTFChars 函数获得的C字符串在原生代码中
+    //使用完之后需要正确地释放，否则将会引起内存泄露。
+    env->ReleaseStringUTFChars(str, cStr);
+    std::string outString = "Hello, JNI";
+    return env->NewStringUTF(outString.c_str());
+}
+
+
+
+
+
 

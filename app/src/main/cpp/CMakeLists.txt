@@ -24,6 +24,8 @@ add_library( # Sets the name of the library.
         native-lib.cpp
         native-lib2.cpp
         HelloJNI.c
+        tools.cpp
+        tools.h
         )
 
 # Searches for a specified prebuilt library and stores the path as a

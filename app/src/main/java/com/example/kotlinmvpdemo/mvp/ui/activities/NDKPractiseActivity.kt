@@ -143,6 +143,15 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                     testJniDynamicRegistration()
                 }
 
+                /**  JNI 基本数据类型 测试 **/
+                22 -> {
+                    testjJNIBasicDataType()
+                }
+                /**  JNI  字符串使用 测试 **/
+                23 -> {
+                    testStringUse()
+                }
+
                 else -> showShortToastSafe("序号错误，请检查")
             }
 
@@ -309,6 +318,18 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
         nativelib.init(17)
         nativelib.init("xixihaha")
         nativelib.update()
+    }
+
+
+    private fun testjJNIBasicDataType() {
+        val average = nativelib.average(4, 8)
+        LogUtils.i(ConfigConstants.TAG_ALL, "average =-= $average")
+    }
+
+
+    private fun testStringUse() {
+        val parameter = "jni 测试字符串的使用"
+        LogUtils.i(ConfigConstants.TAG_ALL, "result =-= ${nativelib.stringUse(parameter)}")
     }
 
 }

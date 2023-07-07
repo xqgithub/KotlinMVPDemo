@@ -82,5 +82,14 @@ class Nativelib {
     external fun update()
     /**  JNI动态注册 **/
 
+    /**
+     * 本数据类型 使用
+     */
+    external fun average(n1: Int, n2: Int): Double
+
+    /**
+     * 字符串的使用
+     */
+    external fun stringUse(parameter: String): String
 
 }

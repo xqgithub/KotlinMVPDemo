@@ -16,7 +16,6 @@
         <activity
             android:name=".mvp.ui.activities.CheckPermissionsActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
             android:theme="@style/myTransparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,27 +25,16 @@
         </activity>
         <activity
             android:name="com.example.baselibrary.mvp.ui.activities.PermissionsActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/myTransparent2" />
         <activity
             android:name=".mvp.ui.activities.MainActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activities.TestProductFlavorsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activities.TestLoopViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activities.TestPictureSelectorMainActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activities.BasicGrammarActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activities.NDKPractiseActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask" />
+        <activity android:name=".mvp.ui.activities.TestProductFlavorsActivity" />
+        <activity android:name=".mvp.ui.activities.TestLoopViewActivity" />
+        <activity android:name=".mvp.ui.activities.TestPictureSelectorMainActivity" />
+        <activity android:name=".mvp.ui.activities.BasicGrammarActivity" />
+        <activity android:name=".mvp.ui.activities.NDKPractiseActivity" />
 
         <service
             android:name="com.example.baselibrary.mvp.service.TaskRemovedService"
