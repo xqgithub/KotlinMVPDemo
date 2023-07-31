@@ -151,6 +151,18 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                 23 -> {
                     testStringUse()
                 }
+                /**  JNI  数组使用 测试 **/
+                24 -> {
+                    testArrayUse()
+                }
+                /**  JNI 局部引用管理 **/
+                25 -> {
+                    testLocalReferenceManagement()
+                }
+                /**  JNI 全局引用 测试 **/
+                26 -> {
+                    testGlobalReferenceUse()
+                }
 
                 else -> showShortToastSafe("序号错误，请检查")
             }
@@ -330,6 +342,28 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
     private fun testStringUse() {
         val parameter = "jni 测试字符串的使用"
         LogUtils.i(ConfigConstants.TAG_ALL, "result =-= ${nativelib.stringUse(parameter)}")
+    }
+
+    private fun testArrayUse() {
+        val arrayIntParameter = intArrayOf(1, 2, 3)
+        val arrayDoubleResult = nativelib.arrayUse(arrayIntParameter)
+        if (arrayDoubleResult.isNotEmpty()) {
+            arrayDoubleResult.forEach { parameterDouble ->
+                LogUtils.i(ConfigConstants.TAG_ALL, "result =-= $parameterDouble")
+            }
+        }
+    }
+
+    private fun testLocalReferenceManagement() {
+        LogUtils.i(ConfigConstants.TAG_ALL, "result =-= ${nativelib.localReferenceManagement()}")
+    }
+
+    private fun testGlobalReferenceUse() {
+        nativelib.globalReferenceUse()
+    }
+
+    private fun testAccessMethod() {
+        LogUtils.i(ConfigConstants.TAG_ALL, " =-= 我被jni调用了,我是非静态方法")
     }
 
 }

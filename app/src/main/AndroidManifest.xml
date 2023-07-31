@@ -19,7 +19,12 @@
             android:theme="@style/myTransparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <!-- 为了隐藏桌面图标，要注意三个属性的配置顺序 -->
+                <!-- 这个data可以随意配置，最好是不会使用的host，目的就是为了隐藏launcher图标而已 -->
+                <data
+                    android:host="test.kotlinmvp.ceshi"
+                    android:path="/main"
+                    android:scheme="testkotlinmvpceshi" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

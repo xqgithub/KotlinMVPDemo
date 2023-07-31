@@ -17,6 +17,7 @@ jstring charToJstring(JNIEnv *env, const char *pat) {
     jbyteArray bytes = (*env).NewByteArray(strlen(pat));
     (*env).SetByteArrayRegion(bytes, 0, strlen(pat), (jbyte *) pat);
     jstring encoding = (*env).NewStringUTF("utf-8");
+
     return (jstring) (*env).NewObject(strClass, ctorID, bytes, encoding);
 }
 
@@ -37,6 +38,11 @@ char *jstringToChar(JNIEnv *env, jstring jstr) {
         memcpy(rtn, ba, alen);
         rtn[alen] = 0;
     }
+
+    //释放局部引用
+    env->DeleteLocalRef(clsstring);
+    env->DeleteLocalRef(strencode);
+
     (*env).ReleaseByteArrayElements(barr, ba, 0);
     return rtn;
 }

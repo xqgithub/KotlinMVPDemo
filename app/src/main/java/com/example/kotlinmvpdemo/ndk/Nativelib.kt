@@ -3,6 +3,7 @@ package com.example.kotlinmvpdemo.ndk
 import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.utils.LogUtils
 
+
 class Nativelib {
 
 
@@ -91,5 +92,22 @@ class Nativelib {
      * 字符串的使用
      */
     external fun stringUse(parameter: String): String
+
+    /**
+     * 数组使用
+     */
+    external fun arrayUse(parameter: IntArray): DoubleArray
+
+    /**
+     * 局部引用管理
+     * PushLocalFrame(len)和PopLocalFrame(NULL)配套使用
+     */
+    external fun localReferenceManagement(): String
+
+    /**
+     * 全局引用使用
+     */
+    external fun globalReferenceUse()
+
 
 }
