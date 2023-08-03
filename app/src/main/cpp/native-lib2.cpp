@@ -177,7 +177,7 @@ Java_com_example_kotlinmvpdemo_ndk_Nativelib_localReferenceManagement(JNIEnv *en
     return jstr;
 }
 
-/** 创建全局引用 **/
+/** 创建全局引用  start **/
 jclass g_cls = NULL;
 jmethodID g_mid = NULL;
 
@@ -217,6 +217,48 @@ Java_com_example_kotlinmvpdemo_ndk_Nativelib_globalReferenceUse(JNIEnv *env, job
     callMethodGlobalReference(env, jobj);
     destroyGlobalReference(env, jobj);
 }
+/** 创建全局引用  end **/
+
+
+/**
+ *  字符串处理
+ */
+
+extern "C" JNIEXPORT jstring JNICALL
+Java_com_example_kotlinmvpdemo_ndk_Nativelib_stringHandling(JNIEnv *env, jobject jobj, jstring str) {
+    jboolean isCopy;
+    //GetStringUTFChars 用于 utf-8 编码
+    const char *cStr = env->GetStringUTFChars(str, &isCopy);
+    //GetStringChars 用于 utf-16 编码
+      const jchar *cStr2 = env->GetStringChars(str, &isCopy);
+
+    //异常处理，后面会专门讲，这里了解即可
+    if (nullptr == cStr || nullptr == cStr2) {
+        return nullptr;
+    }
+
+    //这个取决于 jvm 的实现，不影响我们的编程
+    if (JNI_TRUE == isCopy) {
+        LOGI("C 字符串是 java 字符串的一份拷贝");
+    } else {
+        LOGI("C 字符串指向 java 层的字符串");
+    }
+    LOGI("C/C++ 层收到的字符串是: %s", cStr);
+    LOGI("C/C++ 层收到的字符串是: %s", cStr2);
+
+    std::string outString = "海贼王在哪里？";
+    outString += cStr;
+
+    //通过JNI GetStringChars 函数和 GetStringUTFChars 函数获得的C字符串在原生代码中
+    //使用完之后需要正确地释放，否则将会引起内存泄露。
+    env->ReleaseStringUTFChars(str, cStr);
+    env->ReleaseStringChars(str, cStr2);
+
+    return env->NewStringUTF(outString.c_str());
+}
+
+
+
 
 
 

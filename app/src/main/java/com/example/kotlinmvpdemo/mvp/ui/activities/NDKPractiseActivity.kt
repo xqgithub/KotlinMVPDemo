@@ -163,6 +163,10 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                 26 -> {
                     testGlobalReferenceUse()
                 }
+                /**  JNI 字符串处理 测试 **/
+                27 -> {
+                    testStringHandling()
+                }
 
                 else -> showShortToastSafe("序号错误，请检查")
             }
@@ -362,8 +366,11 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
         nativelib.globalReferenceUse()
     }
 
-    private fun testAccessMethod() {
-        LogUtils.i(ConfigConstants.TAG_ALL, " =-= 我被jni调用了,我是非静态方法")
+    /**
+     * jni字符串处理
+     */
+    private fun testStringHandling() {
+        LogUtils.i(ConfigConstants.TAG_ALL, nativelib.stringHandling("我是海贼王，路飞"))
     }
 
 }

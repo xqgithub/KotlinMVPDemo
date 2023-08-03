@@ -9,7 +9,16 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item><!-- 第二个页面进入时第一个页面不会出现黑屏 -->
+        <item name="android:windowAnimationStyle">@style/PageSwitchingAnimation</item>
     </style>
+
+
+    <!-- 页面切换动画 -->
+    <style name="PageSwitchingAnimation">
+        <item name="android:windowEnterAnimation">@anim/activity_right_in</item>
+        <item name="android:windowExitAnimation">@anim/activity_right_out</item>
+    </style>
+
 
     <!--自定义透明背景 1-->
     <style name="myTransparent">

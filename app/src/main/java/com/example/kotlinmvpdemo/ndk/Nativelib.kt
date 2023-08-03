@@ -109,5 +109,13 @@ class Nativelib {
      */
     external fun globalReferenceUse()
 
+    /**
+     * 字符串处理
+     */
+    external fun stringHandling(parameter: String):String
+
+
+
+
 
 }

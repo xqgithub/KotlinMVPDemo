@@ -16,6 +16,7 @@
         <activity
             android:name=".mvp.ui.activities.CheckPermissionsActivity"
             android:launchMode="singleTask"
+            android:exported="true"
             android:theme="@style/myTransparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +27,9 @@
                     android:path="/main"
                     android:scheme="testkotlinmvpceshi" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
         <activity
