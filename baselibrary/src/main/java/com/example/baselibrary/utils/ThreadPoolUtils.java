@@ -27,9 +27,13 @@ public class ThreadPoolUtils {
     }
 
     public enum Type {
+        //线程数量固定的线程池，该线程池的线程全部为核心线程，它们没有超时机制且排队任务队列无限制
         FixedThread,
+        //数量无限多的线程池，它所有的线程都是非核心线程，当有新任务来时如果没有空闲的线程则直接创建新的线程不会去排队而直接执行，并且超时时间都是60s，所以此线程池适合执行大量耗时小的任务
         CachedThread,
+        //内部只有一个核心线程，它确保所有任务进来都要排队按顺序执行。它的意义在于，统一所有的外界任务到同一线程中，让调用者可以忽略线程同步问题
         SingleThread,
+        //有数量固定的核心线程，且有数量无限多的非核心线程，但是它的非核心线程超时时间是0s，所以非核心线程一旦空闲立马就会被回收
         ScheduledThread
     }
 
@@ -53,7 +57,8 @@ public class ThreadPoolUtils {
             case SingleThread:
                 // 构造一个只支持一个线程的线程池,相当于newFixedThreadPool(1)
                 // ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>())
-                exec = Executors.newSingleThreadExecutor();
+                scheduleExec = Executors.newSingleThreadScheduledExecutor();
+                exec = scheduleExec;
                 break;
             case CachedThread:
                 // 构造一个缓冲功能的线程池

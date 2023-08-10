@@ -3,67 +3,27 @@
     package="com.example.testlibrary">
 
     <application>
-        <activity
-            android:name="com.example.testlibrary.TestMainActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.CoroutineActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.LambdaActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.TestSVGActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.Rxjava2UseActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.ReflectionActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.TestScreenRecordActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.TestBezierActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.TestPropertyAnimationActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.TestCustomInputBoxActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.TestCalendarViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.TestTabLayoutActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.TestCoordinatorTabLayout"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.TestsAvatarsOverlapActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.TestCalendarEventManagerActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.TestShadowBgActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.loadsir.TestLoadSirActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.loadsir.NormalActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.testlibrary.loadsir.FragmentNormalActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name="com.example.testlibrary.TestMainActivity" />
+        <activity android:name="com.example.testlibrary.CoroutineActivity" />
+        <activity android:name="com.example.testlibrary.LambdaActivity" />
+        <activity android:name="com.example.testlibrary.TestSVGActivity" />
+        <activity android:name="com.example.testlibrary.Rxjava2UseActivity" />
+        <activity android:name="com.example.testlibrary.ReflectionActivity" />
+        <activity android:name="com.example.testlibrary.TestScreenRecordActivity" />
+        <activity android:name="com.example.testlibrary.TestBezierActivity" />
+        <activity android:name="com.example.testlibrary.TestPropertyAnimationActivity" />
+        <activity android:name="com.example.testlibrary.TestCustomInputBoxActivity" />
+        <activity android:name="com.example.testlibrary.TestCalendarViewActivity" />
+        <activity android:name="com.example.testlibrary.TestTabLayoutActivity" />
+        <activity android:name="com.example.testlibrary.TestCoordinatorTabLayout" />
+        <activity android:name="com.example.testlibrary.TestsAvatarsOverlapActivity" />
+        <activity android:name="com.example.testlibrary.TestCalendarEventManagerActivity" />
+        <activity android:name="com.example.testlibrary.TestShadowBgActivity" />
+        <activity android:name="com.example.testlibrary.loadsir.TestLoadSirActivity" />
+        <activity android:name="com.example.testlibrary.loadsir.NormalActivity" />
+        <activity android:name="com.example.testlibrary.loadsir.FragmentNormalActivity" />
 
-        <activity
-            android:name="com.example.testlibrary.TestServiceStartupModeActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name="com.example.testlibrary.TestServiceStartupModeActivity" />
 
         <service android:name="com.example.baselibrary.utils.screenrecord.RecordService" />
 

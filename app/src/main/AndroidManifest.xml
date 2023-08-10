@@ -28,6 +28,7 @@
                     android:scheme="testkotlinmvpceshi" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
@@ -37,8 +38,8 @@
             android:theme="@style/myTransparent2" />
         <activity
             android:name=".mvp.ui.activities.MainActivity"
-            android:screenOrientation="landscape"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity android:name=".mvp.ui.activities.TestProductFlavorsActivity" />
         <activity android:name=".mvp.ui.activities.TestLoopViewActivity" />
         <activity android:name=".mvp.ui.activities.TestPictureSelectorMainActivity" />

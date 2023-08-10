@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.TypedValue
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.blankj.utilcode.util.ToastUtils
 import com.example.baselibrary.application.MyApplication
 import com.example.baselibrary.base.BaseActivity
 import com.example.baselibrary.constants.ConfigConstants
@@ -17,12 +18,12 @@ import com.example.kotlinmvpdemo.di.componets.DaggerBasicGrammarComponet
 import com.example.kotlinmvpdemo.di.modules.BasicGrammarModule
 import com.example.kotlinmvpdemo.mvp.views.BasicGrammarView
 import com.example.kotlinmvpdemo.utils.JavaAlternately
+import example.com.testkotlin.haha.utils.sToast
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import kotlinx.android.synthetic.main.activity_basic_grammar.*
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
-import java.lang.Exception
 import kotlin.properties.Delegates
 
 /**
@@ -54,44 +55,55 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                     testArray(stringArray)
                     testArray(stringArray1)
                 }
+
                 4 -> {
                     LogUtils.i(ConfigConstants.TAG_ALL, "testConditionalJudgment  0 和 1 之间大的数字是：${testConditionalJudgment(0, 1)}")
                     LogUtils.i(ConfigConstants.TAG_ALL, "testConditionalJudgment2 0 和 1 之间大的数字是：${testConditionalJudgment2(0, 1)}")
                     testConditionalJudgment3("123456")
                     testConditionalJudgment4()
                 }
+
                 5 -> {
                     LogUtils.i(ConfigConstants.TAG_ALL, "parseInt =-= ${parseInt("")}")
                 }
+
                 6 -> {
                     LogUtils.i(ConfigConstants.TAG_ALL, "testAutomaticCasts =-= ${testAutomaticCasts("123")}")
                 }
+
                 7 -> {
                     testForCycle(stringArray, 0)
                     testForCycle(stringArray, 1)
                 }
+
                 8 -> {
                     testWhile(stringArray)
                 }
+
                 9 -> {
                     testWhen(7)
                 }
+
                 10 -> {
                     testRanges(1, 1)
                     testRanges(2, 11)
                     testRanges(3, 0)
                     testRanges(4, 0)
                 }
+
                 11 -> {
                     testContains(stringArray, "China")
                     testContains(stringArray, "USA")
                 }
+
                 12 -> {
                     traverseMapGather()
                 }
+
                 13 -> {
                     equality()
                 }
+
                 14 -> {
                     myTurtle(3, 4)
                 }
@@ -99,6 +111,7 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                 15 -> {
                     testLabel()
                 }
+
                 16 -> {
                     testReturn(1, 20)
                 }
@@ -106,6 +119,7 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                 17 -> {
                     testStudent()
                 }
+
                 18 -> {
                     testChildren()
                 }
@@ -117,10 +131,12 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                 20 -> {
                     testGeneric()
                 }
+
                 21 -> {
                     myGeneric(Box(10).value)
                     myGeneric(Box("lufei").value)
                 }
+
                 22 -> {
                     testBox()
                 }
@@ -141,6 +157,7 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                 26 -> {
                     testObservable()
                 }
+
                 27 -> {
                     testVetoable()
                 }
@@ -158,6 +175,7 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                         "testFunction2 =-= ${testFunction(y = 4)}",
                     )
                 }
+
                 30 -> {
                     val testfunction2 = testFunction2(strings = *arrayOf("a", "b", "c"))
                     LogUtils.i(
@@ -165,6 +183,7 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                         "testFunction2 =-= $testfunction2",
                     )
                 }
+
                 31 -> {
                     val testfunction4 = "雀雀" testFunction4 8
                     LogUtils.i(
@@ -184,7 +203,9 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                         ConfigConstants.TAG_ALL,
                         "newInts =-= $newInts",
                     )
+                    testHSFunction4(unitProvider = { "嘻嘻哈哈" }, { LogUtils.i(ConfigConstants.TAG_ALL, "请问你在做什么啊？") }, covertProvider = { value -> "Converted: $value" })
                 }
+
                 34 -> {
                     LogUtils.i(
                         ConfigConstants.TAG_ALL,
@@ -192,6 +213,7 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                         "testHSFunction2_type2 =-= ${testHSFunction2(10) { it > 5 }}",
                     )
                 }
+
                 35 -> {
                     LogUtils.i(
                         ConfigConstants.TAG_ALL,
@@ -205,31 +227,39 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                 36 -> {
                     testApply()
                 }
+
                 37 -> {
                     testLet()
                 }
+
                 38 -> {
                     testWith()
                 }
+
                 39 -> {
                     testRun1()
                     testRun2(3)
                     testRun3()
                 }
+
                 40 -> {
                     testUse()
                 }
+
                 41 -> {
                     testRepeat()
                 }
+
                 42 -> {
                     val file = File(filepath)
                     test_require_assert_check(file, true)
                 }
+
                 43 -> {
                     testTakeIf("ko")
                     testTakeIf("ok")
                 }
+
                 44 -> {
                     testTakeUnless("ko")
                     testTakeUnless("ok")
@@ -241,6 +271,7 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                         "testClosure =-= ${testClosure(3)(5)}"
                     )
                 }
+
                 46 -> {
                     testClosure2()
                 }
@@ -249,6 +280,7 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                     testInline(3, 4) { a: Int, b: Int -> a * b }
                     testInline(3, 4) { a: Int, b: Int -> a + b }
                 }
+
                 48 -> {
                     testInline2(stringArray)
                 }
@@ -283,6 +315,7 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
                     javaAlternately.testKotlinFromJava2()
                     javaAlternately.testKotlinFromJava3()
                 }
+
                 else -> showShortToastSafe("序号错误，请检查")
             }
         }
@@ -679,9 +712,11 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
             is Int -> {
                 LogUtils.i(ConfigConstants.TAG_ALL, "value的值 =-= ${value / 2}")
             }
+
             is String -> {
                 LogUtils.i(ConfigConstants.TAG_ALL, "value的值 =-= ${value.toUpperCase()}")
             }
+
             else -> LogUtils.i(ConfigConstants.TAG_ALL, "value的值 =-= 不是整型或者String")
         }
     }
@@ -1071,6 +1106,14 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
     fun testHSFunction3(num1: Int, num2: Int, result: (Int, Int) -> Int): Int {
         return result(num1, num2)
     }
+
+
+    fun testHSFunction4(unitProvider: () -> String, statusChanged: () -> Unit, covertProvider: ((Float) -> String)? = null) {
+        LogUtils.i(ConfigConstants.TAG_ALL, "unitProvider =-= ${unitProvider.invoke()}")
+        statusChanged.invoke()
+        LogUtils.i(ConfigConstants.TAG_ALL, "covertProvider =-= ${covertProvider?.invoke(5.5f)}")
+    }
+
 
     /**
      * 36
