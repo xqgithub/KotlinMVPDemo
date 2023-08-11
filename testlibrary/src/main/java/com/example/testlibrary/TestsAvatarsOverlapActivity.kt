@@ -66,7 +66,7 @@ class TestsAvatarsOverlapActivity : BaseActivity() {
         rv_avatarsover.layoutManager = linearLayoutManager
         //添加分割规则
         rv_avatarsover.addItemDecoration(
-            UniversalItemDecoration.universalItemDecoration.setSpaceItemDecoration(
+            UniversalItemDecoration().getInstance().setSpaceItemDecoration(
                 -ScreenUtils.dip2px(this@TestsAvatarsOverlapActivity, 20f),
                 0,
                 0,
@@ -110,6 +110,7 @@ class TestsAvatarsOverlapActivity : BaseActivity() {
                 0 -> {
                     cl_layoutParams.leftToLeft = R.id.cl_avatars
                 }
+
                 else -> {
                     cl_layoutParams.leftToLeft = avatarsViewIDs[i - 1]
                     cl_layoutParams.leftMargin = ScreenUtils.dip2px(this@TestsAvatarsOverlapActivity, 60f) - ScreenUtils.dip2px(this@TestsAvatarsOverlapActivity, 20f)

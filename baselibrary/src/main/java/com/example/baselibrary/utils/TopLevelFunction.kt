@@ -2,10 +2,14 @@ package com.example.baselibrary.utils
 
 import android.content.Context
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.SparseArray
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import com.example.baselibrary.R
+import com.example.baselibrary.constants.ConfigConstants
 import com.example.baselibrary.mvp.view.loadsir.EmptyCallback
 import com.example.baselibrary.mvp.view.loadsir.ErrorCallback
 import com.example.baselibrary.mvp.view.loadsir.LoadingCallback
@@ -17,6 +21,8 @@ import io.reactivex.ObservableTransformer
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.regex.Pattern
+import java.util.regex.PatternSyntaxException
 
 
 /**
@@ -210,6 +216,41 @@ inline fun mTAG(tagName: String = ""): String {
 }
 
 
+/**
+ * EditText 输入校验
+ * @param regex 输入规则，正则表达式例如:"[^a-zA-Z0-9＿\u4E00-\u9FA5]"
+ */
+inline fun EditText.inputCheckLimit(regex: String, crossinline callBack: (result: String) -> Unit) {
+    try {
+        //先判断是不是正则表达式，如果不是走catch方法
+        Regex(regex)
+        //输入监听
+        addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                val inputResult = s.toString()
+                val p: Pattern = Pattern.compile(regex)
+                val m = p.matcher(inputResult)
+                val regexResult = m.replaceAll("").trim()
+                if (inputResult != regexResult) {
+                    setText(regexResult)
+                    //设置新的光标所在位置
+                    setSelection(regexResult.length)
+                }
+            }
+
+            override fun afterTextChanged(searchValue: Editable) {
+                val resultString = searchValue.toString().trim()
+                callBack(resultString)
+            }
+        })
+    } catch (e: PatternSyntaxException) {
+        e.printStackTrace()
+        LogUtils.e(ConfigConstants.TAG_ALL, "${e.message}")
+    }
+}
 
 
 

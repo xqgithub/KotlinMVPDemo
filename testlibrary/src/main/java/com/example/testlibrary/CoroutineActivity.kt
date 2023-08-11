@@ -36,6 +36,8 @@ import kotlin.system.measureTimeMillis
 @Route(path = RouterTag.CoroutineActivity)
 class CoroutineActivity : BaseActivity() {
 
+    private var branch = -1
+
     override fun setupComponent(myAppComponet: MyAppComponet) {
     }
 
@@ -55,8 +57,12 @@ class CoroutineActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        et_coroutines.inputCheckLimit("[^0-9]") {
+            if (!StringUtils.isBlank(it)) {
+                branch = it.toInt()
+            }
+        }
         tv_coroutines.clickWithTrigger(500) {
-            val branch = et_coroutines.text.toString().toInt()
             when (branch) {
                 0 -> showShortToastSafe("请从序号1开始，哈哈")
                 1 -> testCoroutines()

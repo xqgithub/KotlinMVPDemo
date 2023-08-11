@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.activity_svg.*
 @Route(path = RouterTag.TestSVGActivity)
 class TestSVGActivity : BaseActivity() {
 
+    private var branch = -1
 
     override fun setupComponent(myAppComponet: MyAppComponet) {
 
@@ -53,12 +54,16 @@ class TestSVGActivity : BaseActivity() {
 //        var gestureViewBinder = GestureViewBinder.bind(this, groupView, targetView)
 //        gestureViewBinder.isFullGroup = true
 
+        et_testcustom.inputCheckLimit("[^0-9]") {
+            if (!StringUtils.isBlank(it)) {
+                branch = it.toInt()
+            }
+        }
         tv_clearscreen.clickWithTrigger(500) {
 //            gestureViewBinder = null
             if (StringUtils.isBlank(et_testcustom.text.toString())) {
                 return@clickWithTrigger
             }
-            val branch = et_testcustom.text.toString().toInt()
             when (branch) {
                 0 -> showShortToastSafe("请从序号1开始，哈哈")
                 else -> {

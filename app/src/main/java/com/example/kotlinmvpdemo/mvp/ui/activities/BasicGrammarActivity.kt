@@ -21,6 +21,7 @@ import com.example.kotlinmvpdemo.utils.JavaAlternately
 import example.com.testkotlin.haha.utils.sToast
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import kotlinx.android.synthetic.main.activity_basic_grammar.*
+import kotlinx.android.synthetic.main.activity_ndk_practise.et_one
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
@@ -31,6 +32,8 @@ import kotlin.properties.Delegates
  */
 @Route(path = RouterTag.BasicGrammarActivity)
 class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
+
+    private var branch = -1
 
     override fun onBeforeSetContentLayout() {
         PublicPracticalMethodFromJAVA.getInstance()
@@ -43,9 +46,12 @@ class BasicGrammarActivity : BaseActivity(), BasicGrammarView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        et_one.inputCheckLimit("[^0-9]") {
+            if (!StringUtils.isBlank(it)) {
+                branch = it.toInt()
+            }
+        }
         tv_one.clickWithTrigger(500) {
-            val branch = et_one.text.toString().toInt()
             when (branch) {
                 0 -> showShortToastSafe("请从序号1开始，哈哈")
                 /*** 1-14 kotlin的基本语法及使用 ***/

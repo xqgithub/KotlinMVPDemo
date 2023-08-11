@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
  * author:dimple
  *  通用RecyclerView分割线
  */
-class UniversalItemDecoration private constructor() : RecyclerView.ItemDecoration() {
+class UniversalItemDecoration : RecyclerView.ItemDecoration() {
 
     private var mLeft: Int = 0
     private var mTop: Int = 0
@@ -18,11 +18,21 @@ class UniversalItemDecoration private constructor() : RecyclerView.ItemDecoratio
     private var mBottom: Int = 0
     private var specifiedPosition: Int = -1
 
-    companion object {
-        val universalItemDecoration: UniversalItemDecoration by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
-            UniversalItemDecoration()
-        }
+//    /**
+//     * 这样写有一个弊端，如果一个页面有多个RecyclerView，需要设定分割距离的话，会造成影响
+//     */
+//    companion object {
+//        val universalItemDecoration: UniversalItemDecoration by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+//            UniversalItemDecoration()
+//        }
+//    }
+
+//    private lateinit var universalItemDecoration: UniversalItemDecoration
+
+    fun getInstance(): UniversalItemDecoration {
+        return UniversalItemDecoration()
     }
+
 
     /**
      * 设置间距
@@ -32,7 +42,7 @@ class UniversalItemDecoration private constructor() : RecyclerView.ItemDecoratio
         this.mTop = top
         this.mRight = right
         this.mBottom = bottom
-        return universalItemDecoration
+        return this
     }
 
     /**
@@ -40,7 +50,7 @@ class UniversalItemDecoration private constructor() : RecyclerView.ItemDecoratio
      */
     fun excludeDesignationItem(specifiedPosition: Int): UniversalItemDecoration {
         this.specifiedPosition = specifiedPosition
-        return universalItemDecoration
+        return this
     }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {

@@ -9,7 +9,9 @@ import com.example.baselibrary.di.componets.MyAppComponet
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.PublicPracticalMethodFromJAVA
 import com.example.baselibrary.utils.ReflectionUtils
+import com.example.baselibrary.utils.StringUtils
 import com.example.baselibrary.utils.clickWithTrigger
+import com.example.baselibrary.utils.inputCheckLimit
 import example.com.testkotlin.haha.utils.showShortToastSafe
 import kotlinx.android.synthetic.main.activity_reflection.*
 
@@ -28,6 +30,10 @@ import kotlinx.android.synthetic.main.activity_reflection.*
  */
 @Route(path = RouterTag.ReflectionActivity)
 class ReflectionActivity : BaseActivity() {
+
+    private var branch = -1
+
+
     override fun setupComponent(myAppComponet: MyAppComponet) {
     }
 
@@ -45,9 +51,12 @@ class ReflectionActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        et_reflect.inputCheckLimit("[^0-9]") {
+            if (!StringUtils.isBlank(it)) {
+                branch = it.toInt()
+            }
+        }
         tv_reflect.clickWithTrigger(500) {
-            val branch = et_reflect.text.toString().toInt()
             when (branch) {
                 0 -> showShortToastSafe("请从序号1开始，哈哈")
                 1 -> testreflection()
