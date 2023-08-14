@@ -24,6 +24,8 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
 
     private lateinit var nativelib: Nativelib
 
+    private var branch = -1
+
     companion object {
 
     }
@@ -49,9 +51,12 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ndk_practise)
         nativelib = Nativelib()
-
+        et_one.inputCheckLimit("[^0-9]") {
+            if (!StringUtils.isBlank(it)) {
+                branch = it.toInt()
+            }
+        }
         tv_one.clickWithTrigger(500) {
-            val branch = et_one.text.toString().toInt()
             when (branch) {
                 0 -> showShortToastSafe("请从序号1开始，哈哈")
                 1 -> {
@@ -370,7 +375,7 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
      * jni字符串处理
      */
     private fun testStringHandling() {
-        LogUtils.i(ConfigConstants.TAG_ALL, nativelib.stringHandling("我是海贼王，路飞"))
+        LogUtils.i(ConfigConstants.TAG_ALL, nativelib.stringHandling("嘻嘻"))
     }
 
 }

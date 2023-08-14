@@ -23,6 +23,8 @@ extern char *jstringToChar(JNIEnv *env, jstring jstr);
 
 extern jstring charToJstring(JNIEnv *env, const char *pat);
 
+extern jstring convertStdStringToJString(JNIEnv* env, const std::string& str);
+
 //class Tools {
 //
 //};

@@ -211,7 +211,7 @@ Java_com_example_kotlinmvpdemo_ndk_Nativelib_globalReferenceUse(JNIEnv *env, job
     jclass cls = (*env).FindClass("com/example/kotlinmvpdemo/ndk/Nativelib");
     g_cls = (jclass) (*env).NewGlobalRef(cls);
     //引用了testAccessMethod
-    g_mid =(*env).GetMethodID(g_cls, "testAccessMethod", "()V");
+    g_mid = (*env).GetMethodID(g_cls, "testAccessMethod", "()V");
     //释放cls引用
     env->DeleteLocalRef(cls);
     callMethodGlobalReference(env, jobj);
@@ -230,7 +230,7 @@ Java_com_example_kotlinmvpdemo_ndk_Nativelib_stringHandling(JNIEnv *env, jobject
     //GetStringUTFChars 用于 utf-8 编码
     const char *cStr = env->GetStringUTFChars(str, &isCopy);
     //GetStringChars 用于 utf-16 编码
-      const jchar *cStr2 = env->GetStringChars(str, &isCopy);
+    const jchar *cStr2 = env->GetStringChars(str, &isCopy);
 
     //异常处理，后面会专门讲，这里了解即可
     if (nullptr == cStr || nullptr == cStr2) {
@@ -243,11 +243,22 @@ Java_com_example_kotlinmvpdemo_ndk_Nativelib_stringHandling(JNIEnv *env, jobject
     } else {
         LOGI("C 字符串指向 java 层的字符串");
     }
-    LOGI("C/C++ 层收到的字符串是: %s", cStr);
-    LOGI("C/C++ 层收到的字符串是: %s", cStr2);
 
-    std::string outString = "海贼王在哪里？";
-    outString += cStr;
+    //原始字符串长度
+    jint strLength = env->GetStringLength(str);
+    LOGI("str字符串的长度 =-= %d", strLength);
+    for (int i = 0; i < strLength; i++) {
+        printf("%c", cStr2[i]);
+    }
+
+    LOGI("C/C++ 层收到的字符串是: %s", cStr);
+    std::string outString = "嘻def";
+    outString = cStr + outString;
+    //字符串长度,1个中文长度=3个英文长度
+    jint outStringLength = env->GetStringUTFLength(convertStdStringToJString(env, outString));
+    LOGI("添加后的字符串长度 =-= %d", outStringLength);
+
+
 
     //通过JNI GetStringChars 函数和 GetStringUTFChars 函数获得的C字符串在原生代码中
     //使用完之后需要正确地释放，否则将会引起内存泄露。

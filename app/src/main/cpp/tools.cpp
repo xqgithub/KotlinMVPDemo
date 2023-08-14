@@ -46,3 +46,22 @@ char *jstringToChar(JNIEnv *env, jstring jstr) {
     (*env).ReleaseByteArrayElements(barr, ba, 0);
     return rtn;
 }
+
+/**
+ * std::String 转 jstring
+ */
+jstring convertStdStringToJString(JNIEnv* env, const std::string& str){
+    jbyteArray javaByteArray = env->NewByteArray(str.length());
+    env->SetByteArrayRegion(javaByteArray, 0, str.length(), reinterpret_cast<const jbyte*>(str.c_str()));
+    jclass stringClass = env->FindClass("java/lang/String");
+    jmethodID constructor = env->GetMethodID(stringClass, "<init>", "([BLjava/lang/String;)V");
+    jstring javaString = static_cast<jstring>(env->NewObject(stringClass, constructor, javaByteArray, env->NewStringUTF("UTF-8")));
+
+    env->DeleteLocalRef(stringClass);
+    env->DeleteLocalRef(javaByteArray);
+
+    return javaString;
+}
+
+
+
