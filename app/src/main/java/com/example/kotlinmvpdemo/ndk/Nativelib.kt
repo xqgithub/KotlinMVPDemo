@@ -94,11 +94,6 @@ class Nativelib {
     external fun stringUse(parameter: String): String
 
     /**
-     * 数组使用
-     */
-    external fun arrayUse(parameter: IntArray): DoubleArray
-
-    /**
      * 局部引用管理
      * PushLocalFrame(len)和PopLocalFrame(NULL)配套使用
      */
@@ -112,10 +107,23 @@ class Nativelib {
     /**
      * 字符串处理
      */
-    external fun stringHandling(parameter: String):String
+    external fun stringHandling(parameter: String): String
+
+    /**
+     * 数组访问---基本类型
+     */
+    external fun arrayUse(parameter: IntArray): DoubleArray
+
+    /**
+     * 数组访问---引用类型
+     */
+    external fun arrayUse2(parameter: Array<String>): Array<String>
 
 
-
+    /**
+     * 数组访问---二维数组
+     */
+    external fun arrayUse3(parameter: Array<Array<Int>>): Array<Array<Int>>
 
 
 }

@@ -51,6 +51,7 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ndk_practise)
         nativelib = Nativelib()
+        et_one.setText("28")
         et_one.inputCheckLimit("[^0-9]") {
             if (!StringUtils.isBlank(it)) {
                 branch = it.toInt()
@@ -156,7 +157,7 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                 23 -> {
                     testStringUse()
                 }
-                /**  JNI  数组使用 测试 **/
+                /**  JNI 数组访问 --- 基本类型 测试 **/
                 24 -> {
                     testArrayUse()
                 }
@@ -171,6 +172,11 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
                 /**  JNI 字符串处理 测试 **/
                 27 -> {
                     testStringHandling()
+                }
+
+                /**  JNI 数组访问 --- 引用类型 测试 **/
+                28 -> {
+                    testArrayUse2()
                 }
 
                 else -> showShortToastSafe("序号错误，请检查")
@@ -377,5 +383,33 @@ class NDKPractiseActivity : BaseActivity(), NDKPractiseView {
     private fun testStringHandling() {
         LogUtils.i(ConfigConstants.TAG_ALL, nativelib.stringHandling("嘻嘻"))
     }
+
+    /**
+     * 数组访问---引用类型
+     */
+    private fun testArrayUse2() {
+        val arrayParameter = arrayOf("我", "爱", "学习")
+        val arrayResult = nativelib.arrayUse2(arrayParameter)
+        if (arrayResult.isNotEmpty()) {
+            arrayResult.forEach { result ->
+                LogUtils.i(ConfigConstants.TAG_ALL, "result =-= $result")
+            }
+        }
+    }
+
+    /**
+     * 数组访问---二维数组
+     */
+    private fun testArrayUse3() {
+        val twoDimArray = arrayOf(
+            arrayOf(1, 2, 3),
+            arrayOf(4, 5, 6),
+            arrayOf(7, 8, 9)
+        )
+        nativelib.arrayUse3(twoDimArray)
+
+
+    }
+
 
 }
